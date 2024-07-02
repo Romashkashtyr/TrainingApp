@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.google.gms.google.services)
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -38,6 +40,7 @@ android {
     }
 }
 
+val moxy_version = "2.2.2"
 dependencies {
 
     implementation(libs.androidx.core.ktx)
@@ -45,7 +48,16 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.auth)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+
+    // Moxy
+    implementation(libs.moxy)
+    ksp(libs.moxy.compiler)
+    implementation(libs.moxy.androidx)
+    implementation(libs.moxy.ktx)
 }
