@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.example.trainingapp.databinding.ActivitySignInBinding
+import com.example.trainingapp.domain.SignInPresenter
+import com.example.trainingapp.presentation.MPVViewSignIn
 import com.google.firebase.auth.FirebaseAuth
 import moxy.MvpAppCompatActivity
 
-class SignInActivity : MvpAppCompatActivity() {
+class SignInActivity : MvpAppCompatActivity(), MPVViewSignIn.View {
 
     private lateinit var binding: ActivitySignInBinding
     private lateinit var firebaseAuth: FirebaseAuth
@@ -18,18 +20,23 @@ class SignInActivity : MvpAppCompatActivity() {
         setContentView(binding.root)
 
         firebaseAuth = FirebaseAuth.getInstance()
+        val presenterSignIn = SignInPresenter(firebaseAuth)
 
 
         binding.button.setOnClickListener{
             val userEmail = binding.emailEt.text.toString()
             val userPassword = binding.passET.text.toString()
 
-            if(userEmail.isNotEmpty() && userPassword.isNotEmpty()){
-                binding.button.visibility = View.VISIBLE
-                firebaseAuth.signInWithEmailAndPassword(userEmail, userPassword)
-            } else {
-                Toast.makeText(this, "Enter a valid data!", Toast.LENGTH_SHORT).show()
-            }
+            presenterSignIn.signIn(userEmail, userPassword)
+//            val userEmail = binding.emailEt.text.toString()
+//            val userPassword = binding.passET.text.toString()
+//
+//            if(userEmail.isNotEmpty() && userPassword.isNotEmpty()){
+//                binding.button.visibility = View.VISIBLE
+//                firebaseAuth.signInWithEmailAndPassword(userEmail, userPassword)
+//            } else {
+//                Toast.makeText(this, "Enter a valid data!", Toast.LENGTH_SHORT).show()
+//            }
 
         }
     }
@@ -41,5 +48,27 @@ class SignInActivity : MvpAppCompatActivity() {
             currentUser.reload()
         }
 
+    }
+
+    override fun showViewProgress() {
+        binding.progressBar.visibility = View.VISIBLE
+        binding.textView.visibility = View.GONE
+        binding.passET.visibility = View.GONE
+        binding.emailEt.visibility = View.GONE
+    }
+
+    override fun hideViewProgress() {
+        binding.progressBar.visibility = View.GONE
+        binding.textView.visibility = View.VISIBLE
+        binding.passET.visibility = View.VISIBLE
+        binding.emailEt.visibility = View.VISIBLE
+    }
+
+    override fun navigateToHome() {
+        TODO("Not yet implemented")
+    }
+
+    override fun showError(message: String) {
+        TODO("Not yet implemented")
     }
 }
