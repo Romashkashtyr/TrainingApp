@@ -69,6 +69,6 @@ class SignInActivity : MvpAppCompatActivity(), MPVViewSignIn.View {
     }
 
     override fun showError(message: String) {
-        TODO("Not yet implemented")
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }
