@@ -1,4 +1,4 @@
-package com.example.trainingapp.presentation
+package com.example.trainingapp.start
 
 import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy

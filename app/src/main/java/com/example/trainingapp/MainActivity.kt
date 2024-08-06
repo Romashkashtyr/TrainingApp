@@ -1,11 +1,7 @@
 package com.example.trainingapp
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.trainingapp.presentation.MVPViewInterface
+import com.example.trainingapp.start.MVPViewInterface
 import moxy.MvpAppCompatActivity
 
 class MainActivity : MvpAppCompatActivity(), MVPViewInterface {
