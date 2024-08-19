@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.example.trainingapp.databinding.ActivitySignInBinding
+import com.example.trainingapp.domain.usecases.FirebaseAuthRepositoryImpl
 import com.google.firebase.auth.FirebaseAuth
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
@@ -12,6 +13,7 @@ class SignInActivity : MvpAppCompatActivity(), MPVViewSignIn {
 
     private lateinit var binding: ActivitySignInBinding
     private var firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
+    private val firebaseAuthImpl = FirebaseAuthRepositoryImpl(firebaseAuth)
     private val presenter by moxyPresenter { SignInPresenter(firebaseAuth) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,8 +22,8 @@ class SignInActivity : MvpAppCompatActivity(), MPVViewSignIn {
         setContentView(binding.root)
 
 
-        binding.button.setOnClickListener{
-            val userEmail = binding.emailEt.text.toString()
+        binding.signInButton.setOnClickListener{
+            val userEmail = binding.emailEditText.text.toString()
             val userPassword = binding.passET.text.toString()
             presenter.signIn(userEmail, userPassword)
             presenter.requireShowToast("Вы успешно вошли!")
@@ -42,14 +44,14 @@ class SignInActivity : MvpAppCompatActivity(), MPVViewSignIn {
         binding.progressBar.visibility = View.VISIBLE
         binding.textView.visibility = View.GONE
         binding.passET.visibility = View.GONE
-        binding.emailEt.visibility = View.GONE
+        binding.emailEditText.visibility = View.GONE
     }
 
     override fun hideViewProgress() {
         binding.progressBar.visibility = View.GONE
         binding.textView.visibility = View.VISIBLE
         binding.passET.visibility = View.VISIBLE
-        binding.emailEt.visibility = View.VISIBLE
+        binding.emailEditText.visibility = View.VISIBLE
     }
 
     override fun navigateToHome() {
