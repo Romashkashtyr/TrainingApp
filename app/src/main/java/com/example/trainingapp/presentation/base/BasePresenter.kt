@@ -10,4 +10,6 @@ open class BasePresenter<T: BaseView> : MvpPresenter<T>() {
     fun requireShowToast(message: String) {
         viewState.showToast(message)
     }
+
+
 }

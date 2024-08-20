@@ -6,5 +6,16 @@
     <string name="sign_in_success">Вы успешно вошли в аккаунт</string>
     <string name="sign_in_failure">Вы не вошли в аккаунт</string>
 
+    <!-- Sign Up Activity -->
+    <string name="sign_up_text">Sign Up</string>
+    <string name="type_your_password">Type Your Password</string>
+    <string name="type_your_email">Type Your Email</string>
+    <string name="confirm_your_password">Confirm Your Password</string>
+    <string name="not_registered_yet">Not Registered Yet , Sign Up !</string>
+
+    <!-- Sign Up Method -->
+    <string name="sign_up_success">Вы успешно зарегистрировались</string>
+    <string name="sign_up_failure">Что-то пошло не так</string>
+
 
 </resources>

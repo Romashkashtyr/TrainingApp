@@ -1,10 +1,10 @@
-package com.example.trainingapp.start
+package com.example.trainingapp.start.signin
 
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import com.example.trainingapp.R
 import com.example.trainingapp.databinding.ActivitySignInBinding
-import com.example.trainingapp.domain.usecases.FirebaseAuthRepositoryImpl
 import com.google.firebase.auth.FirebaseAuth
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
@@ -13,7 +13,6 @@ class SignInActivity : MvpAppCompatActivity(), MPVViewSignIn {
 
     private lateinit var binding: ActivitySignInBinding
     private var firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
-    private val firebaseAuthImpl = FirebaseAuthRepositoryImpl(firebaseAuth)
     private val presenter by moxyPresenter { SignInPresenter(firebaseAuth) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,7 +25,7 @@ class SignInActivity : MvpAppCompatActivity(), MPVViewSignIn {
             val userEmail = binding.emailEditText.text.toString()
             val userPassword = binding.passET.text.toString()
             presenter.signIn(userEmail, userPassword)
-            presenter.requireShowToast("Вы успешно вошли!")
+            presenter.requireShowToast(R.string.sign_in_success.toString())
 
         }
     }

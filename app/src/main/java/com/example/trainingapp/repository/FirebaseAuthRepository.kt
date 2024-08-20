@@ -1,14 +1,14 @@
 package com.example.trainingapp.repository
 
 
-import com.example.trainingapp.start.SignInPresenter
-import com.google.firebase.Firebase
-import com.google.firebase.auth.FirebaseAuth
-
 interface FirebaseAuthRepository{
 
 
     fun signIn(email: String, password: String)
+
+    fun signUp(email: String, password: String, confirmPassword: String)
+
+    fun signOut()
 
 //    fun signIn(email: String, password: String) {
 //        if (email.isNotEmpty() && password.isNotEmpty()) {

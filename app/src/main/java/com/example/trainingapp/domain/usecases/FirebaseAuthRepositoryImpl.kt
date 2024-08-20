@@ -19,6 +19,24 @@ class FirebaseAuthRepositoryImpl(private val firebaseAuth: FirebaseAuth) : Fireb
             }
         }
     }
+
+    override fun signUp(email: String, password: String, confirmPassword: String) {
+        if(email.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty()) {
+            if (password == confirmPassword)
+                firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener{ task->
+                    if(task.isSuccessful){
+                        R.string.sign_in_success
+                    } else {
+                        R.string.sign_up_failure
+                    }
+
+                }
+        }
     }
+
+    override fun signOut() {
+        firebaseAuth.signOut()
+    }
+}
 
 
