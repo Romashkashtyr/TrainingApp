@@ -4,9 +4,9 @@ package com.example.trainingapp.repository
 interface FirebaseAuthRepository{
 
 
-    fun signIn(email: String, password: String)
+    suspend fun signIn(email: String, password: String): Boolean
 
-    fun signUp(email: String, password: String, confirmPassword: String)
+    suspend fun signUp(email: String, password: String, confirmPassword: String): Boolean
 
     fun signOut()
 
