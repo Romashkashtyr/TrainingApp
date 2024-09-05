@@ -1,12 +1,14 @@
 package com.example.trainingapp.repository
 
+import com.example.trainingapp.start.FirebaseAuthStatus
+
 
 interface FirebaseAuthRepository{
 
 
-    suspend fun signIn(email: String, password: String): Boolean
+    suspend fun signIn(email: String, password: String): FirebaseAuthStatus
 
-    suspend fun signUp(email: String, password: String, confirmPassword: String): Boolean
+    suspend fun signUp(email: String, password: String, confirmPassword: String): FirebaseAuthStatus
 
     fun signOut()
 

@@ -5,6 +5,7 @@
     <!-- Strings used for fragments for navigation -->
     <string name="sign_in_success">Вы успешно вошли в аккаунт</string>
     <string name="sign_in_failure">Вы не вошли в аккаунт</string>
+    <string name="network_failure">Проблемы с интернетом</string>
 
     <!-- Sign Up Activity -->
     <string name="sign_up_text">Sign Up</string>
