@@ -1,19 +1,23 @@
-package com.example.trainingapp.start.signin
+package com.example.trainingapp.presentation.base.start.signin
 
 import android.os.Bundle
+import android.text.Editable
 import android.view.View
 import android.widget.Toast
 import com.example.trainingapp.R
 import com.example.trainingapp.databinding.ActivitySignInBinding
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 
-class SignInActivity : MvpAppCompatActivity(), MPVViewSignIn {
+class SignInViewActivity : MvpAppCompatActivity(), SignInView {
 
     private lateinit var binding: ActivitySignInBinding
     private var firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
-    private val presenter by moxyPresenter { SignInPresenter(firebaseAuth) }
+    private val presenter by moxyPresenter { SignInPresenter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,11 +27,33 @@ class SignInActivity : MvpAppCompatActivity(), MPVViewSignIn {
 
         binding.signInButton.setOnClickListener{
             val userEmail = binding.emailEditText.text.toString()
-            val userPassword = binding.passET.text.toString()
+            val userPassword = binding.enterPassword.text.toString()
             presenter.signIn(userEmail, userPassword)
             presenter.requireShowToast(R.string.sign_in_success.toString())
 
         }
+
+        val toEditable = Editable.Factory.getInstance()
+        val action = binding.signUpAction.setOnClickListener{}
+        if(action != null ) {
+            CoroutineScope(Dispatchers.IO).launch {
+                binding.apply {
+                    signInButton.text = getString(R.string.sign_up_text)
+                    emailEditText.text = toEditable.newEditable(getString(R.string.type_your_email))
+                    enterPassword.text = toEditable.newEditable(getString(R.string.type_your_password))
+                    passwordLayout.visibility = View.VISIBLE
+                    passEditText.visibility = View.VISIBLE
+                    val userEmail = binding.emailEditText.text.toString()
+                    val userPassword = binding.passEditText.text.toString()
+                    val confirmUserPassword = binding.passEditText.text.toString()
+                    presenter.signUp(userEmail, userPassword, confirmUserPassword)
+                }
+            }
+
+
+
+        }
+
     }
 
     override fun onStart() {
@@ -41,15 +67,14 @@ class SignInActivity : MvpAppCompatActivity(), MPVViewSignIn {
 
     override fun showViewProgress() {
         binding.progressBar.visibility = View.VISIBLE
-        binding.textView.visibility = View.GONE
-        binding.passET.visibility = View.GONE
         binding.emailEditText.visibility = View.GONE
+        binding.passEditText.visibility = View.GONE
     }
 
     override fun hideViewProgress() {
         binding.progressBar.visibility = View.GONE
-        binding.textView.visibility = View.VISIBLE
-        binding.passET.visibility = View.VISIBLE
+        binding.emailEditText.visibility = View.VISIBLE
+        binding.passEditText.visibility = View.VISIBLE
         binding.emailEditText.visibility = View.VISIBLE
     }
 

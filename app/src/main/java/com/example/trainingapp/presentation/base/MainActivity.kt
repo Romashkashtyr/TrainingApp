@@ -1,7 +1,7 @@
-package com.example.trainingapp
+package com.example.trainingapp.presentation.base
 
 import android.os.Bundle
-import com.example.trainingapp.start.MVPViewInterface
+import com.example.trainingapp.R
 import moxy.MvpAppCompatActivity
 
 class MainActivity : MvpAppCompatActivity(), MVPViewInterface {

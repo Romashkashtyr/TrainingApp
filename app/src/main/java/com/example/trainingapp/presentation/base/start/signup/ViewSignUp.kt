@@ -1,11 +1,11 @@
-package com.example.trainingapp.start.signin
+package com.example.trainingapp.presentation.base.start.signup
 
 import com.example.trainingapp.presentation.base.BaseView
 import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(value = AddToEndSingleStrategy::class)
-interface MPVViewSignIn : BaseView {
+interface ViewSignUp : BaseView {
 
         fun showViewProgress()
         fun hideViewProgress()

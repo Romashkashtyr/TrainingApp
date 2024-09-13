@@ -13,17 +13,18 @@
         android:theme="@style/Theme.TrainingApp"
         tools:targetApi="31">
         <activity
-            android:name=".start.signin.SignInActivity"
-            android:exported="false"
-            android:theme="@style/Theme.TrainingApp" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:name=".presentation.base.start.signin.SignInViewActivity"
+            android:exported="true"
+            android:theme="@style/Theme.TrainingApp" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
+        <activity
+            android:name=".presentation.base.MainActivity"
+            android:exported="false">
         </activity>
     </application>
 

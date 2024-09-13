@@ -9,10 +9,15 @@
 
     <!-- Sign Up Activity -->
     <string name="sign_up_text">Sign Up</string>
+    <string name="sign_in_text">Sign In</string>
     <string name="type_your_password">Type Your Password</string>
     <string name="type_your_email">Type Your Email</string>
     <string name="confirm_your_password">Confirm Your Password</string>
     <string name="not_registered_yet">Not Registered Yet , Sign Up !</string>
+
+    <!-- Sign In Activity -->
+    <string name="enter_your_email">Enter your email</string>
+    <string name="enter_your_password">Enter your password</string>
 
     <!-- Sign Up Method -->
     <string name="sign_up_success">Вы успешно зарегистрировались</string>
