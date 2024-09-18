@@ -34,23 +34,22 @@ class SignInViewActivity : MvpAppCompatActivity(), SignInView {
         }
 
         val toEditable = Editable.Factory.getInstance()
-        val action = binding.signUpAction.setOnClickListener{}
-        if(action != null ) {
-            CoroutineScope(Dispatchers.IO).launch {
+        binding.signUpAction.setOnClickListener {
                 binding.apply {
                     signInButton.text = getString(R.string.sign_up_text)
                     emailEditText.text = toEditable.newEditable(getString(R.string.type_your_email))
-                    enterPassword.text = toEditable.newEditable(getString(R.string.type_your_password))
+                    enterPassword.text =
+                        toEditable.newEditable(getString(R.string.type_your_password))
                     passwordLayout.visibility = View.VISIBLE
                     passEditText.visibility = View.VISIBLE
-                    val userEmail = binding.emailEditText.text.toString()
-                    val userPassword = binding.passEditText.text.toString()
-                    val confirmUserPassword = binding.passEditText.text.toString()
-                    presenter.signUp(userEmail, userPassword, confirmUserPassword)
+                    CoroutineScope(Dispatchers.IO).launch {
+                        val userEmail = binding.emailEditText.text.toString()
+                        val userPassword = binding.passEditText.text.toString()
+                        val confirmUserPassword = binding.passEditText.text.toString()
+                        presenter.signUp(userEmail, userPassword, confirmUserPassword)
+                    }
+
                 }
-            }
-
-
 
         }
 

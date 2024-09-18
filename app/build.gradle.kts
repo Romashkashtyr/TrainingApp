@@ -2,7 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.google.gms.google.services)
-    id("com.google.devtools.ksp")
+    //id("com.google.devtools.ksp")
+    id("kotlin-kapt")
 }
 
 android {
@@ -62,7 +63,7 @@ dependencies {
 
     // Moxy
     implementation(libs.moxy)
-    ksp(libs.moxy.compiler)
+    kapt (libs.moxy.compiler)
     implementation(libs.moxy.androidx)
     implementation(libs.moxy.ktx)
 }

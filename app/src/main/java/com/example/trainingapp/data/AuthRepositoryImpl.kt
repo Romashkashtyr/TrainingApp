@@ -12,8 +12,9 @@ class AuthRepositoryImpl : AuthRepository {
     private val firebaseAuth = FirebaseAuth.getInstance()
 
     override suspend fun signIn(email: String, password: String): AuthStatus {
-        val result = firebaseAuth.signInWithEmailAndPassword(email, password).await()
+
         return try {
+            val result = firebaseAuth.signInWithEmailAndPassword(email, password).await()
             if(result.user != null) {
                 AuthStatus.Success("Success") // Уточнить
             } else {
@@ -27,8 +28,9 @@ class AuthRepositoryImpl : AuthRepository {
 
 
     override suspend fun signUp(email: String, password: String, confirmPassword: String): AuthStatus {
-        val resultSignUp = firebaseAuth.createUserWithEmailAndPassword(email, password).await()
+
         return try {
+            val resultSignUp = firebaseAuth.createUserWithEmailAndPassword(email, password).await()
             if (resultSignUp.user != null){
                 AuthStatus.Success("Success") // Уточнить
             } else {

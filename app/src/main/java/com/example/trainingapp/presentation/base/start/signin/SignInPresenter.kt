@@ -1,9 +1,11 @@
 package com.example.trainingapp.presentation.base.start.signin
 
+
 import com.example.trainingapp.R
 import com.example.trainingapp.data.AuthRepositoryImpl
 import com.example.trainingapp.presentation.base.BasePresenter
 import com.example.trainingapp.domain.AuthStatus
+import com.google.rpc.context.AttributeContext.Auth
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -25,12 +27,10 @@ open class SignInPresenter() : BasePresenter<SignInView>() {
                 val success = firebaseAuthRepository.signIn(email,password)
                 withContext(Dispatchers.Main) {
                     when (success) {
-                        AuthStatus.Success("") -> viewState.showToast(R.string.sign_in_success.toString())
-                        AuthStatus.Failure("") -> viewState.showToast(R.string.sign_in_failure.toString())
-                        AuthStatus.NoNetwork("") -> viewState.showToast(R.string.network_failure.toString())
-                        else -> viewState.showToast("")
+                        is AuthStatus.Failure -> {viewState.showToast(R.string.sign_in_failure.toString())}
+                        is AuthStatus.NoNetwork -> {viewState.showToast(R.string.network_failure.toString())}
+                        is AuthStatus.Success -> {viewState.showToast(R.string.sign_in_success.toString())}
                     }
-                    TODO()
                 }
 
                 viewState.hideViewProgress()
