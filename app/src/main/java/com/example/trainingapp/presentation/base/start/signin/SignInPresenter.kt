@@ -48,6 +48,10 @@ open class SignInPresenter() : BasePresenter<SignInView>() {
         firebaseAuthRepository.signOut()
     }
 
+    fun requestChangeMode() {
+        viewState.changeAuthMode()
+    }
+
 }
 
 
