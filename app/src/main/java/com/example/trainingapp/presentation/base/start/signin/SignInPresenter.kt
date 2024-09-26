@@ -3,9 +3,9 @@ package com.example.trainingapp.presentation.base.start.signin
 
 import com.example.trainingapp.R
 import com.example.trainingapp.data.AuthRepositoryImpl
-import com.example.trainingapp.presentation.base.BasePresenter
 import com.example.trainingapp.domain.AuthStatus
-import com.google.rpc.context.AttributeContext.Auth
+import com.example.trainingapp.presentation.base.BasePresenter
+import com.google.api.Context
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -24,27 +24,39 @@ open class SignInPresenter() : BasePresenter<SignInView>() {
             viewState?.showViewProgress()
 
             CoroutineScope(Dispatchers.IO).launch {
-                val success = firebaseAuthRepository.signIn(email,password)
+                val success = firebaseAuthRepository.signIn(email, password)
                 withContext(Dispatchers.Main) {
                     when (success) {
-                        is AuthStatus.Failure -> {viewState.showToast(R.string.sign_in_failure.toString())}
-                        is AuthStatus.NoNetwork -> {viewState.showToast(R.string.network_failure.toString())}
-                        is AuthStatus.Success -> {viewState.showToast(R.string.sign_in_success.toString())}
+                        is AuthStatus.Failure -> {
+                            viewState.showToast(R.string.sign_in_failure.toString())
+
+                        }
+
+                        is AuthStatus.NoNetwork -> {
+                            viewState.showToast(R.string.network_failure.toString())
+                        }
+
+                        is AuthStatus.Success -> {
+                            viewState.showToast(R.string.sign_in_success.toString())
+                        }
                     }
                     viewState?.hideViewProgress()
                 }
 
             }
 
-            }
-
         }
 
-    suspend fun signUp(email:String, password: String, confirmPassword: String){
+
+    }
+
+
+
+    suspend fun signUp(email: String, password: String, confirmPassword: String) {
         firebaseAuthRepository.signUp(email, password, confirmPassword)
     }
 
-    fun signOut(){
+    fun signOut() {
         firebaseAuthRepository.signOut()
     }
 

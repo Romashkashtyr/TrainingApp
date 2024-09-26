@@ -1,5 +1,6 @@
 package com.example.trainingapp.domain.repository
 
+import android.content.Context
 import com.example.trainingapp.domain.AuthStatus
 
 
