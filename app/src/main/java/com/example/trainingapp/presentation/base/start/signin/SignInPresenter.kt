@@ -31,9 +31,9 @@ open class SignInPresenter() : BasePresenter<SignInView>() {
                         is AuthStatus.NoNetwork -> {viewState.showToast(R.string.network_failure.toString())}
                         is AuthStatus.Success -> {viewState.showToast(R.string.sign_in_success.toString())}
                     }
+                    viewState?.hideViewProgress()
                 }
 
-                viewState.hideViewProgress()
             }
 
             }

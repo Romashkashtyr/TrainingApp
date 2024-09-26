@@ -22,6 +22,8 @@ class SignInViewActivity : MvpAppCompatActivity(), SignInView {
     var mode = AuthMode.LOGIN
     val toEditable = Editable.Factory.getInstance()
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)
@@ -86,6 +88,7 @@ class SignInViewActivity : MvpAppCompatActivity(), SignInView {
         binding.passEditText.visibility = View.GONE
     }
 
+
     override fun hideViewProgress() {
         binding.progressBar.visibility = View.GONE
         binding.emailEditText.visibility = View.VISIBLE
@@ -115,6 +118,6 @@ class SignInViewActivity : MvpAppCompatActivity(), SignInView {
     }
 
     override fun showToast(message: String) {
-        TODO("Not yet implemented")
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 }
