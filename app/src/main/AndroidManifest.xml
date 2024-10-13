@@ -13,7 +13,7 @@
         android:theme="@style/Theme.TrainingApp"
         tools:targetApi="31">
         <activity
-            android:name=".presentation.base.start.signin.SignInViewActivity"
+            android:name=".presentation.base.start.signin.SignInActivity"
             android:exported="true"
             android:theme="@style/Theme.TrainingApp" >
         <intent-filter>

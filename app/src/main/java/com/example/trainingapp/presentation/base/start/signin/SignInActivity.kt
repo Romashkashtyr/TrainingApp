@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 
-class SignInViewActivity : MvpAppCompatActivity(), SignInView {
+class SignInActivity : MvpAppCompatActivity(), SignInView {
 
     private lateinit var binding: ActivitySignInBinding
     private var firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
@@ -34,7 +34,7 @@ class SignInViewActivity : MvpAppCompatActivity(), SignInView {
             val userEmail = binding.emailEditText.text.toString()
             val userPassword = binding.enterPassword.text.toString()
             presenter.signIn(userEmail, userPassword)
-            presenter.requireShowToast(R.string.sign_in_success.toString())
+            presenter.requireShowToast(R.string.sign_in_success)
             CoroutineScope(Dispatchers.IO).launch {
                 when(mode) {
                     AuthMode.REGISTRATION -> {
@@ -117,7 +117,8 @@ class SignInViewActivity : MvpAppCompatActivity(), SignInView {
         mode = newMode
     }
 
-    override fun showToast(message: String) {
+
+    override fun showToast(message: Int) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 }

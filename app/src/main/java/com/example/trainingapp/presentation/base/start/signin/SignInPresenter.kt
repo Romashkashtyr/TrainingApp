@@ -28,16 +28,16 @@ open class SignInPresenter() : BasePresenter<SignInView>() {
                 withContext(Dispatchers.Main) {
                     when (success) {
                         is AuthStatus.Failure -> {
-                            viewState.showToast(R.string.sign_in_failure.toString())
+                            viewState.showToast(R.string.sign_in_failure)
 
                         }
 
                         is AuthStatus.NoNetwork -> {
-                            viewState.showToast(R.string.network_failure.toString())
+                            viewState.showToast(R.string.network_failure)
                         }
 
                         is AuthStatus.Success -> {
-                            viewState.showToast(R.string.sign_in_success.toString())
+                            viewState.showToast(R.string.sign_in_success)
                         }
                     }
                     viewState?.hideViewProgress()
@@ -53,7 +53,10 @@ open class SignInPresenter() : BasePresenter<SignInView>() {
 
 
     suspend fun signUp(email: String, password: String, confirmPassword: String) {
-        firebaseAuthRepository.signUp(email, password, confirmPassword)
+        CoroutineScope(Dispatchers.IO).launch {
+            firebaseAuthRepository.signUp(email, password, confirmPassword)
+        }
+
     }
 
     fun signOut() {

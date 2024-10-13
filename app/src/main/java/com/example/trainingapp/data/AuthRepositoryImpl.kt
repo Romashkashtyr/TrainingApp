@@ -3,6 +3,7 @@ package com.example.trainingapp.data
 import com.example.trainingapp.domain.repository.AuthRepository
 import com.example.trainingapp.domain.AuthStatus
 import com.google.firebase.FirebaseException
+import com.google.firebase.FirebaseNetworkException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
@@ -57,9 +58,10 @@ class AuthRepositoryImpl : AuthRepository {
         AuthStatus.Failure("Invalid email format")
 
     } catch (e: FirebaseAuthUserCollisionException) {
-        // Такой email уже зарегистрирован
-        AuthStatus.Failure("Email already in use")
-
+            // Такой email уже зарегистрирован
+            AuthStatus.Failure("Email already in use")
+        }catch (e: FirebaseNetworkException){
+            AuthStatus.NoNetwork("No Network: ${e.message}")
     } catch (e: FirebaseException) {
         // Общая ошибка сети или Firebase
         AuthStatus.NoNetwork("Network error: ${e.message}")
