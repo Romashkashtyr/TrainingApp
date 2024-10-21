@@ -10,14 +10,14 @@ class AuthRepositoryImpl : AuthRepository {
 
     private val firebaseAuth = FirebaseAuth.getInstance()
 
-    override suspend fun signIn(email: String, password: String): AuthStatus {
+    override suspend fun signIn(email: String, password: String): AuthStatus<String> {
 
         return ExceptionCatcher().launchCatcher {
             val result = firebaseAuth.signInWithEmailAndPassword(email, password).await()
             if (result.user != null) {
-                AuthStatus.Success("Success") // Уточнить
+               return@launchCatcher AuthStatus.Success("Success") // Уточнить
             } else {
-                AuthStatus.Failure("Failure") // Уточнить
+                return@launchCatcher AuthStatus.Failure("Failure") // Уточнить
             }
 
         }
@@ -28,16 +28,16 @@ class AuthRepositoryImpl : AuthRepository {
         email: String,
         password: String,
         confirmPassword: String
-    ): AuthStatus {
+    ): AuthStatus<String> {
         if (password != confirmPassword) {
             return AuthStatus.Failure("Passwords do not match")
         }
         return ExceptionCatcher().launchCatcher {
             val resultSignUp = firebaseAuth.createUserWithEmailAndPassword(email, password).await()
             if (resultSignUp.user != null) {
-                AuthStatus.Success("Success") // Уточнить
+               return@launchCatcher AuthStatus.Success("Success")
             } else {
-                AuthStatus.Failure("Failure") // Уточнить
+              return@launchCatcher  AuthStatus.Failure("Failure")
             }
         }
 

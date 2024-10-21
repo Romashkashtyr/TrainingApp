@@ -8,7 +8,7 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 
 class ExceptionCatcher {
-    suspend fun launchCatcher(job: suspend () -> AuthStatus): AuthStatus{
+    suspend fun <T> launchCatcher(job: suspend () -> AuthStatus<T>): AuthStatus<T>{
         try {
             job()
         } catch (e: FirebaseException){
