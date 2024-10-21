@@ -23,25 +23,25 @@ class SignInActivity : MvpAppCompatActivity(), SignInView {
     val toEditable = Editable.Factory.getInstance()
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
 
-        binding.signInButton.setOnClickListener{
+        binding.signInButton.setOnClickListener {
             val userEmail = binding.emailEditText.text.toString()
             val userPassword = binding.enterPassword.text.toString()
             presenter.signIn(userEmail, userPassword)
             presenter.requireShowToast(R.string.sign_in_success)
             CoroutineScope(Dispatchers.IO).launch {
-                when(mode) {
+                when (mode) {
                     AuthMode.REGISTRATION -> {
                         val confirmPassword = binding.passwordLayout.editText.toString()
                         presenter.signUp(userEmail, userPassword, confirmPassword)
                         presenter.requestChangeMode()
                     }
+
                     AuthMode.LOGIN -> {
                         presenter.signIn(userEmail, userPassword)
                     }
@@ -53,21 +53,21 @@ class SignInActivity : MvpAppCompatActivity(), SignInView {
 
 
         binding.signUpAction.setOnClickListener {
-                binding.apply {
-                    signInButton.text = getString(R.string.sign_up_text)
-                    emailEditText.text = toEditable.newEditable(getString(R.string.type_your_email))
-                    enterPassword.text =
-                        toEditable.newEditable(getString(R.string.type_your_password))
-                    passwordLayout.visibility = View.VISIBLE
-                    passEditText.visibility = View.VISIBLE
-                    CoroutineScope(Dispatchers.IO).launch {
-                        val userEmail = binding.emailEditText.text.toString()
-                        val userPassword = binding.passEditText.text.toString()
-                        val confirmUserPassword = binding.passEditText.text.toString()
-                        presenter.signUp(userEmail, userPassword, confirmUserPassword)
-                    }
-
+            binding.apply {
+                signInButton.text = getString(R.string.sign_up_text)
+                emailEditText.text = toEditable.newEditable(getString(R.string.type_your_email))
+                enterPassword.text =
+                    toEditable.newEditable(getString(R.string.type_your_password))
+                passwordLayout.visibility = View.VISIBLE
+                passEditText.visibility = View.VISIBLE
+                CoroutineScope(Dispatchers.IO).launch {
+                    val userEmail = binding.emailEditText.text.toString()
+                    val userPassword = binding.passEditText.text.toString()
+                    val confirmUserPassword = binding.passEditText.text.toString()
+                    presenter.signUp(userEmail, userPassword, confirmUserPassword)
                 }
+
+            }
 
         }
 
@@ -105,11 +105,12 @@ class SignInActivity : MvpAppCompatActivity(), SignInView {
     }
 
     override fun changeAuthMode() {
-        val newMode = if(mode == AuthMode.LOGIN) AuthMode.LOGIN else AuthMode.REGISTRATION
-        when(mode) {
+        val newMode = if (mode == AuthMode.LOGIN) AuthMode.LOGIN else AuthMode.REGISTRATION
+        when (mode) {
             AuthMode.LOGIN -> {
                 binding.signInButton.setText(R.string.sign_in_text)
             }
+
             AuthMode.REGISTRATION -> {
                 binding.signInButton.setText(R.string.sign_up_text)
             }

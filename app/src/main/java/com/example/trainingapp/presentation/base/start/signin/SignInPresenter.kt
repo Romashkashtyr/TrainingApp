@@ -13,7 +13,7 @@ import kotlinx.coroutines.withContext
 import moxy.InjectViewState
 
 @InjectViewState
-open class SignInPresenter() : BasePresenter<SignInView>() {
+open class SignInPresenter : BasePresenter<SignInView>() {
 
 
 
@@ -23,7 +23,7 @@ open class SignInPresenter() : BasePresenter<SignInView>() {
         if (email.isNotEmpty() && password.isNotEmpty()) {
             viewState?.showViewProgress()
 
-            CoroutineScope(Dispatchers.IO).launch {
+            launch {
                 val success = firebaseAuthRepository.signIn(email, password)
                 withContext(Dispatchers.Main) {
                     when (success) {

@@ -4,7 +4,7 @@ import android.content.Context
 import com.example.trainingapp.domain.AuthStatus
 
 
-interface AuthRepository{
+interface AuthRepository {
 
 
     suspend fun signIn(email: String, password: String): AuthStatus
