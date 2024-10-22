@@ -11,7 +11,6 @@ interface SignInView : BaseView {
         fun showViewProgress()
         fun hideViewProgress()
         fun navigateToHome()
-        fun showError(message: String)
         fun changeAuthMode()
 
 }

@@ -3,10 +3,8 @@ package com.example.trainingapp.presentation.base.start.signin
 
 import com.example.trainingapp.R
 import com.example.trainingapp.data.AuthRepositoryImpl
-import com.example.trainingapp.domain.AuthStatus
+import com.example.trainingapp.domain.Status
 import com.example.trainingapp.presentation.base.BasePresenter
-import com.google.api.Context
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -27,16 +25,16 @@ open class SignInPresenter : BasePresenter<SignInView>() {
                 val success = firebaseAuthRepository.signIn(email, password)
                 withContext(Dispatchers.Main) {
                     when (success) {
-                        is AuthStatus.Failure -> {
+                        is Status.Failure -> {
                             viewState.showToast(R.string.sign_in_failure)
 
                         }
 
-                        is AuthStatus.NoNetwork -> {
+                        is Status.NoNetwork -> {
                             viewState.showToast(R.string.network_failure)
                         }
 
-                        is AuthStatus.Success -> {
+                        is Status.Success -> {
                             viewState.showToast(R.string.sign_in_success)
                         }
                     }
@@ -52,8 +50,8 @@ open class SignInPresenter : BasePresenter<SignInView>() {
 
 
 
-    suspend fun signUp(email: String, password: String, confirmPassword: String) {
-        CoroutineScope(Dispatchers.IO).launch {
+    fun signUp(email: String, password: String, confirmPassword: String) {
+        launch {
             firebaseAuthRepository.signUp(email, password, confirmPassword)
         }
 

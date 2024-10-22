@@ -7,6 +7,7 @@ import android.widget.Toast
 import com.example.trainingapp.R
 import com.example.trainingapp.data.AuthMode
 import com.example.trainingapp.databinding.ActivitySignInBinding
+import com.example.trainingapp.presentation.base.BaseActivity
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -14,7 +15,7 @@ import kotlinx.coroutines.launch
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 
-class SignInActivity : MvpAppCompatActivity(), SignInView {
+class SignInActivity : BaseActivity(), SignInView {
 
     private lateinit var binding: ActivitySignInBinding
     private var firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
@@ -33,8 +34,6 @@ class SignInActivity : MvpAppCompatActivity(), SignInView {
             val userEmail = binding.emailEditText.text.toString()
             val userPassword = binding.enterPassword.text.toString()
             presenter.signIn(userEmail, userPassword)
-            presenter.requireShowToast(R.string.sign_in_success)
-            CoroutineScope(Dispatchers.IO).launch {
                 when (mode) {
                     AuthMode.REGISTRATION -> {
                         val confirmPassword = binding.passwordLayout.editText.toString()
@@ -47,7 +46,7 @@ class SignInActivity : MvpAppCompatActivity(), SignInView {
                     }
                 }
 
-            }
+
 
         }
 
@@ -73,14 +72,6 @@ class SignInActivity : MvpAppCompatActivity(), SignInView {
 
     }
 
-    override fun onStart() {
-        super.onStart()
-        val currentUser = firebaseAuth.currentUser
-        if (currentUser != null) {
-            currentUser.reload()
-        }
-
-    }
 
     override fun showViewProgress() {
         binding.progressBar.visibility = View.VISIBLE
@@ -100,9 +91,7 @@ class SignInActivity : MvpAppCompatActivity(), SignInView {
         TODO("Not yet implemented")
     }
 
-    override fun showError(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-    }
+
 
     override fun changeAuthMode() {
         val newMode = if (mode == AuthMode.LOGIN) AuthMode.LOGIN else AuthMode.REGISTRATION

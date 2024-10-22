@@ -1,6 +1,6 @@
 package com.example.trainingapp.data
 
-import com.example.trainingapp.domain.AuthStatus
+import com.example.trainingapp.domain.Status
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseNetworkException
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
@@ -8,30 +8,24 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 
 class ExceptionCatcher {
-    suspend fun <T> launchCatcher(job: suspend () -> AuthStatus<T>): AuthStatus<T>{
-        try {
+    suspend fun <T> launchWithCatch(job: suspend () -> Status<T>): Status<T>{
+        return try {
             job()
         } catch (e: FirebaseException){
             e.message.toString()
-            AuthStatus.NoNetwork("NoNetwork") // Уточнить
+            Status.NoNetwork("NoNetwork") // Уточнить
         } catch (e: FirebaseAuthWeakPasswordException) {
-            // Пароль слишком слабый
-            AuthStatus.Failure("Weak password")
+            Status.Failure("Weak password")
         } catch (e: FirebaseAuthInvalidCredentialsException) {
-            // Неверный формат email
-            AuthStatus.Failure("Invalid email format")
+            Status.Failure("Invalid email format")
         } catch (e: FirebaseAuthUserCollisionException) {
-            // Такой email уже зарегистрирован
-            AuthStatus.Failure("Email already in use")
+            Status.Failure("Email already in use")
         }catch (e: FirebaseNetworkException){
-            AuthStatus.NoNetwork("No Network: ${e.message}")
+            Status.NoNetwork("No Network: ${e.message}")
         } catch (e: FirebaseException) {
-            // Общая ошибка сети или Firebase
-            AuthStatus.NoNetwork("Network error: ${e.message}")
+            Status.NoNetwork("Network error: ${e.message}")
         } catch (e: Exception) {
-            // Для других неизвестных ошибок
-            AuthStatus.Failure("An unknown error occurred: ${e.message}")
+            Status.Failure("An unknown error occurred: ${e.message}")
         }
-        return AuthStatus.Failure("Unknown Error")
     }
 }

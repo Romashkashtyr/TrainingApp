@@ -1,15 +1,14 @@
 package com.example.trainingapp.domain.repository
 
-import android.content.Context
-import com.example.trainingapp.domain.AuthStatus
+import com.example.trainingapp.domain.Status
 
 
 interface AuthRepository {
 
 
-    suspend fun signIn(email: String, password: String): AuthStatus<String>
+    suspend fun signIn(email: String, password: String): Status<String>
 
-    suspend fun signUp(email: String, password: String, confirmPassword: String): AuthStatus<String>
+    suspend fun signUp(email: String, password: String, confirmPassword: String): Status<String>
 
     fun signOut()
 

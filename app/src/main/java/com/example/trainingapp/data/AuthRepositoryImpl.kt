@@ -1,6 +1,6 @@
 package com.example.trainingapp.data
 
-import com.example.trainingapp.domain.AuthStatus
+import com.example.trainingapp.domain.Status
 import com.example.trainingapp.domain.repository.AuthRepository
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.tasks.await
@@ -10,14 +10,14 @@ class AuthRepositoryImpl : AuthRepository {
 
     private val firebaseAuth = FirebaseAuth.getInstance()
 
-    override suspend fun signIn(email: String, password: String): AuthStatus<String> {
+    override suspend fun signIn(email: String, password: String): Status<String> {
 
-        return ExceptionCatcher().launchCatcher {
+        return ExceptionCatcher().launchWithCatch {
             val result = firebaseAuth.signInWithEmailAndPassword(email, password).await()
             if (result.user != null) {
-               return@launchCatcher AuthStatus.Success("Success") // Уточнить
+               return@launchWithCatch Status.Success("Success") // Уточнить
             } else {
-                return@launchCatcher AuthStatus.Failure("Failure") // Уточнить
+                return@launchWithCatch Status.Failure("Failure") // Уточнить
             }
 
         }
@@ -28,16 +28,16 @@ class AuthRepositoryImpl : AuthRepository {
         email: String,
         password: String,
         confirmPassword: String
-    ): AuthStatus<String> {
+    ): Status<String> {
         if (password != confirmPassword) {
-            return AuthStatus.Failure("Passwords do not match")
+            return Status.Failure("Passwords do not match")
         }
-        return ExceptionCatcher().launchCatcher {
+        return ExceptionCatcher().launchWithCatch {
             val resultSignUp = firebaseAuth.createUserWithEmailAndPassword(email, password).await()
             if (resultSignUp.user != null) {
-               return@launchCatcher AuthStatus.Success("Success")
+               return@launchWithCatch Status.Success("Success")
             } else {
-              return@launchCatcher  AuthStatus.Failure("Failure")
+              return@launchWithCatch  Status.Failure("Failure")
             }
         }
 
