@@ -9,15 +9,16 @@ import kotlinx.coroutines.tasks.await
 class AuthRepositoryImpl : AuthRepository {
 
     private val firebaseAuth = FirebaseAuth.getInstance()
+    private val catcher = ExceptionCatcher()
 
     override suspend fun signIn(email: String, password: String): Status<String> {
 
         return ExceptionCatcher().launchWithCatch {
             val result = firebaseAuth.signInWithEmailAndPassword(email, password).await()
             if (result.user != null) {
-               return@launchWithCatch Status.Success("Success") // Уточнить
+               return@launchWithCatch Status.Success("Success")
             } else {
-                return@launchWithCatch Status.Failure("Failure") // Уточнить
+                return@launchWithCatch Status.Failure("Failure")
             }
 
         }
@@ -28,14 +29,14 @@ class AuthRepositoryImpl : AuthRepository {
         email: String,
         password: String,
         confirmPassword: String
-    ): Status<String> {
+    ): Status<Boolean> {
         if (password != confirmPassword) {
             return Status.Failure("Passwords do not match")
         }
-        return ExceptionCatcher().launchWithCatch {
+        return catcher.launchWithCatch {
             val resultSignUp = firebaseAuth.createUserWithEmailAndPassword(email, password).await()
             if (resultSignUp.user != null) {
-               return@launchWithCatch Status.Success("Success")
+               return@launchWithCatch Status.Success(true)
             } else {
               return@launchWithCatch  Status.Failure("Failure")
             }

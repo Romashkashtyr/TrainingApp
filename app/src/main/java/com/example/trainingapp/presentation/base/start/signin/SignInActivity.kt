@@ -18,10 +18,8 @@ import moxy.ktx.moxyPresenter
 class SignInActivity : BaseActivity(), SignInView {
 
     private lateinit var binding: ActivitySignInBinding
-    private var firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
     private val presenter by moxyPresenter { SignInPresenter() }
     var mode = AuthMode.LOGIN
-    val toEditable = Editable.Factory.getInstance()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,40 +32,25 @@ class SignInActivity : BaseActivity(), SignInView {
             val userEmail = binding.emailEditText.text.toString()
             val userPassword = binding.enterPassword.text.toString()
             presenter.signIn(userEmail, userPassword)
-                when (mode) {
-                    AuthMode.REGISTRATION -> {
-                        val confirmPassword = binding.passwordLayout.editText.toString()
-                        presenter.signUp(userEmail, userPassword, confirmPassword)
-                        presenter.requestChangeMode()
-                    }
-
-                    AuthMode.LOGIN -> {
-                        presenter.signIn(userEmail, userPassword)
-                    }
+            when (mode) {
+                AuthMode.REGISTRATION -> {
+                    val confirmPassword = binding.passwordLayout.editText.toString()
+                    presenter.signUp(userEmail, userPassword, confirmPassword)
                 }
 
-
+                AuthMode.LOGIN -> {
+                    presenter.signIn(userEmail, userPassword)
+                }
+            }
 
         }
 
-
         binding.signUpAction.setOnClickListener {
-            binding.apply {
-                signInButton.text = getString(R.string.sign_up_text)
-                emailEditText.text = toEditable.newEditable(getString(R.string.type_your_email))
-                enterPassword.text =
-                    toEditable.newEditable(getString(R.string.type_your_password))
-                passwordLayout.visibility = View.VISIBLE
-                passEditText.visibility = View.VISIBLE
-                CoroutineScope(Dispatchers.IO).launch {
-                    val userEmail = binding.emailEditText.text.toString()
-                    val userPassword = binding.passEditText.text.toString()
-                    val confirmUserPassword = binding.passEditText.text.toString()
-                    presenter.signUp(userEmail, userPassword, confirmUserPassword)
-                }
-
-            }
-
+            presenter.requestChangeMode()
+            val userEmail = binding.emailEditText.text.toString()
+            val userPassword = binding.passEditText.text.toString()
+            val confirmUserPassword = binding.passEditText.text.toString()
+            presenter.signUp(userEmail, userPassword, confirmUserPassword)
         }
 
     }
@@ -92,22 +75,28 @@ class SignInActivity : BaseActivity(), SignInView {
     }
 
 
-
     override fun changeAuthMode() {
-        val newMode = if (mode == AuthMode.LOGIN) AuthMode.LOGIN else AuthMode.REGISTRATION
-        when (mode) {
-            AuthMode.LOGIN -> {
-                binding.signInButton.setText(R.string.sign_in_text)
-            }
+        binding.apply {
+            emailEditText.setText(R.string.type_your_email)
+            enterPassword.setText(R.string.type_your_password)
+            val newMode = if (mode == AuthMode.LOGIN) AuthMode.LOGIN else AuthMode.REGISTRATION
+            when (mode) {
+                AuthMode.LOGIN -> {
+                    binding.passwordLayout.visibility = View.VISIBLE
+                    binding.signInButton.setText(R.string.sign_in_text)
+                }
 
-            AuthMode.REGISTRATION -> {
-                binding.signInButton.setText(R.string.sign_up_text)
+                AuthMode.REGISTRATION -> {
+                    binding.passwordLayout.visibility = View.VISIBLE
+                    binding.signInButton.setText(R.string.sign_up_text)
+                }
             }
+            mode = newMode
         }
-        mode = newMode
+
+
+
     }
-
-
     override fun showToast(message: Int) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
