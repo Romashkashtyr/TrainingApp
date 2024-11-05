@@ -1,25 +1,18 @@
 package com.example.trainingapp.presentation.base.start.signin
 
 import android.os.Bundle
-import android.text.Editable
 import android.view.View
-import android.widget.Toast
 import com.example.trainingapp.R
 import com.example.trainingapp.data.AuthMode
 import com.example.trainingapp.databinding.ActivitySignInBinding
 import com.example.trainingapp.presentation.base.BaseActivity
-import com.google.firebase.auth.FirebaseAuth
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 
 class SignInActivity : BaseActivity(), SignInView {
 
     private lateinit var binding: ActivitySignInBinding
     private val presenter by moxyPresenter { SignInPresenter() }
-    var mode = AuthMode.LOGIN
+    private var mode = AuthMode.LOGIN
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,10 +40,6 @@ class SignInActivity : BaseActivity(), SignInView {
 
         binding.signUpAction.setOnClickListener {
             presenter.requestChangeMode()
-            val userEmail = binding.emailEditText.text.toString()
-            val userPassword = binding.passEditText.text.toString()
-            val confirmUserPassword = binding.passEditText.text.toString()
-            presenter.signUp(userEmail, userPassword, confirmUserPassword)
         }
 
     }
@@ -96,8 +85,5 @@ class SignInActivity : BaseActivity(), SignInView {
 
 
 
-    }
-    override fun showToast(message: Int) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 }

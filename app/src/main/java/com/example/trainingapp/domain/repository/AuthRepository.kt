@@ -6,7 +6,7 @@ import com.example.trainingapp.domain.Status
 interface AuthRepository {
 
 
-    suspend fun signIn(email: String, password: String): Status<String>
+    suspend fun signIn(email: String, password: String): Status<Boolean>
 
     suspend fun signUp(email: String, password: String, confirmPassword: String): Status<Boolean>
 

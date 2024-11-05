@@ -8,12 +8,12 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 
 class ExceptionCatcher {
-    suspend fun <T> launchWithCatch(job: suspend () -> Status<T>): Status<T>{
+    suspend fun <T> launchWithCatch(job: suspend () -> Status<T>): Status<T> {
         return try {
             job()
         } catch (e: FirebaseException){
             e.message.toString()
-            Status.NoNetwork("NoNetwork") // Уточнить
+            Status.NoNetwork("NoNetwork")
         } catch (e: FirebaseAuthWeakPasswordException) {
             Status.Failure("Weak password")
         } catch (e: FirebaseAuthInvalidCredentialsException) {

@@ -11,12 +11,12 @@ class AuthRepositoryImpl : AuthRepository {
     private val firebaseAuth = FirebaseAuth.getInstance()
     private val catcher = ExceptionCatcher()
 
-    override suspend fun signIn(email: String, password: String): Status<String> {
+    override suspend fun signIn(email: String, password: String): Status<Boolean> {
 
         return ExceptionCatcher().launchWithCatch {
             val result = firebaseAuth.signInWithEmailAndPassword(email, password).await()
             if (result.user != null) {
-               return@launchWithCatch Status.Success("Success")
+               return@launchWithCatch Status.Success(true)
             } else {
                 return@launchWithCatch Status.Failure("Failure")
             }
