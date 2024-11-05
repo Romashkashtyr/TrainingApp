@@ -22,9 +22,9 @@ open class SignInPresenter : BasePresenter<SignInView>() {
             viewState?.showViewProgress()
 
             launch {
-                val getAuthStatus = authRepository.signIn(email, password)
+                val authStatus = authRepository.signIn(email, password)
                 withContext(Dispatchers.Main) {
-                    when (getAuthStatus) {
+                    when (authStatus) {
                         is Status.Failure -> {
                             viewState.showToast(R.string.sign_in_failure)
                         }
@@ -54,9 +54,6 @@ open class SignInPresenter : BasePresenter<SignInView>() {
 
     }
 
-    fun signOut() {
-        authRepository.signOut()
-    }
 
     fun requestChangeMode() {
         viewState.changeAuthMode()
