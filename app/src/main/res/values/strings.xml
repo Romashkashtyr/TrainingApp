@@ -24,4 +24,13 @@
     <string name="sign_up_failure">Что-то пошло не так</string>
 
 
+    <!-- Main Activity -->
+    <string name="steps_county">Количество шагов</string>
+    <string name="water_county">Показатель воды</string>
+    <string name="add_water_button">Добавить воды</string>
+    <string name="finished_trains">Пройденные тренировки</string>
+    <string name="trains_county">Список тренировок</string>
+    <string name="total_county">0</string>
+
+
 </resources>
