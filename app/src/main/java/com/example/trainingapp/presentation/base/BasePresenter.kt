@@ -9,7 +9,7 @@ import moxy.MvpView
 import kotlin.coroutines.CoroutineContext
 
 @InjectViewState
-open class BasePresenter<T: BaseView>() : MvpPresenter<T>(), CoroutineScope {
+open class BasePresenter<T: BaseView> : MvpPresenter<T>(), CoroutineScope {
 
     fun requireShowToast(message: Int) {
         viewState.showToast(message)

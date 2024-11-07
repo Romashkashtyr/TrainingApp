@@ -23,7 +23,7 @@
         </intent-filter>
         </activity>
         <activity
-            android:name=".presentation.base.MainActivity"
+            android:name=".presentation.base.main_logic.MainActivity"
             android:exported="false">
         </activity>
     </application>

@@ -38,7 +38,7 @@ class SignInActivity : BaseActivity(), SignInView {
 
         }
 
-        binding.signUpAction.setOnClickListener {
+        binding.changeModeButton.setOnClickListener {
             presenter.requestChangeMode()
         }
 
@@ -48,14 +48,14 @@ class SignInActivity : BaseActivity(), SignInView {
     override fun showViewProgress() {
         binding.progressBar.visibility = View.VISIBLE
         binding.emailEditText.visibility = View.GONE
-        binding.passEditText.visibility = View.GONE
+        binding.passwordEditText.visibility = View.GONE
     }
 
 
     override fun hideViewProgress() {
         binding.progressBar.visibility = View.GONE
         binding.emailEditText.visibility = View.VISIBLE
-        binding.passEditText.visibility = View.VISIBLE
+        binding.passwordEditText.visibility = View.VISIBLE
         binding.emailEditText.visibility = View.VISIBLE
     }
 

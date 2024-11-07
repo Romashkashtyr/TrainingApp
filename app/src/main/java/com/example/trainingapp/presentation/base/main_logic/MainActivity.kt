@@ -1,4 +1,4 @@
-package com.example.trainingapp.presentation.base
+package com.example.trainingapp.presentation.base.main_logic
 
 import android.os.Bundle
 import com.example.trainingapp.R
