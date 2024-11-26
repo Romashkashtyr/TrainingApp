@@ -37,6 +37,7 @@ sealed class DashboardViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val onViewTrainingsClicked: () -> Unit
     ) : DashboardViewHolder(binding.root){
         fun bind(item: DashboardItem.TrainingListItem){
+            binding.viewWorkoutsButton.text = item.trainingList.toString()
             binding.viewWorkoutsButton.setOnClickListener { onViewTrainingsClicked() }
         }
     }
