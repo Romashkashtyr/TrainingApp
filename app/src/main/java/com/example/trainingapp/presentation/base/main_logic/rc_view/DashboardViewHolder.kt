@@ -10,9 +10,11 @@ import com.example.trainingapp.domain.DashboardItem
 
 sealed class DashboardViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
+    abstract fun bind(item: DashboardItem)
+
      class StepsViewHolder(private val binding: ItemStepsBinding) : DashboardViewHolder(binding.root) {
-        fun bind(item: DashboardItem.StepsItem){
-            binding.stepsCount.text = item.stepsCount.toString()
+        override fun bind(item: DashboardItem){
+            binding.stepsCount.text = (item as DashboardItem.StepsItem).stepsCount.toString()
         }
     }
 
@@ -20,15 +22,15 @@ sealed class DashboardViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding: ItemWaterBinding,
         private val onAddWaterClicked: () -> Unit
     ) : DashboardViewHolder(binding.root){
-        fun bind(item: DashboardItem.WaterItem){
-            binding.waterIntake.text = item.waterCount.toString()
+        override fun bind(item: DashboardItem){
+            binding.waterIntake.text = (item as DashboardItem.WaterItem).waterCount.toString()
             binding.addWaterButton.setOnClickListener { onAddWaterClicked() }
         }
     }
 
      class WorkoutsViewHolder(private val binding: ItemWorkoutBinding) : DashboardViewHolder(binding.root){
-        fun bind(item: DashboardItem.WorkoutItem){
-            binding.workoutsCount.text = item.workoutCounts.toString()
+        override fun bind(item: DashboardItem){
+            binding.workoutsCount.text = (item as DashboardItem.WorkoutItem).workoutCounts.toString()
         }
     }
 
@@ -36,8 +38,8 @@ sealed class DashboardViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding: ItemTrainingListBinding,
         private val onViewTrainingsClicked: () -> Unit
     ) : DashboardViewHolder(binding.root){
-        fun bind(item: DashboardItem.TrainingListItem){
-            binding.viewWorkoutsButton.text = item.trainingList.toString()
+        override fun bind(item: DashboardItem){
+            binding.viewWorkoutsButton.text = (item as DashboardItem.TrainingListItem).trainingList
             binding.viewWorkoutsButton.setOnClickListener { onViewTrainingsClicked() }
         }
     }
