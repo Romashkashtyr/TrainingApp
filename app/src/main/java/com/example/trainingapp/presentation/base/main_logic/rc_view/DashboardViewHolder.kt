@@ -2,6 +2,7 @@ package com.example.trainingapp.presentation.base.main_logic.rc_view
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.example.trainingapp.R
 import com.example.trainingapp.databinding.ItemStepsBinding
 import com.example.trainingapp.databinding.ItemTrainingListBinding
 import com.example.trainingapp.databinding.ItemWaterBinding
@@ -24,7 +25,11 @@ sealed class DashboardViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     ) : DashboardViewHolder(binding.root){
         override fun bind(item: DashboardItem){
             binding.waterIntake.text = (item as DashboardItem.WaterItem).waterCount.toString()
-            binding.addWaterButton.setOnClickListener { onAddWaterClicked() }
+            binding.addWaterButton.setOnClickListener {
+                onAddWaterClicked()
+            item.waterCount += 100
+                binding.waterIntake.text = item.waterCount.toString()
+            }
         }
     }
 
@@ -39,7 +44,7 @@ sealed class DashboardViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val onViewTrainingsClicked: () -> Unit
     ) : DashboardViewHolder(binding.root){
         override fun bind(item: DashboardItem){
-            binding.viewWorkoutsButton.text = (item as DashboardItem.TrainingListItem).trainingList
+            binding.viewWorkoutsButton.setText(R.string.trains_county)
             binding.viewWorkoutsButton.setOnClickListener { onViewTrainingsClicked() }
         }
     }

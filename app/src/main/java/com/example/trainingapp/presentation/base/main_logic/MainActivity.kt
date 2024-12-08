@@ -1,17 +1,13 @@
 package com.example.trainingapp.presentation.base.main_logic
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.trainingapp.R
 import com.example.trainingapp.databinding.ActivityMainBinding
-import com.example.trainingapp.databinding.ActivityMainRcBinding
 import com.example.trainingapp.presentation.base.BaseActivity
 import com.example.trainingapp.presentation.base.main_logic.rc_view.DashboardAdapter
-import moxy.MvpAppCompatActivity
 
 class MainActivity : BaseActivity(), DashboardAdapter.OnClick {
-    private lateinit var binding: ActivityMainRcBinding
+    private lateinit var binding: ActivityMainBinding
     private lateinit var dashboardAdapter: DashboardAdapter
 
     private var stepsCount = 0
@@ -20,7 +16,7 @@ class MainActivity : BaseActivity(), DashboardAdapter.OnClick {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainRcBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupRecyclerView()
     }

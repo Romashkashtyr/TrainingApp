@@ -11,12 +11,9 @@ class MainRepositoryImpl : MainRepository {
 
     private val databaseReference = FirebaseDatabase.getInstance()
     private val databaseWater = databaseReference.getReference("get_water")
-    val catcher = FirebaseExceptionCatcher()
+    private val catcher = FirebaseExceptionCatcher()
 
-    override suspend fun getWaterAmount(
-        addWater: (Int) -> String,
-        errorCallback: (String) -> Unit
-    ): Status<Int> {
+    override suspend fun getWaterAmount(): Status<Int> {
         return catcher.launchWithCatch {
             return@launchWithCatch Status.Success(
                 databaseWater.get().await().getValue(Int::class.java) ?: 0
