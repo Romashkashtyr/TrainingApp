@@ -1,5 +1,6 @@
 package com.example.trainingapp.data
 
+import com.example.trainingapp.domain.DashboardItem
 import com.example.trainingapp.domain.Status
 import com.example.trainingapp.domain.repository.MainRepository
 import com.google.firebase.auth.FirebaseAuth
@@ -20,4 +21,11 @@ class MainRepositoryImpl : MainRepository {
             )
         }
     }
+
+    override suspend fun getWaterInfo(): DashboardItem.WaterItem {
+        val database = databaseWater.get().await().getValue(Int::class.java) ?: 0
+        return DashboardItem.WaterItem(database)
+    }
+
+
 }

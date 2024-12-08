@@ -2,13 +2,23 @@ package com.example.trainingapp.presentation.base.main_logic
 
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.trainingapp.data.MainRepositoryImpl
 import com.example.trainingapp.databinding.ActivityMainBinding
+import com.example.trainingapp.domain.DashboardItem
 import com.example.trainingapp.presentation.base.BaseActivity
 import com.example.trainingapp.presentation.base.main_logic.rc_view.DashboardAdapter
+import com.google.firebase.firestore.util.Executors
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class MainActivity : BaseActivity(), DashboardAdapter.OnClick {
     private lateinit var binding: ActivityMainBinding
     private lateinit var dashboardAdapter: DashboardAdapter
+    private val repository = MainRepositoryImpl()
+
+    private val scope = CoroutineScope(Dispatchers.Main + Job())
 
     private var stepsCount = 0
     private var waterIntake = 0
@@ -22,8 +32,13 @@ class MainActivity : BaseActivity(), DashboardAdapter.OnClick {
     }
 
     private fun setupRecyclerView() {
+        val list = mutableListOf<DashboardItem.WaterItem>()
+        dashboardAdapter = DashboardAdapter(this, list)
+        scope.launch {
+            val waterAmount = repository.getWaterInfo()
+            list.add(waterAmount)
+        }
 
-        dashboardAdapter = DashboardAdapter(this, emptyList())
 
         binding.dashboardRecyclerView.apply {
             layoutManager =LinearLayoutManager(this@MainActivity)
