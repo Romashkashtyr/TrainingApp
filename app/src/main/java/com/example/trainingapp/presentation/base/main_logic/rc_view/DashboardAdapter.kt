@@ -6,15 +6,19 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingapp.R
+import com.example.trainingapp.data.WaterIntake
 import com.example.trainingapp.databinding.ItemStepsBinding
 import com.example.trainingapp.databinding.ItemTrainingListBinding
 import com.example.trainingapp.databinding.ItemWaterBinding
 import com.example.trainingapp.databinding.ItemWorkoutBinding
 import com.example.trainingapp.domain.DashboardItem
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
+import kotlin.concurrent.thread
 
 class DashboardAdapter(
     private val onClick: OnClick,
-    private val listViewData: List<DashboardItem>
+    private val listViewData: ArrayList<DashboardItem>
 ) : RecyclerView.Adapter<DashboardViewHolder>() {
 
 
@@ -54,6 +58,30 @@ class DashboardAdapter(
 
     override fun onBindViewHolder(holder: DashboardViewHolder, position: Int) {
         holder.bind(listViewData[position])
+    }
+
+    fun onAddWaterClicked(amount: Int){
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        currentUser?.let { user ->
+            val waterIntakeRef = FirebaseDatabase.getInstance()
+                .reference
+                .child("get_water")
+                .child(user.uid)
+                .push()
+
+            val waterIntakeData = DashboardItem.WaterItem(amount)
+
+            waterIntakeRef.setValue(waterIntakeData)
+                .addOnSuccessListener {
+                    this.
+                }
+
+        }
+    }
+
+    fun updateWaterLevel(water: DashboardItem.WaterItem){
+        listViewData.add(water)
+        notifyItemInserted(listViewData.size - 1)
     }
 
     interface OnClick {

@@ -7,13 +7,16 @@ import com.example.trainingapp.databinding.ActivityMainBinding
 import com.example.trainingapp.domain.DashboardItem
 import com.example.trainingapp.presentation.base.BaseActivity
 import com.example.trainingapp.presentation.base.main_logic.rc_view.DashboardAdapter
+import com.example.trainingapp.presentation.base.start.MainPresenter
 import com.google.firebase.firestore.util.Executors
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import moxy.ktx.moxyPresenter
 
 class MainActivity : BaseActivity(), DashboardAdapter.OnClick {
+    private val mainPresenter by moxyPresenter { MainPresenter() }
     private lateinit var binding: ActivityMainBinding
     private lateinit var dashboardAdapter: DashboardAdapter
     private val repository = MainRepositoryImpl()
@@ -46,8 +49,9 @@ class MainActivity : BaseActivity(), DashboardAdapter.OnClick {
         }
     }
 
-    override fun onAddWaterClicked() {
-        waterIntake += 200
+    override fun onAddWaterClicked(amount: Int) {
+        mainPresenter.onAddWaterClicked(amount)
+        val waterAmount = binding.
 
     }
 

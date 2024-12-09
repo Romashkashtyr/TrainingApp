@@ -8,7 +8,7 @@ import kotlinx.coroutines.tasks.await
 
 class AuthRepositoryImpl : AuthRepository {
 
-    private val firebaseAuth = FirebaseAuth.getInstance()
+    val firebaseAuth = FirebaseAuth.getInstance()
     private val catcher = ExceptionCatcher()
 
     override suspend fun signIn(email: String, password: String): Status<Boolean> {
