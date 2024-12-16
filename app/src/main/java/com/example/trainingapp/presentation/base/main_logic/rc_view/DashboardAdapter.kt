@@ -73,7 +73,7 @@ class DashboardAdapter(
 
             waterIntakeRef.setValue(waterIntakeData)
                 .addOnSuccessListener {
-                    this.
+
                 }
 
         }

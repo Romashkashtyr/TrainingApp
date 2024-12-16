@@ -2,6 +2,7 @@ package com.example.trainingapp.presentation.base.start
 
 
 import com.example.trainingapp.data.AuthRepositoryImpl
+import com.example.trainingapp.data.MainRepositoryImpl
 import com.example.trainingapp.data.WaterIntake
 import com.example.trainingapp.domain.DashboardItem
 import com.example.trainingapp.presentation.base.MainPresenterInterface
@@ -11,8 +12,10 @@ import com.google.firebase.database.FirebaseDatabase
 import moxy.MvpPresenter
 
 class MainPresenter: MvpPresenter<MainPresenterInterface>() {
+    private val repository = MainRepositoryImpl()
 
     private lateinit var adapter: DashboardAdapter
+
 
     private fun initAdapter(){
         adapter = DashboardAdapter(::onAddWaterClicked, arrayListOf<DashboardItem>())
@@ -20,11 +23,14 @@ class MainPresenter: MvpPresenter<MainPresenterInterface>() {
     }
 
 
-    fun onAddWaterClicked(amount: Int) {
+    suspend fun onAddWaterClicked(amount: Int) {
+        val waterAmount = DashboardItem.WaterItem(amount)
+        repository.getWaterInfo()
+
 
     }
 
-    private fun waterUpdate(water: WaterIntake){
-
+    private fun getCurrentWaterLevel(water: DashboardItem.WaterItem) {
+        adapter.updateWaterLevel(water)
     }
 }
