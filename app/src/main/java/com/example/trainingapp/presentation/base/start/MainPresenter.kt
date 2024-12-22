@@ -1,36 +1,46 @@
 package com.example.trainingapp.presentation.base.start
 
 
-import com.example.trainingapp.data.AuthRepositoryImpl
 import com.example.trainingapp.data.MainRepositoryImpl
-import com.example.trainingapp.data.WaterIntake
 import com.example.trainingapp.domain.DashboardItem
-import com.example.trainingapp.presentation.base.MainPresenterInterface
+import com.example.trainingapp.domain.Status
+import com.example.trainingapp.presentation.base.BasePresenter
+import com.example.trainingapp.presentation.base.main_logic.MainView
 import com.example.trainingapp.presentation.base.main_logic.rc_view.DashboardAdapter
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
-import moxy.MvpPresenter
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import moxy.InjectViewState
 
-class MainPresenter: MvpPresenter<MainPresenterInterface>() {
+@InjectViewState
+class MainPresenter: BasePresenter<MainView>() {
     private val repository = MainRepositoryImpl()
-
-    private lateinit var adapter: DashboardAdapter
 
 
     private fun initAdapter(){
-        adapter = DashboardAdapter(::onAddWaterClicked, arrayListOf<DashboardItem>())
+
+    }
+
+    fun requestGetScreenData() {
+        launch {
+            val waterAmount = repository.getWaterAmount()
+            withContext(Dispatchers.IO) {
+                when (waterAmount) {
+                    is Status.Failure -> {}
+                    is Status.NoNetwork -> {}
+                    is Status.Success -> {
+                        viewState.initListData(waterAmount.info)
+                    }
+                }
+            }
+        }
+    }
+
+    fun requestAddWater(amount: Int) {
+        launch { repository.addWater(amount) }
 
     }
 
 
-    suspend fun onAddWaterClicked(amount: Int) {
-        val waterAmount = DashboardItem.WaterItem(amount)
-        repository.getWaterInfo()
 
-
-    }
-
-    private fun getCurrentWaterLevel(water: DashboardItem.WaterItem) {
-        adapter.updateWaterLevel(water)
-    }
 }

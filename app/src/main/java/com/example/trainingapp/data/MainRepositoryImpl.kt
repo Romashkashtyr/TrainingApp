@@ -16,7 +16,7 @@ class MainRepositoryImpl : MainRepository {
 
     override suspend fun getWaterAmount(): Status<Int> {
         return catcher.launchWithCatch {
-            return@launchWithCatch Status.Success(
+            Status.Success(
                 databaseWater.get().await().getValue(Int::class.java) ?: 0
             )
         }

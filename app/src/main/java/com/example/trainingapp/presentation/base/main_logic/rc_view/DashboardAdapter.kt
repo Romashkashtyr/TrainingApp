@@ -79,13 +79,9 @@ class DashboardAdapter(
         }
     }
 
-    fun updateWaterLevel(water: DashboardItem.WaterItem){
-        listViewData.add(water)
-        notifyItemInserted(listViewData.size - 1)
-    }
 
     interface OnClick {
-        fun onAddWaterClicked()
+        fun onAddWaterClicked(newAmount: Int)
         fun onViewTrainingsClicked()
     }
 }

@@ -8,14 +8,13 @@ import com.example.trainingapp.domain.DashboardItem
 import com.example.trainingapp.presentation.base.BaseActivity
 import com.example.trainingapp.presentation.base.main_logic.rc_view.DashboardAdapter
 import com.example.trainingapp.presentation.base.start.MainPresenter
-import com.google.firebase.firestore.util.Executors
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import moxy.ktx.moxyPresenter
 
-class MainActivity : BaseActivity(), DashboardAdapter.OnClick {
+class MainActivity : BaseActivity(), MainView, DashboardAdapter.OnClick {
     private val mainPresenter by moxyPresenter { MainPresenter() }
     private lateinit var binding: ActivityMainBinding
     private lateinit var dashboardAdapter: DashboardAdapter
@@ -31,11 +30,29 @@ class MainActivity : BaseActivity(), DashboardAdapter.OnClick {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        mainPresenter.requestGetScreenData()
         setupRecyclerView()
     }
 
     private fun setupRecyclerView() {
-        val list = mutableListOf<DashboardItem.WaterItem>()
+
+    }
+
+
+    override fun onAddWaterClicked(newAmount: Int) {
+        mainPresenter.requestAddWater(newAmount)
+    }
+
+    override fun onViewTrainingsClicked() {
+        TODO()
+    }
+
+    override fun initListData(waterAmount: Int) {
+        val list = mutableListOf<DashboardItem>(
+            DashboardItem.StepsItem(100),
+            DashboardItem.WaterItem(waterAmount)
+
+        )
         dashboardAdapter = DashboardAdapter(this, list)
         scope.launch {
             val waterAmount = repository.getWaterInfo()
@@ -49,13 +66,7 @@ class MainActivity : BaseActivity(), DashboardAdapter.OnClick {
         }
     }
 
-    override fun onAddWaterClicked(amount: Int) {
-        mainPresenter.onAddWaterClicked(amount)
-        val waterAmount = binding.
-
-    }
-
-    override fun onViewTrainingsClicked() {
-        TODO()
+    override fun addWater(waterCount: Int) {
+        TODO("Not yet implemented")
     }
 }
