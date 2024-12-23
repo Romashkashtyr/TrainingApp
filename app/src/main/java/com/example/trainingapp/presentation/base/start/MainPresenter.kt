@@ -1,6 +1,7 @@
 package com.example.trainingapp.presentation.base.start
 
 
+import com.example.trainingapp.R
 import com.example.trainingapp.data.MainRepositoryImpl
 import com.example.trainingapp.domain.DashboardItem
 import com.example.trainingapp.domain.Status
@@ -17,17 +18,19 @@ class MainPresenter: BasePresenter<MainView>() {
     private val repository = MainRepositoryImpl()
 
 
-    private fun initAdapter(){
 
-    }
 
     fun requestGetScreenData() {
         launch {
             val waterAmount = repository.getWaterAmount()
             withContext(Dispatchers.IO) {
                 when (waterAmount) {
-                    is Status.Failure -> {}
-                    is Status.NoNetwork -> {}
+                    is Status.Failure -> {
+                        viewState.showToast(R.string.sign_up_failure)
+                    }
+                    is Status.NoNetwork -> {
+                        viewState.showToast(R.string.network_failure)
+                    }
                     is Status.Success -> {
                         viewState.initListData(waterAmount.info)
                     }
@@ -38,7 +41,6 @@ class MainPresenter: BasePresenter<MainView>() {
 
     fun requestAddWater(amount: Int) {
         launch { repository.addWater(amount) }
-
     }
 
 

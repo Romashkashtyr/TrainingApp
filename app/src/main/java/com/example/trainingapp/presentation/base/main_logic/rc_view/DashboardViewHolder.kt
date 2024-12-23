@@ -15,19 +15,19 @@ sealed class DashboardViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
      class StepsViewHolder(private val binding: ItemStepsBinding) : DashboardViewHolder(binding.root) {
         override fun bind(item: DashboardItem){
-            binding.stepsCount.text = (item as DashboardItem.StepsItem).stepsCount.toString()
+            binding.stepsCount.text = String.format((item as DashboardItem.StepsItem).stepsCount.toString())
         }
     }
 
     class WaterViewHolder(
         private val binding: ItemWaterBinding,
-        private val onAddWaterClicked: () -> Unit
+        private val onAddWaterClicked: (Int) -> Unit
     ) : DashboardViewHolder(binding.root){
         override fun bind(item: DashboardItem){
-            binding.waterIntake.text = (item as DashboardItem.WaterItem).waterCount.toString()
+            binding.waterIntake.text = String.format((item as DashboardItem.WaterItem).waterCount.toString())
             binding.addWaterButton.setOnClickListener {
-                onAddWaterClicked()
-            item.waterCount += 100
+                item.waterCount += 100
+                onAddWaterClicked(item.waterCount)
                 binding.waterIntake.text = item.waterCount.toString()
             }
         }
@@ -35,7 +35,7 @@ sealed class DashboardViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
      class WorkoutsViewHolder(private val binding: ItemWorkoutBinding) : DashboardViewHolder(binding.root){
         override fun bind(item: DashboardItem){
-            binding.workoutsCount.text = (item as DashboardItem.WorkoutItem).workoutCounts.toString()
+            binding.workoutsCount.text = String.format((item as DashboardItem.WorkoutItem).workoutCounts.toString())
         }
     }
 

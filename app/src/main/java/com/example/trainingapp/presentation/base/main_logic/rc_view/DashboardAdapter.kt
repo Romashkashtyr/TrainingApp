@@ -18,7 +18,7 @@ import kotlin.concurrent.thread
 
 class DashboardAdapter(
     private val onClick: OnClick,
-    private val listViewData: ArrayList<DashboardItem>
+    private val listViewData: List<DashboardItem>
 ) : RecyclerView.Adapter<DashboardViewHolder>() {
 
 
@@ -42,7 +42,9 @@ class DashboardAdapter(
 
             R.layout.item_water -> DashboardViewHolder.WaterViewHolder(
                 ItemWaterBinding.inflate(inflater, parent, false)
-            ) { onClick.onAddWaterClicked() }
+            ) { newAmount ->
+                onClick.onAddWaterClicked(newAmount)
+            }
 
             R.layout.item_workout -> DashboardViewHolder.WorkoutsViewHolder(
                 ItemWorkoutBinding.inflate(inflater, parent, false)

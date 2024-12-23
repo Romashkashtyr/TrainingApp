@@ -6,5 +6,5 @@ import com.example.trainingapp.domain.Status
 interface MainRepository {
 
     suspend fun getWaterAmount(): Status<Int>
-    suspend fun getWaterInfo(): DashboardItem
+    suspend fun addWater(amount: Int)
 }
