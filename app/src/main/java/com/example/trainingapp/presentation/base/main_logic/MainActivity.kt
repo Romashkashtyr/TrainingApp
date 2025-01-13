@@ -15,34 +15,41 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.asCoroutineDispatcher
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import moxy.ktx.moxyPresenter
 import java.util.concurrent.Executors
+import kotlin.coroutines.coroutineContext
 
 class MainActivity : BaseActivity(), MainView, DashboardAdapter.OnClick {
     private val mainPresenter by moxyPresenter { MainPresenter() }
     private lateinit var binding: ActivityMainBinding
     private lateinit var dashboardAdapter: DashboardAdapter
 
+
     private val dispatcher = Executors.newCachedThreadPool().asCoroutineDispatcher()
     private val scope = CoroutineScope(dispatcher)
 
-    private var stepsCount = 0
-    private var waterIntake = 0
-    private var workoutCount = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         mainPresenter.requestGetScreenData()
-        setupRecyclerView()
+        observeScreenData()
     }
 
-    private fun setupRecyclerView() {
 
+    private fun observeScreenData() {
+        mainPresenter.screenData
+            .onEach { status ->
+                when(status) {
+                    is Status.Success -> initListData(status.info)
+                    else -> Unit
+                }
+            }.launchIn(scope)
     }
-
 
     override fun onAddWaterClicked(newAmount: Int) {
         mainPresenter.requestAddWater(newAmount)

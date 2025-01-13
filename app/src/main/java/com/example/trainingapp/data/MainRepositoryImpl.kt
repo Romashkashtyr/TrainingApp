@@ -10,6 +10,8 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.asCoroutineDispatcher
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import java.util.concurrent.Executors
@@ -22,12 +24,14 @@ class MainRepositoryImpl : MainRepository {
     private val catcher = FirebaseExceptionCatcher()
 
 
-    override suspend fun getWaterAmount(): Status<Int> {
-        return catcher.launchWithCatch {
-            Status.Success(
+    override suspend fun getWaterAmount(): Flow<Status<Int>> {
+        return flow {
+            val data = Status.Success(
                 databaseWater.get().await().getValue(Int::class.java) ?: 0
             )
+            emit(data)
         }
+
     }
 
     override suspend fun addWater(amount: Int) {
