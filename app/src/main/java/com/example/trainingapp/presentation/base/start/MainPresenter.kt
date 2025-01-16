@@ -18,8 +18,6 @@ class MainPresenter: BasePresenter<MainView>() {
     private val repository = MainRepositoryImpl()
 
 
-
-
     fun requestGetScreenData() {
         launch {
             val waterAmount = repository.getWaterAmount()

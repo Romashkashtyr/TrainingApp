@@ -65,9 +65,6 @@ class MainActivity : BaseActivity(), MainView, DashboardAdapter.OnClick {
     }
 
     override fun addWater(waterCount: Int){
-        scope.launch {
             mainPresenter.requestAddWater(waterCount)
-        }
-
     }
 }
