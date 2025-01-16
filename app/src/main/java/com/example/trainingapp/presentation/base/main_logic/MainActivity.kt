@@ -36,8 +36,12 @@ class MainActivity : BaseActivity(), MainView, DashboardAdapter.OnClick {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         mainPresenter.requestGetScreenData()
+        setupRecyclerView()
     }
 
+    private fun setupRecyclerView() {
+
+    }
 
 
     override fun onAddWaterClicked(newAmount: Int) {
