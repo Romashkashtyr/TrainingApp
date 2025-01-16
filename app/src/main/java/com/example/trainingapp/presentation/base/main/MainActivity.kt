@@ -1,21 +1,13 @@
-package com.example.trainingapp.presentation.base.main_logic
+package com.example.trainingapp.presentation.base.main
 
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.trainingapp.data.MainRepositoryImpl
 import com.example.trainingapp.databinding.ActivityMainBinding
 import com.example.trainingapp.domain.DashboardItem
-import com.example.trainingapp.domain.Status
 import com.example.trainingapp.presentation.base.BaseActivity
-import com.example.trainingapp.presentation.base.BasePresenter
-import com.example.trainingapp.presentation.base.main_logic.rc_view.DashboardAdapter
-import com.example.trainingapp.presentation.base.start.MainPresenter
+import com.example.trainingapp.presentation.base.main.rc_view.DashboardAdapter
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.asCoroutineDispatcher
-import kotlinx.coroutines.launch
 import moxy.ktx.moxyPresenter
 import java.util.concurrent.Executors
 
@@ -24,24 +16,14 @@ class MainActivity : BaseActivity(), MainView, DashboardAdapter.OnClick {
     private lateinit var binding: ActivityMainBinding
     private lateinit var dashboardAdapter: DashboardAdapter
 
-    private val dispatcher = Executors.newCachedThreadPool().asCoroutineDispatcher()
-    private val scope = CoroutineScope(dispatcher)
-
-    private var stepsCount = 0
-    private var waterIntake = 0
-    private var workoutCount = 0
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         mainPresenter.requestGetScreenData()
-        setupRecyclerView()
     }
 
-    private fun setupRecyclerView() {
 
-    }
 
 
     override fun onAddWaterClicked(newAmount: Int) {
