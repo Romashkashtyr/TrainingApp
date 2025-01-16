@@ -24,12 +24,6 @@ class MainActivity : BaseActivity(), MainView, DashboardAdapter.OnClick {
     private lateinit var binding: ActivityMainBinding
     private lateinit var dashboardAdapter: DashboardAdapter
 
-    private val dispatcher = Executors.newCachedThreadPool().asCoroutineDispatcher()
-    private val scope = CoroutineScope(dispatcher)
-
-    private var stepsCount = 0
-    private var waterIntake = 0
-    private var workoutCount = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
