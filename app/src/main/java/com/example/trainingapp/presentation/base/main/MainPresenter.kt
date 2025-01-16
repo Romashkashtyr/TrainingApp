@@ -1,19 +1,14 @@
-package com.example.trainingapp.presentation.base.start
+package com.example.trainingapp.presentation.base.main
 
 
 import com.example.trainingapp.R
 import com.example.trainingapp.data.MainRepositoryImpl
-import com.example.trainingapp.domain.DashboardItem
 import com.example.trainingapp.domain.Status
-import com.example.trainingapp.presentation.base.BasePresenter
-import com.example.trainingapp.presentation.base.main_logic.MainView
-import com.example.trainingapp.presentation.base.main_logic.rc_view.DashboardAdapter
-import kotlinx.coroutines.Dispatchers
+import com.example.trainingapp.presentation.base.base.BasePresenter
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import moxy.InjectViewState
 import kotlinx.coroutines.flow.collect
 

@@ -1,21 +1,12 @@
 package com.example.trainingapp.data
 
-import com.example.trainingapp.domain.DashboardItem
 import com.example.trainingapp.domain.Status
 import com.example.trainingapp.domain.repository.MainRepository
-import com.example.trainingapp.presentation.base.BasePresenter
 import com.google.firebase.FirebaseException
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.asCoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
-import java.util.concurrent.Executors
-import kotlin.coroutines.coroutineContext
 
 class MainRepositoryImpl : MainRepository {
 

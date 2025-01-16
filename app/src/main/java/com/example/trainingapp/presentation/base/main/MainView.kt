@@ -1,6 +1,6 @@
-package com.example.trainingapp.presentation.base.main_logic
+package com.example.trainingapp.presentation.base.main
 
-import com.example.trainingapp.presentation.base.BaseView
+import com.example.trainingapp.presentation.base.base.BaseView
 import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType
 

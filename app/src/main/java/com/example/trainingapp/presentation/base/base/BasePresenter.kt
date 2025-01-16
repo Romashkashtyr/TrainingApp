@@ -1,11 +1,10 @@
-package com.example.trainingapp.presentation.base
+package com.example.trainingapp.presentation.base.base
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import moxy.InjectViewState
 import moxy.MvpPresenter
-import moxy.MvpView
 import kotlin.coroutines.CoroutineContext
 
 @InjectViewState

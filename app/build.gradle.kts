@@ -45,6 +45,9 @@ val moxy_version = "2.2.2"
 dependencies {
 
 
+    implementation (project(":domain"))
+    implementation (project(":data"))
+
     implementation (libs.androidx.room.runtime)
     kapt (libs.androidx.room.compiler)
     implementation (libs.androidx.room.ktx)

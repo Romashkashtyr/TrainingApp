@@ -5,7 +5,7 @@ import android.view.View
 import com.example.trainingapp.R
 import com.example.trainingapp.data.AuthMode
 import com.example.trainingapp.databinding.ActivitySignInBinding
-import com.example.trainingapp.presentation.base.BaseActivity
+import com.example.trainingapp.presentation.base.base.BaseActivity
 import moxy.ktx.moxyPresenter
 
 class SignInActivity : BaseActivity(), SignInView {

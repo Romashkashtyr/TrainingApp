@@ -4,7 +4,7 @@ package com.example.trainingapp.presentation.base.start.signin
 import com.example.trainingapp.R
 import com.example.trainingapp.data.AuthRepositoryImpl
 import com.example.trainingapp.domain.Status
-import com.example.trainingapp.presentation.base.BasePresenter
+import com.example.trainingapp.presentation.base.base.BasePresenter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

@@ -1,12 +1,9 @@
-package com.example.trainingapp.presentation.base.main_logic.rc_view
+package com.example.trainingapp.presentation.base.main.rc_view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingapp.R
-import com.example.trainingapp.data.WaterIntake
 import com.example.trainingapp.databinding.ItemStepsBinding
 import com.example.trainingapp.databinding.ItemTrainingListBinding
 import com.example.trainingapp.databinding.ItemWaterBinding
@@ -14,7 +11,6 @@ import com.example.trainingapp.databinding.ItemWorkoutBinding
 import com.example.trainingapp.domain.DashboardItem
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import kotlin.concurrent.thread
 
 class DashboardAdapter(
     private val onClick: OnClick,

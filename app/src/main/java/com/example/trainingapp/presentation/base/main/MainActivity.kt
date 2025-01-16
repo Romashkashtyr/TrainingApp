@@ -1,26 +1,19 @@
-package com.example.trainingapp.presentation.base.main_logic
+package com.example.trainingapp.presentation.base.main
 
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.trainingapp.data.MainRepositoryImpl
 import com.example.trainingapp.databinding.ActivityMainBinding
 import com.example.trainingapp.domain.DashboardItem
 import com.example.trainingapp.domain.Status
-import com.example.trainingapp.presentation.base.BaseActivity
-import com.example.trainingapp.presentation.base.BasePresenter
-import com.example.trainingapp.presentation.base.main_logic.rc_view.DashboardAdapter
-import com.example.trainingapp.presentation.base.start.MainPresenter
+import com.example.trainingapp.presentation.base.base.BaseActivity
+import com.example.trainingapp.presentation.base.main.rc_view.DashboardAdapter
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.asCoroutineDispatcher
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import moxy.ktx.moxyPresenter
 import java.util.concurrent.Executors
-import kotlin.coroutines.coroutineContext
 
 class MainActivity : BaseActivity(), MainView, DashboardAdapter.OnClick {
     private val mainPresenter by moxyPresenter { MainPresenter() }
@@ -72,9 +65,6 @@ class MainActivity : BaseActivity(), MainView, DashboardAdapter.OnClick {
     }
 
     override fun addWater(waterCount: Int){
-        scope.launch {
             mainPresenter.requestAddWater(waterCount)
-        }
-
     }
 }
