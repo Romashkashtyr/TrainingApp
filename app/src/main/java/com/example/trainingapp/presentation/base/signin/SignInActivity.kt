@@ -1,4 +1,4 @@
-package com.example.trainingapp.domain.signin
+package com.example.trainingapp.presentation.base.signin
 
 import android.os.Bundle
 import android.view.View

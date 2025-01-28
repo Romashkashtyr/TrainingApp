@@ -37,6 +37,12 @@
     <string name="training_name">Тренировка</string>
     <string name="duration">Длительность: </string>
     <string name="complexity">Сложность: </string>
+    <string name="level_easy">Легкий</string>
+    <string name="level_medium">Средний</string>
+    <string name="level_hard">Тяжелый</string>
+    <string name="main_menu">Главное меню</string>
+    <string name="training_list">Список тренировок</string>
+
 
 
 
