@@ -7,4 +7,6 @@ import moxy.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(value = AddToEndSingleStrategy::class)
 interface TrainingsView: BaseView {
+
+    fun showTrainingsList()
 }

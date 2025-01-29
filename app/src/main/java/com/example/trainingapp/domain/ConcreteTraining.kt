@@ -9,8 +9,3 @@ data class ConcreteTraining(
 ): Training {
 }
 
-interface Training {
-    val trainingName: String
-    val duration: Duration
-    val complexity: Int
-}
