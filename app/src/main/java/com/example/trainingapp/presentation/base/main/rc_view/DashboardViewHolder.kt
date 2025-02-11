@@ -50,8 +50,6 @@ sealed class DashboardViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         }
     }
 
-    companion object {
-        val dashboard =
-    }
+
 
 }
