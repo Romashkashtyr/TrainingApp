@@ -11,6 +11,7 @@ import com.example.trainingapp.domain.DashboardItem
 
 sealed class DashboardViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
+
     abstract fun bind(item: DashboardItem)
 
      class StepsViewHolder(private val binding: ItemStepsBinding) : DashboardViewHolder(binding.root) {
@@ -48,4 +49,9 @@ sealed class DashboardViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             binding.viewWorkoutsButton.setOnClickListener { onViewTrainingsClicked() }
         }
     }
+
+    companion object {
+        val dashboard =
+    }
+
 }

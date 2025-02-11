@@ -4,11 +4,17 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.trainingapp.R
 import com.example.trainingapp.databinding.ActivityTrainingsListBinding
+import com.example.trainingapp.domain.DashboardItem
+import com.example.trainingapp.domain.Training
 import com.example.trainingapp.domain.di.ApplicationComponent
 import com.example.trainingapp.presentation.base.BaseActivity
+import com.example.trainingapp.presentation.base.main.rc_view.DashboardViewHolder
+import com.example.trainingapp.presentation.base.trainings.rc_view_training.TrainingAdapter
 
 class TrainingsListActivity : BaseActivity(), TrainingsView {
     private lateinit var binding: ActivityTrainingsListBinding
+    private lateinit var trainingAdapter: TrainingAdapter
+
 
     private val component by lazy {
         
@@ -21,7 +27,10 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
         }
 
     override fun showTrainingsList() {
-        TODO("Not yet implemented")
+        val trainingsList = arrayListOf<Training>()
+        trainingAdapter = TrainingAdapter(trainingsList)
+
+
     }
 
 }

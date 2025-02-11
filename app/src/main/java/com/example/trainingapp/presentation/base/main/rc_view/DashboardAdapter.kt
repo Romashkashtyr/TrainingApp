@@ -82,4 +82,5 @@ class DashboardAdapter(
         fun onAddWaterClicked(newAmount: Int)
         fun onViewTrainingsClicked()
     }
+
 }
