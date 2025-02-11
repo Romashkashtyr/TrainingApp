@@ -20,7 +20,8 @@
         app:layout_constraintEnd_toEndOf="@+id/training_list"
         app:layout_constraintHorizontal_bias="0.982"
         app:layout_constraintStart_toStartOf="@+id/training_list"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <TextView
         android:id="@+id/training_list"
