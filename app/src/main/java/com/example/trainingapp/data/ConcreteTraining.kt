@@ -1,5 +1,6 @@
-package com.example.trainingapp.domain
+package com.example.trainingapp.data
 
+import com.example.trainingapp.domain.Training
 import kotlin.time.Duration
 
 data class ConcreteTraining(
