@@ -2,7 +2,6 @@ package com.example.trainingapp.presentation.base
 
 import android.widget.Toast
 import moxy.MvpAppCompatActivity
-import moxy.ktx.moxyPresenter
 
 open class BaseActivity : MvpAppCompatActivity(), BaseView  {
 

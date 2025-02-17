@@ -6,8 +6,9 @@ import dagger.Binds
 import dagger.Module
 
 @Module
-interface Module {
+interface TrainingModule {
 
+    @AppScope
     @Binds
     fun bindTrainingRepository(impl: TrainingsRepositoryImpl): TrainingsRepository
 }
