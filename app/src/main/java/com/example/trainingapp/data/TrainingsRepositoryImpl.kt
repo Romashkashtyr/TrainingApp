@@ -8,7 +8,7 @@ import javax.inject.Inject
 @AppScope
 class TrainingsRepositoryImpl @Inject constructor() : TrainingsRepository {
 
-    override fun getTrainingList(): ArrayList<Training> {
+    override suspend fun getTrainingList(): ArrayList<Training> {
         TODO("Not yet implemented")
     }
 }
