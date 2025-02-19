@@ -5,13 +5,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingapp.R
-import com.example.trainingapp.databinding.ItemTrainingsBinding
+import com.example.trainingapp.databinding.ItemTrainingBinding
 import com.example.trainingapp.domain.Training
 
-class TrainingAdapter(private val trainingsList: ArrayList<Training>) :
+class TrainingAdapter(private val trainingsList: List<Training>) :
     RecyclerView.Adapter<TrainingAdapter.TrainingViewHolder>() {
 
-    inner class TrainingViewHolder(private val binding: ItemTrainingsBinding, private val context: Context) :
+    inner class TrainingViewHolder(private val binding: ItemTrainingBinding, private val context: Context) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Training) {
@@ -27,7 +27,7 @@ class TrainingAdapter(private val trainingsList: ArrayList<Training>) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrainingViewHolder {
-        val binding = ItemTrainingsBinding
+        val binding = ItemTrainingBinding
             .inflate(LayoutInflater.from(parent.context), parent, false)
         return TrainingViewHolder(binding, parent.context)
     }

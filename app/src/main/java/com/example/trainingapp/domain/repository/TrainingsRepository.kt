@@ -5,5 +5,5 @@ import com.example.trainingapp.domain.Training
 
 interface TrainingsRepository {
 
-    suspend fun getTrainingList(): ArrayList<Training>
+    suspend fun requestTrainingList(): List<Training>
 }

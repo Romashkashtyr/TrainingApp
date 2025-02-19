@@ -4,9 +4,12 @@ import android.app.Application
 
 class TrainingApp : Application() {
 
-    val component by lazy {
-        DaggerApplicationComponent.create()
+    companion object {
+        val component by lazy {
+            DaggerApplicationComponent.create()
+        }
     }
+
 
 
 }
