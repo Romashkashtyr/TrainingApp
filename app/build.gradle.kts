@@ -51,6 +51,7 @@ dependencies {
 
     implementation (libs.firebase.database)
     implementation (libs.firebase.core)
+    implementation(libs.firebase.firestore)
 
 
     implementation(libs.androidx.core.ktx)
