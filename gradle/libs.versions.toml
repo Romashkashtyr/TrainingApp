@@ -31,6 +31,7 @@ dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = 
 firebase-auth-ktx = { module = "com.google.firebase:firebase-auth-ktx" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 firebase-firestore = { module = "com.google.firebase:firebase-firestore",name = "firebase-firestore-ktx"}
+firebase-storage = { module = "com.google.firebase:firebase-storage",name = "firebase-storage-ktx"}
 
 firebase-core = { module = "com.google.firebase:firebase-core", version.ref = "firebaseCore" }
 firebase-database = { module = "com.google.firebase:firebase-database", version.ref = "firebaseDatabase" }
