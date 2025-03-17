@@ -53,6 +53,9 @@ dependencies {
     implementation (libs.firebase.core)
     implementation(libs.firebase.firestore)
 
+    implementation (libs.google.cloud.storage)
+
+
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

@@ -6,5 +6,5 @@ import com.example.trainingapp.domain.Training
 
 interface TrainingsRepository {
 
-    suspend fun requestTrainingList(): List<ConcreteTraining>
+    suspend fun requestTrainingList(): List<Training>
 }
