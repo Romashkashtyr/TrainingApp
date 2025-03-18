@@ -8,11 +8,8 @@ import com.example.trainingapp.databinding.ItemTrainingListBinding
 import com.example.trainingapp.domain.DashboardItem
 import com.example.trainingapp.presentation.base.BaseActivity
 import com.example.trainingapp.presentation.base.main.rc_view.DashboardAdapter
-import com.example.trainingapp.presentation.base.trainings.TrainingsListActivity
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.asCoroutineDispatcher
+import com.example.trainingapp.presentation.trainings.TrainingsListActivity
 import moxy.ktx.moxyPresenter
-import java.util.concurrent.Executors
 
 class MainActivity : BaseActivity(), MainView, DashboardAdapter.OnClick {
     private val mainPresenter by moxyPresenter { MainPresenter() }

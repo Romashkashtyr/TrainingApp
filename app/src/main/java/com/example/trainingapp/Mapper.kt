@@ -13,7 +13,6 @@ object Mapper {
         val data = document.get("Trainings") as List<*>
 
         for (i in data) {
-            
             val trainingDataItem = ConcreteTraining(
                 trainingName  = i as String,
                 duration = i as Duration,

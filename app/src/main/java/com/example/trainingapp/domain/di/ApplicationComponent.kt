@@ -1,7 +1,7 @@
 package com.example.trainingapp.domain.di
 
-import com.example.trainingapp.presentation.base.trainings.TrainingsListActivity
-import com.example.trainingapp.presentation.base.trainings.TrainingsPresenter
+import com.example.trainingapp.presentation.trainings.TrainingsListActivity
+import com.example.trainingapp.presentation.trainings.TrainingsPresenter
 import dagger.Component
 import javax.inject.Singleton
 

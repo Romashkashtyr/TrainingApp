@@ -17,8 +17,8 @@ class TrainingsRepositoryImpl @Inject constructor() : TrainingsRepository {
 
 
     override suspend fun requestTrainingList(): List<Training> {
-//        val firebaseFireStore = Firebase.firestore
-//        val trainingResult = firebaseFireStore.collection("Trainings").document().get()
+        val firebaseFireStore = Firebase.firestore
+        val trainingResult = firebaseFireStore.collection("Trainings").document().get()
 //        if (trainingResult.isSuccessful){
 //            Status.Success(true)
 //        } else {
@@ -27,11 +27,11 @@ class TrainingsRepositoryImpl @Inject constructor() : TrainingsRepository {
 ////        val firestore = FirebaseFireStore.getInstance()
 ////        val firestoreData = firestore.collection("Trainings").document().get()
 //
-//        return Mapper.mapDataFromFireStoreDB(trainingResult.result)
+        return Mapper.mapDataFromFireStoreDB(trainingResult.result)
 
 
-        val storage = StorageOptions.getDefaultInstance().service
-        val storage = StorageOptions.getDefaultInstance().service
+//        val storage = StorageOptions.getDefaultInstance().service
+
     }
 
 
