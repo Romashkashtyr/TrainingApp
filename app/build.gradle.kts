@@ -85,4 +85,13 @@ dependencies {
     kapt (libs.moxy.compiler)
     implementation(libs.moxy.androidx)
     implementation(libs.moxy.ktx)
+
+
+    //Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+
+    //OKHttp
+    val okhttpVersion = "4.12.0"
+    implementation(libs.logging.interceptor)
 }

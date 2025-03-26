@@ -31,7 +31,7 @@ class TrainingsRepositoryImpl @Inject constructor() : TrainingsRepository {
 
 
         val storage = StorageOptions.getDefaultInstance().service
-        val storage = StorageOptions.getDefaultInstance().service
+        TODO()
     }
 
 
