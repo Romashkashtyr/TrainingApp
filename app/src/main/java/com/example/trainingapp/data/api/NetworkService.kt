@@ -1,7 +1,10 @@
 package com.example.trainingapp.data.api
 
 import com.example.trainingapp.data.Constants
+import com.example.trainingapp.data.network.Video
+import com.example.trainingapp.data.network.WorkoutSession
 import com.google.gson.annotations.SerializedName
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -15,7 +18,7 @@ interface NetworkService {
         @Query("previous") previous: String?,
         @Query("result") result: ArrayList<String>,
         @Query("apiKey") apiKey: String = Constants.API_KEY
-    )
+    ): Response<WorkoutSession>
 
 
     @GET("/v2/video")
@@ -28,5 +31,5 @@ interface NetworkService {
         @Query("is_main") isMain: Boolean?,
         @Query("duration") duration: String?,
         @Query("apiKey") apiKey: String = Constants.API_KEY
-    )
+    ): Response<Video>
 }

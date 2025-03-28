@@ -1,8 +1,8 @@
-package com.example.trainingapp.data
+package com.example.trainingapp.data.network
 
 import com.google.gson.annotations.SerializedName
 
-data class Video(
+data class VideoResultTraining(
     @SerializedName("id") var id: Int? = null,
     @SerializedName("uuid") var uuid: String? = null,
     @SerializedName("exercise") var exercise: Int? = null,

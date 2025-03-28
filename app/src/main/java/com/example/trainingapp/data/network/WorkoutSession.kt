@@ -1,4 +1,4 @@
-package com.example.trainingapp.data
+package com.example.trainingapp.data.network
 
 import com.google.gson.annotations.SerializedName
 
@@ -6,5 +6,5 @@ data class WorkoutSession(
     @SerializedName("count") var count: Int = 0,
     @SerializedName("next") var next: String? = null,
     @SerializedName("previous") var previous: String? = null,
-    @SerializedName("results") var results: ArrayList<String> = arrayListOf()
+    @SerializedName("results") var results: List<WorkoutSessionResult> = emptyList()
 )
