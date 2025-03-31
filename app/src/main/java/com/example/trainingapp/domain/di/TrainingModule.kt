@@ -20,26 +20,9 @@ interface TrainingModule {
     @Binds
     fun bindTrainingRepository(impl: TrainingsRepositoryImpl): TrainingsRepository
 
-    @Provides
-    fun baseUrl() = Constants.BASE_URL
 
-    @Provides
-    fun logging() = HttpLoggingInterceptor()
-        .setLevel(HttpLoggingInterceptor.Level.BODY)
 
-    @Provides
-    fun okHttpClient() = OkHttpClient.Builder()
-        .addInterceptor(logging())
-        .build()
 
-    @Provides
-    @Singleton
-    fun provideRetrofit(baseUrl: String): NetworkService =
-        Retrofit.Builder()
-            .baseUrl(baseUrl)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(NetworkService::class.java)
 
 //    @AppScope
 //    @Binds

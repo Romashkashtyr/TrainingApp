@@ -32,4 +32,7 @@ interface NetworkService {
         @Query("duration") duration: String?,
         @Query("apiKey") apiKey: String = Constants.API_KEY
     ): Response<Video>
+
+
+    val apiInterface:
 }
