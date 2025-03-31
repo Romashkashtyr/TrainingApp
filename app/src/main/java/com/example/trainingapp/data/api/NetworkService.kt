@@ -34,5 +34,4 @@ interface NetworkService {
     ): Response<Video>
 
 
-    val apiInterface:
 }
