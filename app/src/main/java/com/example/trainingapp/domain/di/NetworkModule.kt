@@ -1,6 +1,6 @@
 package com.example.trainingapp.domain.di
 
-import com.example.trainingapp.data.Constants
+import com.example.trainingapp.data.ApiSettings
 import com.example.trainingapp.data.api.NetworkService
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -12,14 +12,10 @@ import javax.inject.Singleton
 interface NetworkModule {
 
 
-    @Provides
-    fun baseUrl() = Constants.BASE_URL
-
-    @Provides
     fun logging() = HttpLoggingInterceptor()
         .setLevel(HttpLoggingInterceptor.Level.BODY)
 
-    @Provides
+
     fun okHttpClient() = OkHttpClient.Builder()
         .addInterceptor(logging())
         .build()

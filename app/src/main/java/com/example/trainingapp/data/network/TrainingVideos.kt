@@ -1,6 +1,6 @@
 package com.example.trainingapp.data.network
 
-data class Video(
+data class TrainingVideos(
     val count: Int,
     val next: String,
     val previous: String,

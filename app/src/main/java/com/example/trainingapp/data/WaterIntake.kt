@@ -1,3 +1,4 @@
 package com.example.trainingapp.data
 
-data class WaterIntake(val amount: Int)
+@JvmInline
+value class WaterIntake(val amount: Int)
