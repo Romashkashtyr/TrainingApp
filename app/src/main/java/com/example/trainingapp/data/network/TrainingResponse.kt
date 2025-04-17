@@ -1,6 +1,6 @@
 package com.example.trainingapp.data.network
 
 data class TrainingResponse(
-    val workouts: List<WorkoutSession>,
-    val videoResultTraining: List<VideoResultTraining>
-)
+    override val workouts: List<WorkoutSession>,
+    override val videoResultTraining: List<VideoResultTraining>
+) : TrainingResponseAbs

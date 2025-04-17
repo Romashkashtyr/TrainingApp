@@ -4,11 +4,11 @@ import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 data class VideoResultTraining(
-    @SerializedName("id") var id: Int? = null,
-    @SerializedName("uuid") var uuid: String? = null,
-    @SerializedName("exercise") var exercise: Int? = null,
-    @SerializedName("exercise_uuid") var exerciseUuid: String? = null,
-    @SerializedName("video") var video: String? = null,
-    @SerializedName("is_main") var isMain: Boolean? = null,
-    @SerializedName("duration") var duration: String? = null,
-): Serializable
+    @SerializedName("id") override var id: Int? = null,
+    @SerializedName("uuid") override var uuid: String? = null,
+    @SerializedName("exercise") override var exercise: Int? = null,
+    @SerializedName("exercise_uuid") override var exerciseUuid: String? = null,
+    @SerializedName("video") override var video: String? = null,
+    @SerializedName("is_main") override var isMain: Boolean? = null,
+    @SerializedName("duration") override var duration: String? = null,
+) : Serializable, VideoResultTrainingAbs

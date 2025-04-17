@@ -1,4 +1,4 @@
-package com.example.trainingapp.presentation.base.signin
+package com.example.trainingapp.presentation.signin
 
 import com.example.trainingapp.data.AuthMode
 import com.example.trainingapp.presentation.base.BaseView

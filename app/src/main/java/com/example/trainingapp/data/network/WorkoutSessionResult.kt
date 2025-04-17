@@ -1,8 +1,8 @@
 package com.example.trainingapp.data.network
 
 data class WorkoutSessionResult(
-    val id: Int? = null,
-    val day: Int? = null,
-    val timeStart: String = "00:00",
-    val timeEnd: String
-)
+    override val id: Int? = null,
+    override val day: Int? = null,
+    override val timeStart: String = "00:00",
+    override val timeEnd: String
+) : WorkoutSessionResultAbs

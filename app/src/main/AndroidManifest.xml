@@ -17,7 +17,7 @@
             android:name=".presentation.base.trainings.TrainingsListActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.base.signin.SignInActivity"
+            android:name=".presentation.signin.SignInActivity"
             android:exported="true"
             android:theme="@style/Theme.TrainingApp" >
             <intent-filter>

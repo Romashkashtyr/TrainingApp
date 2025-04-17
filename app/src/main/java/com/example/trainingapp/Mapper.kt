@@ -1,6 +1,5 @@
 package com.example.trainingapp
 
-import com.example.trainingapp.data.ConcreteTraining
 import com.example.trainingapp.domain.Training
 import com.google.firebase.firestore.DocumentSnapshot
 import kotlin.time.Duration
