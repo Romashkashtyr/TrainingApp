@@ -22,9 +22,9 @@ interface NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(baseUrl: String): NetworkService =
+    fun provideRetrofit(): NetworkService =
         Retrofit.Builder()
-            .baseUrl(baseUrl)
+            .baseUrl(ApiSettings.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient())
             .build()

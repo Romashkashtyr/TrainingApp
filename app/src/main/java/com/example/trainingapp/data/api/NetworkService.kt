@@ -1,6 +1,5 @@
 package com.example.trainingapp.data.api
 
-import com.example.trainingapp.data.ApiSettings
 import com.example.trainingapp.data.network.TrainingVideos
 import com.example.trainingapp.data.network.WorkoutSession
 import retrofit2.Response
@@ -11,23 +10,23 @@ import retrofit2.http.Query
 interface NetworkService {
 
     @GET("/v2/workoutsession")
-    suspend fun getWorkoutSession(
-        @Query("count") count: Int,
-        @Query("next") next: String?,
-        @Query("previous") previous: String?,
-        @Query("result") result: ArrayList<String>,
+    suspend fun getWorkoutSessions(
+        @Query("count") count: Int = 10,
+        @Query("next") next: String? = null,
+        @Query("previous") previous: String? = null,
+        @Query("result") result: List<String>? = null,
     ): Response<WorkoutSession>
 
 
     @GET("/v2/video")
-    suspend fun getVideo(
-        @Query("id") id: Int?,
-        @Query("uuid") uuid: String?,
-        @Query("exercise") exercise: Int?,
-        @Query("exercise_uuid") exerciseUuid: String?,
-        @Query("video") video: String?,
-        @Query("is_main") isMain: Boolean?,
-        @Query("duration") duration: String?,
+    suspend fun getVideos(
+        @Query("id") id: Int? = null,
+        @Query("uuid") uuid: String? = null,
+        @Query("exercise") exercise: Int? = null,
+        @Query("exercise_uuid") exerciseUuid: String? = null,
+        @Query("video") video: String? = null,
+        @Query("is_main") isMain: Boolean? = null,
+        @Query("duration") duration: String? = null,
     ): Response<TrainingVideos>
 
 
