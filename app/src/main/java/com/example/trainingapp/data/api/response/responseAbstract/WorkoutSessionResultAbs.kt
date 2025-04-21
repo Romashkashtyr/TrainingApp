@@ -1,4 +1,4 @@
-package com.example.trainingapp.data.network
+package com.example.trainingapp.data.api.response.responseAbstract
 
 interface WorkoutSessionResultAbs {
     val id: Int?

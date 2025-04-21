@@ -1,6 +1,6 @@
 package com.example.trainingapp.presentation.base.trainings
 
-import com.example.trainingapp.data.TrainingsRepositoryImpl
+import com.example.trainingapp.data.repository.TrainingsRepositoryImpl
 import com.example.trainingapp.domain.di.TrainingApp
 import com.example.trainingapp.presentation.base.BasePresenter
 import kotlinx.coroutines.Dispatchers

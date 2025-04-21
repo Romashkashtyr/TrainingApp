@@ -1,4 +1,4 @@
-package com.example.trainingapp.data
+package com.example.trainingapp.data.api
 
 object ApiSettings {
     const val BASE_URL = "https://wger.de/"

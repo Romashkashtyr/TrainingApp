@@ -1,13 +1,8 @@
-package com.example.trainingapp.data
+package com.example.trainingapp.data.repository
 
-import com.example.trainingapp.Mapper
-import com.example.trainingapp.domain.Status
 import com.example.trainingapp.domain.Training
 import com.example.trainingapp.domain.repository.TrainingsRepository
 import com.google.cloud.storage.StorageOptions
-import com.google.firebase.Firebase
-import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.firestore
 import javax.inject.Inject
 import javax.inject.Singleton
 

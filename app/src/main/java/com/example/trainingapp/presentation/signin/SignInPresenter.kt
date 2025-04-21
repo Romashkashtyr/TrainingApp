@@ -2,7 +2,7 @@ package com.example.trainingapp.presentation.signin
 
 
 import com.example.trainingapp.R
-import com.example.trainingapp.data.AuthRepositoryImpl
+import com.example.trainingapp.data.repository.AuthRepositoryImpl
 import com.example.trainingapp.domain.Status
 import com.example.trainingapp.presentation.base.BasePresenter
 import kotlinx.coroutines.Dispatchers

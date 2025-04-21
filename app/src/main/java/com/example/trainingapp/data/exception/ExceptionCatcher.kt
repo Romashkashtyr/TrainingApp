@@ -1,4 +1,4 @@
-package com.example.trainingapp.data
+package com.example.trainingapp.data.exception
 
 import com.example.trainingapp.domain.Status
 import com.google.firebase.FirebaseException

@@ -1,5 +1,6 @@
-package com.example.trainingapp.data
+package com.example.trainingapp.data.repository
 
+import com.example.trainingapp.data.exception.ExceptionCatcher
 import com.example.trainingapp.domain.Status
 import com.example.trainingapp.domain.repository.AuthRepository
 import com.google.firebase.auth.FirebaseAuth

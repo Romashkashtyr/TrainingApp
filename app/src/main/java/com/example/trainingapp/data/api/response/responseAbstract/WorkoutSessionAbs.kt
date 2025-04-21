@@ -1,6 +1,6 @@
-package com.example.trainingapp.data.network
+package com.example.trainingapp.data.api.response.responseAbstract
 
-import com.google.gson.annotations.SerializedName
+import com.example.trainingapp.data.api.response.WorkoutSessionResult
 
 interface WorkoutSessionAbs {
     var count: Int

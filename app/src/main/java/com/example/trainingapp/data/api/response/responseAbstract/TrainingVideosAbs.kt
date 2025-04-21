@@ -1,4 +1,6 @@
-package com.example.trainingapp.data.network
+package com.example.trainingapp.data.api.response.responseAbstract
+
+import com.example.trainingapp.data.api.response.VideoResultTraining
 
 interface TrainingVideosAbs {
     val count: Int

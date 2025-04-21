@@ -1,5 +1,6 @@
-package com.example.trainingapp.data.network
+package com.example.trainingapp.data.api.response
 
+import com.example.trainingapp.data.api.response.responseAbstract.VideoResultTrainingAbs
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 

@@ -1,6 +1,7 @@
 package com.example.trainingapp.domain.di
 
-import com.example.trainingapp.data.ApiSettings
+import com.example.trainingapp.data.api.ApiSettings
+import com.example.trainingapp.data.api.Interceptor
 import com.example.trainingapp.data.api.NetworkService
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -18,6 +19,7 @@ interface NetworkModule {
 
     fun okHttpClient() = OkHttpClient.Builder()
         .addInterceptor(logging())
+        .addInterceptor(Interceptor())
         .build()
 
     @Provides

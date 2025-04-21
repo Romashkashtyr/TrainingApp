@@ -1,6 +1,4 @@
-package com.example.trainingapp.data.network
-
-import com.google.gson.annotations.SerializedName
+package com.example.trainingapp.data.api.response.responseAbstract
 
 interface VideoResultTrainingAbs {
     var id: Int?

@@ -2,7 +2,7 @@ package com.example.trainingapp.presentation.base.main
 
 
 import com.example.trainingapp.R
-import com.example.trainingapp.data.MainRepositoryImpl
+import com.example.trainingapp.data.repository.MainRepositoryImpl
 import com.example.trainingapp.domain.Status
 import com.example.trainingapp.presentation.base.BasePresenter
 import kotlinx.coroutines.Dispatchers

@@ -1,7 +1,8 @@
 package com.example.trainingapp.data.api
 
-import com.example.trainingapp.data.network.TrainingVideos
-import com.example.trainingapp.data.network.WorkoutSession
+import com.example.trainingapp.data.api.response.TrainingVideos
+import com.example.trainingapp.data.api.response.VideoResultTraining
+import com.example.trainingapp.data.api.response.WorkoutSession
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
