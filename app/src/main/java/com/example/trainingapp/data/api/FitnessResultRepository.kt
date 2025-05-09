@@ -18,7 +18,8 @@ class FitnessResultRepository(private val api: NetworkService) {
                 previous = previous
             )
             if (response.isSuccessful){
-                Result.success(response.body()!!)  // неправильно
+                val responseBody = response.body() ?: return Result.failure(Exception("Error: ${response.code()}"))
+                Result.success(responseBody)
             } else {
                 Result.failure(Exception("Error: ${response.code()}"))
             }
@@ -30,14 +31,15 @@ class FitnessResultRepository(private val api: NetworkService) {
     suspend fun getWorkoutVideos(
         exercisedId: Int? = null,
         isMain: Boolean? = null
-    ): Result<List<VideoResultTraining>> {
+    ): Result<List<TrainingVideos>> {
         return try {
             val response = api.getVideos(
                 exercise = exercisedId,
                 isMain = isMain
             )
             if (response.isSuccessful) {
-                Result.success(response.body()?.result!!)  // неправильно
+                val responseBody = response.body() ?: return Result.failure(Exception("Error: ${response.code()}"))
+                Result.success(responseBody)
             } else {
                 Result.failure(Exception("Error: ${response.code()}"))
             }

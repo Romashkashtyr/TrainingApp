@@ -28,7 +28,7 @@ interface NetworkService {
         @Query("video") video: String? = null,
         @Query("is_main") isMain: Boolean? = null,
         @Query("duration") duration: String? = null,
-    ): Response<TrainingVideos>
+    ): Response<List<TrainingVideos>>
 
 
 }

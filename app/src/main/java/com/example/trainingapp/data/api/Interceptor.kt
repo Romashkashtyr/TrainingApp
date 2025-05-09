@@ -17,13 +17,13 @@ class Interceptor() : Interceptor, Authenticator {
     override fun authenticate(route: Route?, response: Response): Request? {
         var requestAvailable: Request? = null
         try {
-            requestAvailable = response?.request?.newBuilder()
-                ?.addHeader("", "")
-                ?.build()
+            requestAvailable = response.request.newBuilder()
+                .addHeader("", "")
+                .build()
             return requestAvailable
         }catch (e: Exception) {
             "Error ${e.message}"
         }
-        return requestAvailable
+        return null
     }
 }
