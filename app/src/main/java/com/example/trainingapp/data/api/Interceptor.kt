@@ -8,9 +8,17 @@ import okhttp3.Route
 
 class Interceptor() : Interceptor, Authenticator {
     override fun intercept(chain: Interceptor.Chain): Response {
-        var request : Request = chain.request()
-        request  = request.newBuilder()
+        var request: Request = chain.request()
+        request = request.newBuilder()
             .addHeader("", "").build()
+//        when(chain.proceed(request)) {
+//            400 -> {
+//
+//            }
+//            401 -> {
+//
+//            }
+//        }
         return chain.proceed(request)
     }
 
@@ -21,7 +29,7 @@ class Interceptor() : Interceptor, Authenticator {
                 .addHeader("", "")
                 .build()
             return requestAvailable
-        }catch (e: Exception) {
+        } catch (e: Exception) {
             "Error ${e.message}"
         }
         return null
