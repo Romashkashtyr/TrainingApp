@@ -1,7 +1,7 @@
-package com.example.trainingapp.data.api
+package com.example.trainingapp.domain.repository
 
+import com.example.trainingapp.data.api.NetworkService
 import com.example.trainingapp.data.api.response.TrainingVideos
-import com.example.trainingapp.data.api.response.VideoResultTraining
 import com.example.trainingapp.data.api.response.WorkoutSession
 
 class FitnessResultRepository(private val api: NetworkService) {
