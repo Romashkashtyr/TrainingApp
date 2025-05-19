@@ -1,4 +1,4 @@
-package com.example.trainingapp.presentation.base.main
+package com.example.trainingapp.presentation.main
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,8 +7,8 @@ import com.example.trainingapp.databinding.ActivityMainBinding
 import com.example.trainingapp.databinding.ItemTrainingListBinding
 import com.example.trainingapp.domain.DashboardItem
 import com.example.trainingapp.presentation.base.BaseActivity
-import com.example.trainingapp.presentation.base.main.rc_view.DashboardAdapter
-import com.example.trainingapp.presentation.base.trainings.TrainingsListActivity
+import com.example.trainingapp.presentation.rc_view.DashboardAdapter
+import com.example.trainingapp.presentation.trainings.TrainingsListActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.asCoroutineDispatcher
 import moxy.ktx.moxyPresenter

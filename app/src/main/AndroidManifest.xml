@@ -14,7 +14,7 @@
         android:theme="@style/Theme.TrainingApp"
         tools:targetApi="31" >
         <activity
-            android:name=".presentation.base.trainings.TrainingsListActivity"
+            android:name=".presentation.trainings.TrainingsListActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.signin.SignInActivity"
@@ -27,7 +27,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".presentation.base.main.MainActivity"
+            android:name=".presentation.main.MainActivity"
             android:exported="true" >
         </activity>
     </application>

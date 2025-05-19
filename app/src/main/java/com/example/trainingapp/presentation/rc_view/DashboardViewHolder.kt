@@ -1,4 +1,4 @@
-package com.example.trainingapp.presentation.base.main.rc_view
+package com.example.trainingapp.presentation.rc_view
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
