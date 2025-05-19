@@ -1,6 +1,6 @@
 package com.example.trainingapp.data.api.response
 
-import com.example.trainingapp.data.api.response.responseAbstract.WorkoutSessionAbs
+import com.example.trainingapp.data.api.response.responseAPI.WorkoutSessionAbs
 import com.google.gson.annotations.SerializedName
 
 data class WorkoutSession(

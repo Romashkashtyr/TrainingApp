@@ -9,6 +9,10 @@ class TrainingApp : Application() {
             DaggerApplicationComponent.create()
         }
 
+        val componentFitnessResult by lazy {
+            DaggerApplicationComponent.create()
+        }
+
 
 
     }

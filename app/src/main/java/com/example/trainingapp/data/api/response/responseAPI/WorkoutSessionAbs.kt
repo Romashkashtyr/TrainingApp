@@ -1,4 +1,4 @@
-package com.example.trainingapp.data.api.response.responseAbstract
+package com.example.trainingapp.data.api.response.responseAPI
 
 import com.example.trainingapp.data.api.response.WorkoutSessionResult
 

@@ -1,6 +1,6 @@
 package com.example.trainingapp.data.api.response
 
-import com.example.trainingapp.data.api.response.responseAbstract.WorkoutSessionResultAbs
+import com.example.trainingapp.data.api.response.responseAPI.WorkoutSessionResultAbs
 
 data class WorkoutSessionResult(
     override val id: Int? = null,

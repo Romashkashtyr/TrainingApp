@@ -2,6 +2,7 @@ package com.example.trainingapp.presentation.trainings
 
 import com.example.trainingapp.data.repository.TrainingsRepositoryImpl
 import com.example.trainingapp.domain.di.TrainingApp
+import com.example.trainingapp.domain.repository.FitnessResultRepositoryImpl
 import com.example.trainingapp.presentation.base.BasePresenter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -20,6 +21,9 @@ class TrainingsPresenter: BasePresenter<TrainingsView>() {
     @Inject
     lateinit var repository: TrainingsRepositoryImpl
 
+    @Inject
+    lateinit var repositoryResult: FitnessResultRepositoryImpl
+
     fun requestTrainingList(){
         launch {
             val list = repository.requestTrainingList()
@@ -27,6 +31,13 @@ class TrainingsPresenter: BasePresenter<TrainingsView>() {
                 viewState.showTrainingsList(list)
             }
         }
+    }
+
+    suspend fun getWorkoutSessions(
+
+    ) {
+        repositoryResult.getWorkoutSessions(count = 10)
+        TODO()
     }
 
 }

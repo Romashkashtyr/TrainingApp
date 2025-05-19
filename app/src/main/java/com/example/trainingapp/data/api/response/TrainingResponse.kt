@@ -1,6 +1,6 @@
 package com.example.trainingapp.data.api.response
 
-import com.example.trainingapp.data.api.response.responseAbstract.TrainingResponseAbs
+import com.example.trainingapp.data.api.response.responseAPI.TrainingResponseAbs
 
 data class TrainingResponse(
     override val workouts: List<WorkoutSession>,

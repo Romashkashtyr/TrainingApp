@@ -2,11 +2,14 @@ package com.example.trainingapp.domain.repository
 
 import com.example.trainingapp.data.api.NetworkService
 import com.example.trainingapp.data.api.response.TrainingVideos
+import com.example.trainingapp.data.api.response.VideoResultTraining
 import com.example.trainingapp.data.api.response.WorkoutSession
+import com.example.trainingapp.data.api.response.WorkoutSessionResult
+import javax.inject.Inject
 
-class FitnessResultRepository(private val api: NetworkService) {
+class FitnessResultRepositoryImpl @Inject constructor(private val api: NetworkService) : FitnessRepositoryResult {
 
-    suspend fun getWorkoutSessions(
+    override suspend fun getWorkoutSessions(
         count: Int = 10,
         nextPageToken: String,
         previous: String
@@ -28,7 +31,7 @@ class FitnessResultRepository(private val api: NetworkService) {
         }
     }
 
-    suspend fun getWorkoutVideos(
+    override suspend fun getWorkoutVideos(
         exercisedId: Int? = null,
         isMain: Boolean? = null
     ): Result<List<TrainingVideos>> {
@@ -47,4 +50,24 @@ class FitnessResultRepository(private val api: NetworkService) {
             Result.failure(e)
         }
     }
+
+    override suspend fun getWorkoutSessions(
+        count: Int = 10,
+        next: String?,
+        previous: String?,
+        result: List<WorkoutSessionResult>
+    ): Result<WorkoutSession> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getWorkoutVideos(
+        count: Int,
+        next: String,
+        previous: String,
+        result: List<VideoResultTraining>
+    ): Result<List<TrainingVideos>> {
+        TODO("Not yet implemented")
+    }
+
+
 }
