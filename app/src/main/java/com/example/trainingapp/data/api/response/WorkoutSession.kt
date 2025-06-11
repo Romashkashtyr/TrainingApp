@@ -4,7 +4,7 @@ import com.example.trainingapp.data.api.response.responseAPI.WorkoutSessionAbs
 import com.google.gson.annotations.SerializedName
 
 data class WorkoutSession(
-    @SerializedName("count") override var count: Int ,
+    @SerializedName("count") override var count: Int = 10 ,
     @SerializedName("next") override var next: String? = null,
     @SerializedName("previous") override var previous: String? = null,
     @SerializedName("results") override var results: List<WorkoutSessionResult> = emptyList()

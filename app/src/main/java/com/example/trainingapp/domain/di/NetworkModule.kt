@@ -4,6 +4,7 @@ import com.example.trainingapp.data.api.ApiSettings
 import com.example.trainingapp.data.api.Interceptor
 import com.example.trainingapp.data.api.NetworkService
 import com.google.firebase.BuildConfig
+import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -12,17 +13,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
-interface NetworkModule {
+@Module
+object NetworkModule {
 
 
-//    fun logging() = HttpLoggingInterceptor()
-//        .setLevel(HttpLoggingInterceptor.Level.BODY)
-//
-//
-//    fun okHttpClient() = OkHttpClient.Builder()
-//        .addInterceptor(logging())
-//        .addInterceptor(Interceptor())
-//        .build()
+
 
     @Provides
     @Singleton
@@ -37,15 +32,14 @@ interface NetworkModule {
             .build()
     }
 
-    @Provides
-    @Singleton
-    fun provideRetrofit(): NetworkService =
-        Retrofit.Builder()
-            .baseUrl(ApiSettings.BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(provideOkHttpClient(Interceptor()))
-            .build()
-            .create(NetworkService::class.java)
+//    @Provides
+//    @Singleton
+//    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit =
+//        Retrofit.Builder()
+//            .baseUrl(ApiSettings.BASE_URL)
+//            .addConverterFactory(GsonConverterFactory.create())
+//            .client(okHttpClient)
+//            .build()
 
 
     @Provides
