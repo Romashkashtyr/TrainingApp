@@ -2,7 +2,6 @@ package com.example.trainingapp.data.repository
 
 import com.example.trainingapp.domain.Training
 import com.example.trainingapp.domain.repository.TrainingsRepository
-import com.google.cloud.storage.StorageOptions
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -25,7 +24,7 @@ class TrainingsRepositoryImpl @Inject constructor() : TrainingsRepository {
 //        return Mapper.mapDataFromFireStoreDB(trainingResult.result)
 
 
-        val storage = StorageOptions.getDefaultInstance().service
+        //val storage = StorageOptions.getDefaultInstance().service
         TODO()
     }
 

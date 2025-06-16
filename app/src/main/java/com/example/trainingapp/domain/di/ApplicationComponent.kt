@@ -16,10 +16,6 @@ interface ApplicationComponent {
     fun inject(presenter: TrainingsPresenter)
     fun inject(repositoryFitnessResult: FitnessResultRepositoryImpl)
 
-    @Component.Factory
-    interface AppComponentFactory {
 
-        fun create(@BindsInstance retrofit: Retrofit): ApplicationComponent
-    }
 
 }

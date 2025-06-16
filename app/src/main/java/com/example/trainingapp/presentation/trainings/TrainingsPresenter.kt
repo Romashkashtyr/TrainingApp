@@ -1,7 +1,7 @@
 package com.example.trainingapp.presentation.trainings
 
 import com.example.trainingapp.data.repository.TrainingsRepositoryImpl
-import com.example.trainingapp.domain.di.TrainingApp
+import com.example.trainingapp.presentation.TrainingApp
 import com.example.trainingapp.domain.repository.FitnessResultRepositoryImpl
 import com.example.trainingapp.presentation.base.BasePresenter
 import kotlinx.coroutines.Dispatchers
@@ -36,7 +36,7 @@ class TrainingsPresenter: BasePresenter<TrainingsView>() {
     suspend fun getWorkoutSessions(
 
     ) {
-        repositoryResult.getWorkoutSessions(count = 10)
+        repositoryResult.getWorkoutSessions(count = 10, next = null, previous = null, result = emptyList())
         TODO()
     }
 

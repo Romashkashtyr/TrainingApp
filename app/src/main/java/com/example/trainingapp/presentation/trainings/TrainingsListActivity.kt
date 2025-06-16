@@ -1,14 +1,12 @@
 package com.example.trainingapp.presentation.trainings
 
 import android.os.Bundle
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.trainingapp.databinding.ActivityTrainingsListBinding
 import com.example.trainingapp.domain.Training
-import com.example.trainingapp.domain.di.TrainingApp
+import com.example.trainingapp.presentation.TrainingApp
 import com.example.trainingapp.presentation.base.BaseActivity
 import com.example.trainingapp.presentation.trainings.rc_view_training.TrainingAdapter
-import kotlinx.coroutines.launch
 import moxy.ktx.moxyPresenter
 
 class TrainingsListActivity : BaseActivity(), TrainingsView {
