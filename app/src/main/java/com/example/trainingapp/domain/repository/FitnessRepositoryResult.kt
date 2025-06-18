@@ -4,7 +4,6 @@ import com.example.trainingapp.data.api.response.TrainingVideos
 import com.example.trainingapp.data.api.response.VideoResultTraining
 import com.example.trainingapp.data.api.response.WorkoutSession
 import com.example.trainingapp.data.api.response.WorkoutSessionResult
-import io.grpc.ClientStreamTracer.StreamInfo
 
 interface FitnessRepositoryResult {
 
