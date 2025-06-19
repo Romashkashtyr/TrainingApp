@@ -65,23 +65,31 @@ class SignInActivity : BaseActivity(), SignInView {
 
 
     override fun changeAuthMode() {
+        val email = binding.emailEditText.text.toString()
+        val password = binding.enterPassword.text.toString()
+        val confirmPassword = binding.passwordLayout.editText.toString()
         binding.apply {
-            emailEditText.setText(R.string.type_your_email)
-            enterPassword.setText(R.string.type_your_password)
-            val newMode = if (mode == AuthMode.LOGIN) AuthMode.LOGIN else AuthMode.REGISTRATION
+            //emailEditText.setText(R.string.type_your_email)
+            //enterPassword.setText(R.string.type_your_password)
+            val newMode = if (mode == AuthMode.LOGIN) AuthMode.REGISTRATION else AuthMode.LOGIN
             when (mode) {
                 AuthMode.LOGIN -> {
-                    binding.passwordLayout.visibility = View.VISIBLE
-                    binding.signInButton.setText(R.string.sign_in_text)
+                    passwordLayout.visibility = View.VISIBLE
+                    signInButton.setText(R.string.sign_in_text)
                 }
 
                 AuthMode.REGISTRATION -> {
-                    binding.passwordLayout.visibility = View.VISIBLE
-                    binding.signInButton.setText(R.string.sign_up_text)
+                    passwordLayout.visibility = View.VISIBLE
+                    signInButton.setText(R.string.sign_up_text)
+                    presenter.signUp(email, password, confirmPassword)
                 }
             }
             mode = newMode
+
+            emailEditText.text?.clear()
+            enterPassword.text?.clear()
         }
+
 
 
 
