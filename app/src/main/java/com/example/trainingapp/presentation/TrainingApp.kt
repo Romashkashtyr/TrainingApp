@@ -3,6 +3,7 @@ package com.example.trainingapp.presentation
 import android.app.Application
 import com.example.trainingapp.domain.di.ApplicationComponent
 import com.example.trainingapp.domain.di.DaggerApplicationComponent
+import com.google.firebase.FirebaseApp
 
 class TrainingApp : Application() {
 
@@ -21,6 +22,7 @@ class TrainingApp : Application() {
 //        component = DaggerApplicationComponent.builder()
 //            .appModule(AppModule(this))
 //            .build()
+        FirebaseApp.initializeApp(this)
     }
 
 
