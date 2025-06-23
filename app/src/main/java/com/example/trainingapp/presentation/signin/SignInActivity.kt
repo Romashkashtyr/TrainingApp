@@ -1,5 +1,7 @@
 package com.example.trainingapp.presentation.signin
 
+import android.content.Context
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.View
 import com.example.trainingapp.R
@@ -65,17 +67,23 @@ class SignInActivity : BaseActivity(), SignInView {
 
 
     override fun changeAuthMode() {
+        val newMode = if (mode == AuthMode.LOGIN) AuthMode.REGISTRATION else AuthMode.LOGIN
         val email = binding.emailEditText.text.toString()
         val password = binding.enterPassword.text.toString()
         val confirmPassword = binding.passwordLayout.editText.toString()
         binding.apply {
             //emailEditText.setText(R.string.type_your_email)
             //enterPassword.setText(R.string.type_your_password)
-            val newMode = if (mode == AuthMode.LOGIN) AuthMode.REGISTRATION else AuthMode.LOGIN
-            when (mode) {
+
+            when (newMode) {
                 AuthMode.LOGIN -> {
-                    passwordLayout.visibility = View.VISIBLE
-                    signInButton.setText(R.string.sign_in_text)
+                    if(isNetworkAvailable()) {
+                        passwordLayout.visibility = View.VISIBLE
+                        signInButton.setText(R.string.sign_in_text)
+                    } else {
+                        println("Is not available")
+                    }
+
                 }
 
                 AuthMode.REGISTRATION -> {
@@ -84,14 +92,20 @@ class SignInActivity : BaseActivity(), SignInView {
                     presenter.signUp(email, password, confirmPassword)
                 }
             }
-            mode = newMode
 
             emailEditText.text?.clear()
             enterPassword.text?.clear()
+
+            mode = newMode
         }
 
 
 
 
+    }
+
+    fun isNetworkAvailable(): Boolean {
+        val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        return connectivityManager.activeNetworkInfo?.isConnected == true
     }
 }
