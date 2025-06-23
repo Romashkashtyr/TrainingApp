@@ -1,18 +1,24 @@
 package com.example.trainingapp.data.repository
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import com.example.trainingapp.data.exception.ExceptionCatcher
 import com.example.trainingapp.domain.Status
 import com.example.trainingapp.domain.repository.AuthRepository
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.tasks.await
+import javax.inject.Inject
 
 
-class AuthRepositoryImpl : AuthRepository {
+class AuthRepositoryImpl: AuthRepository {
 
     val firebaseAuth = FirebaseAuth.getInstance()
     private val catcher = ExceptionCatcher()
 
     override suspend fun signIn(email: String, password: String): Status<Boolean> {
+
+       // if(checkInternetConnection())
 
         return ExceptionCatcher().launchWithCatch {
             val result = firebaseAuth.signInWithEmailAndPassword(email, password).await()
@@ -47,6 +53,15 @@ class AuthRepositoryImpl : AuthRepository {
 
     override fun signOut() {
         firebaseAuth.signOut()
+    }
+
+
+
+    private suspend fun checkInternetConnection(context: Context): Boolean {
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        return connectivityManager.activeNetwork?.let { network ->
+            connectivityManager.getNetworkCapabilities(network)?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+        } ?: false
     }
 }
 

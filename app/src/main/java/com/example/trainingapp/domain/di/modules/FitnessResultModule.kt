@@ -1,4 +1,4 @@
-package com.example.trainingapp.domain.di
+package com.example.trainingapp.domain.di.modules
 
 import com.example.trainingapp.domain.repository.FitnessRepositoryResult
 import com.example.trainingapp.domain.repository.FitnessResultRepositoryImpl

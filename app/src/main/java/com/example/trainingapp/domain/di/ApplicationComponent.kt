@@ -1,11 +1,13 @@
 package com.example.trainingapp.domain.di
 
+import com.example.trainingapp.data.repository.AuthRepositoryImpl
+import com.example.trainingapp.domain.di.modules.FitnessResultModule
+import com.example.trainingapp.domain.di.modules.NetworkModule
+import com.example.trainingapp.domain.di.modules.TrainingModule
 import com.example.trainingapp.domain.repository.FitnessResultRepositoryImpl
 import com.example.trainingapp.presentation.trainings.TrainingsListActivity
 import com.example.trainingapp.presentation.trainings.TrainingsPresenter
-import dagger.BindsInstance
 import dagger.Component
-import retrofit2.Retrofit
 import javax.inject.Singleton
 
 @Singleton
@@ -15,7 +17,18 @@ interface ApplicationComponent {
     fun inject(activity: TrainingsListActivity)
     fun inject(presenter: TrainingsPresenter)
     fun inject(repositoryFitnessResult: FitnessResultRepositoryImpl)
+    fun inject(repository: AuthRepositoryImpl)
+
+//    @ApplicationContext
+//    fun context(): Context
 
 
+//    @Component.Factory
+//    interface ApplicationComponentFactory {
+//
+//        fun create(
+//            @BindsInstance context: Context
+//        ): ApplicationComponent
+//    }
 
 }

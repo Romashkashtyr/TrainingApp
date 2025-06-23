@@ -13,9 +13,14 @@ class TrainingApp : Application() {
     }
 
 
+
+
     override fun onCreate() {
         super.onCreate()
         component = DaggerApplicationComponent.create()
+//        component = DaggerApplicationComponent.builder()
+//            .appModule(AppModule(this))
+//            .build()
     }
 
 
