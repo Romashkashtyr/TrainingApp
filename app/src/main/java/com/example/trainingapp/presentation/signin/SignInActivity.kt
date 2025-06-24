@@ -17,6 +17,14 @@ class SignInActivity : BaseActivity(), SignInView {
     private var mode = AuthMode.LOGIN
 
 
+    private val userEmail: String
+        get() = binding.emailEditText.text.toString()
+    private val userPassword: String
+        get() = binding.enterPassword.text.toString()
+    private val confirmPassword: String
+        get() = binding.passwordLayout.editText?.text.toString()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)
@@ -26,7 +34,6 @@ class SignInActivity : BaseActivity(), SignInView {
         binding.signInButton.setOnClickListener {
             val userEmail = binding.emailEditText.text.toString()
             val userPassword = binding.enterPassword.text.toString()
-            presenter.signIn(userEmail, userPassword)
             when (mode) {
                 AuthMode.REGISTRATION -> {
                     val confirmPassword = binding.passwordLayout.editText.toString()
@@ -67,10 +74,10 @@ class SignInActivity : BaseActivity(), SignInView {
 
 
     override fun changeAuthMode() {
-        val newMode = if (mode == AuthMode.LOGIN) AuthMode.REGISTRATION else AuthMode.LOGIN
-        val email = binding.emailEditText.text.toString()
-        val password = binding.enterPassword.text.toString()
-        val confirmPassword = binding.passwordLayout.editText.toString()
+        val newMode = if (mode == AuthMode.LOGIN) AuthMode.LOGIN else AuthMode.REGISTRATION
+//        val email = binding.emailEditText.text.toString()
+//        val password = binding.enterPassword.text.toString()
+//        val confirmPassword = binding.passwordLayout.editText.toString()
         binding.apply {
             //emailEditText.setText(R.string.type_your_email)
             //enterPassword.setText(R.string.type_your_password)
@@ -80,6 +87,8 @@ class SignInActivity : BaseActivity(), SignInView {
                     if(isNetworkAvailable()) {
                         passwordLayout.visibility = View.VISIBLE
                         signInButton.setText(R.string.sign_in_text)
+                        passwordEditText.visibility = View.GONE
+
                     } else {
                         println("Is not available")
                     }
@@ -89,7 +98,7 @@ class SignInActivity : BaseActivity(), SignInView {
                 AuthMode.REGISTRATION -> {
                     passwordLayout.visibility = View.VISIBLE
                     signInButton.setText(R.string.sign_up_text)
-                    presenter.signUp(email, password, confirmPassword)
+                    presenter.signUp(userEmail, userPassword, confirmPassword)
                 }
             }
 

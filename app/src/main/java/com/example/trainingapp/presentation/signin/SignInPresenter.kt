@@ -48,8 +48,28 @@ open class SignInPresenter : BasePresenter<SignInView>() {
 
 
     fun signUp(email: String, password: String, confirmPassword: String) {
+        if (email.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty()){
+            viewState?.showViewProgress()
+        }
+
         launch {
-            authRepository.signUp(email, password, confirmPassword)
+            val authStatus = authRepository.signUp(email, password, confirmPassword)
+            withContext(Dispatchers.Main) {
+                when (authStatus) {
+                    is Status.Failure -> {
+                        viewState.showToast(R.string.sign_in_failure)
+                    }
+
+                    is Status.NoNetwork -> {
+                        viewState.showToast(R.string.network_failure)
+                    }
+
+                    is Status.Success -> {
+                        viewState.showToast(R.string.sign_in_success)
+                    }
+                }
+                viewState?.hideViewProgress()
+            }
         }
 
     }
