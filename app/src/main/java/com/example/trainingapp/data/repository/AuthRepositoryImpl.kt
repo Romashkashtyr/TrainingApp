@@ -11,10 +11,13 @@ import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 
-class AuthRepositoryImpl: AuthRepository {
+class AuthRepositoryImpl @Inject constructor(
+    val firebaseAuth: FirebaseAuth,
+    val catcher: ExceptionCatcher
+): AuthRepository {
 
-    val firebaseAuth = FirebaseAuth.getInstance()
-    private val catcher = ExceptionCatcher()
+//    val firebaseAuth = FirebaseAuth.getInstance()
+//    private val catcher = ExceptionCatcher()
 
     override suspend fun signIn(email: String, password: String): Status<Boolean> {
 

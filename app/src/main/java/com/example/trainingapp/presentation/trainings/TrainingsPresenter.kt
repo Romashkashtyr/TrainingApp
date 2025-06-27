@@ -12,17 +12,20 @@ import javax.inject.Inject
 
 
 @InjectViewState
-class TrainingsPresenter: BasePresenter<TrainingsView>() {
+class TrainingsPresenter @Inject constructor(
+    val repository: TrainingsRepositoryImpl,
+    val repositoryResult: FitnessResultRepositoryImpl
+): BasePresenter<TrainingsView>() {
 
     init {
         TrainingApp.component.inject(this)
     }
 
-    @Inject
-    lateinit var repository: TrainingsRepositoryImpl
-
-    @Inject
-    lateinit var repositoryResult: FitnessResultRepositoryImpl
+//    @Inject
+//    lateinit var repository: TrainingsRepositoryImpl
+//
+//    @Inject
+//    lateinit var repositoryResult: FitnessResultRepositoryImpl
 
     fun requestTrainingList(){
         launch {

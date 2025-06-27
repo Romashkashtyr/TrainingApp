@@ -2,25 +2,28 @@ package com.example.trainingapp.domain.di.modules
 
 import android.app.Application
 import android.content.Context
+import com.example.trainingapp.data.exception.ExceptionCatcher
+import com.example.trainingapp.presentation.signin.AuthorizationPresenter
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import javax.inject.Inject
+import javax.inject.Provider
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
 
-//@Module
-//class AppModule(private val application: Application) {
-//
-//    @Provides
-//    @Singleton
-//    fun provideApplication(): Application = application
-//
-//    @Provides
-//    @Singleton
-//    @ApplicationContext
-//    fun provideApplicationContext(): Context = application
-//}
-//
-//@Qualifier
-//@Retention(AnnotationRetention.RUNTIME)
-//annotation class ApplicationContext
+@Module
+class AppModule(private val application: Application) {
+
+
+
+
+}
+
+@Singleton
+class PresenterFactory @Inject constructor(
+    private val authPresenterProvider: Provider<AuthorizationPresenter>
+) {
+    fun createAuthorizationPresenter(): AuthorizationPresenter = authPresenterProvider.get()
+}

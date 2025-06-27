@@ -9,13 +9,16 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import moxy.InjectViewState
+import javax.inject.Inject
 
 @InjectViewState
-open class AuthorizationPresenter : BasePresenter<AuthorizationView>() {
+open class AuthorizationPresenter @Inject constructor(
+    private val authRepository: AuthRepositoryImpl
+) : BasePresenter<AuthorizationView>() {
 
 
 
-    private val authRepository = AuthRepositoryImpl()
+   // private val authRepository = AuthRepositoryImpl()
 
     fun signIn(email: String, password: String) {
         if (email.isNotEmpty() && password.isNotEmpty()) {

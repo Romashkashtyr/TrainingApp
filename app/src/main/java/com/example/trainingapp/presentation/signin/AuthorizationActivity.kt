@@ -5,13 +5,20 @@ import android.view.View
 import com.example.trainingapp.R
 import com.example.trainingapp.data.AuthMode
 import com.example.trainingapp.databinding.ActivitySignInBinding
+import com.example.trainingapp.domain.di.modules.PresenterFactory
 import com.example.trainingapp.presentation.base.BaseActivity
 import moxy.ktx.moxyPresenter
+import javax.inject.Inject
 
 class AuthorizationActivity : BaseActivity(), AuthorizationView {
 
     private lateinit var binding: ActivitySignInBinding
-    private val presenter by moxyPresenter { AuthorizationPresenter() }
+    //private val presenter by moxyPresenter { AuthorizationPresenter() }
+
+    @Inject
+    lateinit var presenterFactory: PresenterFactory
+
+    private val presenter by moxyPresenter { presenterFactory.createAuthorizationPresenter() }
     private var mode = AuthMode.LOGIN
 
 
