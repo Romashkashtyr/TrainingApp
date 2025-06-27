@@ -11,7 +11,7 @@ import kotlinx.coroutines.withContext
 import moxy.InjectViewState
 
 @InjectViewState
-open class SignInPresenter : BasePresenter<SignInView>() {
+open class AuthorizationPresenter : BasePresenter<AuthorizationView>() {
 
 
 
@@ -48,11 +48,9 @@ open class SignInPresenter : BasePresenter<SignInView>() {
 
 
     fun signUp(email: String, password: String, confirmPassword: String) {
-        if (email.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty()){
-            viewState?.showViewProgress()
-        }
 
         launch {
+            viewState?.showViewProgress()
             val authStatus = authRepository.signUp(email, password, confirmPassword)
             withContext(Dispatchers.Main) {
                 when (authStatus) {

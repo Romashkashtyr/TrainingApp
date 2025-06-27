@@ -1,7 +1,5 @@
 package com.example.trainingapp.presentation.signin
 
-import android.content.Context
-import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.View
 import com.example.trainingapp.R
@@ -10,10 +8,10 @@ import com.example.trainingapp.databinding.ActivitySignInBinding
 import com.example.trainingapp.presentation.base.BaseActivity
 import moxy.ktx.moxyPresenter
 
-class SignInActivity : BaseActivity(), SignInView {
+class AuthorizationActivity : BaseActivity(), AuthorizationView {
 
     private lateinit var binding: ActivitySignInBinding
-    private val presenter by moxyPresenter { SignInPresenter() }
+    private val presenter by moxyPresenter { AuthorizationPresenter() }
     private var mode = AuthMode.LOGIN
 
 
@@ -32,18 +30,7 @@ class SignInActivity : BaseActivity(), SignInView {
 
 
         binding.signInButton.setOnClickListener {
-            val userEmail = binding.emailEditText.text.toString()
-            val userPassword = binding.enterPassword.text.toString()
-            when (mode) {
-                AuthMode.REGISTRATION -> {
-                    val confirmPassword = binding.passwordLayout.editText.toString()
-                    presenter.signUp(userEmail, userPassword, confirmPassword)
-                }
-
-                AuthMode.LOGIN -> {
-                    presenter.signIn(userEmail, userPassword)
-                }
-            }
+            registrationMode()
 
         }
 
@@ -51,6 +38,18 @@ class SignInActivity : BaseActivity(), SignInView {
             presenter.requestChangeMode()
         }
 
+    }
+
+    private fun registrationMode() {
+        when (mode) {
+            AuthMode.REGISTRATION -> {
+                presenter.signUp(userEmail, userPassword, confirmPassword)
+            }
+
+            AuthMode.LOGIN -> {
+                presenter.signIn(userEmail, userPassword)
+            }
+        }
     }
 
 
@@ -74,25 +73,14 @@ class SignInActivity : BaseActivity(), SignInView {
 
 
     override fun changeAuthMode() {
-        val newMode = if (mode == AuthMode.LOGIN) AuthMode.LOGIN else AuthMode.REGISTRATION
-//        val email = binding.emailEditText.text.toString()
-//        val password = binding.enterPassword.text.toString()
-//        val confirmPassword = binding.passwordLayout.editText.toString()
+        val newMode = if (mode == AuthMode.LOGIN) AuthMode.REGISTRATION else AuthMode.LOGIN
         binding.apply {
-            //emailEditText.setText(R.string.type_your_email)
-            //enterPassword.setText(R.string.type_your_password)
 
             when (newMode) {
                 AuthMode.LOGIN -> {
-                    if(isNetworkAvailable()) {
                         passwordLayout.visibility = View.VISIBLE
                         signInButton.setText(R.string.sign_in_text)
                         passwordEditText.visibility = View.GONE
-
-                    } else {
-                        println("Is not available")
-                    }
-
                 }
 
                 AuthMode.REGISTRATION -> {
@@ -102,8 +90,6 @@ class SignInActivity : BaseActivity(), SignInView {
                 }
             }
 
-            emailEditText.text?.clear()
-            enterPassword.text?.clear()
 
             mode = newMode
         }
@@ -113,8 +99,5 @@ class SignInActivity : BaseActivity(), SignInView {
 
     }
 
-    fun isNetworkAvailable(): Boolean {
-        val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        return connectivityManager.activeNetworkInfo?.isConnected == true
-    }
+
 }
