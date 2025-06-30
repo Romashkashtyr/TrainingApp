@@ -2,6 +2,7 @@ package com.example.trainingapp.domain.di
 
 import android.content.Context
 import com.example.trainingapp.data.repository.AuthRepositoryImpl
+import com.example.trainingapp.domain.di.modules.AppModule
 import com.example.trainingapp.domain.di.modules.ExceptionModule
 import com.example.trainingapp.domain.di.modules.FitnessResultModule
 import com.example.trainingapp.domain.di.modules.NetworkModule
@@ -15,7 +16,7 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [TrainingModule::class, NetworkModule::class, FitnessResultModule::class, ExceptionModule::class])
+@Component(modules = [TrainingModule::class, NetworkModule::class, FitnessResultModule::class, ExceptionModule::class, AppModule::class])
 interface ApplicationComponent {
 
     fun inject(activity: TrainingsListActivity)

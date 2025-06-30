@@ -19,7 +19,7 @@ class TrainingApp : Application() {
     override fun onCreate() {
         super.onCreate()
         component = DaggerApplicationComponent.builder()
-            .context(this)
+            .context(applicationContext)
             .build()
         FirebaseApp.initializeApp(this)
 
