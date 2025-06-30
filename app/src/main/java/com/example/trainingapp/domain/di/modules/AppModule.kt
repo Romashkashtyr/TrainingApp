@@ -5,6 +5,7 @@ import android.content.Context
 import com.example.trainingapp.data.exception.ExceptionCatcher
 import com.example.trainingapp.presentation.signin.AuthorizationPresenter
 import com.example.trainingapp.presentation.trainings.TrainingsPresenter
+import com.google.firebase.auth.FirebaseAuth
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -18,9 +19,15 @@ import javax.inject.Singleton
 class AppModule( /*private val application: Application*/ ) {
 
 
-    @Provides
+//    @Provides
+//    @Singleton
+//    fun provideContext(application: Application): Context = application.applicationContext
+
     @Singleton
-    fun provideContext(application: Application): Context = application.applicationContext
+    @Provides
+    fun provideFirebaseAuth(): FirebaseAuth {
+        return FirebaseAuth.getInstance()
+    }
 
 
 }
