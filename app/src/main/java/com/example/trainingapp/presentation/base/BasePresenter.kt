@@ -5,6 +5,7 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
 import moxy.InjectViewState
 import moxy.MvpPresenter
 import moxy.MvpView
@@ -19,7 +20,10 @@ open class BasePresenter<T: BaseView> : MvpPresenter<T>(), CoroutineScope {
     }
 
     private fun requireShowToast(message: Int) {
-        viewState.showToast(message)
+        launch {
+            viewState.showToast(message)
+        }
+
     }
 
     override val coroutineContext: CoroutineContext
