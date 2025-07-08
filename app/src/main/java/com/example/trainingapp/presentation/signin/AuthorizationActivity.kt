@@ -22,6 +22,9 @@ class AuthorizationActivity : BaseActivity(), AuthorizationView {
 
 
 
+    init {
+        TrainingApp.component.inject(this)
+    }
 
     private var mode = AuthMode.LOGIN
 
