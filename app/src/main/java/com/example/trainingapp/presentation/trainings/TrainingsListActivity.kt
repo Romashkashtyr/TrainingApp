@@ -15,11 +15,14 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
     private lateinit var binding: ActivityTrainingsListBinding
     private lateinit var trainingAdapter: TrainingAdapter
 
+
     @Inject
     lateinit var trainingFactory: TrainingFactory
 
    // private val presenter by moxyPresenter { TrainingsPresenter() }
     private val presenter by moxyPresenter { trainingFactory.createTrainingPresenter() }
+
+
 
 
     init {
@@ -29,6 +32,7 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        TrainingApp.component.inject(this)
         binding = ActivityTrainingsListBinding.inflate(layoutInflater)
         setContentView(binding.root)
         presenter.requestTrainingList()

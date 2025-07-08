@@ -6,6 +6,7 @@ import com.example.trainingapp.R
 import com.example.trainingapp.data.AuthMode
 import com.example.trainingapp.databinding.ActivitySignInBinding
 import com.example.trainingapp.domain.di.modules.PresenterFactory
+import com.example.trainingapp.presentation.TrainingApp
 import com.example.trainingapp.presentation.base.BaseActivity
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
@@ -17,8 +18,11 @@ class AuthorizationActivity : BaseActivity(), AuthorizationView {
 
     @Inject
     lateinit var presenterFactory: PresenterFactory
-
     private val presenter by moxyPresenter { presenterFactory.createAuthorizationPresenter() }
+
+
+
+
     private var mode = AuthMode.LOGIN
 
 
@@ -34,6 +38,8 @@ class AuthorizationActivity : BaseActivity(), AuthorizationView {
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        //presenter = presenterFactory.createAuthorizationPresenter()
+        TrainingApp.component.inject(this)
 
 
         binding.signInButton.setOnClickListener {

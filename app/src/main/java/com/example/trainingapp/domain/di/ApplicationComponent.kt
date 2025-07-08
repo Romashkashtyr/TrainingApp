@@ -8,6 +8,7 @@ import com.example.trainingapp.domain.di.modules.FitnessResultModule
 import com.example.trainingapp.domain.di.modules.NetworkModule
 import com.example.trainingapp.domain.di.modules.TrainingModule
 import com.example.trainingapp.domain.repository.FitnessResultRepositoryImpl
+import com.example.trainingapp.presentation.signin.AuthorizationActivity
 import com.example.trainingapp.presentation.trainings.TrainingsListActivity
 import com.example.trainingapp.presentation.trainings.TrainingsPresenter
 import com.google.firebase.auth.FirebaseAuth
@@ -23,6 +24,7 @@ interface ApplicationComponent {
     fun inject(presenter: TrainingsPresenter)
     fun inject(repositoryFitnessResult: FitnessResultRepositoryImpl)
     fun inject(repository: AuthRepositoryImpl)
+    fun inject(activity: AuthorizationActivity)
 
 //    @ApplicationContext
 //    fun context(): Context
