@@ -18,8 +18,6 @@ open class AuthorizationPresenter @Inject constructor(
 
 
 
-   // private val authRepository = AuthRepositoryImpl()
-
     fun signIn(email: String, password: String) {
         if (email.isNotEmpty() && password.isNotEmpty()) {
             viewState?.showViewProgress()
@@ -45,6 +43,8 @@ open class AuthorizationPresenter @Inject constructor(
 
             }
 
+        } else {
+            viewState.showToast(R.string.enter_your_data)
         }
     }
 

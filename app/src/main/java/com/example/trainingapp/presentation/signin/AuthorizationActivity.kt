@@ -14,20 +14,12 @@ import javax.inject.Inject
 class AuthorizationActivity : BaseActivity(), AuthorizationView {
 
     private lateinit var binding: ActivitySignInBinding
-    //private val presenter by moxyPresenter { AuthorizationPresenter() }
 
     @Inject
     lateinit var presenterFactory: PresenterFactory
     private val presenter by moxyPresenter { presenterFactory.createAuthorizationPresenter() }
 
-
-
-    init {
-        TrainingApp.component.inject(this)
-    }
-
     private var mode = AuthMode.LOGIN
-
 
     private val userEmail: String
         get() = binding.emailEditText.text.toString()
@@ -37,13 +29,14 @@ class AuthorizationActivity : BaseActivity(), AuthorizationView {
         get() = binding.passwordLayout.editText?.text.toString()
 
 
+    init {
+        TrainingApp.component.inject(this)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //presenter = presenterFactory.createAuthorizationPresenter()
-        TrainingApp.component.inject(this)
-
 
         binding.signInButton.setOnClickListener {
             registrationMode()
@@ -96,13 +89,11 @@ class AuthorizationActivity : BaseActivity(), AuthorizationView {
                 AuthMode.LOGIN -> {
                         passwordLayout.visibility = View.VISIBLE
                         signInButton.setText(R.string.sign_in_text)
-                        passwordEditText.visibility = View.GONE
                 }
 
                 AuthMode.REGISTRATION -> {
                     passwordLayout.visibility = View.VISIBLE
                     signInButton.setText(R.string.sign_up_text)
-                    presenter.signUp(userEmail, userPassword, confirmPassword)
                 }
             }
 

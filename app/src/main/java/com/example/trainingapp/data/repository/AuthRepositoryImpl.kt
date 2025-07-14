@@ -12,16 +12,13 @@ import javax.inject.Inject
 
 
 class AuthRepositoryImpl @Inject constructor(
-    val firebaseAuth: FirebaseAuth,
-    val catcher: ExceptionCatcher
+    private val firebaseAuth: FirebaseAuth,
+    private val catcher: ExceptionCatcher
 ): AuthRepository {
 
-//    val firebaseAuth = FirebaseAuth.getInstance()
-//    private val catcher = ExceptionCatcher()
 
     override suspend fun signIn(email: String, password: String): Status<Boolean> {
 
-       // if(checkInternetConnection())
 
         return ExceptionCatcher().launchWithCatch {
             val result = firebaseAuth.signInWithEmailAndPassword(email, password).await()

@@ -18,6 +18,7 @@
     <!-- Sign In Activity -->
     <string name="enter_your_email">Enter your email</string>
     <string name="enter_your_password">Enter your password</string>
+    <string name="enter_your_data">Enter your password and e-mail</string>
 
     <!-- Sign Up Method -->
     <string name="sign_up_success">Вы успешно зарегистрировались</string>

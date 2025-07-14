@@ -21,13 +21,8 @@ import javax.inject.Singleton
 interface ApplicationComponent {
 
     fun inject(activity: TrainingsListActivity)
-    fun inject(presenter: TrainingsPresenter)
-    fun inject(repositoryFitnessResult: FitnessResultRepositoryImpl)
-    fun inject(repository: AuthRepositoryImpl)
     fun inject(activity: AuthorizationActivity)
 
-//    @ApplicationContext
-//    fun context(): Context
 
     @Component.Builder
     interface Builder {
@@ -37,13 +32,5 @@ interface ApplicationComponent {
     }
 
 
-
-//    @Component.Factory
-//    interface ApplicationComponentFactory {
-//
-//        fun create(
-//            @BindsInstance context: Context
-//        ): ApplicationComponent
-//    }
 
 }
