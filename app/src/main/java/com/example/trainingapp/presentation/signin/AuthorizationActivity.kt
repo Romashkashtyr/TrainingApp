@@ -40,7 +40,6 @@ class AuthorizationActivity : BaseActivity(), AuthorizationView {
 
         binding.signInButton.setOnClickListener {
             registrationMode()
-
         }
 
         binding.changeModeButton.setOnClickListener {
@@ -101,10 +100,5 @@ class AuthorizationActivity : BaseActivity(), AuthorizationView {
             mode = newMode
         }
 
-
-
-
     }
-
-
 }

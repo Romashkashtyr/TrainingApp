@@ -27,7 +27,6 @@ interface ApplicationComponent {
     @Component.Builder
     interface Builder {
         @BindsInstance fun context(context: Context): Builder
-       // @BindsInstance fun firebaseAuth(firebaseAuth: FirebaseAuth): Builder
         fun build(): ApplicationComponent
     }
 

@@ -56,13 +56,6 @@ class AuthRepositoryImpl @Inject constructor(
     }
 
 
-
-    private suspend fun checkInternetConnection(context: Context): Boolean {
-        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        return connectivityManager.activeNetwork?.let { network ->
-            connectivityManager.getNetworkCapabilities(network)?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
-        } ?: false
-    }
 }
 
 
