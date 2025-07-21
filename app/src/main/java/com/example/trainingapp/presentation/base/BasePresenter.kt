@@ -1,5 +1,6 @@
 package com.example.trainingapp.presentation.base
 
+import android.util.Log
 import com.example.trainingapp.R
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
@@ -15,7 +16,7 @@ import kotlin.coroutines.CoroutineContext
 open class BasePresenter<T: BaseView> : MvpPresenter<T>(), CoroutineScope {
 
     private val exceptionHandler = CoroutineExceptionHandler{ _, throwable ->
-        println(throwable.message)
+        Log.e("ExceptionHandler", throwable.stackTraceToString())
         requireShowToast(R.string.sign_up_failure)
     }
 

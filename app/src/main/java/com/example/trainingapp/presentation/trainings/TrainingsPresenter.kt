@@ -17,9 +17,7 @@ class TrainingsPresenter @Inject constructor(
     val repositoryResult: FitnessResultRepositoryImpl
 ): BasePresenter<TrainingsView>() {
 
-    init {
-        TrainingApp.component.inject(this)
-    }
+
 
 //    @Inject
 //    lateinit var repository: TrainingsRepositoryImpl

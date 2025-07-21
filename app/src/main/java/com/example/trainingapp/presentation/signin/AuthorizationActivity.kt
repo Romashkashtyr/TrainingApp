@@ -26,7 +26,7 @@ class AuthorizationActivity : BaseActivity(), AuthorizationView {
     private val userPassword: String
         get() = binding.enterPassword.text.toString()
     private val confirmPassword: String
-        get() = binding.passwordLayout.editText?.text.toString()
+        get() = binding.confirmPasswordLayout.editText?.text.toString()
 
 
     init {
@@ -63,16 +63,11 @@ class AuthorizationActivity : BaseActivity(), AuthorizationView {
 
     override fun showViewProgress() {
         binding.progressBar.visibility = View.VISIBLE
-        binding.emailEditText.visibility = View.GONE
-        binding.passwordEditText.visibility = View.GONE
     }
 
 
     override fun hideViewProgress() {
         binding.progressBar.visibility = View.GONE
-        binding.emailEditText.visibility = View.VISIBLE
-        binding.passwordEditText.visibility = View.VISIBLE
-        binding.emailEditText.visibility = View.VISIBLE
     }
 
     override fun navigateToHome() {
@@ -86,12 +81,13 @@ class AuthorizationActivity : BaseActivity(), AuthorizationView {
 
             when (newMode) {
                 AuthMode.LOGIN -> {
-                        passwordLayout.visibility = View.VISIBLE
-                        signInButton.setText(R.string.sign_in_text)
+                    confirmPasswordLayout.visibility = View.GONE
+                    signInButton.setText(R.string.sign_in_text)
+                    confirmPasswordEditText.text?.clear()
                 }
 
                 AuthMode.REGISTRATION -> {
-                    passwordLayout.visibility = View.VISIBLE
+                    confirmPasswordLayout.visibility = View.VISIBLE
                     signInButton.setText(R.string.sign_up_text)
                 }
             }

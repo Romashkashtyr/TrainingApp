@@ -14,19 +14,19 @@ class ExceptionCatcher @Inject constructor() {
     suspend fun <T> launchWithCatch(job: suspend () -> Status<T>): Status<T> {
         return try {
             job()
-        } catch (e: FirebaseException){
-            e.message.toString()
-            Status.NoNetwork("NoNetwork")
         } catch (e: FirebaseAuthWeakPasswordException) {
             Status.Failure("Weak password")
         } catch (e: FirebaseAuthInvalidCredentialsException) {
             Status.Failure("Invalid email format")
         } catch (e: FirebaseAuthUserCollisionException) {
             Status.Failure("Email already in use")
-        }catch (e: FirebaseNetworkException){
+        } catch (e: FirebaseNetworkException) {
             Status.NoNetwork("No Network: ${e.message}")
         } catch (e: FirebaseException) {
             Status.NoNetwork("Network error: ${e.message}")
+        } catch (e: FirebaseException) {
+            e.message.toString()
+            Status.NoNetwork("NoNetwork")
         } catch (e: Exception) {
             Status.Failure("An unknown error occurred: ${e.message}")
         }
