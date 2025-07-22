@@ -1,5 +1,6 @@
 package com.example.trainingapp.presentation.signin
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.example.trainingapp.R
@@ -8,6 +9,8 @@ import com.example.trainingapp.databinding.ActivitySignInBinding
 import com.example.trainingapp.domain.di.modules.PresenterFactory
 import com.example.trainingapp.presentation.TrainingApp
 import com.example.trainingapp.presentation.base.BaseActivity
+import com.example.trainingapp.presentation.main.MainActivity
+import com.example.trainingapp.presentation.trainings.TrainingsListActivity
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 
@@ -71,7 +74,8 @@ class AuthorizationActivity : BaseActivity(), AuthorizationView {
     }
 
     override fun navigateToHome() {
-        TODO("Not yet implemented")
+        startActivity(Intent(this, TrainingsListActivity::class.java))
+        finish()
     }
 
 

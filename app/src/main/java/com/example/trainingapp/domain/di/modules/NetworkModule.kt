@@ -1,5 +1,6 @@
 package com.example.trainingapp.domain.di.modules
 
+import com.example.trainingapp.data.api.ApiSettings
 import com.example.trainingapp.data.api.Interceptor
 import com.example.trainingapp.data.api.NetworkService
 import com.google.firebase.BuildConfig
@@ -8,6 +9,7 @@ import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -30,12 +32,24 @@ object NetworkModule {
 
 
 
+    @Provides
+    @Singleton
+    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(ApiSettings.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(okHttpClient)
+            .build()
+    }
+
 
     @Provides
     @Singleton
-    fun provideApiService(): NetworkService {
-        return Retrofit.Builder().build().create(NetworkService::class.java)
+    fun provideApiService(retrofit: Retrofit): NetworkService {
+        return retrofit.create(NetworkService::class.java)
     }
+
+
 
 
 

@@ -23,6 +23,7 @@
     <!-- Sign Up Method -->
     <string name="sign_up_success">Вы успешно зарегистрировались</string>
     <string name="sign_up_failure">Что-то пошло не так</string>
+    <string name="sign_up_weak_password">Слабый пароль</string>
 
 
     <!-- Main Activity -->

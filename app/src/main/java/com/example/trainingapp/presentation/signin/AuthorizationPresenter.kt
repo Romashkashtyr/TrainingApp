@@ -36,6 +36,7 @@ open class AuthorizationPresenter @Inject constructor(
 
                         is Status.Success -> {
                             viewState.showToast(R.string.sign_in_success)
+                            viewState.navigateToHome()
                         }
                     }
                     viewState?.hideViewProgress()
@@ -51,7 +52,14 @@ open class AuthorizationPresenter @Inject constructor(
 
 
     fun signUp(email: String, password: String, confirmPassword: String) {
-
+        if(email.isEmpty() || password.isEmpty()) {
+            viewState.showToast(R.string.sign_in_failure)
+            return
+        }
+        if (password.length < 6) {
+            viewState.showToast(R.string.sign_up_weak_password)
+            return
+        }
         launch {
             viewState?.showViewProgress()
             val authStatus = authRepository.signUp(email, password, confirmPassword)
@@ -67,6 +75,7 @@ open class AuthorizationPresenter @Inject constructor(
 
                     is Status.Success -> {
                         viewState.showToast(R.string.sign_in_success)
+                        viewState.navigateToHome()
                     }
                 }
                 viewState?.hideViewProgress()

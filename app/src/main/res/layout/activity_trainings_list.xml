@@ -9,13 +9,12 @@
 
     <ImageView
         android:id="@+id/arrow_back"
-        android:layout_width="63dp"
-        android:layout_height="52dp"
+        android:layout_width="40dp"
+        android:layout_height="17dp"
         android:src="@drawable/back"
+        app:layout_constraintBottom_toTopOf="@+id/training_list"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/training_list">
-    </ImageView>
+        app:layout_constraintTop_toTopOf="parent"></ImageView>
 
     <TextView
         android:id="@+id/training_list"

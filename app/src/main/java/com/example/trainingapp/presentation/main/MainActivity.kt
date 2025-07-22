@@ -23,6 +23,7 @@ class MainActivity : BaseActivity(), MainView, DashboardAdapter.OnClick {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        bindingItem = ItemTrainingListBinding.inflate(layoutInflater)
         setContentView(binding.root)
         mainPresenter.requestGetScreenData()
         toTrainingList()

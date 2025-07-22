@@ -3,6 +3,7 @@ package com.example.trainingapp.data.repository
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.util.Log
 import com.example.trainingapp.data.exception.ExceptionCatcher
 import com.example.trainingapp.domain.Status
 import com.example.trainingapp.domain.repository.AuthRepository
@@ -20,12 +21,15 @@ class AuthRepositoryImpl @Inject constructor(
     override suspend fun signIn(email: String, password: String): Status<Boolean> {
 
 
-        return ExceptionCatcher().launchWithCatch {
+        return catcher.launchWithCatch {
+            Log.d("AuthRepository", "Attempting signIn with email: $email")
             val result = firebaseAuth.signInWithEmailAndPassword(email, password).await()
             if (result.user != null) {
+                Log.d("AuthRepository", "SignIn successful, user: ${result.user?.uid}")
                return@launchWithCatch Status.Success(true)
             } else {
-                return@launchWithCatch Status.Failure("Failure")
+                Log.w("AuthRepository", "SignIn failed: user is null")
+                return@launchWithCatch Status.Failure("User not found or invalid credentials")
             }
 
         }
@@ -45,7 +49,7 @@ class AuthRepositoryImpl @Inject constructor(
             if (resultSignUp.user != null) {
                return@launchWithCatch Status.Success(true)
             } else {
-              return@launchWithCatch  Status.Failure("Failure")
+              return@launchWithCatch  Status.Failure("Failed to create user")
             }
         }
 

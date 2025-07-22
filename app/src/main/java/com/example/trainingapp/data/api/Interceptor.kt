@@ -5,8 +5,9 @@ import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
 import okhttp3.Route
+import javax.inject.Inject
 
-class Interceptor() : Interceptor, Authenticator {
+class Interceptor @Inject constructor() : Interceptor, Authenticator {
     override fun intercept(chain: Interceptor.Chain): Response {
         var request: Request = chain.request()
         request = request.newBuilder()
