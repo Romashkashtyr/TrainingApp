@@ -42,11 +42,13 @@ sealed class DashboardViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
      class TrainingListViewHolder(
         private val binding: ItemTrainingListBinding,
-        private val onViewTrainingsClicked: () -> Unit
+        private val onViewTrainingsClicked: () -> Unit,
+         private val onTrainingClick: () -> Unit
     ) : DashboardViewHolder(binding.root){
         override fun bind(item: DashboardItem){
             binding.viewWorkoutsButton.setText(R.string.trains_county)
             binding.viewWorkoutsButton.setOnClickListener { onViewTrainingsClicked() }
+            binding.viewWorkoutsButton.setOnClickListener { onTrainingClick() }
         }
     }
 

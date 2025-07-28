@@ -18,7 +18,7 @@ class MainPresenter: BasePresenter<MainView>() {
     fun requestGetScreenData() {
         launch {
             val waterAmount = repository.getWaterAmount()
-            withContext(Dispatchers.IO) {
+            withContext(Dispatchers.Main) {
                 when (waterAmount) {
                     is Status.Failure -> {
                         viewState.showToast(R.string.sign_up_failure)

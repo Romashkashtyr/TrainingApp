@@ -1,8 +1,5 @@
 package com.example.trainingapp.data.repository
 
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
 import android.util.Log
 import com.example.trainingapp.data.exception.ExceptionCatcher
 import com.example.trainingapp.domain.Status

@@ -23,7 +23,7 @@ class ExceptionCatcher @Inject constructor() {
         } catch (e: FirebaseNetworkException) {
             Status.NoNetwork("No Network: ${e.message}")
         } catch (e: FirebaseException) {
-            Status.NoNetwork("Network error: ${e.message}")
+            Status.Failure("Unidentified error: ${e.message}")
         } catch (e: Exception) {
             Status.Failure("An unknown error occurred: ${e.message}")
         }

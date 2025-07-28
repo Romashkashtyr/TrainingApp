@@ -1,5 +1,6 @@
 package com.example.trainingapp.presentation.trainings
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,7 +32,6 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        TrainingApp.component.inject(this)
         binding = ActivityTrainingsListBinding.inflate(layoutInflater)
         setContentView(binding.root)
         presenter.requestTrainingList()
@@ -49,6 +49,10 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
             layoutManager = LinearLayoutManager(this@TrainingsListActivity)
             adapter = trainingAdapter
         }
+    }
+
+    companion object {
+        fun getIntent(fromContext: Context): Intent = Intent(fromContext, TrainingsListActivity::class.java)
     }
 
 }

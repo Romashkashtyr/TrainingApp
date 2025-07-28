@@ -11,6 +11,7 @@ class TrainingApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        instance = this
         FirebaseApp.initializeApp(this)
         component = DaggerApplicationComponent.builder()
             .context(this)
@@ -26,6 +27,7 @@ class TrainingApp : Application() {
     companion object {
 
         lateinit var component: ApplicationComponent
+        lateinit var instance: Application
 
     }
 

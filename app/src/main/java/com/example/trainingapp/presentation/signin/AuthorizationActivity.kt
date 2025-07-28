@@ -1,6 +1,8 @@
 package com.example.trainingapp.presentation.signin
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import com.example.trainingapp.R
@@ -11,6 +13,7 @@ import com.example.trainingapp.presentation.TrainingApp
 import com.example.trainingapp.presentation.base.BaseActivity
 import com.example.trainingapp.presentation.main.MainActivity
 import com.example.trainingapp.presentation.trainings.TrainingsListActivity
+import com.google.firebase.auth.FirebaseAuth
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 
@@ -32,6 +35,10 @@ class AuthorizationActivity : BaseActivity(), AuthorizationView {
         get() = binding.confirmPasswordLayout.editText?.text.toString()
 
 
+    private val sharedPreferences: SharedPreferences by lazy {
+        getSharedPreferences("auth_prefs", Context.MODE_PRIVATE)
+    }
+
     init {
         TrainingApp.component.inject(this)
     }
@@ -40,6 +47,12 @@ class AuthorizationActivity : BaseActivity(), AuthorizationView {
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        if (isUserLoggedIn()) {
+            startActivity(Intent(MainActivity.getInstance(this)))
+            finish()
+            return
+        }
 
         binding.signInButton.setOnClickListener {
             registrationMode()
@@ -74,7 +87,7 @@ class AuthorizationActivity : BaseActivity(), AuthorizationView {
     }
 
     override fun navigateToHome() {
-        startActivity(Intent(this, TrainingsListActivity::class.java))
+        startActivity(Intent(TrainingsListActivity.getIntent(this)))
         finish()
     }
 
@@ -100,5 +113,11 @@ class AuthorizationActivity : BaseActivity(), AuthorizationView {
             mode = newMode
         }
 
+    }
+
+    private fun isUserLoggedIn(): Boolean {
+        val isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false)
+        val firebaseUser = FirebaseAuth.getInstance().currentUser
+        return isLoggedIn && firebaseUser != null
     }
 }

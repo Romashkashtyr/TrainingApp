@@ -47,8 +47,13 @@ class DashboardAdapter(
             )
 
             R.layout.item_training_list -> DashboardViewHolder.TrainingListViewHolder(
-                ItemTrainingListBinding.inflate(inflater, parent, false)
-            ) { onClick.onViewTrainingsClicked() }
+                ItemTrainingListBinding.inflate(inflater, parent, false),
+                onViewTrainingsClicked = {
+                    onClick.onViewTrainingsClicked()
+                }
+            ) {
+                onClick.onTrainingClick()
+            }
 
             else -> throw IllegalArgumentException("Unknown view type")
         }
@@ -81,6 +86,7 @@ class DashboardAdapter(
     interface OnClick {
         fun onAddWaterClicked(newAmount: Int)
         fun onViewTrainingsClicked()
+        fun onTrainingClick()
     }
 
 }
