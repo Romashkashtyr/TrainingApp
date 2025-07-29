@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.trainingapp.Constants.AUTH_PREFS
 import com.example.trainingapp.databinding.ActivityMainBinding
 import com.example.trainingapp.databinding.ItemTrainingListBinding
 import com.example.trainingapp.domain.DashboardItem
@@ -22,7 +23,7 @@ class MainActivity : BaseActivity(), MainView, DashboardAdapter.OnClick {
     private lateinit var dashboardAdapter: DashboardAdapter
 
     private val sharedPreferences: SharedPreferences by lazy {
-        getSharedPreferences("auth_prefs", Context.MODE_PRIVATE)
+        getSharedPreferences(AUTH_PREFS, Context.MODE_PRIVATE)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

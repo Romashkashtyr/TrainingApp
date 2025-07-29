@@ -9,30 +9,34 @@ import kotlinx.coroutines.tasks.await
 
 class MainRepositoryImpl : MainRepository {
 
-    private val databaseReference = FirebaseDatabase.getInstance()
+    private val databaseReference = FirebaseDatabase.getInstance("https://trainingapp-f08df-default-rtdb.firebaseio.com/")
     private val databaseWater = databaseReference.getReference("get_water")
     private val catcher = FirebaseExceptionCatcher()
 
 
     override suspend fun getWaterAmount(): Status<Int> {
         return catcher.launchWithCatch {
-            Status.Success(
-                databaseWater.get().await().getValue(Int::class.java) ?: 0
-            )
-        }
-    }
-
-    override suspend fun addWater(amount: Int) {
-        try {
             val snapshot = databaseWater.get().await()
-            val currentAmount = snapshot?.value.toString().toIntOrNull() ?: 0
-            databaseWater.setValue(currentAmount)
-        } catch (e: FirebaseException) {
+            if(snapshot.exists()) {
+                val waterData = snapshot.getValue(String::class.java)
+                val waterAmount = waterData?.toIntOrNull() ?: 0
+                Status.Success(waterAmount)
+            } else {
+                Status.Success(0)
+            }
 
         }
-
-
     }
 
+    override suspend fun addWater(amount: Int): Status<Unit> {
+        return catcher.launchWithCatch {
+            val snapshot = databaseWater.get().await()
+            val currentAmount = snapshot.getValue(String::class.java)?.toIntOrNull() ?: 0
+            val newAmount = currentAmount + amount
+            databaseWater.setValue(newAmount.toString()).await()
+            Status.Success(Unit)
+        }
+
+    }
 
 }

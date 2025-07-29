@@ -16,12 +16,6 @@ class TrainingApp : Application() {
         component = DaggerApplicationComponent.builder()
             .context(this)
             .build()
-
-
-//        component = DaggerApplicationComponent.builder()
-//            .appModule(AppModule(this))
-//            .build()
-
     }
 
     companion object {

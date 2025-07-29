@@ -3,6 +3,9 @@ package com.example.trainingapp.presentation.signin
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.example.trainingapp.Constants.AUTH_PREFS
+import com.example.trainingapp.Constants.IS_LOGGED_IN
+import com.example.trainingapp.Constants.USER_EMAIL
 import com.example.trainingapp.R
 import com.example.trainingapp.data.repository.AuthRepositoryImpl
 import com.example.trainingapp.domain.Status
@@ -100,11 +103,11 @@ open class AuthorizationPresenter @Inject constructor(
         viewState.changeAuthMode()
     }
 
-    companion object {
-        const val AUTH_PREFS = "auth_prefs"
-        const val IS_LOGGED_IN = "isLoggedIn"
-        const val USER_EMAIL = "userEmail"
-    }
+//    companion object {
+//        const val AUTH_PREFS = "auth_prefs"
+//        const val IS_LOGGED_IN = "isLoggedIn"
+//        const val USER_EMAIL = "userEmail"
+//    }
 
 }
 

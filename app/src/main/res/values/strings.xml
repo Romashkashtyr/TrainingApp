@@ -14,6 +14,7 @@
     <string name="type_your_email">Type Your Email</string>
     <string name="confirm_your_password">Confirm Your Password</string>
     <string name="not_registered_yet">Not Registered Yet , Sign Up !</string>
+    <string name="not_entered_yet">Not Entered Yet , Sign In !</string>
 
     <!-- Sign In Activity -->
     <string name="enter_your_email">Enter your email</string>

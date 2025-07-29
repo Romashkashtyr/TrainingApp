@@ -5,6 +5,8 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
+import com.example.trainingapp.Constants.AUTH_PREFS
+import com.example.trainingapp.Constants.IS_LOGGED_IN
 import com.example.trainingapp.R
 import com.example.trainingapp.data.AuthMode
 import com.example.trainingapp.databinding.ActivitySignInBinding
@@ -36,7 +38,7 @@ class AuthorizationActivity : BaseActivity(), AuthorizationView {
 
 
     private val sharedPreferences: SharedPreferences by lazy {
-        getSharedPreferences("auth_prefs", Context.MODE_PRIVATE)
+        getSharedPreferences(AUTH_PREFS, Context.MODE_PRIVATE)
     }
 
     init {
@@ -101,6 +103,7 @@ class AuthorizationActivity : BaseActivity(), AuthorizationView {
                     confirmPasswordLayout.visibility = View.GONE
                     signInButton.setText(R.string.sign_in_text)
                     confirmPasswordEditText.text?.clear()
+                    changeModeButton.setText(R.string.not_entered_yet)
                 }
 
                 AuthMode.REGISTRATION -> {
@@ -116,7 +119,7 @@ class AuthorizationActivity : BaseActivity(), AuthorizationView {
     }
 
     private fun isUserLoggedIn(): Boolean {
-        val isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false)
+        val isLoggedIn = sharedPreferences.getBoolean(IS_LOGGED_IN, false)
         val firebaseUser = FirebaseAuth.getInstance().currentUser
         return isLoggedIn && firebaseUser != null
     }
