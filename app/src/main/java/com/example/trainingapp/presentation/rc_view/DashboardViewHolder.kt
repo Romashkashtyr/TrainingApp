@@ -1,6 +1,7 @@
 package com.example.trainingapp.presentation.rc_view
 
 import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingapp.R
 import com.example.trainingapp.databinding.ItemStepsBinding
@@ -27,9 +28,14 @@ sealed class DashboardViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         override fun bind(item: DashboardItem){
             binding.waterIntake.text = String.format((item as DashboardItem.WaterItem).waterCount.toString())
             binding.addWaterButton.setOnClickListener {
-                item.waterCount += 100
-                onAddWaterClicked(item.waterCount)
-                binding.waterIntake.text = item.waterCount.toString()
+                val newAmount = binding.waterInputEditText.text.toString().toIntOrNull() ?: 0
+                if(newAmount > 0) {
+                    onAddWaterClicked(newAmount)
+                } else {
+                    binding.root.context.getString(R.string.invalid_amount).let {amount ->
+                        Toast.makeText(binding.root.context, amount, Toast.LENGTH_LONG).show()
+                    }
+                }
             }
         }
     }
@@ -47,8 +53,10 @@ sealed class DashboardViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     ) : DashboardViewHolder(binding.root){
         override fun bind(item: DashboardItem){
             binding.viewWorkoutsButton.setText(R.string.trains_county)
-            binding.viewWorkoutsButton.setOnClickListener { onViewTrainingsClicked() }
-            binding.viewWorkoutsButton.setOnClickListener { onTrainingClick() }
+            binding.viewWorkoutsButton.setOnClickListener {
+                onViewTrainingsClicked()
+                onTrainingClick()
+            }
         }
     }
 

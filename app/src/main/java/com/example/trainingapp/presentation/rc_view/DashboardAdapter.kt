@@ -63,24 +63,24 @@ class DashboardAdapter(
         holder.bind(listViewData[position])
     }
 
-    fun onAddWaterClicked(amount: Int){
-        val currentUser = FirebaseAuth.getInstance().currentUser
-        currentUser?.let { user ->
-            val waterIntakeRef = FirebaseDatabase.getInstance()
-                .reference
-                .child("get_water")
-                .child(user.uid)
-                .push()
-
-            val waterIntakeData = DashboardItem.WaterItem(amount)
-
-            waterIntakeRef.setValue(waterIntakeData)
-                .addOnSuccessListener {
-
-                }
-
-        }
-    }
+//    fun onAddWaterClicked(amount: Int){
+//        val currentUser = FirebaseAuth.getInstance().currentUser
+//        currentUser?.let { user ->
+//            val waterIntakeRef = FirebaseDatabase.getInstance()
+//                .reference
+//                .child("get_water")
+//                .child(user.uid)
+//                .push()
+//
+//            val waterIntakeData = DashboardItem.WaterItem(amount)
+//
+//            waterIntakeRef.setValue(waterIntakeData)
+//                .addOnSuccessListener {
+//
+//                }
+//
+//        }
+//    }
 
 
     interface OnClick {

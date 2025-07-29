@@ -45,6 +45,8 @@
     <string name="level_hard">Тяжелый</string>
     <string name="main_menu">Главное меню</string>
     <string name="training_list">Список тренировок</string>
+    <string name="water_input">Добавьте количество воды (мл)</string>
+    <string name="invalid_amount">Введите положительное значение</string>
 
 
 
