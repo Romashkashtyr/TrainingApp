@@ -1,5 +1,6 @@
 package com.example.trainingapp.data.repository
 
+import com.example.trainingapp.Constants
 import com.example.trainingapp.data.exception.FirebaseExceptionCatcher
 import com.example.trainingapp.domain.Status
 import com.example.trainingapp.domain.repository.MainRepository
@@ -8,15 +9,17 @@ import kotlinx.coroutines.tasks.await
 
 class MainRepositoryImpl : MainRepository {
 
-    private val databaseReference = FirebaseDatabase.getInstance("https://trainingapp-f08df-default-rtdb.firebaseio.com/")
-    private val databaseWater = databaseReference.getReference("get_water")
+    private val databaseReference = FirebaseDatabase
+        .getInstance(Constants.DATABASE)
+        .reference
+    private val databaseWater = databaseReference.child(Constants.DATABASE_REFERENCE_PATH)
     private val catcher = FirebaseExceptionCatcher()
 
 
     override suspend fun getWaterAmount(): Status<Int> {
         return catcher.launchWithCatch {
             val snapshot = databaseWater.get().await()
-            if(snapshot.exists()) {
+            if (snapshot.exists()) {
                 val waterAmount = snapshot.getValue(Int::class.java) ?: 0
                 Status.Success(waterAmount)
             } else {

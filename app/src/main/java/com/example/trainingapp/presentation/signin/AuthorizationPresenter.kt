@@ -62,7 +62,7 @@ open class AuthorizationPresenter @Inject constructor(
 
 
     fun signUp(email: String, password: String, confirmPassword: String) {
-        if(email.isEmpty() || password.isEmpty()) {
+        if (email.isEmpty() || password.isEmpty()) {
             viewState.showToast(R.string.sign_in_failure)
             return
         }
@@ -103,11 +103,6 @@ open class AuthorizationPresenter @Inject constructor(
         viewState.changeAuthMode()
     }
 
-//    companion object {
-//        const val AUTH_PREFS = "auth_prefs"
-//        const val IS_LOGGED_IN = "isLoggedIn"
-//        const val USER_EMAIL = "userEmail"
-//    }
 
 }
 

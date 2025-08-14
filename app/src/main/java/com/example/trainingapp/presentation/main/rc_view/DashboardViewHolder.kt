@@ -1,4 +1,4 @@
-package com.example.trainingapp.presentation.rc_view
+package com.example.trainingapp.presentation.main.rc_view
 
 import android.view.View
 import android.widget.Toast

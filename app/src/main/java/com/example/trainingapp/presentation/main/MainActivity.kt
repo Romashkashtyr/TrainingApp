@@ -10,7 +10,7 @@ import com.example.trainingapp.databinding.ActivityMainBinding
 import com.example.trainingapp.databinding.ItemTrainingListBinding
 import com.example.trainingapp.domain.DashboardItem
 import com.example.trainingapp.presentation.base.BaseActivity
-import com.example.trainingapp.presentation.rc_view.DashboardAdapter
+import com.example.trainingapp.presentation.main.rc_view.DashboardAdapter
 import com.example.trainingapp.presentation.trainings.TrainingsListActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.asCoroutineDispatcher
