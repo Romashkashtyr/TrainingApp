@@ -56,6 +56,7 @@ class MainActivity : BaseActivity(), MainView, DashboardAdapter.OnClick {
         setContentView(binding.root)
         mainPresenter.requestGetScreenData()
         onTrainingClick()
+        adapter.updateItems(items)
     }
 
 
