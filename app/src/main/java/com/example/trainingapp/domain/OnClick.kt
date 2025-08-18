@@ -1,6 +1,6 @@
 package com.example.trainingapp.domain
 
-interface onClick {
+interface OnClick {
 
     fun onAddWaterClicked(newAmount: Int)
     fun onViewTrainingsClicked()
