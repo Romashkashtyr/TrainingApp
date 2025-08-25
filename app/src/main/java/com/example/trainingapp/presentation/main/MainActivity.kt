@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.trainingapp.Constants.AUTH_PREFS
 import com.example.trainingapp.databinding.ActivityMainBinding
 import com.example.trainingapp.domain.DashboardItem
-import com.example.trainingapp.domain.OnClick
+import com.example.trainingapp.domain.OnAddWaterClicked
 import com.example.trainingapp.presentation.base.BaseActivity
 import com.example.trainingapp.presentation.main.adapters.DashboardAdapterDelegates
 import com.example.trainingapp.presentation.main.rc_view.DashboardAdapter
@@ -19,7 +19,7 @@ import moxy.ktx.moxyPresenter
 class MainActivity : BaseActivity(), MainView, DashboardAdapter.OnClick {
     private val mainPresenter by moxyPresenter { MainPresenter() }
     private lateinit var binding: ActivityMainBinding
-    private lateinit var dashboardAdapter: DashboardAdapter
+    private lateinit var dashboardAdapter: DashboardAdapterDelegates
 
     private val sharedPreferences: SharedPreferences by lazy {
         getSharedPreferences(AUTH_PREFS, Context.MODE_PRIVATE)
@@ -32,18 +32,10 @@ class MainActivity : BaseActivity(), MainView, DashboardAdapter.OnClick {
         DashboardItem.TrainingListItem()
     )
 
-    val adapter = DashboardAdapterDelegates(
-        onClick = object : OnClick {
+    val adapterDelegate = DashboardAdapterDelegates(
+        onAddWaterClicked = object : OnAddWaterClicked {
             override fun onAddWaterClicked(newAmount: Int) {
                 Toast.makeText(this@MainActivity, "Added $newAmount ml of water", Toast.LENGTH_LONG).show()
-            }
-
-            override fun onViewTrainingsClicked() {
-                TODO("Not yet implemented")
-            }
-
-            override fun onTrainingClick() {
-                TODO("Not yet implemented")
             }
 
         },
@@ -56,7 +48,7 @@ class MainActivity : BaseActivity(), MainView, DashboardAdapter.OnClick {
         setContentView(binding.root)
         mainPresenter.requestGetScreenData()
         onTrainingClick()
-        adapter.updateItems(items)
+        adapterDelegate.updateItems(items)
     }
 
 
@@ -75,13 +67,9 @@ class MainActivity : BaseActivity(), MainView, DashboardAdapter.OnClick {
     }
 
     override fun initListData(waterAmount: Int) {
-        val list = mutableListOf(
-            DashboardItem.StepsItem(100), DashboardItem.WaterItem(waterAmount)
-        )
-        dashboardAdapter = DashboardAdapter(this, list)
         binding.dashboardRecyclerView.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
-            adapter = dashboardAdapter
+            adapter = adapterDelegate
         }
     }
 

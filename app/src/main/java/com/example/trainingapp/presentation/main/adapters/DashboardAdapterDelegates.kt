@@ -3,20 +3,20 @@ package com.example.trainingapp.presentation.main.adapters
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingapp.domain.DashboardItem
-import com.example.trainingapp.domain.OnClick
+import com.example.trainingapp.domain.OnAddWaterClicked
 import com.example.trainingapp.presentation.main.delegates.StepsItemDelegate
 import com.example.trainingapp.presentation.main.delegates.WaterItemDelegate
 import com.example.trainingapp.presentation.main.delegates.WorkoutItemDelegate
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegatesManager
 
 class DashboardAdapterDelegates(
-    private val onClick: OnClick,
+    private val onAddWaterClicked: OnAddWaterClicked,
     private var items: List<DashboardItem>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val delegatesManager = AdapterDelegatesManager<List<DashboardItem>>().apply {
         addDelegate(StepsItemDelegate())
-        addDelegate(WaterItemDelegate(onClick::onAddWaterClicked))
+        addDelegate(WaterItemDelegate(onAddWaterClicked::onAddWaterClicked))
         addDelegate(WorkoutItemDelegate())
     }
 
