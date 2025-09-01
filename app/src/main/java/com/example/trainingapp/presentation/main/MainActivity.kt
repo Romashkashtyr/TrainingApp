@@ -47,8 +47,6 @@ class MainActivity : BaseActivity(), MainView, DashboardAdapter.OnClick {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         mainPresenter.requestGetScreenData()
-        onTrainingClick()
-        adapterDelegate.updateItems(items)
     }
 
 

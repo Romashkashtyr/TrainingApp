@@ -8,11 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingapp.R
 import com.example.trainingapp.databinding.ItemWaterBinding
 import com.example.trainingapp.domain.DashboardItem
+import com.example.trainingapp.domain.OnAddWaterClicked
 import com.example.trainingapp.presentation.main.rc_view.DashboardViewHolder
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 
 class WaterItemDelegate(
-    private val onAddWaterClicked: (Int) -> (Unit)
+    private val onAddWaterClicked: OnAddWaterClicked
 ): AdapterDelegate<List<DashboardItem>>() {
     override fun isForViewType(items: List<DashboardItem>, position: Int): Boolean {
         return items[position] is DashboardItem.WaterItem
@@ -21,7 +22,7 @@ class WaterItemDelegate(
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
         return DashboardViewHolder.WaterViewHolder(
             ItemWaterBinding.inflate(LayoutInflater.from(parent.context),parent, false),
-            onAddWaterClicked = onAddWaterClicked
+            onAddWaterClicked = onAddWaterClicked::onAddWaterClicked
         )
     }
 
