@@ -2,6 +2,8 @@ package com.example.trainingapp.domain.di.modules
 
 import android.app.Application
 import android.content.Context
+import android.content.SharedPreferences
+import com.example.trainingapp.Constants
 import com.example.trainingapp.data.exception.ExceptionCatcher
 import com.example.trainingapp.presentation.signin.AuthorizationPresenter
 import com.example.trainingapp.presentation.trainings.TrainingsPresenter
@@ -18,15 +20,17 @@ import javax.inject.Singleton
 @Module
 class AppModule {
 
-
-
     @Singleton
     @Provides
     fun provideFirebaseAuth(): FirebaseAuth {
         return FirebaseAuth.getInstance()
     }
 
-
+    @Provides
+    @Singleton
+    fun provideSharedPreferences(app: Application): SharedPreferences {
+        return app.getSharedPreferences(Constants.AUTH_PREFS, Context.MODE_PRIVATE)
+    }
 }
 
 @Singleton

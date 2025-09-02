@@ -10,20 +10,19 @@ import com.example.trainingapp.Constants.AUTH_PREFS
 import com.example.trainingapp.databinding.ActivityMainBinding
 import com.example.trainingapp.domain.DashboardItem
 import com.example.trainingapp.domain.OnAddWaterClicked
+import com.example.trainingapp.domain.OnTrainingClick
+import com.example.trainingapp.domain.OnViewTrainingsClicked
 import com.example.trainingapp.presentation.base.BaseActivity
 import com.example.trainingapp.presentation.main.adapters.DashboardAdapterDelegates
 import com.example.trainingapp.presentation.main.rc_view.DashboardAdapter
 import com.example.trainingapp.presentation.trainings.TrainingsListActivity
 import moxy.ktx.moxyPresenter
 
-class MainActivity : BaseActivity(), MainView, DashboardAdapter.OnClick {
+class MainActivity : BaseActivity(), MainView, DashboardAdapter.OnClick, OnAddWaterClicked, OnTrainingClick, OnViewTrainingsClicked {
     private val mainPresenter by moxyPresenter { MainPresenter() }
     private lateinit var binding: ActivityMainBinding
-    private lateinit var dashboardAdapter: DashboardAdapterDelegates
 
-    private val sharedPreferences: SharedPreferences by lazy {
-        getSharedPreferences(AUTH_PREFS, Context.MODE_PRIVATE)
-    }
+
 
     val items = listOf(
         DashboardItem.StepsItem(5000),
@@ -33,12 +32,9 @@ class MainActivity : BaseActivity(), MainView, DashboardAdapter.OnClick {
     )
 
     val adapterDelegate = DashboardAdapterDelegates(
-        onAddWaterClicked = object : OnAddWaterClicked {
-            override fun onAddWaterClicked(newAmount: Int) {
-                Toast.makeText(this@MainActivity, "Added $newAmount ml of water", Toast.LENGTH_LONG).show()
-            }
-
-        },
+        onAddWaterClicked = this,
+        onTrainingClick = this,
+        onViewTrainingsClicked = this,
         items = items
     )
 

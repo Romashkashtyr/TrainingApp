@@ -20,7 +20,7 @@ class WaterItemDelegate(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
-        return DashboardViewHolder.WaterViewHolder(
+        return WaterViewHolder(
             ItemWaterBinding.inflate(LayoutInflater.from(parent.context),parent, false),
             onAddWaterClicked = onAddWaterClicked::onAddWaterClicked
         )
@@ -32,7 +32,7 @@ class WaterItemDelegate(
         holder: RecyclerView.ViewHolder,
         payloads: MutableList<Any>
     ) {
-        (holder as DashboardViewHolder.WaterViewHolder).bind(items[position] as DashboardItem.WaterItem)
+        (holder as WaterViewHolder).bind(items[position] as DashboardItem.WaterItem)
     }
 
     inner class WaterViewHolder(

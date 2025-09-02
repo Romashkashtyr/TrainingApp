@@ -25,7 +25,7 @@ class WorkoutItemDelegate() :AdapterDelegate<List<DashboardItem>>() {
         holder: RecyclerView.ViewHolder,
         payloads: MutableList<Any>
     ) {
-        (holder as DashboardViewHolder.WorkoutsViewHolder).bind(items[position] as DashboardItem.WorkoutItem)
+        (holder as WorkoutViewHolder).bind(items[position] as DashboardItem.WorkoutItem)
     }
 
     inner class WorkoutViewHolder(

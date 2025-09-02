@@ -29,7 +29,7 @@ class StepsItemDelegate : AdapterDelegate<List<DashboardItem>>(){
         holder: RecyclerView.ViewHolder,
         payloads: MutableList<Any>
     ) {
-        (holder as DashboardViewHolder.StepsViewHolder).bind(items[position] as DashboardItem.StepsItem)
+        (holder as StepsViewHolder).bind(items[position] as DashboardItem.StepsItem)
     }
 
     inner class StepsViewHolder(
