@@ -16,7 +16,7 @@ class DashboardAdapterDelegates(
 
     private val delegatesManager = AdapterDelegatesManager<List<DashboardItem>>().apply {
         addDelegate(StepsItemDelegate())
-        addDelegate(WaterItemDelegate(onAddWaterClicked::onAddWaterClicked))
+        addDelegate(WaterItemDelegate(onAddWaterClicked))
         addDelegate(WorkoutItemDelegate())
     }
 
