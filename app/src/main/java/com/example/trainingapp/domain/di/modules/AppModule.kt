@@ -3,7 +3,9 @@ package com.example.trainingapp.domain.di.modules
 import android.content.Context
 import android.content.SharedPreferences
 import com.example.trainingapp.Constants
+import com.example.trainingapp.data.exception.ExceptionCatcher
 import com.example.trainingapp.data.repository.AuthRepositoryImpl
+import com.example.trainingapp.domain.repository.AuthRepository
 import com.example.trainingapp.presentation.authorization.AuthorizationPresenter
 import com.example.trainingapp.presentation.splash.SplashPresenter
 import com.example.trainingapp.presentation.trainings.TrainingsPresenter
@@ -28,6 +30,16 @@ class AppModule {
     @Singleton
     fun provideSharedPreferences(context: Context): SharedPreferences {
         return context.getSharedPreferences(Constants.AUTH_PREFS, Context.MODE_PRIVATE)
+    }
+
+    @Provides
+    @Singleton
+    fun provideAuthRepository(
+        firebaseAuth: FirebaseAuth,
+        catcher: ExceptionCatcher,
+        sharedPreferences: SharedPreferences
+    ): AuthRepository {
+        return AuthRepositoryImpl(firebaseAuth,catcher,sharedPreferences)
     }
 }
 
