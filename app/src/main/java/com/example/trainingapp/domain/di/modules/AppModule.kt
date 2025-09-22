@@ -1,22 +1,17 @@
 package com.example.trainingapp.domain.di.modules
 
-import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import com.example.trainingapp.Constants
-import com.example.trainingapp.data.exception.ExceptionCatcher
 import com.example.trainingapp.data.repository.AuthRepositoryImpl
-import com.example.trainingapp.domain.repository.AuthRepository
-import com.example.trainingapp.presentation.signin.AuthorizationPresenter
+import com.example.trainingapp.presentation.authorization.AuthorizationPresenter
 import com.example.trainingapp.presentation.splash.SplashPresenter
 import com.example.trainingapp.presentation.trainings.TrainingsPresenter
 import com.google.firebase.auth.FirebaseAuth
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import javax.inject.Inject
 import javax.inject.Provider
-import javax.inject.Qualifier
 import javax.inject.Singleton
 
 

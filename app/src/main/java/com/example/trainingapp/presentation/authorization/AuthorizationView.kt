@@ -1,4 +1,4 @@
-package com.example.trainingapp.presentation.signin
+package com.example.trainingapp.presentation.authorization
 
 import com.example.trainingapp.presentation.base.BaseView
 import moxy.viewstate.strategy.AddToEndSingleStrategy

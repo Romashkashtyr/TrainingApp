@@ -29,7 +29,7 @@
             android:name=".presentation.trainings.TrainingsListActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.signin.AuthorizationActivity"
+            android:name=".presentation.authorization.AuthorizationActivity"
             android:exported="false"
             android:theme="@style/Theme.TrainingApp" >
         </activity>

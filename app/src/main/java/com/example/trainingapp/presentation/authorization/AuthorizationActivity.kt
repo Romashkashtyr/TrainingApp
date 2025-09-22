@@ -1,4 +1,4 @@
-package com.example.trainingapp.presentation.signin
+package com.example.trainingapp.presentation.authorization
 
 import android.content.Context
 import android.content.Intent
@@ -9,7 +9,6 @@ import com.example.trainingapp.data.AuthMode
 import com.example.trainingapp.data.repository.AuthRepositoryImpl
 import com.example.trainingapp.databinding.ActivitySignInBinding
 import com.example.trainingapp.domain.di.modules.PresenterFactory
-import com.example.trainingapp.domain.repository.AuthRepository
 import com.example.trainingapp.presentation.TrainingApp
 import com.example.trainingapp.presentation.base.BaseActivity
 import com.example.trainingapp.presentation.main.MainActivity
