@@ -7,7 +7,7 @@ import com.example.trainingapp.databinding.ItemTrainingListBinding
 import com.example.trainingapp.domain.DashboardItem
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 import com.example.trainingapp.R
-import com.example.trainingapp.domain.OnTrainingClick
+import com.example.trainingapp.domain.events.OnTrainingClick
 
 class TrainingListItemDelegate(
     private val onTrainingClick: OnTrainingClick

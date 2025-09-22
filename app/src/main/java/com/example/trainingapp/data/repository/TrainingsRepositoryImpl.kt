@@ -1,6 +1,6 @@
 package com.example.trainingapp.data.repository
 
-import com.example.trainingapp.domain.Training
+import com.example.trainingapp.domain.training.Training
 import com.example.trainingapp.domain.repository.TrainingsRepository
 import javax.inject.Inject
 import javax.inject.Singleton

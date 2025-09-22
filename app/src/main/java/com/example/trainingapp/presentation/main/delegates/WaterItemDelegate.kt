@@ -2,14 +2,12 @@ package com.example.trainingapp.presentation.main.delegates
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Adapter
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingapp.R
 import com.example.trainingapp.databinding.ItemWaterBinding
 import com.example.trainingapp.domain.DashboardItem
-import com.example.trainingapp.domain.OnAddWaterClicked
-import com.example.trainingapp.presentation.main.rc_view.DashboardViewHolder
+import com.example.trainingapp.domain.events.OnAddWaterClicked
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 
 class WaterItemDelegate(

@@ -3,9 +3,8 @@ package com.example.trainingapp.presentation.main.adapters
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingapp.domain.DashboardItem
-import com.example.trainingapp.domain.OnAddWaterClicked
-import com.example.trainingapp.domain.OnTrainingClick
-import com.example.trainingapp.domain.OnViewTrainingsClicked
+import com.example.trainingapp.domain.events.OnAddWaterClicked
+import com.example.trainingapp.domain.events.OnTrainingClick
 import com.example.trainingapp.presentation.main.delegates.StepsItemDelegate
 import com.example.trainingapp.presentation.main.delegates.TrainingListItemDelegate
 import com.example.trainingapp.presentation.main.delegates.WaterItemDelegate
@@ -14,7 +13,6 @@ import com.hannesdorfmann.adapterdelegates4.AdapterDelegatesManager
 
 class DashboardAdapterDelegates(
     private val onAddWaterClicked: OnAddWaterClicked,
-    onViewTrainingsClicked: OnViewTrainingsClicked,
     private val onTrainingClick: OnTrainingClick,
     private var items: List<DashboardItem>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {

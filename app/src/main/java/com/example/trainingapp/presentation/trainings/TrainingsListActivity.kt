@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.trainingapp.databinding.ActivityTrainingsListBinding
-import com.example.trainingapp.domain.Training
+import com.example.trainingapp.domain.training.Training
 import com.example.trainingapp.domain.di.modules.TrainingFactory
 import com.example.trainingapp.presentation.TrainingApp
 import com.example.trainingapp.presentation.base.BaseActivity

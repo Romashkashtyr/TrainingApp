@@ -2,39 +2,35 @@ package com.example.trainingapp.presentation.main
 
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.trainingapp.Constants.AUTH_PREFS
 import com.example.trainingapp.databinding.ActivityMainBinding
 import com.example.trainingapp.domain.DashboardItem
-import com.example.trainingapp.domain.OnAddWaterClicked
-import com.example.trainingapp.domain.OnTrainingClick
-import com.example.trainingapp.domain.OnViewTrainingsClicked
+import com.example.trainingapp.domain.events.OnAddWaterClicked
+import com.example.trainingapp.domain.events.OnTrainingClick
+import com.example.trainingapp.domain.events.OnViewTrainingsClicked
 import com.example.trainingapp.presentation.base.BaseActivity
 import com.example.trainingapp.presentation.main.adapters.DashboardAdapterDelegates
-import com.example.trainingapp.presentation.main.rc_view.DashboardAdapter
 import com.example.trainingapp.presentation.trainings.TrainingsListActivity
 import moxy.ktx.moxyPresenter
 
-class MainActivity : BaseActivity(), MainView, DashboardAdapter.OnClick, OnAddWaterClicked, OnTrainingClick, OnViewTrainingsClicked {
+class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
+    OnTrainingClick, OnViewTrainingsClicked {
     private val mainPresenter by moxyPresenter { MainPresenter() }
     private lateinit var binding: ActivityMainBinding
 
 
 
-    val items = listOf(
+    private val items = listOf(
         DashboardItem.StepsItem(5000),
         DashboardItem.WaterItem(1500),
         DashboardItem.WorkoutItem(3),
         DashboardItem.TrainingListItem()
     )
 
-    val adapterDelegate = DashboardAdapterDelegates(
+    private val adapterDelegate = DashboardAdapterDelegates(
         onAddWaterClicked = this,
         onTrainingClick = this,
-        onViewTrainingsClicked = this,
         items = items
     )
 

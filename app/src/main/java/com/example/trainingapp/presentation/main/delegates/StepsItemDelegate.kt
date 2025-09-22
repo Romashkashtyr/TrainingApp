@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingapp.databinding.ItemStepsBinding
 import com.example.trainingapp.domain.DashboardItem
-import com.example.trainingapp.presentation.main.rc_view.DashboardViewHolder
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
 
@@ -18,7 +17,7 @@ class StepsItemDelegate : AdapterDelegate<List<DashboardItem>>(){
     }
 
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
-        return DashboardViewHolder.StepsViewHolder(
+        return StepsViewHolder(
             ItemStepsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }

@@ -20,7 +20,7 @@ import javax.inject.Inject
 
 @InjectViewState
 open class AuthorizationPresenter @Inject constructor(
-    private val authRepository: AuthRepository
+    private val authRepository: AuthRepositoryImpl
 ) : BasePresenter<AuthorizationView>() {
 
 

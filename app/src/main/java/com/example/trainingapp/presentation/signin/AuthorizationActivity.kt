@@ -1,14 +1,11 @@
 package com.example.trainingapp.presentation.signin
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
-import com.example.trainingapp.Constants.AUTH_PREFS
-import com.example.trainingapp.Constants.IS_LOGGED_IN
 import com.example.trainingapp.R
 import com.example.trainingapp.data.AuthMode
+import com.example.trainingapp.data.repository.AuthRepositoryImpl
 import com.example.trainingapp.databinding.ActivitySignInBinding
 import com.example.trainingapp.domain.di.modules.PresenterFactory
 import com.example.trainingapp.domain.repository.AuthRepository
@@ -16,7 +13,6 @@ import com.example.trainingapp.presentation.TrainingApp
 import com.example.trainingapp.presentation.base.BaseActivity
 import com.example.trainingapp.presentation.main.MainActivity
 import com.example.trainingapp.presentation.trainings.TrainingsListActivity
-import com.google.firebase.auth.FirebaseAuth
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 
@@ -28,7 +24,7 @@ class AuthorizationActivity : BaseActivity(), AuthorizationView {
     lateinit var presenterFactory: PresenterFactory
     private val presenter by moxyPresenter { presenterFactory.createAuthorizationPresenter() }
     @Inject
-    lateinit var authRepository: AuthRepository
+    lateinit var authRepository: AuthRepositoryImpl
 
     private var mode = AuthMode.LOGIN
 
@@ -40,9 +36,6 @@ class AuthorizationActivity : BaseActivity(), AuthorizationView {
         get() = binding.confirmPasswordLayout.editText?.text.toString()
 
 
-//    private val sharedPreferences: SharedPreferences by lazy {
-//        getSharedPreferences(AUTH_PREFS, Context.MODE_PRIVATE)
-//    }
 
     init {
         TrainingApp.component.inject(this)
@@ -59,11 +52,6 @@ class AuthorizationActivity : BaseActivity(), AuthorizationView {
             return
         }
 
-//        if (isUserLoggedIn()) {
-//            startActivity(Intent(MainActivity.getInstance(this)))
-//            finish()
-//            return
-//        }
 
         binding.signInButton.setOnClickListener {
             registrationMode()
@@ -129,9 +117,4 @@ class AuthorizationActivity : BaseActivity(), AuthorizationView {
 
 
 
-//    private fun isUserLoggedIn(): Boolean {
-//        val isLoggedIn = sharedPreferences.getBoolean(IS_LOGGED_IN, false)
-//        val firebaseUser = FirebaseAuth.getInstance().currentUser
-//        return isLoggedIn && firebaseUser != null
-//    }
 }

@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainingapp.databinding.ItemWorkoutBinding
 import com.example.trainingapp.domain.DashboardItem
-import com.example.trainingapp.presentation.main.rc_view.DashboardViewHolder
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 
 class WorkoutItemDelegate() :AdapterDelegate<List<DashboardItem>>() {
@@ -14,7 +13,7 @@ class WorkoutItemDelegate() :AdapterDelegate<List<DashboardItem>>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
-        return DashboardViewHolder.WorkoutsViewHolder(
+        return WorkoutViewHolder(
             ItemWorkoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
