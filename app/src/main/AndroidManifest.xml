@@ -16,10 +16,7 @@
         android:theme="@style/Theme.TrainingApp"
         tools:targetApi="31" >
         <activity
-            android:name=".presentation.trainings.TrainingsListActivity"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.signin.AuthorizationActivity"
+            android:name=".presentation.splash.SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.TrainingApp" >
             <intent-filter>
@@ -29,8 +26,16 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".presentation.trainings.TrainingsListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.signin.AuthorizationActivity"
+            android:exported="false"
+            android:theme="@style/Theme.TrainingApp" >
+        </activity>
+        <activity
             android:name=".presentation.main.MainActivity"
-            android:exported="true" >
+            android:exported="false" >
         </activity>
     </application>
 

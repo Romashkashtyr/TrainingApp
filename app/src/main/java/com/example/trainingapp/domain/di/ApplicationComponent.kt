@@ -9,6 +9,7 @@ import com.example.trainingapp.domain.di.modules.NetworkModule
 import com.example.trainingapp.domain.di.modules.TrainingModule
 import com.example.trainingapp.domain.repository.FitnessResultRepositoryImpl
 import com.example.trainingapp.presentation.signin.AuthorizationActivity
+import com.example.trainingapp.presentation.splash.SplashActivity
 import com.example.trainingapp.presentation.trainings.TrainingsListActivity
 import com.example.trainingapp.presentation.trainings.TrainingsPresenter
 import com.google.firebase.auth.FirebaseAuth
@@ -30,6 +31,7 @@ interface ApplicationComponent {
 
     fun inject(activity: TrainingsListActivity)
     fun inject(activity: AuthorizationActivity)
+    fun inject(activity: SplashActivity)
 
 
     @Component.Builder

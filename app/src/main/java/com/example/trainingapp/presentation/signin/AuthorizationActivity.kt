@@ -1,5 +1,6 @@
 package com.example.trainingapp.presentation.signin
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -114,6 +115,12 @@ class AuthorizationActivity : BaseActivity(), AuthorizationView {
         }
 
     }
+
+    companion object {
+        fun getInstance(fromContext: Context) = Intent(fromContext, AuthorizationActivity::class.java)
+    }
+
+
 
 
 
