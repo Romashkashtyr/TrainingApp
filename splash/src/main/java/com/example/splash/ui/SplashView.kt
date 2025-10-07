@@ -1,4 +1,4 @@
-package com.example.trainingapp.presentation.splash
+package com.example.splash.ui
 
 import moxy.MvpView
 import moxy.viewstate.strategy.alias.AddToEndSingle

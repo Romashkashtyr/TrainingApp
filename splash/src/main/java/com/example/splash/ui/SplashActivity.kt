@@ -1,18 +1,11 @@
-package com.example.trainingapp.presentation.splash
+package com.example.splash.ui
 
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import com.example.trainingapp.databinding.ActivitySplashBinding
-import com.example.trainingapp.domain.di.modules.SplashPresenterFactory
-import com.example.trainingapp.presentation.TrainingApp
-import com.example.trainingapp.presentation.main.MainActivity
-import com.example.trainingapp.presentation.authorization.AuthorizationActivity
-import moxy.MvpAppCompatActivity
-import moxy.ktx.moxyPresenter
-import javax.inject.Inject
+import com.example.core.RouterHolder
 
-class SplashActivity: MvpAppCompatActivity(), SplashView{
+class SplashActivity: MvpAppCompatActivity(), SplashView {
 
     private lateinit var binding: ActivitySplashBinding
 
@@ -38,12 +31,11 @@ class SplashActivity: MvpAppCompatActivity(), SplashView{
     }
 
     override fun navigateToMain() {
-        startActivity(MainActivity.getInstance(this))
         finish()
     }
 
     override fun navigateToAuthorization() {
-        startActivity(AuthorizationActivity.getInstance(this))
+        RouterHolder.router?.navigateToAuth(this)
         finish()
     }
 

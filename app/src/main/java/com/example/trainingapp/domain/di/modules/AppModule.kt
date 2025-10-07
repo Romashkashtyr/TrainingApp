@@ -7,7 +7,7 @@ import com.example.trainingapp.data.exception.ExceptionCatcher
 import com.example.trainingapp.data.repository.AuthRepositoryImpl
 import com.example.trainingapp.domain.repository.AuthRepository
 import com.example.trainingapp.presentation.authorization.AuthorizationPresenter
-import com.example.trainingapp.presentation.splash.SplashPresenter
+import com.example.splash.ui.SplashPresenter
 import com.example.trainingapp.presentation.trainings.TrainingsPresenter
 import com.google.firebase.auth.FirebaseAuth
 import dagger.Module

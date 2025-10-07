@@ -116,7 +116,7 @@ class AuthorizationActivity : BaseActivity(), AuthorizationView {
     }
 
     companion object {
-        fun getInstance(fromContext: Context) = Intent(fromContext, AuthorizationActivity::class.java)
+        fun getIntent(fromContext: Context) = Intent(fromContext, AuthorizationActivity::class.java)
     }
 
 

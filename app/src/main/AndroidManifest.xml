@@ -16,7 +16,7 @@
         android:theme="@style/Theme.TrainingApp"
         tools:targetApi="31" >
         <activity
-            android:name=".presentation.splash.SplashActivity"
+            android:name="com.example.splash.ui.SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.TrainingApp" >
             <intent-filter>

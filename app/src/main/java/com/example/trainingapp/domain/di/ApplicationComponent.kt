@@ -2,12 +2,13 @@ package com.example.trainingapp.domain.di
 
 import android.content.Context
 import com.example.trainingapp.domain.di.modules.AppModule
+import com.example.trainingapp.domain.di.modules.AuthModule
 import com.example.trainingapp.domain.di.modules.ExceptionModule
 import com.example.trainingapp.domain.di.modules.FitnessResultModule
 import com.example.trainingapp.domain.di.modules.NetworkModule
 import com.example.trainingapp.domain.di.modules.TrainingModule
 import com.example.trainingapp.presentation.authorization.AuthorizationActivity
-import com.example.trainingapp.presentation.splash.SplashActivity
+import com.example.splash.ui.SplashActivity
 import com.example.trainingapp.presentation.trainings.TrainingsListActivity
 import dagger.BindsInstance
 import dagger.Component
@@ -20,7 +21,8 @@ import javax.inject.Singleton
     NetworkModule::class,
     FitnessResultModule::class,
     ExceptionModule::class,
-    AppModule::class
+    AppModule::class,
+    AuthModule::class
     ]
 )
 interface ApplicationComponent {
