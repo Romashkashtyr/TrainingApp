@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
+   // id("kotlin-kapt")
+    kotlin("kapt")
 }
 
 android {
@@ -30,11 +32,36 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
 
-    implementation(project(":core"))
+    api(project(":core"))
+    implementation(project(":data"))
+    implementation(project(":domain"))
+
+
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+
+
+    implementation(libs.moxy)
+    implementation(libs.moxy.androidx)
+    implementation(libs.moxy.ktx)
+    kapt(libs.moxy.compiler)
+
+
+    implementation(libs.dagger)
+    kapt(libs.dagger.compiler)
+
+
+
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.auth.ktx)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

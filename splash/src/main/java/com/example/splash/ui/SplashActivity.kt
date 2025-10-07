@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.example.core.RouterHolder
+import moxy.MvpAppCompatActivity
+import moxy.ktx.moxyPresenter
+import javax.inject.Inject
 
 class SplashActivity: MvpAppCompatActivity(), SplashView {
 
@@ -15,7 +18,6 @@ class SplashActivity: MvpAppCompatActivity(), SplashView {
     private val presenter by moxyPresenter { presenterFactory.createSplashPresenter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        TrainingApp.component.inject(this)
         super.onCreate(savedInstanceState)
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)

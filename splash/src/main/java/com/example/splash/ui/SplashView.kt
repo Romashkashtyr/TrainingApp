@@ -3,20 +3,17 @@ package com.example.splash.ui
 import moxy.MvpView
 import moxy.viewstate.strategy.alias.AddToEndSingle
 
+@AddToEndSingle
 interface SplashView: MvpView {
 
-    @AddToEndSingle
+
     fun showProgress()
 
-    @AddToEndSingle
     fun hideProgress()
 
-    @AddToEndSingle
     fun navigateToMain()
 
-    @AddToEndSingle
     fun navigateToAuthorization()
 
-    @AddToEndSingle
     fun showError(message:String)
 }
