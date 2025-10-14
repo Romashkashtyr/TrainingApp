@@ -39,7 +39,7 @@ android {
 
 dependencies {
 
-    api(project(":core"))
+    implementation(project(":core"))
     implementation(project(":data"))
     implementation(project(":domain"))
 
@@ -60,8 +60,17 @@ dependencies {
 
 
 
+    implementation(libs.firebase.analytics)
     implementation(libs.firebase.auth)
+    implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth.ktx)
+    implementation(libs.firebase.firestore.ktx)
+    implementation (libs.firebase.database)
+    implementation (libs.firebase.core)
+    implementation(libs.firebase.firestore)
+    implementation(libs.firebase.storage)
+    implementation(libs.firebase.messaging)
+
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

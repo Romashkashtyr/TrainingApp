@@ -4,6 +4,7 @@ package com.example.trainingapp.presentation.authorization
 import com.example.trainingapp.R
 import com.example.trainingapp.data.repository.AuthRepositoryImpl
 import com.example.trainingapp.domain.Status
+import com.example.trainingapp.domain.repository.AuthRepository
 import com.example.trainingapp.presentation.base.BasePresenter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -13,7 +14,7 @@ import javax.inject.Inject
 
 @InjectViewState
 open class AuthorizationPresenter @Inject constructor(
-    private val authRepository: AuthRepositoryImpl
+    private val authRepository: AuthRepository
 ) : BasePresenter<AuthorizationView>() {
 
 

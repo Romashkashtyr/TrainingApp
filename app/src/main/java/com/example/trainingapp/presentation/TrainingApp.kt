@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import com.example.core.Router
 import com.example.core.RouterHolder
+import com.example.splash.di.SplashComponent
 import com.example.trainingapp.domain.di.ApplicationComponent
 import com.example.trainingapp.domain.di.DaggerApplicationComponent
 import com.example.trainingapp.presentation.authorization.AuthorizationActivity
@@ -21,6 +22,7 @@ class TrainingApp : Application(), Router {
             .context(this)
             .build()
         RouterHolder.router = this
+        SplashComponent.init(applicationContext)
     }
 
     companion object {
