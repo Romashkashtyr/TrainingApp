@@ -7,7 +7,7 @@ import com.example.trainingapp.domain.di.modules.ExceptionModule
 import com.example.trainingapp.domain.di.modules.FitnessResultModule
 import com.example.trainingapp.domain.di.modules.NetworkModule
 import com.example.trainingapp.domain.di.modules.TrainingModule
-import com.example.trainingapp.presentation.authorization.AuthorizationActivity
+import com.example.auth.AuthorizationActivity
 import com.example.splash.ui.SplashActivity
 import com.example.trainingapp.presentation.trainings.TrainingsListActivity
 import dagger.BindsInstance
@@ -28,7 +28,7 @@ import javax.inject.Singleton
 interface ApplicationComponent {
 
     fun inject(activity: TrainingsListActivity)
-    fun inject(activity: AuthorizationActivity)
+    fun inject(activity: com.example.auth.AuthorizationActivity)
     fun inject(activity: SplashActivity)
 
 

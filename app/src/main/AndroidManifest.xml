@@ -29,12 +29,12 @@
             android:name=".presentation.trainings.TrainingsListActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.authorization.AuthorizationActivity"
+            android:name="com.example.auth.ui.AuthorizationActivity"
             android:exported="false"
             android:theme="@style/Theme.TrainingApp" >
         </activity>
         <activity
-            android:name=".presentation.main.MainActivity"
+            android:name="com.example.main.ui.MainActivity"
             android:exported="false" >
         </activity>
     </application>

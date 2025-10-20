@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.google.gms.google.services)
     kotlin("kapt")
 }
 
@@ -47,6 +48,10 @@ dependencies {
 
     implementation(libs.dagger)
     kapt(libs.dagger.compiler)
+
+    implementation(libs.firebase.auth)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth.ktx)
 
 
 

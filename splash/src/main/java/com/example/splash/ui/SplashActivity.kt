@@ -3,7 +3,7 @@ package com.example.splash.ui
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import com.example.core.RouterHolder
+import com.example.core.navigation.RouterHolder
 import com.example.splash.databinding.ActivitySplashBinding
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter

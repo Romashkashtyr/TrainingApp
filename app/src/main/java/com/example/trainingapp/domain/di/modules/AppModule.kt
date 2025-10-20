@@ -2,11 +2,11 @@ package com.example.trainingapp.domain.di.modules
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.example.trainingapp.Constants
-import com.example.trainingapp.data.exception.ExceptionCatcher
+import com.example.core.Constants
+import com.example.core.exception.ExceptionCatcher
 import com.example.trainingapp.data.repository.AuthRepositoryImpl
 import com.example.trainingapp.domain.repository.AuthRepository
-import com.example.trainingapp.presentation.authorization.AuthorizationPresenter
+import com.example.auth.AuthorizationPresenter
 import com.example.splash.ui.SplashPresenter
 import com.example.trainingapp.presentation.trainings.TrainingsPresenter
 import com.google.firebase.auth.FirebaseAuth
@@ -45,17 +45,17 @@ class AppModule {
 
 @Singleton
 class PresenterFactory @Inject constructor(
-    private val authPresenterProvider: Provider<AuthorizationPresenter>
+    private val authPresenterProvider: Provider<com.example.auth.AuthorizationPresenter>
 ) {
-    fun createAuthorizationPresenter(): AuthorizationPresenter = authPresenterProvider.get()
+    fun createAuthorizationPresenter(): com.example.auth.AuthorizationPresenter = authPresenterProvider.get()
 }
 
 @Singleton
 class SplashPresenterFactory @Inject constructor(
     private val authRepository: AuthRepositoryImpl
 ) {
-    fun createAuthorizationPresenter(): AuthorizationPresenter {
-        return AuthorizationPresenter(authRepository)
+    fun createAuthorizationPresenter(): com.example.auth.AuthorizationPresenter {
+        return com.example.auth.AuthorizationPresenter(authRepository)
     }
 
     fun createSplashPresenter(): SplashPresenter {

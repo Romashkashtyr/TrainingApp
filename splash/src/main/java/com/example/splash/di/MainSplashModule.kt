@@ -1,5 +1,7 @@
 package com.example.splash.di
 
+import com.example.core.repository.AuthRepository
+import com.example.core.repository.AuthRepositoryImpl
 import com.example.splash.ui.SplashPresenter
 import dagger.Module
 import dagger.Provides

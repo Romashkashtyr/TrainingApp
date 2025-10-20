@@ -44,8 +44,6 @@ android {
 val moxy_version = "2.2.2"
 dependencies {
 
-    implementation(project(":domain"))
-    implementation(project(":data"))
     implementation(project(":core"))
     implementation(project(":splash"))
 

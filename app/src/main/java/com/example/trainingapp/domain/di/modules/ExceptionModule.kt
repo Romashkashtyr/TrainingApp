@@ -1,6 +1,6 @@
 package com.example.trainingapp.domain.di.modules
 
-import com.example.trainingapp.data.exception.ExceptionCatcher
+import com.example.core.exception.ExceptionCatcher
 import dagger.Module
 import dagger.Provides
 

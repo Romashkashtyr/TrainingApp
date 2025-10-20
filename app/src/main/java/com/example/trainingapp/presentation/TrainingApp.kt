@@ -2,14 +2,13 @@ package com.example.trainingapp.presentation
 
 import android.app.Application
 import android.content.Context
-import com.example.core.Router
-import com.example.core.RouterHolder
+import com.example.core.navigation.Router
+import com.example.core.navigation.RouterHolder
 import com.example.splash.di.SplashComponent
 import com.example.trainingapp.domain.di.ApplicationComponent
 import com.example.trainingapp.domain.di.DaggerApplicationComponent
-import com.example.trainingapp.presentation.authorization.AuthorizationActivity
+import com.example.auth.AuthorizationActivity
 import com.google.firebase.FirebaseApp
-import com.google.firebase.auth.FirebaseAuth
 
 class TrainingApp : Application(), Router {
 
@@ -33,7 +32,7 @@ class TrainingApp : Application(), Router {
     }
 
     override fun navigateToAuth(fromContext: Context) {
-        fromContext.startActivity(AuthorizationActivity.getIntent(fromContext))
+        fromContext.startActivity(com.example.auth.AuthorizationActivity.getIntent(fromContext))
     }
 
 

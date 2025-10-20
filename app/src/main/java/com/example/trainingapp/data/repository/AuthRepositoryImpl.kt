@@ -2,8 +2,8 @@ package com.example.trainingapp.data.repository
 
 import android.content.SharedPreferences
 import android.util.Log
-import com.example.trainingapp.Constants.IS_LOGGED_IN
-import com.example.trainingapp.data.exception.ExceptionCatcher
+import com.example.core.Constants.IS_LOGGED_IN
+import com.example.core.exception.ExceptionCatcher
 import com.example.trainingapp.domain.Status
 import com.example.trainingapp.domain.repository.AuthRepository
 import com.google.firebase.auth.FirebaseAuth

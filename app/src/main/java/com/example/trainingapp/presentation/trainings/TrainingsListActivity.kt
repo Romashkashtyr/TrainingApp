@@ -8,8 +8,8 @@ import com.example.trainingapp.databinding.ActivityTrainingsListBinding
 import com.example.trainingapp.domain.training.Training
 import com.example.trainingapp.domain.di.modules.TrainingFactory
 import com.example.trainingapp.presentation.TrainingApp
-import com.example.trainingapp.presentation.base.BaseActivity
-import com.example.trainingapp.presentation.main.MainActivity
+import com.example.core.base.BaseActivity
+import com.example.main.MainActivity
 import com.example.trainingapp.presentation.trainings.rc_view_training.TrainingAdapter
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
@@ -37,7 +37,7 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
         presenter.requestTrainingList()
 
         binding.arrowBack.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, com.example.main.MainActivity::class.java))
             finish()
         }
     }
