@@ -4,8 +4,6 @@ import android.content.SharedPreferences
 import android.util.Log
 import com.example.core.Constants.IS_LOGGED_IN
 import com.example.core.exception.ExceptionCatcher
-import com.example.trainingapp.domain.Status
-import com.example.trainingapp.domain.repository.AuthRepository
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject

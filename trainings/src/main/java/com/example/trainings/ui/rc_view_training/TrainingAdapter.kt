@@ -1,4 +1,4 @@
-package com.example.trainingapp.presentation.trainings.rc_view_training
+package com.example.trainings.ui.rc_view_training
 
 import android.content.Context
 import android.view.LayoutInflater

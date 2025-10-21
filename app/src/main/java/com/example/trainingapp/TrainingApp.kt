@@ -1,4 +1,4 @@
-package com.example.trainingapp.presentation
+package com.example.trainingapp
 
 import android.app.Application
 import android.content.Context

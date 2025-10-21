@@ -1,4 +1,4 @@
-package com.example.trainingapp.presentation.trainings
+package com.example.trainings.ui
 
 import android.content.Context
 import android.content.Intent
@@ -10,7 +10,7 @@ import com.example.trainingapp.domain.di.modules.TrainingFactory
 import com.example.trainingapp.presentation.TrainingApp
 import com.example.core.base.BaseActivity
 import com.example.main.MainActivity
-import com.example.trainingapp.presentation.trainings.rc_view_training.TrainingAdapter
+import com.example.trainings.ui.rc_view_training.TrainingAdapter
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 

@@ -9,7 +9,7 @@ import com.example.trainingapp.domain.di.modules.NetworkModule
 import com.example.trainingapp.domain.di.modules.TrainingModule
 import com.example.auth.AuthorizationActivity
 import com.example.splash.ui.SplashActivity
-import com.example.trainingapp.presentation.trainings.TrainingsListActivity
+import com.example.trainings.TrainingsListActivity
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -27,7 +27,7 @@ import javax.inject.Singleton
 )
 interface ApplicationComponent {
 
-    fun inject(activity: TrainingsListActivity)
+    fun inject(activity: com.example.trainings.TrainingsListActivity)
     fun inject(activity: com.example.auth.AuthorizationActivity)
     fun inject(activity: SplashActivity)
 

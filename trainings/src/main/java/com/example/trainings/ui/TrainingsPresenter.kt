@@ -1,7 +1,6 @@
-package com.example.trainingapp.presentation.trainings
+package com.example.trainings.ui
 
 import com.example.trainingapp.data.repository.TrainingsRepositoryImpl
-import com.example.trainingapp.presentation.TrainingApp
 import com.example.trainingapp.domain.repository.FitnessResultRepositoryImpl
 import com.example.core.base.BasePresenter
 import kotlinx.coroutines.Dispatchers

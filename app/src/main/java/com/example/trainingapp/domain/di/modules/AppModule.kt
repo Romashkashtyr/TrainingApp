@@ -5,10 +5,10 @@ import android.content.SharedPreferences
 import com.example.core.Constants
 import com.example.core.exception.ExceptionCatcher
 import com.example.trainingapp.data.repository.AuthRepositoryImpl
-import com.example.trainingapp.domain.repository.AuthRepository
 import com.example.auth.AuthorizationPresenter
+import com.example.core.repository.AuthRepository
 import com.example.splash.ui.SplashPresenter
-import com.example.trainingapp.presentation.trainings.TrainingsPresenter
+import com.example.trainings.TrainingsPresenter
 import com.google.firebase.auth.FirebaseAuth
 import dagger.Module
 import dagger.Provides
@@ -38,7 +38,7 @@ class AppModule {
         firebaseAuth: FirebaseAuth,
         catcher: ExceptionCatcher,
         sharedPreferences: SharedPreferences
-    ): AuthRepository {
+    ): AuthRepositoryImpl {
         return AuthRepositoryImpl(firebaseAuth,catcher,sharedPreferences)
     }
 }
@@ -65,7 +65,7 @@ class SplashPresenterFactory @Inject constructor(
 
 @Singleton
 class TrainingFactory @Inject constructor(
-    private val trainingPresenterProvider: Provider<TrainingsPresenter>
+    private val trainingPresenterProvider: Provider<com.example.trainings.TrainingsPresenter>
 ) {
-    fun createTrainingPresenter(): TrainingsPresenter = trainingPresenterProvider.get()
+    fun createTrainingPresenter(): com.example.trainings.TrainingsPresenter = trainingPresenterProvider.get()
 }

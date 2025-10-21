@@ -1,4 +1,4 @@
-package com.example.trainingapp.presentation.trainings
+package com.example.trainings.ui
 
 import com.example.trainingapp.domain.training.Training
 import com.example.core.base.BaseView

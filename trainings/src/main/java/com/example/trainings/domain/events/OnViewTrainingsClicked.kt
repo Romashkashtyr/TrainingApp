@@ -1,4 +1,4 @@
-package com.example.trainingapp.domain.events
+package com.example.trainings.domain.events
 
 interface OnViewTrainingsClicked {
 

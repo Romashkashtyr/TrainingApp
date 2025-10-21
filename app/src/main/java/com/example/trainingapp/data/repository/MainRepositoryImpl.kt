@@ -2,7 +2,6 @@ package com.example.trainingapp.data.repository
 
 import com.example.core.Constants
 import com.example.core.exception.FirebaseExceptionCatcher
-import com.example.trainingapp.domain.Status
 import com.example.trainingapp.domain.repository.MainRepository
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.tasks.await

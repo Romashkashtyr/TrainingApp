@@ -7,11 +7,12 @@ import android.view.View
 import com.example.auth.R
 import com.example.trainingapp.data.AuthMode
 import com.example.trainingapp.data.repository.AuthRepositoryImpl
-import com.example.trainingapp.databinding.ActivitySignInBinding
 import com.example.trainingapp.domain.di.modules.PresenterFactory
 import com.example.trainingapp.presentation.TrainingApp
 import com.example.core.base.BaseActivity
+import com.example.core.repository.AuthRepositoryImpl
 import com.example.main.MainActivity
+import com.example.main.ui.MainActivity
 import com.example.trainingapp.presentation.trainings.TrainingsListActivity
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
@@ -47,7 +48,7 @@ class AuthorizationActivity : BaseActivity(), AuthorizationView {
         setContentView(binding.root)
 
         if(authRepository.isUserLoggedIn()) {
-            startActivity(Intent(com.example.main.MainActivity.getInstance(this)))
+            startActivity(Intent(MainActivity.getInstance(this)))
             finish()
             return
         }
