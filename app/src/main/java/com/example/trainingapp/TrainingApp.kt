@@ -2,12 +2,14 @@ package com.example.trainingapp
 
 import android.app.Application
 import android.content.Context
+import com.example.auth.domain.di.AuthComponent
+import com.example.auth.ui.AuthorizationActivity
 import com.example.core.navigation.Router
 import com.example.core.navigation.RouterHolder
 import com.example.splash.di.SplashComponent
 import com.example.trainingapp.domain.di.ApplicationComponent
 import com.example.trainingapp.domain.di.DaggerApplicationComponent
-import com.example.auth.AuthorizationActivity
+import com.example.trainings.di.TrainingComponent
 import com.google.firebase.FirebaseApp
 
 class TrainingApp : Application(), Router {
@@ -22,6 +24,8 @@ class TrainingApp : Application(), Router {
             .build()
         RouterHolder.router = this
         SplashComponent.init(applicationContext)
+        AuthComponent.init(applicationContext)
+        TrainingComponent.init(applicationContext)
     }
 
     companion object {
@@ -32,7 +36,7 @@ class TrainingApp : Application(), Router {
     }
 
     override fun navigateToAuth(fromContext: Context) {
-        fromContext.startActivity(com.example.auth.AuthorizationActivity.getIntent(fromContext))
+        fromContext.startActivity(AuthorizationActivity.getIntent(fromContext))
     }
 
 
