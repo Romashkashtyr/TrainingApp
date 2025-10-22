@@ -2,9 +2,9 @@ package com.example.auth.ui
 
 
 import com.example.auth.R
-import com.example.trainingapp.domain.Status
-import com.example.trainingapp.domain.repository.AuthRepository
 import com.example.core.base.BasePresenter
+import com.example.core.repository.AuthRepository
+import com.example.core.structures.Status
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

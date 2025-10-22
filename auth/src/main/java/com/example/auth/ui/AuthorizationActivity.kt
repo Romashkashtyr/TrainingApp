@@ -5,6 +5,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.example.auth.R
+import com.example.auth.data.AuthMode
+import com.example.auth.databinding.ActivitySignInBinding
+import com.example.auth.domain.di.PresenterFactory
 import com.example.trainingapp.data.AuthMode
 import com.example.trainingapp.data.repository.AuthRepositoryImpl
 import com.example.trainingapp.domain.di.modules.PresenterFactory

@@ -3,6 +3,7 @@ package com.example.trainings.ui
 import com.example.trainingapp.data.repository.TrainingsRepositoryImpl
 import com.example.trainingapp.domain.repository.FitnessResultRepositoryImpl
 import com.example.core.base.BasePresenter
+import com.example.trainings.data.TrainingsRepositoryImpl
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

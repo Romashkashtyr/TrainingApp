@@ -38,6 +38,10 @@ android {
 
 dependencies {
 
+    implementation(project(":auth"))
+    implementation(project(":core"))
+    implementation(project(":main"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -47,6 +51,11 @@ dependencies {
 
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+
+    implementation(libs.moxy)
+    implementation(libs.moxy.androidx)
+    implementation(libs.moxy.ktx)
+    kapt(libs.moxy.compiler)
 
     // Firebase
     implementation(libs.firebase.analytics)
