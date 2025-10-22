@@ -46,6 +46,9 @@ dependencies {
 
     implementation(project(":core"))
     implementation(project(":splash"))
+    implementation(project(":trainings"))
+    implementation(project(":auth"))
+    implementation(project(":main"))
 
 
     implementation (libs.androidx.room.runtime)
