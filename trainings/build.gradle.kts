@@ -69,6 +69,14 @@ dependencies {
     implementation(libs.firebase.storage)
     implementation(libs.firebase.messaging)
 
+    //Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+
+    //OKHttp
+    val okhttpVersion = "4.12.0"
+    implementation(libs.logging.interceptor)
+
 
     implementation(libs.dagger)
     kapt(libs.dagger.compiler)

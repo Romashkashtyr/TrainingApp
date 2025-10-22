@@ -1,9 +1,9 @@
 package com.example.trainings.ui
 
-import com.example.trainingapp.data.repository.TrainingsRepositoryImpl
-import com.example.trainingapp.domain.repository.FitnessResultRepositoryImpl
+
 import com.example.core.base.BasePresenter
-import com.example.trainings.data.TrainingsRepositoryImpl
+import com.example.trainings.domain.FitnessRepositoryResult
+import com.example.trainings.domain.TrainingsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -13,8 +13,8 @@ import javax.inject.Inject
 
 @InjectViewState
 class TrainingsPresenter @Inject constructor(
-    val repository: TrainingsRepositoryImpl,
-    val repositoryResult: FitnessResultRepositoryImpl
+    val repository: TrainingsRepository,
+    val repositoryResult: FitnessRepositoryResult
 ): BasePresenter<TrainingsView>() {
 
 

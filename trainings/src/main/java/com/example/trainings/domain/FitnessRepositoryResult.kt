@@ -1,9 +1,9 @@
 package com.example.trainings.domain
 
-import com.example.trainingapp.data.api.response.TrainingVideos
-import com.example.trainingapp.data.api.response.VideoResultTraining
-import com.example.trainingapp.data.api.response.WorkoutSession
-import com.example.trainingapp.data.api.response.WorkoutSessionResult
+import com.example.trainings.data.response.TrainingVideos
+import com.example.trainings.data.response.VideoResultTraining
+import com.example.trainings.data.response.WorkoutSession
+import com.example.trainings.data.response.WorkoutSessionResult
 
 interface FitnessRepositoryResult {
 

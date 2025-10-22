@@ -6,7 +6,7 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.core.base.BaseActivity
 import com.example.main.ui.MainActivity
-import com.example.trainingapp.presentation.TrainingApp
+import com.example.trainingapp.TrainingApp
 import com.example.trainings.Training
 import com.example.trainings.databinding.ActivityTrainingsListBinding
 import com.example.trainings.di.TrainingFactory

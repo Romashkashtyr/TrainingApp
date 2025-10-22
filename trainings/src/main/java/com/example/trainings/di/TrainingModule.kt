@@ -16,6 +16,8 @@ interface TrainingModule {
 
 
 
+
+
 //    @AppScope
 //    @Binds
 //    fun bindTrainingRepository(impl: TrainingsRepositoryImpl): TrainingsRepository

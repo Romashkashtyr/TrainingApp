@@ -1,10 +1,10 @@
 package com.example.trainings.data
 
-import com.example.trainingapp.data.api.NetworkService
-import com.example.trainingapp.data.api.response.TrainingVideos
-import com.example.trainingapp.data.api.response.VideoResultTraining
-import com.example.trainingapp.data.api.response.WorkoutSession
-import com.example.trainingapp.data.api.response.WorkoutSessionResult
+import com.example.trainings.data.response.NetworkService
+import com.example.trainings.data.response.TrainingVideos
+import com.example.trainings.data.response.VideoResultTraining
+import com.example.trainings.data.response.WorkoutSession
+import com.example.trainings.data.response.WorkoutSessionResult
 import com.example.trainings.domain.FitnessRepositoryResult
 import javax.inject.Inject
 

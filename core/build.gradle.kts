@@ -52,6 +52,14 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth.ktx)
 
+    //Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+
+    //OKHttp
+    val okhttpVersion = "4.12.0"
+    implementation(libs.logging.interceptor)
+
 
 
     implementation(libs.androidx.core.ktx)

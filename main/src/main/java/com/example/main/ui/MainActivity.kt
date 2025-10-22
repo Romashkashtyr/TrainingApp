@@ -4,14 +4,14 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.trainingapp.databinding.ActivityMainBinding
-import com.example.trainingapp.domain.DashboardItem
-import com.example.trainingapp.domain.events.OnAddWaterClicked
-import com.example.trainingapp.domain.events.OnTrainingClick
-import com.example.trainingapp.domain.events.OnViewTrainingsClicked
 import com.example.core.base.BaseActivity
+import com.example.core.structures.DashboardItem
+import com.example.main.databinding.ActivityMainBinding
 import com.example.main.ui.adapters.DashboardAdapterDelegates
-import com.example.trainingapp.presentation.trainings.TrainingsListActivity
+import com.example.trainings.domain.events.OnAddWaterClicked
+import com.example.trainings.domain.events.OnTrainingClick
+import com.example.trainings.domain.events.OnViewTrainingsClicked
+import com.example.trainings.ui.TrainingsListActivity
 import moxy.ktx.moxyPresenter
 
 class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,

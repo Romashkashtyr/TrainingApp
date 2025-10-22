@@ -1,5 +1,6 @@
 package com.example.trainings.di
 
+import com.example.trainings.data.FitnessResultRepositoryImpl
 import com.example.trainings.domain.TrainingsRepository
 import com.example.trainings.ui.TrainingsPresenter
 import dagger.Module
@@ -13,8 +14,8 @@ class TrainingsModule {
 
     @Provides
     @Singleton
-    fun provideTrainingPresenterFactory(trainingsRepository: TrainingsRepository): TrainingsPresenter {
-        return TrainingsPresenter(trainingsRepository)
+    fun provideTrainingPresenterFactory(trainingsRepository: TrainingsRepository, repositoryImpl: FitnessResultRepositoryImpl): TrainingsPresenter {
+        return TrainingsPresenter(trainingsRepository, repositoryImpl)
     }
 
 
