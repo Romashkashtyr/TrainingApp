@@ -1,4 +1,4 @@
-package com.example.trainingapp.domain.di.modules
+package com.example.core.di
 
 import com.example.core.exception.ExceptionCatcher
 import dagger.Module

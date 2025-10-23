@@ -6,7 +6,7 @@ import com.example.core.Constants
 import com.example.core.exception.ExceptionCatcher
 import com.example.trainingapp.data.repository.AuthRepositoryImpl
 import com.example.auth.AuthorizationPresenter
-import com.example.core.repository.AuthRepository
+import com.example.auth.repository.AuthRepository
 import com.example.splash.ui.SplashPresenter
 import com.example.trainings.TrainingsPresenter
 import com.google.firebase.auth.FirebaseAuth

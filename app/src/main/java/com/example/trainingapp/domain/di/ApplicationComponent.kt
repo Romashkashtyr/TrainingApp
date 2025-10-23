@@ -4,11 +4,8 @@ import android.content.Context
 import com.example.auth.ui.AuthorizationActivity
 import com.example.splash.ui.SplashActivity
 import com.example.trainingapp.domain.di.modules.AppModule
-import com.example.trainingapp.domain.di.modules.AuthModule
-import com.example.trainingapp.domain.di.modules.ExceptionModule
-import com.example.trainingapp.domain.di.modules.FitnessResultModule
-import com.example.trainingapp.domain.di.modules.NetworkModule
-import com.example.trainingapp.domain.di.modules.TrainingModule
+import com.example.auth.domain.di.AuthBindModule
+import com.example.core.di.ExceptionModule
 import com.example.trainings.ui.TrainingsListActivity
 import dagger.BindsInstance
 import dagger.Component
@@ -22,7 +19,7 @@ import javax.inject.Singleton
     FitnessResultModule::class,
     ExceptionModule::class,
     AppModule::class,
-    AuthModule::class
+    AuthBindModule::class
     ]
 )
 interface ApplicationComponent {

@@ -1,4 +1,4 @@
-package com.example.trainingapp.data.api
+package com.example.core
 
 import okhttp3.Authenticator
 import okhttp3.Interceptor

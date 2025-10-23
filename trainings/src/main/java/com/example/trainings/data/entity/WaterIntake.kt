@@ -1,4 +1,4 @@
-package com.example.trainingapp.domain.entity
+package com.example.trainings.data.entity
 
 @JvmInline
 value class WaterIntake(val amount: Int)

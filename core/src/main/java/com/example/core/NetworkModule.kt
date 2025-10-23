@@ -1,7 +1,6 @@
-package com.example.trainingapp.domain.di.modules
+package com.example.core
 
-import com.example.trainingapp.data.api.ApiSettings
-import com.example.trainingapp.data.api.Interceptor
+
 import com.example.trainingapp.data.api.NetworkService
 import com.google.firebase.BuildConfig
 import dagger.Module

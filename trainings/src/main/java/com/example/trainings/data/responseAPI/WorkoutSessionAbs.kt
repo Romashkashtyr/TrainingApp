@@ -1,6 +1,6 @@
 package com.example.trainings.data.responseAPI
 
-import com.example.trainingapp.data.api.response.WorkoutSessionResult
+import com.example.trainings.data.response.WorkoutSessionResult
 
 interface WorkoutSessionAbs {
     var count: Int

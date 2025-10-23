@@ -1,6 +1,6 @@
 package com.example.trainings.data.response
 
-import com.example.trainingapp.data.api.response.responseAPI.VideoResultTrainingAbs
+import com.example.trainings.data.responseAPI.VideoResultTrainingAbs
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 

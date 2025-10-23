@@ -8,13 +8,9 @@ import com.example.auth.R
 import com.example.auth.data.AuthMode
 import com.example.auth.databinding.ActivitySignInBinding
 import com.example.auth.domain.di.PresenterFactory
-import com.example.trainingapp.data.AuthMode
-import com.example.trainingapp.data.repository.AuthRepositoryImpl
-import com.example.trainingapp.domain.di.modules.PresenterFactory
 import com.example.trainingapp.presentation.TrainingApp
 import com.example.core.base.BaseActivity
-import com.example.core.repository.AuthRepositoryImpl
-import com.example.main.MainActivity
+import com.example.auth.data.AuthRepositoryImpl
 import com.example.main.ui.MainActivity
 import com.example.trainingapp.presentation.trainings.TrainingsListActivity
 import moxy.ktx.moxyPresenter

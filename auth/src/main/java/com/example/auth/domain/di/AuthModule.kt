@@ -3,7 +3,7 @@ package com.example.auth.domain.di
 import android.content.SharedPreferences
 import com.example.auth.ui.AuthorizationPresenter
 import com.example.core.exception.ExceptionCatcher
-import com.example.core.repository.AuthRepositoryImpl
+import com.example.auth.data.AuthRepositoryImpl
 import com.google.android.datatransport.runtime.dagger.Module
 import com.google.android.datatransport.runtime.dagger.Provides
 import com.google.firebase.auth.FirebaseAuth

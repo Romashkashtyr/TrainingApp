@@ -3,7 +3,7 @@ package com.example.auth.ui
 
 import com.example.auth.R
 import com.example.core.base.BasePresenter
-import com.example.core.repository.AuthRepository
+import com.example.auth.repository.AuthRepository
 import com.example.core.structures.Status
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

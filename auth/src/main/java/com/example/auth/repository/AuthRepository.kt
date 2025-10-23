@@ -1,4 +1,4 @@
-package com.example.core.repository
+package com.example.auth.repository
 
 import com.example.core.structures.Status
 

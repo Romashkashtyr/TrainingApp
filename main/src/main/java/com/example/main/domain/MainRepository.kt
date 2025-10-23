@@ -1,4 +1,6 @@
-package com.example.trainingapp.domain.repository
+package com.example.main.domain
+
+import com.example.core.structures.Status
 
 interface MainRepository {
 

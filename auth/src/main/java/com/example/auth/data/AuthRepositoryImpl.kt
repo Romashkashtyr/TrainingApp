@@ -1,7 +1,8 @@
-package com.example.core.repository
+package com.example.auth.data
 
 import android.content.SharedPreferences
 import android.util.Log
+import com.example.auth.repository.AuthRepository
 import com.example.core.Constants.IS_LOGGED_IN
 import com.example.core.exception.ExceptionCatcher
 import com.example.core.structures.Status
