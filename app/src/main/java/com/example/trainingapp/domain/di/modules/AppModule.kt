@@ -2,12 +2,12 @@ package com.example.trainingapp.domain.di.modules
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.example.auth.data.AuthRepositoryImpl
+import com.example.auth.ui.AuthorizationPresenter
 import com.example.core.Constants
 import com.example.core.exception.ExceptionCatcher
-import com.example.auth.AuthorizationPresenter
-import com.example.auth.repository.AuthRepository
 import com.example.splash.ui.SplashPresenter
-import com.example.trainings.TrainingsPresenter
+import com.example.trainings.ui.TrainingsPresenter
 import com.google.firebase.auth.FirebaseAuth
 import dagger.Module
 import dagger.Provides
@@ -44,17 +44,17 @@ class AppModule {
 
 @Singleton
 class PresenterFactory @Inject constructor(
-    private val authPresenterProvider: Provider<com.example.auth.AuthorizationPresenter>
+    private val authPresenterProvider: Provider<AuthorizationPresenter>
 ) {
-    fun createAuthorizationPresenter(): com.example.auth.AuthorizationPresenter = authPresenterProvider.get()
+    fun createAuthorizationPresenter(): AuthorizationPresenter = authPresenterProvider.get()
 }
 
 @Singleton
 class SplashPresenterFactory @Inject constructor(
     private val authRepository: AuthRepositoryImpl
 ) {
-    fun createAuthorizationPresenter(): com.example.auth.AuthorizationPresenter {
-        return com.example.auth.AuthorizationPresenter(authRepository)
+    fun createAuthorizationPresenter(): AuthorizationPresenter {
+        return AuthorizationPresenter(authRepository)
     }
 
     fun createSplashPresenter(): SplashPresenter {
@@ -64,7 +64,7 @@ class SplashPresenterFactory @Inject constructor(
 
 @Singleton
 class TrainingFactory @Inject constructor(
-    private val trainingPresenterProvider: Provider<com.example.trainings.TrainingsPresenter>
+    private val trainingPresenterProvider: Provider<TrainingsPresenter>
 ) {
-    fun createTrainingPresenter(): com.example.trainings.TrainingsPresenter = trainingPresenterProvider.get()
+    fun createTrainingPresenter(): TrainingsPresenter = trainingPresenterProvider.get()
 }

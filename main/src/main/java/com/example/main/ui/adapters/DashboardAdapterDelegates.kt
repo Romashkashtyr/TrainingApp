@@ -2,13 +2,13 @@ package com.example.main.ui.adapters
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.trainingapp.domain.DashboardItem
-import com.example.trainingapp.domain.events.OnAddWaterClicked
-import com.example.trainingapp.domain.events.OnTrainingClick
+import com.example.core.structures.DashboardItem
 import com.example.main.ui.delegates.StepsItemDelegate
 import com.example.main.ui.delegates.TrainingListItemDelegate
 import com.example.main.ui.delegates.WaterItemDelegate
 import com.example.main.ui.delegates.WorkoutItemDelegate
+import com.example.trainings.domain.events.OnAddWaterClicked
+import com.example.trainings.domain.events.OnTrainingClick
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegatesManager
 
 class DashboardAdapterDelegates(

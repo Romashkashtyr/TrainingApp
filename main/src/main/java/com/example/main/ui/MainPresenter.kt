@@ -1,10 +1,10 @@
 package com.example.main.ui
 
 
-import com.example.trainingapp.data.repository.MainRepositoryImpl
-import com.example.trainingapp.domain.Status
 import com.example.core.base.BasePresenter
+import com.example.core.structures.Status
 import com.example.main.R
+import com.example.main.data.MainRepositoryImpl
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

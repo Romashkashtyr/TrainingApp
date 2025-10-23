@@ -56,6 +56,8 @@ dependencies {
     implementation(libs.firebase.storage)
     implementation(libs.firebase.messaging)
 
+    implementation(libs.adapterdelegates4.kotlin.dsl.viewbinding)
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

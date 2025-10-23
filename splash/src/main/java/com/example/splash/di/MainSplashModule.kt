@@ -1,7 +1,10 @@
 package com.example.splash.di
 
+import com.example.auth.data.AuthRepositoryImpl
+import com.example.auth.ui.AuthorizationPresenter
+
+
 import com.example.auth.repository.AuthRepository
-import com.example.auth.repository.AuthRepositoryImpl
 import com.example.splash.ui.SplashPresenter
 import dagger.Module
 import dagger.Provides
@@ -14,7 +17,7 @@ class MainSplashModule {
 
     @Provides
     @Singleton
-    fun provideSplashPresenterFactory(authRepository: com.example.auth.repository.AuthRepository): SplashPresenter {
+    fun provideSplashPresenterFactory(authRepository: AuthRepository): SplashPresenter {
         return SplashPresenter(authRepository)
     }
 
@@ -22,7 +25,7 @@ class MainSplashModule {
 
 @Singleton
 class PresenterFactory @Inject constructor(
-    private val authRepository: com.example.auth.repository.AuthRepositoryImpl
+    private val authRepository: AuthRepositoryImpl
 ) {
     fun createAuthorizationPresenter(): AuthorizationPresenter {
         return AuthorizationPresenter(authRepository)

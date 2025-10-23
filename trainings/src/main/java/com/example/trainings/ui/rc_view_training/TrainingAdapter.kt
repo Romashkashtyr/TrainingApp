@@ -4,9 +4,9 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.trainingapp.R
-import com.example.trainingapp.databinding.ItemTrainingBinding
-import com.example.trainingapp.domain.training.Training
+import com.example.trainings.R
+import com.example.trainings.Training
+import com.example.trainings.databinding.ItemTrainingBinding
 
 class TrainingAdapter(private val trainingsList: List<Training>) :
     RecyclerView.Adapter<TrainingAdapter.TrainingViewHolder>() {

@@ -1,7 +1,7 @@
 package com.example.trainings.ui
 
-import com.example.trainingapp.domain.training.Training
 import com.example.core.base.BaseView
+import com.example.trainings.Training
 import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType
 

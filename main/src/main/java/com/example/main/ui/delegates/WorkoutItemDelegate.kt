@@ -3,8 +3,8 @@ package com.example.main.ui.delegates
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.trainingapp.databinding.ItemWorkoutBinding
-import com.example.trainingapp.domain.DashboardItem
+import com.example.core.structures.DashboardItem
+import com.example.main.databinding.ItemWorkoutBinding
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 
 class WorkoutItemDelegate() :AdapterDelegate<List<DashboardItem>>() {

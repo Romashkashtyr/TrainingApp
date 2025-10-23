@@ -3,11 +3,11 @@ package com.example.main.ui.delegates
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.trainingapp.databinding.ItemTrainingListBinding
-import com.example.trainingapp.domain.DashboardItem
+import com.example.core.structures.DashboardItem
+import com.example.main.R
+import com.example.main.databinding.ItemTrainingListBinding
+import com.example.trainings.domain.events.OnTrainingClick
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
-import com.example.trainingapp.R
-import com.example.trainingapp.domain.events.OnTrainingClick
 
 class TrainingListItemDelegate(
     private val onTrainingClick: OnTrainingClick

@@ -4,8 +4,8 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.trainingapp.databinding.ItemStepsBinding
-import com.example.trainingapp.domain.DashboardItem
+import com.example.core.structures.DashboardItem
+import com.example.main.databinding.ItemStepsBinding
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 
 class StepsItemDelegate : AdapterDelegate<List<DashboardItem>>(){

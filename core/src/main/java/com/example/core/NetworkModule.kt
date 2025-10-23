@@ -1,7 +1,8 @@
 package com.example.core
 
 
-import com.example.trainingapp.data.api.NetworkService
+
+import com.example.trainings.data.response.NetworkService
 import com.google.firebase.BuildConfig
 import dagger.Module
 import dagger.Provides

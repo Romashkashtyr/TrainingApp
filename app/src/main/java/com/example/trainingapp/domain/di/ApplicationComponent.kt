@@ -14,9 +14,6 @@ import javax.inject.Singleton
 @Singleton
 @Component(
     modules = [
-    TrainingModule::class,
-    NetworkModule::class,
-    FitnessResultModule::class,
     ExceptionModule::class,
     AppModule::class,
     AuthBindModule::class
