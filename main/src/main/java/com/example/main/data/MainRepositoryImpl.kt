@@ -1,4 +1,4 @@
-package com.example.trainingapp.data.repository
+package com.example.main.data
 
 import com.example.core.Constants
 import com.example.core.exception.FirebaseExceptionCatcher
