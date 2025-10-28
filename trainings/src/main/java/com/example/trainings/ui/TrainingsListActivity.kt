@@ -5,9 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.core.base.BaseActivity
-import com.example.core.navigation.RouterProvider
-import com.example.core.navigation.Screens
-import com.example.main.ui.MainActivity
+import com.example.core.navigation.RouterProvider.router
+import com.example.core.navigation.Screen
 import com.example.trainingapp.TrainingApp
 import com.example.trainings.Training
 import com.example.trainings.databinding.ActivityTrainingsListBinding
@@ -39,7 +38,8 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
         presenter.requestTrainingList()
 
         binding.arrowBack.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
+           // startActivity(Intent(this, MainActivity::class.java))
+            router?.navigateTo(Screen.Main(this))
             finish()
         }
     }

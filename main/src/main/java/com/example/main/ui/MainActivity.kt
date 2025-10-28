@@ -68,6 +68,6 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
     }
 
     companion object {
-        fun getInstance(fromContext: Context) = Intent(fromContext, MainActivity::class.java)
+        fun getIntent(fromContext: Context) = Intent(fromContext, MainActivity::class.java)
     }
 }

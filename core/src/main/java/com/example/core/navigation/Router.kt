@@ -5,5 +5,5 @@ import android.content.Context
 interface Router {
 
     fun navigateToAuth(fromContext: Context)
-    fun navigateTo(screens: Screens)
+    fun navigateTo(screen: Screen)
 }
