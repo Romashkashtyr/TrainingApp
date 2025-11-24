@@ -2,8 +2,6 @@ package com.example.splash.di
 
 import com.example.auth.data.AuthRepositoryImpl
 import com.example.auth.ui.AuthorizationPresenter
-
-
 import com.example.auth.repository.AuthRepository
 import com.example.splash.ui.SplashPresenter
 import dagger.Module

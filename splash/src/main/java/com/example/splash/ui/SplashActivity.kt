@@ -3,7 +3,10 @@ package com.example.splash.ui
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import com.example.auth.ui.AuthorizationActivity
 import com.example.core.navigation.RouterHolder
+import com.example.core.navigation.RouterHolder.router
+import com.example.core.navigation.Screen
 import com.example.splash.databinding.ActivitySplashBinding
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
@@ -38,12 +41,12 @@ class SplashActivity: MvpAppCompatActivity(), SplashView {
     }
 
     override fun navigateToAuthorization() {
-        RouterHolder.router?.navigateToAuth(this)
+        router?.navigateTo(Screen.AuthorizationNav(this))
         finish()
     }
 
     override fun showError(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
-        navigateToAuthorization()
+        router?.navigateTo(Screen.AuthorizationNav(applicationContext))
     }
 }

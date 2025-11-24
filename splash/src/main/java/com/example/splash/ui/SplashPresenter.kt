@@ -1,11 +1,11 @@
 package com.example.splash.ui
 
-import com.example.auth.data.AuthRepositoryImpl
+import com.example.auth.repository.AuthRepository
 import moxy.MvpPresenter
 import javax.inject.Inject
 
 class SplashPresenter @Inject constructor(
-    private val authRepository: AuthRepositoryImpl
+    private val authRepository: AuthRepository
 ): MvpPresenter<SplashView>() {
 
 
