@@ -2,7 +2,6 @@ package com.example.core.base
 
 import android.widget.Toast
 import moxy.MvpAppCompatActivity
-import org.checkerframework.common.returnsreceiver.qual.This
 
 open class BaseActivity : MvpAppCompatActivity(), BaseView {
 
