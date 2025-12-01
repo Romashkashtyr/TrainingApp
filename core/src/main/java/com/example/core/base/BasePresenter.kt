@@ -1,7 +1,7 @@
 package com.example.core.base
 
 import android.util.Log
-import com.example.core.R
+import com.example.trainingapp.R
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -10,6 +10,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import moxy.InjectViewState
 import moxy.MvpPresenter
+import moxy.MvpView
 import kotlin.coroutines.CoroutineContext
 
 @InjectViewState

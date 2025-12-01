@@ -6,13 +6,13 @@ import android.os.Bundle
 import android.view.View
 import com.example.auth.R
 import com.example.auth.data.AuthMode
-import com.example.auth.data.AuthRepositoryImpl
 import com.example.auth.databinding.ActivitySignInBinding
 import com.example.auth.domain.di.PresenterFactory
+import com.example.trainingapp.presentation.TrainingApp
 import com.example.core.base.BaseActivity
-import com.example.core.navigation.RouterHolder.router
-import com.example.core.navigation.Screen
-import com.example.trainingapp.TrainingApp
+import com.example.auth.data.AuthRepositoryImpl
+import com.example.main.ui.MainActivity
+import com.example.trainingapp.presentation.trainings.TrainingsListActivity
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 
@@ -36,6 +36,7 @@ class AuthorizationActivity : BaseActivity(), AuthorizationView {
         get() = binding.confirmPasswordLayout.editText?.text.toString()
 
 
+
     init {
         TrainingApp.component.inject(this)
     }
@@ -46,8 +47,7 @@ class AuthorizationActivity : BaseActivity(), AuthorizationView {
         setContentView(binding.root)
 
         if(authRepository.isUserLoggedIn()) {
-            //startActivity(Intent(MainActivity.getInstance(this)))
-            router?.navigateTo(Screen.Main(this))
+            startActivity(Intent(MainActivity.getInstance(this)))
             finish()
             return
         }
@@ -86,8 +86,7 @@ class AuthorizationActivity : BaseActivity(), AuthorizationView {
     }
 
     override fun navigateToHome() {
-        //startActivity(Intent(TrainingsListActivity.getIntent(this)))
-        router?.navigateTo(Screen.TrainingNav(this))
+        startActivity(Intent(TrainingsListActivity.getIntent(this)))
         finish()
     }
 
@@ -119,5 +118,9 @@ class AuthorizationActivity : BaseActivity(), AuthorizationView {
     companion object {
         fun getIntent(fromContext: Context) = Intent(fromContext, AuthorizationActivity::class.java)
     }
+
+
+
+
 
 }
