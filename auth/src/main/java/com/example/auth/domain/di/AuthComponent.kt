@@ -1,10 +1,24 @@
 package com.example.auth.domain.di
 
 import android.content.Context
+import com.example.core.di.CoreComponent
+import com.example.core.repository.AuthRepository
 import com.google.android.datatransport.runtime.dagger.Component
+import javax.inject.Singleton
 
-@Component(modules = [AuthModule::class])
-abstract class AuthComponent {
+@Singleton
+@Component(modules = [AuthModule::class], dependencies = [CoreComponent::class])
+interface  AuthComponent {
+
+    fun authRepository(): AuthRepository
+
+    @Component.Builder
+    interface Builder {
+        fun coreComponent(coreComponent: CoreComponent): Builder
+
+        fun build(): AuthComponent
+
+    }
 
     companion object {
 

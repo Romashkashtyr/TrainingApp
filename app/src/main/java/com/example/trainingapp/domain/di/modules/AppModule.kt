@@ -6,9 +6,11 @@ import com.example.auth.data.AuthRepositoryImpl
 import com.example.auth.ui.AuthorizationPresenter
 import com.example.core.Constants
 import com.example.core.exception.ExceptionCatcher
+import com.example.core.repository.AuthRepository
 import com.example.splash.ui.SplashPresenter
 import com.example.trainings.ui.TrainingsPresenter
 import com.google.firebase.auth.FirebaseAuth
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import javax.inject.Inject
@@ -18,6 +20,7 @@ import javax.inject.Singleton
 
 @Module
 class AppModule {
+
 
     @Singleton
     @Provides
@@ -37,7 +40,7 @@ class AppModule {
         firebaseAuth: FirebaseAuth,
         catcher: ExceptionCatcher,
         sharedPreferences: SharedPreferences
-    ): AuthRepositoryImpl {
+    ): AuthRepository {
         return AuthRepositoryImpl(firebaseAuth,catcher,sharedPreferences)
     }
 }

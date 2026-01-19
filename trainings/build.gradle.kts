@@ -38,7 +38,6 @@ android {
 
 dependencies {
 
-    implementation(project(":auth"))
     implementation(project(":core"))
 
     implementation(libs.androidx.core.ktx)

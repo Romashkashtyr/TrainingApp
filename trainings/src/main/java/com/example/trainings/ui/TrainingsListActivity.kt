@@ -38,7 +38,6 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
         presenter.requestTrainingList()
 
         binding.arrowBack.setOnClickListener {
-           // startActivity(Intent(this, MainActivity::class.java))
             router?.navigateTo(Screen.Main(this))
             finish()
         }

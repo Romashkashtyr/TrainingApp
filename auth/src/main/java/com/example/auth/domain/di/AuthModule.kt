@@ -13,7 +13,7 @@ import javax.inject.Singleton
 
 
 @Module
-class AuthModule {
+abstract class AuthModule {
 
 
     @Provides

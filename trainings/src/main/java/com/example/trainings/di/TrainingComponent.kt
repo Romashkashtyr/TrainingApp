@@ -2,11 +2,14 @@ package com.example.trainings.di
 
 import android.content.Context
 import com.google.android.datatransport.runtime.dagger.Component
+import javax.inject.Singleton
 
+@Singleton
 @Component(modules = [FitnessResultModule::class, TrainingModule::class, TrainingsModule::class])
 abstract class TrainingComponent {
 
     companion object {
+
         private var trainingComponent: TrainingComponent? = null
 
         fun init(context: Context): TrainingComponent {

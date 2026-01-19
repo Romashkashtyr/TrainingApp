@@ -45,7 +45,7 @@ class TrainingApp : Application(), Router {
         when(screen) {
             is Screen.Main -> screen.fromContext.startActivity(MainActivity.getIntent(screen.fromContext))
             is Screen.TrainingNav -> screen.fromContext.startActivity(TrainingsListActivity.getIntent(screen.fromContext))
-            is Screen.AuthorizationNav -> screen.fromContext.startActivity(AuthorizationActivity.getIntent(screen.fromContext))
+            is Screen.Auth -> screen.fromContext.startActivity(AuthorizationActivity.getIntent(screen.fromContext))
         }
     }
 

@@ -5,6 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.core.base.BaseActivity
+import com.example.core.navigation.RouterHolder
+import com.example.core.navigation.Screen
 import com.example.core.structures.DashboardItem
 import com.example.main.databinding.ActivityMainBinding
 import com.example.main.ui.adapters.DashboardAdapterDelegates
@@ -52,8 +54,7 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
     }
 
     override fun onTrainingClick() {
-        val intent = Intent(this, TrainingsListActivity::class.java)
-        startActivity(intent)
+        RouterHolder.router?.navigateTo(Screen.TrainingNav(this))
     }
 
     override fun initListData(waterAmount: Int) {

@@ -6,6 +6,8 @@ import com.example.splash.ui.SplashActivity
 import com.example.trainingapp.domain.di.modules.AppModule
 import com.example.auth.domain.di.AuthBindModule
 import com.example.core.di.ExceptionModule
+import com.example.splash.di.SplashComponent
+import com.example.trainingapp.domain.di.modules.SubcomponentsModule
 import com.example.trainings.ui.TrainingsListActivity
 import dagger.BindsInstance
 import dagger.Component
@@ -16,14 +18,18 @@ import javax.inject.Singleton
     modules = [
     ExceptionModule::class,
     AppModule::class,
-    AuthBindModule::class
+    AuthBindModule::class,
+    SubcomponentsModule::class
     ]
 )
 interface ApplicationComponent {
 
+
+    fun splashComponentFactory(): SplashComponent.SplashFactorySub
+
     fun inject(activity: TrainingsListActivity)
     fun inject(activity: AuthorizationActivity)
-    fun inject(activity: SplashActivity)
+   // fun inject(activity: SplashActivity)
 
 
     @Component.Builder
@@ -31,9 +37,6 @@ interface ApplicationComponent {
         @BindsInstance fun context(context: Context): Builder
         fun build(): ApplicationComponent
     }
-
-
-
 
 
 }
