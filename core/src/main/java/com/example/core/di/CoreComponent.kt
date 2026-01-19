@@ -5,7 +5,7 @@ import dagger.BindsInstance
 import dagger.Component
 
 @Component(modules = [CoreModule::class])
-class CoreComponent {
+interface CoreComponent {
 
     @Component.Builder
     interface Builder {

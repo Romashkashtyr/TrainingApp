@@ -1,6 +1,6 @@
 package com.example.splash.ui
 
-import com.example.auth.repository.AuthRepository
+import com.example.core.repository.AuthRepository
 import moxy.MvpPresenter
 import javax.inject.Inject
 

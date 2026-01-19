@@ -54,7 +54,7 @@ class PresenterFactory @Inject constructor(
 
 @Singleton
 class SplashPresenterFactory @Inject constructor(
-    private val authRepository: AuthRepositoryImpl
+    private val authRepository: AuthRepository
 ) {
     fun createAuthorizationPresenter(): AuthorizationPresenter {
         return AuthorizationPresenter(authRepository)
