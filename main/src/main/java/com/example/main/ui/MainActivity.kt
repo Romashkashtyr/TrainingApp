@@ -13,7 +13,6 @@ import com.example.main.ui.adapters.DashboardAdapterDelegates
 import com.example.trainings.domain.events.OnAddWaterClicked
 import com.example.trainings.domain.events.OnTrainingClick
 import com.example.trainings.domain.events.OnViewTrainingsClicked
-import com.example.trainings.ui.TrainingsListActivity
 import moxy.ktx.moxyPresenter
 
 class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,

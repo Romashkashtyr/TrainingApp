@@ -15,7 +15,6 @@ import javax.inject.Singleton
 @Module
 abstract class AuthModule {
 
-
     @Provides
     @Singleton
     fun provideAuthRepository(

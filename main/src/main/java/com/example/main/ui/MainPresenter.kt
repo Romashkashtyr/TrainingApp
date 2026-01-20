@@ -2,22 +2,23 @@ package com.example.main.ui
 
 
 import com.example.core.base.BasePresenter
+import com.example.core.repository.MainRepository
 import com.example.core.structures.Status
 import com.example.main.R
-import com.example.main.data.MainRepositoryImpl
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import moxy.InjectViewState
 
 @InjectViewState
-class MainPresenter: BasePresenter<MainView>() {
-    private val repository = MainRepositoryImpl()
+class MainPresenter(
+    private val mainRepository: MainRepository
+): BasePresenter<MainView>() {
 
 
     fun requestGetScreenData() {
         launch {
-            val waterAmount = repository.getWaterAmount()
+            val waterAmount = mainRepository.getWaterAmount()
             withContext(Dispatchers.Main.immediate) {
                 when (waterAmount) {
                     is Status.Failure -> {
@@ -35,7 +36,7 @@ class MainPresenter: BasePresenter<MainView>() {
     }
 
     fun requestAddWater(amount: Int) {
-        launch { repository.addWater(amount) }
+        launch { mainRepository.addWater(amount) }
     }
 
 

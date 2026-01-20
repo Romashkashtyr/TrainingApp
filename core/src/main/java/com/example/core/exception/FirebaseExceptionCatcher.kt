@@ -6,8 +6,9 @@ import com.google.firebase.FirebaseNetworkException
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException
+import javax.inject.Inject
 
-class FirebaseExceptionCatcher {
+class FirebaseExceptionCatcher @Inject constructor() {
     suspend fun <T> launchWithCatch(job: suspend () -> Status<T>): Status<T> {
         return try {
             job()

@@ -19,5 +19,4 @@ class ExceptionModule {
         return FirebaseExceptionCatcher()
     }
 
-
 }
