@@ -36,37 +36,42 @@ open class AuthorizationPresenter @Inject constructor(
                 }
             }
         }
+    }
 
 
-        fun signUp(email: String, password: String, confirmPassword: String) {
+    fun signUp(email: String, password: String, confirmPassword: String) {
 
-            viewState.showViewProgress()
+        viewState.showViewProgress()
 
-            launch {
-                when (signUpUseCase(email, password, confirmPassword)) {
-                    is Status.Failure<*> -> {
-                        viewState.showToast(R.string.sign_in_failure)
-                    }
+        launch {
+            when (signUpUseCase(email, password, confirmPassword)) {
+                is Status.Failure<*> -> {
+                    viewState.showToast(R.string.sign_in_failure)
+                }
 
-                    is Status.NoNetwork<*> -> {
-                        viewState.showToast(R.string.network_failure)
-                    }
+                is Status.NoNetwork<*> -> {
+                    viewState.showToast(R.string.network_failure)
+                }
 
-                    is Status.Success<*> -> {
-                        viewState.showToast(R.string.sign_in_success)
-                        viewState.navigateToHome()
-                    }
+                is Status.Success<*> -> {
+                    viewState.showToast(R.string.sign_in_success)
+                    viewState.navigateToHome()
                 }
             }
         }
     }
-
 
     fun requestChangeMode() {
         viewState.changeAuthMode()
     }
 
 }
+
+
+
+
+
+
 
 
 

@@ -46,7 +46,6 @@ class AuthorizationActivity : BaseActivity(), AuthorizationView {
         setContentView(binding.root)
 
         if(authRepository.isUserLoggedIn()) {
-            //startActivity(Intent(MainActivity.getInstance(this)))
             router?.navigateTo(Screen.Main(this))
             finish()
             return

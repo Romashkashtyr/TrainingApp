@@ -6,7 +6,10 @@ import com.example.auth.data.AuthRepositoryImpl
 import com.example.auth.ui.AuthorizationPresenter
 import com.example.core.Constants
 import com.example.core.exception.ExceptionCatcher
+import com.example.core.exception.FirebaseExceptionCatcher
 import com.example.core.repository.AuthRepository
+import com.example.main.data.MainRepositoryImpl
+import com.example.main.domain.MainRepository
 import com.example.splash.ui.SplashPresenter
 import com.example.trainings.ui.TrainingsPresenter
 import com.google.firebase.auth.FirebaseAuth
@@ -43,6 +46,14 @@ class AppModule {
     ): AuthRepository {
         return AuthRepositoryImpl(firebaseAuth,catcher,sharedPreferences)
     }
+
+    @Provides
+    @Singleton
+    fun provideMainRepository(
+        catcher: FirebaseExceptionCatcher,
+    ): MainRepository {
+        return MainRepositoryImpl(catcher)
+    }
 }
 
 @Singleton
@@ -56,9 +67,9 @@ class PresenterFactory @Inject constructor(
 class SplashPresenterFactory @Inject constructor(
     private val authRepository: AuthRepository
 ) {
-    fun createAuthorizationPresenter(): AuthorizationPresenter {
-        return AuthorizationPresenter(authRepository)
-    }
+//    fun createAuthorizationPresenter(): AuthorizationPresenter {
+//        return AuthorizationPresenter(authRepository)
+//    }
 
     fun createSplashPresenter(): SplashPresenter {
         return SplashPresenter(authRepository)

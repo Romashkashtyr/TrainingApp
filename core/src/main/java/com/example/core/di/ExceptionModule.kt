@@ -1,6 +1,7 @@
 package com.example.core.di
 
 import com.example.core.exception.ExceptionCatcher
+import com.example.core.exception.FirebaseExceptionCatcher
 import dagger.Module
 import dagger.Provides
 
@@ -12,4 +13,11 @@ class ExceptionModule {
     fun provideExceptionCatcher(): ExceptionCatcher {
         return ExceptionCatcher()
     }
+
+    @Provides
+    fun provideFirebaseCatcher(): FirebaseExceptionCatcher {
+        return FirebaseExceptionCatcher()
+    }
+
+
 }

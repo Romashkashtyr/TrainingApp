@@ -6,14 +6,17 @@ import com.example.core.structures.Status
 import com.example.main.domain.MainRepository
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.tasks.await
+import javax.inject.Inject
 
-class MainRepositoryImpl : MainRepository {
+class MainRepositoryImpl @Inject constructor(
+    private val catcher: FirebaseExceptionCatcher
+) : MainRepository {
 
     private val databaseReference = FirebaseDatabase
         .getInstance(Constants.DATABASE)
         .reference
     private val databaseWater = databaseReference.child(Constants.DATABASE_REFERENCE_PATH)
-    private val catcher = FirebaseExceptionCatcher()
+    //private val catcher = FirebaseExceptionCatcher()
 
 
     override suspend fun getWaterAmount(): Status<Int> {
