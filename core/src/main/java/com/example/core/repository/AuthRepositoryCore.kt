@@ -3,7 +3,7 @@ package com.example.core.repository
 import com.example.core.structures.Status
 
 
-interface AuthRepository {
+interface AuthRepositoryCore {
 
 
     suspend fun signIn(email: String, password: String): Status<Boolean>

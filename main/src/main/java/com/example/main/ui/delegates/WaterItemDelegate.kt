@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.core.structures.DashboardItem
 import com.example.main.R
 import com.example.main.databinding.ItemWaterBinding
-import com.example.trainings.domain.events.OnAddWaterClicked
+import com.example.main.ui.OnAddWaterClicked
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 
 class WaterItemDelegate(

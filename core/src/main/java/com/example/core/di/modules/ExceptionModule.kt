@@ -1,4 +1,4 @@
-package com.example.core.di
+package com.example.core.di.modules
 
 import com.example.core.exception.ExceptionCatcher
 import com.example.core.exception.FirebaseExceptionCatcher

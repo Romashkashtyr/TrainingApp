@@ -1,7 +1,6 @@
-package com.example.core.domain.usecase
+package com.example.auth.domain.usecase
 
-import com.example.core.R
-import com.example.core.repository.AuthRepository
+import com.example.auth.repository.AuthRepository
 import com.example.core.structures.Status
 import javax.inject.Inject
 

@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.core.structures.DashboardItem
 import com.example.main.R
 import com.example.main.databinding.ItemTrainingListBinding
-import com.example.trainings.domain.events.OnTrainingClick
+import com.example.main.ui.OnTrainingClick
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 
 class TrainingListItemDelegate(

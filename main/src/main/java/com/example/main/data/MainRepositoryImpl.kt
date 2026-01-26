@@ -2,8 +2,8 @@ package com.example.main.data
 
 import com.example.core.Constants
 import com.example.core.exception.FirebaseExceptionCatcher
-import com.example.core.repository.MainRepository
 import com.example.core.structures.Status
+import com.example.main.domain.MainRepository
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
@@ -16,7 +16,6 @@ class MainRepositoryImpl @Inject constructor(
         .getInstance(Constants.DATABASE)
         .reference
     private val databaseWater = databaseReference.child(Constants.DATABASE_REFERENCE_PATH)
-    //private val catcher = FirebaseExceptionCatcher()
 
 
     override suspend fun getWaterAmount(): Status<Int> {
@@ -28,7 +27,6 @@ class MainRepositoryImpl @Inject constructor(
             } else {
                 Status.Success(0)
             }
-
         }
     }
 
@@ -40,7 +38,6 @@ class MainRepositoryImpl @Inject constructor(
             databaseWater.setValue(newAmount.toString()).await()
             Status.Success(Unit)
         }
-
     }
 
 }

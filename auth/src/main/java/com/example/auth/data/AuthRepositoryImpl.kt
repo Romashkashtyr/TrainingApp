@@ -2,9 +2,9 @@ package com.example.auth.data
 
 import android.content.SharedPreferences
 import android.util.Log
+import com.example.auth.repository.AuthRepository
 import com.example.core.Constants.IS_LOGGED_IN
 import com.example.core.exception.ExceptionCatcher
-import com.example.core.repository.AuthRepository
 import com.example.core.structures.Status
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.tasks.await
@@ -30,7 +30,6 @@ class AuthRepositoryImpl @Inject constructor(
                 Log.w("AuthRepository", "SignIn failed: user is null")
                 return@launchWithCatch Status.Failure("User not found or invalid credentials")
             }
-
         }
     }
 
@@ -52,7 +51,6 @@ class AuthRepositoryImpl @Inject constructor(
               return@launchWithCatch  Status.Failure("Failed to create user")
             }
         }
-
     }
 
     override fun signOut() {

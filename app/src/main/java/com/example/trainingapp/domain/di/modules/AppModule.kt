@@ -3,10 +3,11 @@ package com.example.trainingapp.domain.di.modules
 import android.content.Context
 import android.content.SharedPreferences
 import com.example.auth.data.AuthRepositoryImpl
+import com.example.auth.repository.AuthRepository
 import com.example.auth.ui.AuthorizationPresenter
 import com.example.core.Constants
 import com.example.core.exception.ExceptionCatcher
-import com.example.core.repository.AuthRepository
+import com.example.core.repository.AuthRepositoryCore
 import com.example.splash.ui.SplashPresenter
 import com.example.trainings.ui.TrainingsPresenter
 import com.google.firebase.auth.FirebaseAuth
@@ -55,14 +56,11 @@ class PresenterFactory @Inject constructor(
 
 @Singleton
 class SplashPresenterFactory @Inject constructor(
-    private val authRepository: AuthRepository
+    private val authRepositoryCore: AuthRepositoryCore
 ) {
-//    fun createAuthorizationPresenter(): AuthorizationPresenter {
-//        return AuthorizationPresenter(authRepository)
-//    }
 
     fun createSplashPresenter(): SplashPresenter {
-        return SplashPresenter(authRepository)
+        return SplashPresenter(authRepositoryCore)
     }
 }
 

@@ -4,6 +4,8 @@ import android.content.SharedPreferences
 import com.example.auth.ui.AuthorizationPresenter
 import com.example.core.exception.ExceptionCatcher
 import com.example.auth.data.AuthRepositoryImpl
+import com.example.auth.repository.AuthRepository
+import com.google.android.datatransport.runtime.dagger.Binds
 import com.google.android.datatransport.runtime.dagger.Module
 import com.google.android.datatransport.runtime.dagger.Provides
 import com.google.firebase.auth.FirebaseAuth
@@ -13,17 +15,11 @@ import javax.inject.Singleton
 
 
 @Module
-abstract class AuthModule {
+interface AuthModule {
 
-    @Provides
+    @Binds
     @Singleton
-    fun provideAuthRepository(
-        firebaseAuth: FirebaseAuth,
-        catcher: ExceptionCatcher,
-        sharedPreferences: SharedPreferences
-    ): AuthRepositoryImpl {
-        return AuthRepositoryImpl(firebaseAuth,catcher,sharedPreferences)
-    }
+    fun bindsAuthRepository(impl: AuthRepositoryImpl): AuthRepository
 }
 
 @Singleton

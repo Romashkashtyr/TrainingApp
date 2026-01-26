@@ -3,13 +3,14 @@ package com.example.trainingapp
 import android.app.Application
 import com.example.auth.domain.di.AuthComponent
 import com.example.auth.ui.AuthorizationActivity
+import com.example.core.di.CoreComponent
 import com.example.core.navigation.Router
 import com.example.core.navigation.RouterHolder
 import com.example.core.navigation.Screen
+import com.example.main.di.MainComponent
 import com.example.main.ui.MainActivity
 import com.example.splash.di.SplashComponent
 import com.example.trainingapp.domain.di.ApplicationComponent
-import com.example.trainingapp.domain.di.DaggerApplicationComponent
 import com.example.trainings.di.TrainingComponent
 import com.example.trainings.ui.TrainingsListActivity
 import com.google.firebase.FirebaseApp
@@ -20,14 +21,24 @@ class TrainingApp : Application(), Router {
     override fun onCreate() {
         super.onCreate()
         instance = this
+        initDi()
         FirebaseApp.initializeApp(this)
         component = DaggerApplicationComponent.builder()
             .context(this)
             .build()
         RouterHolder.router = this
-        SplashComponent.init(applicationContext)
-        AuthComponent.init(applicationContext)
-        TrainingComponent.init(applicationContext)
+//        SplashComponent.init(applicationContext)
+//        AuthComponent.init(applicationContext)
+//        TrainingComponent.init(applicationContext)
+    }
+
+
+    private fun initDi() {
+        val coreComponent = CoreComponent.init(applicationContext)
+        MainComponent.init(coreComponent)
+        SplashComponent.init(coreComponent)
+        AuthComponent.init(coreComponent)
+        TrainingComponent.init(coreComponent)
     }
 
     companion object {
@@ -36,10 +47,6 @@ class TrainingApp : Application(), Router {
         lateinit var instance: Application
 
     }
-
-//    override fun navigateToAuth(fromContext: Context) {
-//        fromContext.startActivity(AuthorizationActivity.getIntent(fromContext))
-//    }
 
     override fun navigateTo(screen: Screen) {
         when(screen) {

@@ -1,18 +1,18 @@
 package com.example.splash.ui
 
-import com.example.core.repository.AuthRepository
+import com.example.core.repository.AuthRepositoryCore
 import moxy.MvpPresenter
 import javax.inject.Inject
 
 class SplashPresenter @Inject constructor(
-    private val authRepository: AuthRepository
+    private val authRepositoryCore: AuthRepositoryCore
 ): MvpPresenter<SplashView>() {
 
 
      fun checkAuthorization() {
         viewState.showProgress()
             try {
-                val isLoggedIn = authRepository.isUserLoggedIn()
+                val isLoggedIn = authRepositoryCore.isUserLoggedIn()
                 if (isLoggedIn) {
                     viewState.navigateToMain()
                 } else {

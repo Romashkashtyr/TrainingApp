@@ -12,7 +12,6 @@ import com.example.auth.domain.di.PresenterFactory
 import com.example.core.base.BaseActivity
 import com.example.core.navigation.RouterHolder.router
 import com.example.core.navigation.Screen
-import com.example.trainingapp.TrainingApp
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 

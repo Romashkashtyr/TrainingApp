@@ -6,7 +6,7 @@ import android.widget.Toast
 import com.example.core.navigation.RouterHolder.router
 import com.example.core.navigation.Screen
 import com.example.splash.databinding.ActivitySplashBinding
-import com.example.splash.di.SplashPresenterFactory
+import com.example.splash.di.modules.SplashPresenterFactory
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
@@ -40,12 +40,12 @@ class SplashActivity: MvpAppCompatActivity(), SplashView {
     }
 
     override fun navigateToAuthorization() {
-        router?.navigateTo(Screen.Auth(this))
+        router.navigateTo(Screen.Auth(this))
         finish()
     }
 
     override fun showError(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
-        router?.navigateTo(Screen.Auth(this))
+        router.navigateTo(Screen.Auth(this))
     }
 }

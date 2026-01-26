@@ -1,4 +1,4 @@
-package com.example.trainings.di
+package com.example.trainings.di.modules
 
 import com.example.core.ApiSettings
 import com.example.core.Interceptor

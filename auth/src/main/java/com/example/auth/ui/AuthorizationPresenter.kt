@@ -2,9 +2,9 @@ package com.example.auth.ui
 
 
 import com.example.auth.R
+import com.example.auth.domain.usecase.SignInUseCase
+import com.example.auth.domain.usecase.SignUpUseCase
 import com.example.core.base.BasePresenter
-import com.example.core.domain.usecase.SignInUseCase
-import com.example.core.domain.usecase.SignUpUseCase
 import com.example.core.structures.Status
 import kotlinx.coroutines.launch
 import moxy.InjectViewState

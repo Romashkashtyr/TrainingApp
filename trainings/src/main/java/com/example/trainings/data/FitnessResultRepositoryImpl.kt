@@ -8,8 +8,9 @@ import com.example.trainings.data.response.WorkoutSessionResult
 import com.example.trainings.domain.FitnessRepositoryResult
 import javax.inject.Inject
 
-class FitnessResultRepositoryImpl @Inject constructor(private val api: NetworkService) :
-    FitnessRepositoryResult {
+class FitnessResultRepositoryImpl @Inject constructor(
+    private val api: NetworkService
+) : FitnessRepositoryResult {
 
 
     override suspend fun getWorkoutSessions(
@@ -24,8 +25,9 @@ class FitnessResultRepositoryImpl @Inject constructor(private val api: NetworkSe
                 next = next,
                 previous = previous
             )
-            if (response.isSuccessful){
-                val responseBody = response.body() ?: return Result.failure(Exception("Error: ${response.code()}"))
+            if (response.isSuccessful) {
+                val responseBody =
+                    response.body() ?: return Result.failure(Exception("Error: ${response.code()}"))
                 Result.success(responseBody)
             } else {
                 Result.failure(Exception("Error: ${response.code()}"))
@@ -47,12 +49,13 @@ class FitnessResultRepositoryImpl @Inject constructor(private val api: NetworkSe
                 isMain = false
             )
             if (response.isSuccessful) {
-                val responseBody = response.body() ?: return Result.failure(Exception("Error: ${response.code()}"))
+                val responseBody =
+                    response.body() ?: return Result.failure(Exception("Error: ${response.code()}"))
                 Result.success(responseBody)
             } else {
                 Result.failure(Exception("Error: ${response.code()}"))
             }
-        } catch (e: Exception){
+        } catch (e: Exception) {
             Result.failure(e)
         }
     }

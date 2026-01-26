@@ -7,10 +7,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.core.base.BaseActivity
 import com.example.core.navigation.RouterHolder.router
 import com.example.core.navigation.Screen
-import com.example.trainingapp.TrainingApp
 import com.example.trainings.Training
 import com.example.trainings.databinding.ActivityTrainingsListBinding
-import com.example.trainings.di.TrainingFactory
+import com.example.trainings.di.modules.TrainingFactory
 import com.example.trainings.ui.rc_view_training.TrainingAdapter
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
@@ -38,7 +37,7 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
         presenter.requestTrainingList()
 
         binding.arrowBack.setOnClickListener {
-            router?.navigateTo(Screen.Main(this))
+            router.navigateTo(Screen.Main(this))
             finish()
         }
     }

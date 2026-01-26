@@ -1,4 +1,4 @@
-package com.example.trainings.di
+package com.example.trainings.di.modules
 
 import com.example.trainings.data.FitnessResultRepositoryImpl
 import com.example.trainings.domain.TrainingsRepository
@@ -17,9 +17,6 @@ class TrainingsModule {
     fun provideTrainingPresenterFactory(trainingsRepository: TrainingsRepository, repositoryImpl: FitnessResultRepositoryImpl): TrainingsPresenter {
         return TrainingsPresenter(trainingsRepository, repositoryImpl)
     }
-
-
-
 
 }
 

@@ -1,23 +1,46 @@
 package com.example.trainings.di
 
-import android.content.Context
+import com.example.core.di.CoreComponent
+import com.example.trainings.di.modules.TrainingFitnessModule
+import com.example.trainings.di.modules.TrainingsModule
+import com.example.trainings.ui.TrainingsListActivity
 import com.google.android.datatransport.runtime.dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [FitnessResultModule::class, TrainingModule::class, TrainingsModule::class])
-abstract class TrainingComponent {
+@Component(
+    modules = [
+        TrainingFitnessModule::class,
+        TrainingsModule::class
+    ],
+    dependencies = [
+        CoreComponent::class
+    ]
+)
+interface TrainingComponent {
+
+
+    fun inject(activity: TrainingsListActivity)
+
+    @Component.Builder
+    interface Builder {
+
+        fun coreComponent(coreComponent: CoreComponent): Builder
+
+        fun build(): TrainingComponent
+    }
+
 
     companion object {
 
-        private var trainingComponent: TrainingComponent? = null
+        private var instance: TrainingComponent? = null
 
-        fun init(context: Context): TrainingComponent {
-            if (trainingComponent == null) {
-                trainingComponent = DaggerTrainingComponent.create()
+        fun init(coreComponent: CoreComponent): TrainingComponent {
+            if (instance == null) {
+                instance = DaggerTrainingComponent.builder().coreComponent(coreComponent).build()
             }
 
-            return trainingComponent!!
+            return instance!!
         }
 
     }

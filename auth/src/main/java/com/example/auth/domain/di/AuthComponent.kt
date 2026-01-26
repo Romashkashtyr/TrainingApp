@@ -1,12 +1,11 @@
 package com.example.auth.domain.di
 
-import android.content.Context
-import com.example.core.di.CoreComponent
-import com.example.core.repository.AuthRepository
-import com.google.android.datatransport.runtime.dagger.Component
-import javax.inject.Singleton
 
-@Singleton
+import com.example.auth.repository.AuthRepository
+import com.example.core.di.CoreComponent
+import com.google.android.datatransport.runtime.dagger.Component
+
+
 @Component(modules = [AuthModule::class], dependencies = [CoreComponent::class])
 interface  AuthComponent {
 
@@ -22,13 +21,13 @@ interface  AuthComponent {
 
     companion object {
 
-        private var authComponent: AuthComponent? = null
+        private var instance: AuthComponent? = null
 
-        fun init(context: Context): AuthComponent {
-            if (authComponent == null) {
-                authComponent = DaggerAuthComponent.create
+        fun init(coreComponent: CoreComponent): AuthComponent {
+            if (instance == null) {
+                instance = DaggerAuthComponent.builder().coreComponent(coreComponent).build()
         }
-        return authComponent!!
+        return instance!!
     }
 }
 }

@@ -18,13 +18,6 @@ class TrainingsPresenter @Inject constructor(
 ): BasePresenter<TrainingsView>() {
 
 
-
-//    @Inject
-//    lateinit var repository: TrainingsRepositoryImpl
-//
-//    @Inject
-//    lateinit var repositoryResult: FitnessResultRepositoryImpl
-
     fun requestTrainingList(){
         launch {
             val list = repository.requestTrainingList()
