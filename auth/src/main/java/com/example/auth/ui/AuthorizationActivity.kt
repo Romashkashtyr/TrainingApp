@@ -36,7 +36,7 @@ class AuthorizationActivity : BaseActivity(), AuthorizationView {
 
 
     init {
-        TrainingApp.component.inject(this)
+        //TrainingApp.component.inject(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

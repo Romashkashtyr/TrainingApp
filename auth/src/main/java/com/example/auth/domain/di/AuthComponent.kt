@@ -2,14 +2,18 @@ package com.example.auth.domain.di
 
 
 import com.example.auth.repository.AuthRepository
+import com.example.auth.ui.AuthorizationActivity
 import com.example.core.di.CoreComponent
 import com.google.android.datatransport.runtime.dagger.Component
+import javax.inject.Singleton
 
-
+@Singleton
 @Component(modules = [AuthModule::class], dependencies = [CoreComponent::class])
 interface  AuthComponent {
 
     fun authRepository(): AuthRepository
+
+    fun inject(activity: AuthorizationActivity)
 
     @Component.Builder
     interface Builder {

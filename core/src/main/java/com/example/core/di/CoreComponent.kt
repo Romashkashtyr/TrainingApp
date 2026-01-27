@@ -7,7 +7,6 @@ import com.example.core.navigation.Router
 import com.example.core.repository.AuthRepositoryCore
 import dagger.BindsInstance
 import dagger.Component
-import javax.inject.Singleton
 
 
 @Component(modules = [CoreModule::class, RouterModule::class])

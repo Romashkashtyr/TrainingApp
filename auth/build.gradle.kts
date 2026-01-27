@@ -59,6 +59,11 @@ dependencies {
     implementation(libs.moxy.ktx)
 
 
+    //Dagger
+    implementation(libs.dagger)
+    kapt(libs.dagger.compiler)
+
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

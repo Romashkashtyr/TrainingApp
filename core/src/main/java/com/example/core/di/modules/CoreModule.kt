@@ -4,7 +4,6 @@ import com.example.core.data.AuthRepositoryCoreImpl
 import com.example.core.repository.AuthRepositoryCore
 import dagger.Binds
 import dagger.Module
-import javax.inject.Singleton
 
 @Module
 interface CoreModule {
