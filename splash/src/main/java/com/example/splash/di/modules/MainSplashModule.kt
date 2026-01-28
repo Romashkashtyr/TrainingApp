@@ -6,7 +6,6 @@ import com.example.splash.ui.SplashPresenter
 import dagger.Module
 import dagger.Provides
 import javax.inject.Inject
-import javax.inject.Singleton
 
 
 @Module

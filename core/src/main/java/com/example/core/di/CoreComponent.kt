@@ -1,10 +1,12 @@
 package com.example.core.di
 
 import android.content.Context
+import android.content.SharedPreferences
 import com.example.core.di.modules.CoreModule
 import com.example.core.di.modules.RouterModule
 import com.example.core.navigation.Router
 import com.example.core.repository.AuthRepositoryCore
+import com.google.firebase.auth.FirebaseAuth
 import dagger.BindsInstance
 import dagger.Component
 
@@ -24,8 +26,11 @@ interface CoreComponent {
 
     fun authRepositoryCore(): AuthRepositoryCore
 
-
     fun provideRouter(): Router
+
+    fun provideFirebaseAuth(): FirebaseAuth
+
+    fun provideSharedPreferences(): SharedPreferences
 
     companion object {
         private var instance: CoreComponent? = null

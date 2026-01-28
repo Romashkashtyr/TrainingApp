@@ -11,6 +11,7 @@ import com.example.main.di.MainComponent
 import com.example.main.ui.MainActivity
 import com.example.splash.di.SplashComponent
 import com.example.trainingapp.domain.di.ApplicationComponent
+import com.example.trainingapp.domain.di.DaggerApplicationComponent
 import com.example.trainings.di.TrainingComponent
 import com.example.trainings.ui.TrainingsListActivity
 import com.google.firebase.FirebaseApp
@@ -43,6 +44,7 @@ class TrainingApp : Application(), Router {
 
     companion object {
 
+        //lateinit var component: ApplicationComponent
         lateinit var component: ApplicationComponent
         lateinit var instance: Application
 

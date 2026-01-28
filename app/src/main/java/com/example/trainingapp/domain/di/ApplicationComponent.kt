@@ -17,9 +17,9 @@ import javax.inject.Singleton
 )
 interface ApplicationComponent {
 
-    fun inject(activity: TrainingsListActivity)
-    fun inject(activity: AuthorizationActivity)
-    fun inject(activity: SplashActivity)
+//    fun inject(activity: TrainingsListActivity)
+//    fun inject(activity: AuthorizationActivity)
+//    fun inject(activity: SplashActivity)
 
 
     @Component.Builder

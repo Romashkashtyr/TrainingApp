@@ -9,6 +9,7 @@ import com.example.core.navigation.RouterHolder.router
 import com.example.core.navigation.Screen
 import com.example.trainings.Training
 import com.example.trainings.databinding.ActivityTrainingsListBinding
+import com.example.trainings.di.TrainingComponent
 import com.example.trainings.di.modules.TrainingFactory
 import com.example.trainings.ui.rc_view_training.TrainingAdapter
 import moxy.ktx.moxyPresenter
@@ -26,7 +27,7 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
 
 
     init {
-        TrainingApp.component.inject(this)
+        TrainingComponent.instance?.inject(this)
     }
 
 
