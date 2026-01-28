@@ -9,6 +9,8 @@ import com.google.firebase.auth.FirebaseAuth
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import javax.inject.Inject
+import javax.inject.Provider
 import javax.inject.Singleton
 
 @Module

@@ -8,7 +8,7 @@ import com.example.auth.R
 import com.example.auth.data.AuthMode
 import com.example.auth.data.AuthRepositoryImpl
 import com.example.auth.databinding.ActivitySignInBinding
-import com.example.auth.domain.di.PresenterFactory
+import com.example.auth.domain.di.modules.PresenterFactory
 import com.example.core.base.BaseActivity
 import com.example.core.navigation.RouterHolder.router
 import com.example.core.navigation.Screen

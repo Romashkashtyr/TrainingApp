@@ -1,6 +1,7 @@
 package com.example.auth.domain.di
 
 
+import com.example.auth.domain.di.modules.AuthModule
 import com.example.auth.ui.AuthorizationActivity
 import com.example.core.di.CoreComponent
 import dagger.Component

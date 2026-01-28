@@ -35,7 +35,7 @@ interface TrainingComponent {
 
     companion object {
 
-         var instance: TrainingComponent? = null
+        var instance: TrainingComponent? = null
 
         fun init(coreComponent: CoreComponent): TrainingComponent {
             if (instance == null) {

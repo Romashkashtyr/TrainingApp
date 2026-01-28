@@ -20,7 +20,6 @@ class TrainingsModule {
 
 }
 
-
 @Singleton
 class TrainingFactory @Inject constructor(
     private val trainingPresenterProvider: Provider<TrainingsPresenter>
