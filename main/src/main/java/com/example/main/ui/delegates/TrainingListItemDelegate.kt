@@ -11,7 +11,7 @@ import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 
 class TrainingListItemDelegate(
     private val onTrainingClick: OnTrainingClick
-): AdapterDelegate<List<DashboardItem>>() {
+) : AdapterDelegate<List<DashboardItem>>() {
     override fun isForViewType(items: List<DashboardItem>, position: Int): Boolean {
         return items[position] is DashboardItem.TrainingListItem
     }
@@ -39,7 +39,7 @@ class TrainingListItemDelegate(
     inner class TrainingListViewHolder(
         private val binding: ItemTrainingListBinding,
         private val onTrainingClick: () -> Unit
-    ): RecyclerView.ViewHolder(binding.root) {
+    ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: DashboardItem.TrainingListItem) {
             binding.viewWorkoutsButton.setText(R.string.training_list)
             binding.viewWorkoutsButton.setOnClickListener {

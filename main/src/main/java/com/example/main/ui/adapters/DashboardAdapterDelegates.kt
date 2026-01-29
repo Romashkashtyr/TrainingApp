@@ -17,12 +17,13 @@ class DashboardAdapterDelegates(
     private var items: List<DashboardItem>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val delegatesManager = AdapterDelegatesManager<List<DashboardItem>>().apply {
-        addDelegate(StepsItemDelegate())
-        addDelegate(WaterItemDelegate(onAddWaterClicked))
-        addDelegate(WorkoutItemDelegate())
-        addDelegate(TrainingListItemDelegate(onTrainingClick))
-    }
+    private val delegatesManager =
+        AdapterDelegatesManager<List<DashboardItem>>().apply {
+            addDelegate(StepsItemDelegate())
+            addDelegate(WaterItemDelegate(onAddWaterClicked))
+            addDelegate(WorkoutItemDelegate())
+            addDelegate(TrainingListItemDelegate(onTrainingClick))
+        }
 
 
     override fun getItemViewType(position: Int): Int {

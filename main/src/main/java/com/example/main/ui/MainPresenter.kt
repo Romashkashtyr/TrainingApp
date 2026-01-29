@@ -13,7 +13,7 @@ import moxy.InjectViewState
 @InjectViewState
 class MainPresenter(
     private val mainRepository: MainRepository
-): BasePresenter<MainView>() {
+) : BasePresenter<MainView>() {
 
 
     fun requestGetScreenData() {
@@ -24,9 +24,11 @@ class MainPresenter(
                     is Status.Failure -> {
                         viewState.showToast(R.string.sign_up_failure)
                     }
+
                     is Status.NoNetwork -> {
                         viewState.showToast(R.string.network_failure)
                     }
+
                     is Status.Success -> {
                         viewState.initListData(waterAmount.info)
                     }
@@ -38,7 +40,6 @@ class MainPresenter(
     fun requestAddWater(amount: Int) {
         launch { mainRepository.addWater(amount) }
     }
-
 
 
 }

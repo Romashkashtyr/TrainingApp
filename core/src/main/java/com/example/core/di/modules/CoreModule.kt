@@ -3,22 +3,18 @@ package com.example.core.di.modules
 import android.content.Context
 import android.content.SharedPreferences
 import com.example.core.Constants
-import com.example.core.data.AuthRepositoryCoreImpl
-import com.example.core.repository.AuthRepositoryCore
+import com.example.core.data.CheckAuthRepositoryCoreImpl
+import com.example.core.repository.CheckAuthRepositoryCore
 import com.google.firebase.auth.FirebaseAuth
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
-import javax.inject.Inject
-import javax.inject.Provider
-import javax.inject.Singleton
 
 @Module
 interface CoreModule {
 
     @Binds
-    fun bindAuthRepositoryCore(impl: AuthRepositoryCoreImpl): AuthRepositoryCore
-
+    fun bindAuthRepositoryCore(impl: CheckAuthRepositoryCoreImpl): CheckAuthRepositoryCore
 
     companion object {
 

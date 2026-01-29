@@ -7,7 +7,7 @@ import com.example.core.structures.DashboardItem
 import com.example.main.databinding.ItemWorkoutBinding
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 
-class WorkoutItemDelegate() :AdapterDelegate<List<DashboardItem>>() {
+class WorkoutItemDelegate() : AdapterDelegate<List<DashboardItem>>() {
     override fun isForViewType(items: List<DashboardItem>, position: Int): Boolean {
         return items[position] is DashboardItem.WorkoutItem
     }
@@ -29,7 +29,7 @@ class WorkoutItemDelegate() :AdapterDelegate<List<DashboardItem>>() {
 
     inner class WorkoutViewHolder(
         private val binding: ItemWorkoutBinding
-    ): RecyclerView.ViewHolder(binding.root) {
+    ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: DashboardItem.WorkoutItem) {
             binding.workoutsCount.text = item.workoutCounts.toString()
         }

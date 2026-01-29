@@ -13,9 +13,9 @@ import moxy.MvpPresenter
 import kotlin.coroutines.CoroutineContext
 
 @InjectViewState
-open class BasePresenter<T: BaseView> : MvpPresenter<T>(), CoroutineScope {
+open class BasePresenter<T : BaseView> : MvpPresenter<T>(), CoroutineScope {
 
-    private val exceptionHandler = CoroutineExceptionHandler{ _, throwable ->
+    private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
         Log.e("ExceptionHandler", throwable.stackTraceToString())
         requireShowToast(R.string.sign_up_failure)
     }

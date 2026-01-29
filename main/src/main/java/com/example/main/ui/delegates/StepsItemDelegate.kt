@@ -8,7 +8,7 @@ import com.example.core.structures.DashboardItem
 import com.example.main.databinding.ItemStepsBinding
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 
-class StepsItemDelegate : AdapterDelegate<List<DashboardItem>>(){
+class StepsItemDelegate : AdapterDelegate<List<DashboardItem>>() {
 
 
     override fun isForViewType(items: List<DashboardItem>, position: Int): Boolean {
@@ -32,9 +32,9 @@ class StepsItemDelegate : AdapterDelegate<List<DashboardItem>>(){
 
     inner class StepsViewHolder(
         private val binding: ItemStepsBinding
-    ): RecyclerView.ViewHolder(binding.root) {
+    ) : RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
-        fun bind(item: DashboardItem.StepsItem){
+        fun bind(item: DashboardItem.StepsItem) {
             binding.stepsCount.text = item.stepsCount.toString()
         }
     }

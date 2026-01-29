@@ -12,14 +12,14 @@ import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 
 class WaterItemDelegate(
     private val onAddWaterClicked: OnAddWaterClicked
-): AdapterDelegate<List<DashboardItem>>() {
+) : AdapterDelegate<List<DashboardItem>>() {
     override fun isForViewType(items: List<DashboardItem>, position: Int): Boolean {
         return items[position] is DashboardItem.WaterItem
     }
 
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
         return WaterViewHolder(
-            ItemWaterBinding.inflate(LayoutInflater.from(parent.context),parent, false),
+            ItemWaterBinding.inflate(LayoutInflater.from(parent.context), parent, false),
             onAddWaterClicked = onAddWaterClicked::onAddWaterClicked
         )
     }
@@ -36,21 +36,20 @@ class WaterItemDelegate(
     inner class WaterViewHolder(
         private val binding: ItemWaterBinding,
         private val onAddWaterClicked: (Int) -> (Unit)
-    ): RecyclerView.ViewHolder(binding.root) {
+    ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: DashboardItem.WaterItem) {
             binding.waterIntake.text = item.waterCount.toString()
             binding.addWaterButton.setOnClickListener {
                 val newAmount = binding.waterInputEditText.text.toString().toIntOrNull() ?: 0
-                if (newAmount > 0 ){
+                if (newAmount > 0) {
                     onAddWaterClicked(newAmount)
                 } else {
                     Toast.makeText(
                         binding.root.context,
                         binding.root.context.getString(R.string.invalid_amount),
                         Toast.LENGTH_LONG
-                        ).show()
+                    ).show()
                 }
-
             }
         }
     }

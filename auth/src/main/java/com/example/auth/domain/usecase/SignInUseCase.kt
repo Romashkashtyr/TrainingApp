@@ -13,7 +13,7 @@ class SignInUseCase @Inject constructor(
         password: String
     ): Status<Boolean> {
 
-        if(email.isBlank() || password.isBlank()) {
+        if (email.isBlank() || password.isBlank()) {
             return Status.Failure("Something went wrong")
         }
 

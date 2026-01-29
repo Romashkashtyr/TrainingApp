@@ -45,8 +45,6 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // TODO()
-        //MainComponent.init(CoreComponent.init(applicationContext)).inject(this)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         mainPresenter.requestGetScreenData()

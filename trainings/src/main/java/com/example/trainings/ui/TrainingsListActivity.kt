@@ -53,7 +53,8 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
     }
 
     companion object {
-        fun getIntent(fromContext: Context): Intent = Intent(fromContext, TrainingsListActivity::class.java)
+        fun getIntent(fromContext: Context): Intent =
+            Intent(fromContext, TrainingsListActivity::class.java)
     }
 
 }

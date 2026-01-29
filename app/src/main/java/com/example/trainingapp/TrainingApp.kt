@@ -22,9 +22,6 @@ class TrainingApp : Application(), Router {
         instance = this
         initDi()
         FirebaseApp.initializeApp(this)
-//        component = DaggerApplicationComponent.builder()
-//            .context(this)
-//            .build()
         RouterHolder.router = this
     }
 
@@ -59,6 +56,5 @@ class TrainingApp : Application(), Router {
             )
         }
     }
-
 
 }

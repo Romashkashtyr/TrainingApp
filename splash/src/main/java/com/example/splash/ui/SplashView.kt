@@ -4,7 +4,7 @@ import moxy.MvpView
 import moxy.viewstate.strategy.alias.AddToEndSingle
 
 @AddToEndSingle
-interface SplashView: MvpView {
+interface SplashView : MvpView {
 
 
     fun showProgress()
@@ -15,5 +15,5 @@ interface SplashView: MvpView {
 
     fun navigateToAuthorization()
 
-    fun showError(message:String)
+    fun showError(message: String)
 }

@@ -12,7 +12,7 @@ import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 
-class SplashActivity: MvpAppCompatActivity(), SplashView {
+class SplashActivity : MvpAppCompatActivity(), SplashView {
 
     private lateinit var binding: ActivitySplashBinding
 

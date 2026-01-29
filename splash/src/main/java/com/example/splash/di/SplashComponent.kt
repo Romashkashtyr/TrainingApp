@@ -23,10 +23,10 @@ interface SplashComponent {
 
 
     companion object {
-         private var instance: SplashComponent? = null
+        private var instance: SplashComponent? = null
 
         fun init(coreComponent: CoreComponent): SplashComponent {
-            if(instance == null) {
+            if (instance == null) {
                 instance = DaggerSplashComponent.builder().coreComponent(coreComponent).build()
             }
 
@@ -34,7 +34,7 @@ interface SplashComponent {
         }
 
         fun getSplashInstance(): SplashComponent {
-             return if(instance != null) instance!! else throw IllegalStateException()
+            return if (instance != null) instance!! else throw IllegalStateException()
         }
     }
 }

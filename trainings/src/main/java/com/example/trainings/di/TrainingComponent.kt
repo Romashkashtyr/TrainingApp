@@ -36,7 +36,7 @@ interface TrainingComponent {
 
     companion object {
 
-        var instance: TrainingComponent? = null
+        private var instance: TrainingComponent? = null
 
         fun init(coreComponent: CoreComponent): TrainingComponent {
             if (instance == null) {
@@ -47,7 +47,7 @@ interface TrainingComponent {
         }
 
         fun getTrainingInstance(): TrainingComponent {
-            return if(instance != null) instance!! else throw IllegalStateException()
+            return if (instance != null) instance!! else throw IllegalStateException()
         }
 
     }

@@ -3,15 +3,16 @@ package com.example.core.di
 import android.content.Context
 import android.content.SharedPreferences
 import com.example.core.di.modules.CoreModule
+import com.example.core.di.modules.ExceptionModule
 import com.example.core.di.modules.RouterModule
 import com.example.core.navigation.Router
-import com.example.core.repository.AuthRepositoryCore
+import com.example.core.repository.CheckAuthRepositoryCore
 import com.google.firebase.auth.FirebaseAuth
 import dagger.BindsInstance
 import dagger.Component
 
 
-@Component(modules = [CoreModule::class, RouterModule::class])
+@Component(modules = [CoreModule::class, ExceptionModule::class, RouterModule::class])
 interface CoreComponent {
 
     @Component.Builder
@@ -24,7 +25,7 @@ interface CoreComponent {
 
     }
 
-    fun authRepositoryCore(): AuthRepositoryCore
+    fun authRepositoryCore(): CheckAuthRepositoryCore
 
     fun provideRouter(): Router
 

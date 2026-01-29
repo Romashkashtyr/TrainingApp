@@ -13,15 +13,15 @@ import javax.inject.Inject
 
 @InjectViewState
 class TrainingsPresenter @Inject constructor(
-    val repository: TrainingsRepository,
-    val repositoryResult: FitnessRepositoryResult
-): BasePresenter<TrainingsView>() {
+    private val repository: TrainingsRepository,
+    private val repositoryResult: FitnessRepositoryResult
+) : BasePresenter<TrainingsView>() {
 
 
-    fun requestTrainingList(){
+    fun requestTrainingList() {
         launch {
             val list = repository.requestTrainingList()
-            withContext(Dispatchers.Main){
+            withContext(Dispatchers.Main) {
                 viewState.showTrainingsList(list)
             }
         }
@@ -30,7 +30,12 @@ class TrainingsPresenter @Inject constructor(
     suspend fun getWorkoutSessions(
 
     ) {
-        repositoryResult.getWorkoutSessions(count = 10, next = null, previous = null, result = emptyList())
+        repositoryResult.getWorkoutSessions(
+            count = 10,
+            next = null,
+            previous = null,
+            result = emptyList()
+        )
         TODO()
     }
 

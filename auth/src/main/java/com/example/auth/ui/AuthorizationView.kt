@@ -7,9 +7,9 @@ import moxy.viewstate.strategy.StateStrategyType
 @StateStrategyType(value = AddToEndSingleStrategy::class)
 interface AuthorizationView : BaseView {
 
-        fun showViewProgress()
-        fun hideViewProgress()
-        fun navigateToHome()
-        fun changeAuthMode()
+    fun showViewProgress()
+    fun hideViewProgress()
+    fun navigateToHome()
+    fun changeAuthMode()
 
 }

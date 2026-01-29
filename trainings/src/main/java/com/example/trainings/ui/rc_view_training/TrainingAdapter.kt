@@ -11,7 +11,10 @@ import com.example.trainings.databinding.ItemTrainingBinding
 class TrainingAdapter(private val trainingsList: List<Training>) :
     RecyclerView.Adapter<TrainingAdapter.TrainingViewHolder>() {
 
-    inner class TrainingViewHolder(private val binding: ItemTrainingBinding, private val context: Context) :
+    inner class TrainingViewHolder(
+        private val binding: ItemTrainingBinding,
+        private val context: Context
+    ) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Training) {

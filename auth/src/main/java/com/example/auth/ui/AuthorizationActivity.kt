@@ -13,6 +13,7 @@ import com.example.auth.domain.di.modules.PresenterFactory
 import com.example.core.base.BaseActivity
 import com.example.core.navigation.RouterHolder.router
 import com.example.core.navigation.Screen
+import com.example.core.repository.CheckAuthRepositoryCore
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 
@@ -23,8 +24,9 @@ class AuthorizationActivity : BaseActivity(), AuthorizationView {
     @Inject
     lateinit var presenterFactory: PresenterFactory
     private val presenter by moxyPresenter { presenterFactory.createAuthorizationPresenter() }
+
     @Inject
-    lateinit var authRepository: AuthRepositoryImpl
+    lateinit var checkAuthRepositoryCore: CheckAuthRepositoryCore
 
     private var mode = AuthMode.LOGIN
 
@@ -45,8 +47,8 @@ class AuthorizationActivity : BaseActivity(), AuthorizationView {
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        if(authRepository.isUserLoggedIn()) {
-            router?.navigateTo(Screen.Main(this))
+        if (checkAuthRepositoryCore.isUserLoggedIn()) {
+            router.navigateTo(Screen.Main(this))
             finish()
             return
         }
@@ -85,8 +87,7 @@ class AuthorizationActivity : BaseActivity(), AuthorizationView {
     }
 
     override fun navigateToHome() {
-        //startActivity(Intent(TrainingsListActivity.getIntent(this)))
-        router?.navigateTo(Screen.TrainingNav(this))
+        router.navigateTo(Screen.TrainingNav(this))
         finish()
     }
 
@@ -108,7 +109,6 @@ class AuthorizationActivity : BaseActivity(), AuthorizationView {
                     signInButton.setText(R.string.sign_up_text)
                 }
             }
-
 
             mode = newMode
         }

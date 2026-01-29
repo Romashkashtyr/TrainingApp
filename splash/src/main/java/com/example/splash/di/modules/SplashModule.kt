@@ -1,7 +1,7 @@
 package com.example.splash.di.modules
 
 
-import com.example.core.repository.AuthRepositoryCore
+import com.example.core.repository.CheckAuthRepositoryCore
 import com.example.splash.ui.SplashPresenter
 import dagger.Module
 import dagger.Provides
@@ -11,20 +11,19 @@ import javax.inject.Inject
 @Module
 class SplashModule {
 
-    // TODO()
     @Provides
-    fun provideSplashPresenterFactory(authRepositoryCore: AuthRepositoryCore): SplashPresenter {
-        return SplashPresenter(authRepositoryCore)
+    fun provideSplashPresenterFactory(checkAuthRepositoryCore: CheckAuthRepositoryCore): SplashPresenter {
+        return SplashPresenter(checkAuthRepositoryCore)
     }
 
 }
 
 
 class SplashPresenterFactory @Inject constructor(
-    private val authRepositoryCore: AuthRepositoryCore
+    private val checkAuthRepositoryCore: CheckAuthRepositoryCore
 ) {
     fun createSplashPresenter(): SplashPresenter {
-        return SplashPresenter(authRepositoryCore)
+        return SplashPresenter(checkAuthRepositoryCore)
     }
 }
 
