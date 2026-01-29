@@ -6,6 +6,7 @@ import android.widget.Toast
 import com.example.core.navigation.RouterHolder.router
 import com.example.core.navigation.Screen
 import com.example.splash.databinding.ActivitySplashBinding
+import com.example.splash.di.SplashComponent
 import com.example.splash.di.modules.SplashPresenterFactory
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
@@ -19,6 +20,10 @@ class SplashActivity: MvpAppCompatActivity(), SplashView {
     lateinit var presenterFactory: SplashPresenterFactory
 
     private val presenter by moxyPresenter { presenterFactory.createSplashPresenter() }
+
+    init {
+        SplashComponent.getSplashInstance().inject(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +41,7 @@ class SplashActivity: MvpAppCompatActivity(), SplashView {
     }
 
     override fun navigateToMain() {
+        router.navigateTo(Screen.Main(this))
         finish()
     }
 

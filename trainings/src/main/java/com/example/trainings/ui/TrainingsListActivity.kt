@@ -27,7 +27,7 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
 
 
     init {
-        TrainingComponent.instance?.inject(this)
+        TrainingComponent.getTrainingInstance().inject(this)
     }
 
 

@@ -5,11 +5,12 @@ import com.example.auth.domain.di.modules.AuthModule
 import com.example.auth.ui.AuthorizationActivity
 import com.example.core.di.CoreComponent
 import dagger.Component
+import java.lang.IllegalStateException
 import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [AuthModule::class], dependencies = [CoreComponent::class])
-interface  AuthComponent {
+interface AuthComponent {
 
     fun inject(activity: AuthorizationActivity)
 
@@ -33,8 +34,8 @@ interface  AuthComponent {
         return instance!!
     }
 
-        fun getInstance(): AuthComponent {
-            return if(instance != null) instance!! else throw UninitializedPropertyAccessException()
+        fun getAuthInstance(): AuthComponent {
+            return if(instance != null) instance!! else throw IllegalStateException()
         }
 }
 }

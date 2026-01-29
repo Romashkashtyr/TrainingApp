@@ -4,6 +4,7 @@ import com.example.core.di.CoreComponent
 import com.example.main.di.modules.MainModule
 import com.example.main.ui.MainActivity
 import dagger.Component
+import java.lang.IllegalStateException
 import javax.inject.Singleton
 
 @Singleton
@@ -30,10 +31,8 @@ interface MainComponent {
             return instance!!
         }
 
-
-
-        fun getInstance(): MainComponent {
-            return if (instance != null) instance!! else throw UninitializedPropertyAccessException()
+        fun getMainInstance(): MainComponent {
+            return if (instance != null) instance!! else throw IllegalStateException()
         }
     }
 }

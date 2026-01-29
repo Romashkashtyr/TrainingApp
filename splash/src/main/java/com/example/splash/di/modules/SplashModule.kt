@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 
 @Module
-class MainSplashModule {
+class SplashModule {
 
     // TODO()
     @Provides

@@ -8,6 +8,7 @@ import com.example.auth.R
 import com.example.auth.data.AuthMode
 import com.example.auth.data.AuthRepositoryImpl
 import com.example.auth.databinding.ActivitySignInBinding
+import com.example.auth.domain.di.AuthComponent
 import com.example.auth.domain.di.modules.PresenterFactory
 import com.example.core.base.BaseActivity
 import com.example.core.navigation.RouterHolder.router
@@ -36,7 +37,7 @@ class AuthorizationActivity : BaseActivity(), AuthorizationView {
 
 
     init {
-        //TrainingApp.component.inject(this)
+        AuthComponent.getAuthInstance().inject(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

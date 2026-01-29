@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.core.base.BaseActivity
-import com.example.core.di.CoreComponent
 import com.example.core.navigation.RouterHolder
 import com.example.core.navigation.Screen
 import com.example.core.structures.DashboardItem
@@ -39,6 +38,10 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
         onTrainingClick = this,
         items = items
     )
+
+    init {
+        MainComponent.getMainInstance().inject(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

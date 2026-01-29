@@ -6,6 +6,7 @@ import com.example.trainings.di.modules.TrainingFitnessModule
 import com.example.trainings.di.modules.TrainingsModule
 import com.example.trainings.ui.TrainingsListActivity
 import dagger.Component
+import java.lang.IllegalStateException
 import javax.inject.Singleton
 
 @Singleton
@@ -42,7 +43,11 @@ interface TrainingComponent {
                 instance = DaggerTrainingComponent.builder().coreComponent(coreComponent).build()
             }
 
-            return instance!!
+            return instance ?: throw IllegalStateException()
+        }
+
+        fun getTrainingInstance(): TrainingComponent {
+            return if(instance != null) instance!! else throw IllegalStateException()
         }
 
     }
