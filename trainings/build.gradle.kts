@@ -55,6 +55,10 @@ dependencies {
     implementation(libs.moxy.ktx)
     kapt(libs.moxy.compiler)
 
+    implementation (libs.androidx.room.runtime)
+    kapt (libs.androidx.room.compiler)
+    implementation (libs.androidx.room.ktx)
+
     // Firebase
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.auth)

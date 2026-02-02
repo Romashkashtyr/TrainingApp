@@ -2,7 +2,9 @@ package com.example.trainings.domain
 
 import com.example.trainings.data.response.TrainingVideos
 import com.example.trainings.data.response.VideoResultTraining
+import com.example.trainings.data.response.VideosResponse
 import com.example.trainings.data.response.WorkoutSession
+import com.example.trainings.data.response.WorkoutSessionResponse
 import com.example.trainings.data.response.WorkoutSessionResult
 
 interface FitnessRepositoryResult {
@@ -12,12 +14,12 @@ interface FitnessRepositoryResult {
         next: String?,
         previous: String?,
         result: List<WorkoutSessionResult>
-    ): Result<WorkoutSession>
+    ): Result<WorkoutSessionResponse>
 
     suspend fun getWorkoutVideos(
         count: Int,
         next: String,
         previous: String,
         result: List<VideoResultTraining>
-    ): Result<List<TrainingVideos>>
+    ): Result<VideosResponse>
 }
