@@ -1,7 +1,10 @@
 package com.example.trainings.data
 
 import com.example.trainings.Training
+import com.example.trainings.data.response.TrainingVideos
+import com.example.trainings.data.response.WorkoutSession
 import com.example.trainings.domain.TrainingsRepository
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -26,6 +29,14 @@ class TrainingsRepositoryImpl @Inject constructor() : TrainingsRepository {
 
         //val storage = StorageOptions.getDefaultInstance().service
         TODO()
+    }
+
+    override fun getAllVideoFromServer(query: String): Flow<RequestResult<List<TrainingVideos>>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getAllWorkoutFromServer(query: String): Flow<RequestResult<List<WorkoutSession>>> {
+        TODO("Not yet implemented")
     }
 
 

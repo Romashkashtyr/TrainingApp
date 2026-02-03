@@ -7,6 +7,8 @@ import com.example.trainings.data.response.VideoResultTraining
 import com.example.trainings.data.response.WorkoutSession
 
 
+
+// удалить
 @Entity(tableName = "training")
 data class TrainingResponseDBO(
      @PrimaryKey(autoGenerate = true) val id: Int,

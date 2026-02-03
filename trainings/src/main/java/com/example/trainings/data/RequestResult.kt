@@ -1,0 +1,29 @@
+package com.example.trainings.data
+
+public sealed class RequestResult<out E: Any>(public open val data: E? = null) {
+
+    public class InProgress<E: Any>(
+        data: E? = null
+    ): RequestResult<E>(data)
+
+    class Success<E: Any>(
+        override val data: E
+    ): RequestResult<E>(data)
+
+
+    class Error<E: Any>(
+        data: E? = null,
+        val error: Throwable? = null
+    ): RequestResult<E>()
+}
+
+
+public fun <I:Any, O: Any> RequestResult<I>.map(mapper: (I) -> O): RequestResult<O> {
+    return when(this) {
+        is RequestResult.Error -> RequestResult.Error(data?.let(mapper))
+        is RequestResult.InProgress -> RequestResult.InProgress(data?.let(mapper))
+        is RequestResult.Success -> RequestResult.Success(mapper(data))
+    }
+
+
+}
