@@ -6,5 +6,5 @@ data class VideosResponse(
     @SerializedName("count") val count: Int,
     @SerializedName("next") val next: String?,
     @SerializedName("previous") val previous: String?,
-    @SerializedName("results") val results: List<Video>,
+    @SerializedName("results") val results: List<VideoResultTraining>,
 )
