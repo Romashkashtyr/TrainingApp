@@ -11,7 +11,7 @@ interface NetworkService {
     suspend fun getWorkoutSessions(
         @Query("count") count: Int = 10,
         @Query("next") next: String? = null,
-    ): Response<WorkoutSessionResponse>
+    ): Response<WorkoutSession>
 
 
     @GET("/v2/video")

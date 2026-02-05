@@ -15,20 +15,27 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface TrainingDAO {
 
-    @Transaction
-    @Query("SELECT * FROM workout_sessions")
-    fun observeWorkoutSession(): Flow<WorkoutSessionResult>
 
-    @Transaction
-    @Query("SELECT * FROM video_results")
-    fun observeVideos(): Flow<List<VideoResultTrainingDBO>>
+    @Query("SELECT * FROM training WHERE id = 1")
+    fun observeCache(): Flow<TrainingResponseDBO?>
+
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertWorkoutSession(model: WorkoutSessionDBO)
+    suspend fun insertCache(cache: TrainingResponseDBO)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertWorkoutResults(models: List<WorkoutSessionResultDBO>)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertVideoResults(models: List<VideoResultTrainingDBO>)
+//    @Query("SELECT * FROM workout_sessions")
+//    fun observeWorkoutSession(): Flow<WorkoutSessionResult>
+//
+//    @Query("SELECT * FROM video_results")
+//    fun observeVideos(): Flow<List<VideoResultTrainingDBO>>
+//
+//    @Insert(onConflict = OnConflictStrategy.REPLACE)
+//    suspend fun insertWorkoutSession(model: WorkoutSessionDBO)
+//
+//    @Insert(onConflict = OnConflictStrategy.REPLACE)
+//    suspend fun insertWorkoutResults(models: List<WorkoutSessionResultDBO>)
+//
+//    @Insert(onConflict = OnConflictStrategy.REPLACE)
+//    suspend fun insertVideoResults(models: List<VideoResultTrainingDBO>)
 }

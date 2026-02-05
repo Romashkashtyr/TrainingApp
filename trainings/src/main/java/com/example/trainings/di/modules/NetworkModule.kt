@@ -4,6 +4,7 @@ import com.example.core.ApiSettings
 import com.example.core.Interceptor
 import com.example.trainings.data.response.NetworkService
 import com.google.firebase.BuildConfig
+import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -39,6 +40,12 @@ object NetworkModule {
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideGson(): Gson {
+        return Gson()
     }
 
 
