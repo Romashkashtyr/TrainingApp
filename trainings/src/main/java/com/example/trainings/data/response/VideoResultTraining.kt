@@ -9,7 +9,7 @@ data class VideoResultTraining(
     @SerializedName("uuid") override var uuid: String? = null,
     @SerializedName("exercise") override var exercise: Int? = null,
     @SerializedName("exercise_uuid") override var exerciseUuid: String? = null,
-    @SerializedName("video") override var video: String? = null,
+    @SerializedName("video") override var videoUrl: String? = null,
     @SerializedName("is_main") override var isMain: Boolean? = null,
     @SerializedName("duration") override var duration: String? = null,
 ) : Serializable, VideoResultTrainingAbs

@@ -5,7 +5,7 @@ interface VideoResultTrainingAbs {
     var uuid: String?
     var exercise: Int?
     var exerciseUuid: String?
-    var video: String?
+    var videoUrl: String?
     var isMain: Boolean?
     var duration: String?
 }

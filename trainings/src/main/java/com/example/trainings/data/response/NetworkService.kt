@@ -16,9 +16,16 @@ interface NetworkService {
 
     @GET("/v2/video")
     suspend fun getVideos(
-        @Query("exercise") exercise: Int? = null,
+        @Query("exercise") exercise: String? = null,
         @Query("is_main") isMain: Boolean? = null,
     ): Response<VideosResponse>
+
+    @GET("/v2/video")
+    suspend fun getVideosTraining(
+        @Query("exercise") exercise: String? = null,
+        @Query("is_main") isMain: Boolean? = null,
+    ): Result<List<VideoResultTraining>>
+
 
 
 }

@@ -4,12 +4,9 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Transaction
-import com.example.trainings.data.response.WorkoutSessionResult
 import com.example.trainings.database.models.TrainingResponseDBO
+import com.example.trainings.database.models.TrainingVideosDBO
 import com.example.trainings.database.models.VideoResultTrainingDBO
-import com.example.trainings.database.models.WorkoutSessionDBO
-import com.example.trainings.database.models.WorkoutSessionResultDBO
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -22,6 +19,9 @@ interface TrainingDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCache(cache: TrainingResponseDBO)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertCacheVideo(cache: List<VideoResultTrainingDBO>)
 
 
 //    @Query("SELECT * FROM workout_sessions")

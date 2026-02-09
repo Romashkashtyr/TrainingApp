@@ -4,7 +4,6 @@ import com.example.trainings.data.response.NetworkService
 import com.example.trainings.data.response.VideoResultTraining
 import com.example.trainings.data.response.VideosResponse
 import com.example.trainings.data.response.WorkoutSession
-import com.example.trainings.data.response.WorkoutSessionResult
 import com.example.trainings.domain.FitnessRepositoryResult
 import javax.inject.Inject
 
@@ -17,7 +16,7 @@ class FitnessResultRepositoryImpl @Inject constructor(
         count: Int,
         next: String?,
         previous: String?,
-        result: List<WorkoutSessionResult>
+        result: List<WorkoutSession>
     ): Result<WorkoutSession> {
         return try {
             val response = api.getWorkoutSessions(
@@ -44,7 +43,7 @@ class FitnessResultRepositoryImpl @Inject constructor(
     ): Result<VideosResponse> {
         return try {
             val response = api.getVideos(
-                exercise = count,
+                exercise = next,
                 isMain = false
             )
             if (response.isSuccessful) {

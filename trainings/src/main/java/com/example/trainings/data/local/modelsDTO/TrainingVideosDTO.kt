@@ -1,4 +1,4 @@
-package com.example.trainings.domain.modelsDTO
+package com.example.trainings.data.local.modelsDTO
 
 import com.example.trainings.data.response.VideoResultTraining
 import com.google.gson.annotations.SerializedName
