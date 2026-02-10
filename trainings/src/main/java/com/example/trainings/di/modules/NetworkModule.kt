@@ -1,8 +1,12 @@
 package com.example.trainings.di.modules
 
+import android.content.Context
+import androidx.room.Room
+import androidx.room.RoomDatabase
 import com.example.core.ApiSettings
 import com.example.core.Interceptor
 import com.example.trainings.data.response.NetworkService
+import com.example.trainings.database.TrainingDatabase
 import com.google.firebase.BuildConfig
 import com.google.gson.Gson
 import dagger.Module
@@ -40,6 +44,13 @@ object NetworkModule {
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
+    }
+
+
+    @Singleton
+    @Provides
+    fun provideTrainingDatabase(applicationContext: Context): TrainingDatabase {
+        return TrainingDatabase(applicationContext)
     }
 
     @Provides

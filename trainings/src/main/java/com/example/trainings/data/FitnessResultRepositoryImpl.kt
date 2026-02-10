@@ -23,12 +23,12 @@ class FitnessResultRepositoryImpl @Inject constructor(
                 count = count,
                 next = next,
             )
-            if (response.isSuccessful) {
+            if (response.isSuccess) {
                 val responseBody =
-                    response.body() ?: return Result.failure(Exception("Error: ${response.code()}"))
+                    response.getOrNull() ?: return Result.failure(Exception("Error: ${response.exceptionOrNull()}"))
                 Result.success(responseBody)
             } else {
-                Result.failure(Exception("Error: ${response.code()}"))
+                Result.failure(Exception("Error: ${response.exceptionOrNull()}"))
             }
         } catch (e: Exception) {
             Result.failure(e)
@@ -46,12 +46,12 @@ class FitnessResultRepositoryImpl @Inject constructor(
                 exercise = next,
                 isMain = false
             )
-            if (response.isSuccessful) {
+            if (response.isSuccess) {
                 val responseBody =
-                    response.body() ?: return Result.failure(Exception("Error: ${response.code()}"))
+                    response.getOrNull() ?: return Result.failure(Exception("Error: ${response.exceptionOrNull()}"))
                 Result.success(responseBody)
             } else {
-                Result.failure(Exception("Error: ${response.code()}"))
+                Result.failure(Exception("Error: ${response.exceptionOrNull()}"))
             }
         } catch (e: Exception) {
             Result.failure(e)

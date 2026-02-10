@@ -11,14 +11,14 @@ interface NetworkService {
     suspend fun getWorkoutSessions(
         @Query("count") count: Int = 10,
         @Query("next") next: String? = null,
-    ): Response<WorkoutSession>
+    ): Result<WorkoutSession>
 
 
     @GET("/v2/video")
     suspend fun getVideos(
         @Query("exercise") exercise: String? = null,
         @Query("is_main") isMain: Boolean? = null,
-    ): Response<VideosResponse>
+    ): Result<VideosResponse>
 
     @GET("/v2/video")
     suspend fun getVideosTraining(
