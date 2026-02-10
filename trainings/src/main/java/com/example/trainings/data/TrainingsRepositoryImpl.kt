@@ -1,18 +1,13 @@
 package com.example.trainings.data
 
-import com.example.trainings.data.local.modelsDTO.TrainingVideosDTO
 import com.example.trainings.data.local.modelsDTO.VideoResultTrainingDTO
-import com.example.trainings.data.mappers.TrainingMapper.toTrainingVideosDBO
 import com.example.trainings.data.mappers.TrainingMapper.toVideoResultTrainingDBO
 import com.example.trainings.data.mappers.TrainingMapper.toVideoResultTrainingDTO
 import com.example.trainings.data.response.NetworkService
 import com.example.trainings.data.response.TrainingResponse
-import com.example.trainings.data.response.TrainingVideos
 import com.example.trainings.data.response.VideoResultTraining
-import com.example.trainings.data.response.WorkoutSession
 import com.example.trainings.database.TrainingDatabase
 import com.example.trainings.database.models.TrainingResponseDBO
-import com.example.trainings.database.models.VideoResultTrainingDBO
 import com.example.trainings.database.models.dao.TrainingDAO
 import com.example.trainings.domain.TrainingsRepository
 import kotlinx.coroutines.Dispatchers
@@ -97,12 +92,12 @@ class TrainingsRepositoryImpl @Inject constructor(
     }
 
     override suspend fun refresh() {
-        val sessionsResponse = safeApiCall { api.getWorkoutSessions() }
-        val videosResponse = safeApiCall { api.getVideos() }
+        val sessionsResult =  api.getWorkoutSessions().map { it.results }
+        val videosResult =  api.getVideos().map { it.results }
 
-        if (sessionsResponse.isSuccess && videosResponse.isSuccess) {
-            val workouts = sessionsResponse.getOrNull()?.results ?: emptyList()
-            val videos = videosResponse.getOrNull()?.results ?: emptyList()
+        if (sessionsResult.isSuccess && videosResult.isSuccess) {
+            val workouts = sessionsResult.getOrNull()
+            val videos = videosResult.getOrNull()
 
             dao.insertCache(
                 TrainingResponseDBO(
