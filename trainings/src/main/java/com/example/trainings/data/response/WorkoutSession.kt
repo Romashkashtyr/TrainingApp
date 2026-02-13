@@ -2,7 +2,10 @@ package com.example.trainings.data.response
 
 import com.example.trainings.data.responseAPI.WorkoutSessionAbs
 import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.Serializable
 
+
+@Serializable
 data class WorkoutSession(
     @SerializedName("count") override var count: Int = 10 ,
     @SerializedName("next") override var next: String? = null,

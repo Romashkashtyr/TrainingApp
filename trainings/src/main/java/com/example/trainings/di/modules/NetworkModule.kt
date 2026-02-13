@@ -1,18 +1,19 @@
 package com.example.trainings.di.modules
 
-import android.content.Context
-import androidx.room.Room
-import androidx.room.RoomDatabase
 import com.example.core.ApiSettings
 import com.example.core.Interceptor
 import com.example.trainings.data.response.NetworkService
-import com.example.trainings.database.TrainingDatabase
 import com.google.firebase.BuildConfig
 import com.google.gson.Gson
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
+import kotlinx.serialization.json.Json
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
+import okhttp3.internal.ignoreIoExceptions
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -46,17 +47,23 @@ object NetworkModule {
             .build()
     }
 
-
-    @Singleton
     @Provides
-    fun provideTrainingDatabase(applicationContext: Context): TrainingDatabase {
-        return TrainingDatabase(applicationContext)
+    @Singleton
+    fun provideJson(): Json {
+        return Json{
+            ignoreUnknownKeys = true
+            coerceInputValues = true
+        }
     }
 
     @Provides
     @Singleton
-    fun provideGson(): Gson {
-        return Gson()
+    fun provideConverterFactory(
+        json: Json
+    ): Converter.Factory {
+        return  json.asConverterFactory(
+            "application/json".toMediaType()
+        )
     }
 
 

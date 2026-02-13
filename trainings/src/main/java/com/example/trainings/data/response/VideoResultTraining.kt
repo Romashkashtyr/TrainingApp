@@ -2,8 +2,9 @@ package com.example.trainings.data.response
 
 import com.example.trainings.data.responseAPI.VideoResultTrainingAbs
 import com.google.gson.annotations.SerializedName
-import java.io.Serializable
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class VideoResultTraining(
     @SerializedName("id") override var id: Int? = null,
     @SerializedName("uuid") override var uuid: String? = null,
@@ -12,4 +13,4 @@ data class VideoResultTraining(
     @SerializedName("video") override var videoUrl: String? = null,
     @SerializedName("is_main") override var isMain: Boolean? = null,
     @SerializedName("duration") override var duration: String? = null,
-) : Serializable, VideoResultTrainingAbs
+) :VideoResultTrainingAbs

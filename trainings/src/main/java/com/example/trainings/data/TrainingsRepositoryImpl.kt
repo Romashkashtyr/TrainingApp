@@ -6,9 +6,8 @@ import com.example.trainings.data.mappers.TrainingMapper.toVideoResultTrainingDT
 import com.example.trainings.data.response.NetworkService
 import com.example.trainings.data.response.TrainingResponse
 import com.example.trainings.data.response.VideoResultTraining
-import com.example.trainings.database.TrainingDatabase
+import com.example.trainings.database.TrainingRoomDatabase
 import com.example.trainings.database.models.TrainingResponseDBO
-import com.example.trainings.database.models.dao.TrainingDAO
 import com.example.trainings.domain.TrainingsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -24,29 +23,12 @@ import javax.inject.Singleton
 @Singleton
 class TrainingsRepositoryImpl @Inject constructor(
     private val api: NetworkService,
-    private val dao: TrainingDAO,
-    private val database: TrainingDatabase
+    private val database: TrainingRoomDatabase
 ) : TrainingsRepository {
 
+    private val db = TrainingRoomDatabase.getInstanceDb()
 
-    //    override suspend fun requestTrainingList(): List<Training> {
-////        val firebaseFireStore = Firebase.firestore
-////        val trainingResult = firebaseFireStore.collection("Trainings").document().get()
-////        if (trainingResult.isSuccessful){
-////            Status.Success(true)
-////        } else {
-////            Status.Failure("Failure")
-////        }
-//////        val firestore = FirebaseFireStore.getInstance()
-//////        val firestoreData = firestore.collection("Trainings").document().get()
-////
-////        return Mapper.mapDataFromFireStoreDB(trainingResult.result)
-//
-//
-//        //val storage = StorageOptions.getDefaultInstance().service
-//        TODO()
-//    }
-//
+
     override fun getAllVideoFromServer(query: String): Flow<RequestResult<List<VideoResultTraining>>> {
         return flow { emit(api.getVideosTraining(exercise = query)) }
                 .onEach { result ->
@@ -62,8 +44,6 @@ class TrainingsRepositoryImpl @Inject constructor(
     }
 
 
-
-
     // временно
      fun <T : Any> Result<T>.toRequestResult(): RequestResult<T> {
         return when {
@@ -72,15 +52,10 @@ class TrainingsRepositoryImpl @Inject constructor(
             else -> error("Impossible branch")
         }
     }
-//
-//    override fun getAllWorkoutFromServer(query: String): Flow<RequestResult<List<WorkoutSession>>> {
-//        val apiRequest =
-//            flow { emit(api.getWorkoutSessions()) }
-//    }
 
 
     override fun observeTrainingResponse(): Flow<TrainingResponse> {
-        return dao.observeCache()
+        return database.trainingDao().observeCache()
             .filterNotNull()
             .map { cache ->
                 TrainingResponse(
@@ -99,7 +74,7 @@ class TrainingsRepositoryImpl @Inject constructor(
             val workouts = sessionsResult.getOrNull()
             val videos = videosResult.getOrNull()
 
-            dao.insertCache(
+            database.trainingDao().insertCache(
                 TrainingResponseDBO(
                     id = 1,
                     workouts = workouts,
@@ -126,7 +101,7 @@ class TrainingsRepositoryImpl @Inject constructor(
 
     private suspend fun saveVideosToCache(data: List<VideoResultTrainingDTO>) {
         val dbos = data.map { videoDTO -> videoDTO.toVideoResultTrainingDBO() }
-        database.dao.insertCacheVideo(dbos)
+        database.trainingDao().insertCacheVideo(dbos)
 
     }
 }

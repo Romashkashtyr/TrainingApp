@@ -10,6 +10,8 @@ import com.example.core.navigation.Screen
 import com.example.main.di.MainComponent
 import com.example.main.ui.MainActivity
 import com.example.splash.di.SplashComponent
+import com.example.trainings.database.TrainingDatabase
+import com.example.trainings.database.TrainingRoomDatabase
 import com.example.trainings.di.TrainingComponent
 import com.example.trainings.ui.TrainingsListActivity
 import com.google.firebase.FirebaseApp
@@ -22,6 +24,7 @@ class TrainingApp : Application(), Router {
         instance = this
         initDi()
         FirebaseApp.initializeApp(this)
+        TrainingRoomDatabase.initializeDb(this)
         RouterHolder.router = this
     }
 

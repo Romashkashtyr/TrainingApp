@@ -2,6 +2,7 @@ package com.example.trainings.di
 
 import com.example.core.di.CoreComponent
 import com.example.trainings.di.modules.NetworkModule
+import com.example.trainings.di.modules.TrainingDatabaseModule
 import com.example.trainings.di.modules.TrainingFitnessModule
 import com.example.trainings.di.modules.TrainingsModule
 import com.example.trainings.ui.TrainingsListActivity
@@ -14,7 +15,8 @@ import javax.inject.Singleton
     modules = [
         TrainingFitnessModule::class,
         TrainingsModule::class,
-        NetworkModule::class
+        NetworkModule::class,
+        TrainingDatabaseModule::class
     ],
     dependencies = [
         CoreComponent::class
