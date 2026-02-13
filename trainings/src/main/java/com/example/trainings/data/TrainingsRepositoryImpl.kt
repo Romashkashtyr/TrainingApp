@@ -26,8 +26,6 @@ class TrainingsRepositoryImpl @Inject constructor(
     private val database: TrainingRoomDatabase
 ) : TrainingsRepository {
 
-    private val db = TrainingRoomDatabase.getInstanceDb()
-
 
     override fun getAllVideoFromServer(query: String): Flow<RequestResult<List<VideoResultTraining>>> {
         return flow { emit(api.getVideosTraining(exercise = query)) }

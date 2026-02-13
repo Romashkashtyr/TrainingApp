@@ -9,9 +9,8 @@ import com.example.trainings.data.response.WorkoutSession
 import com.example.trainings.database.converters.Converters
 
 
-// удалить
+
 @Entity(tableName = "training")
-@TypeConverters(Converters::class)
 data class TrainingResponseDBO(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,

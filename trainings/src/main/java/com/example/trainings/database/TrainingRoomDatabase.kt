@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.example.trainings.database.converters.Converters
 import com.example.trainings.database.models.TrainingResponseDBO
 import com.example.trainings.database.models.TrainingVideosDBO
 import com.example.trainings.database.models.VideoResultTrainingDBO
@@ -23,6 +25,7 @@ import java.lang.IllegalStateException
     ], version = 1,
     exportSchema = true
 )
+@TypeConverters(Converters::class)
 abstract class TrainingRoomDatabase : RoomDatabase() {
     abstract fun trainingDao(): TrainingDAO
 
