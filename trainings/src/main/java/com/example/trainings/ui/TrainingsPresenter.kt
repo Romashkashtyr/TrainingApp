@@ -18,14 +18,14 @@ class TrainingsPresenter @Inject constructor(
 ) : BasePresenter<TrainingsView>() {
 
 
-    fun requestTrainingList() {
-        launch {
-            val list = repository.requestTrainingList()
-            withContext(Dispatchers.Main) {
-                viewState.showTrainingsList(list)
-            }
-        }
-    }
+//    fun requestTrainingList() {
+//        launch {
+//            val list = repository.requestTrainingList()
+//            withContext(Dispatchers.Main) {
+//                viewState.showTrainingsList(list)
+//            }
+//        }
+//    }
 
     suspend fun getWorkoutSessions(
 

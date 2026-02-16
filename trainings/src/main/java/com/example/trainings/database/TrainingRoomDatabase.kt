@@ -21,12 +21,13 @@ import java.lang.IllegalStateException
         TrainingResponseDBO::class,
         TrainingVideosDBO::class,
         VideoResultTrainingDBO::class,
-        WorkoutSessionDBO::class
+        WorkoutSessionDBO::class,
     ], version = 1,
-    exportSchema = true
+    exportSchema = false
 )
 @TypeConverters(Converters::class)
 abstract class TrainingRoomDatabase : RoomDatabase() {
+
     abstract fun trainingDao(): TrainingDAO
 
 

@@ -12,7 +12,7 @@ class Converters {
 
 
     @Inject
-    private lateinit var json: Json
+     internal lateinit var json: Json
 
     @TypeConverter
     fun jsonToWorkoutSessionList(jsonString: String?): List<WorkoutSession>? {

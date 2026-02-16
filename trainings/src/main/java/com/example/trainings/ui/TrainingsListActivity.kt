@@ -35,7 +35,7 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
         super.onCreate(savedInstanceState)
         binding = ActivityTrainingsListBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        presenter.requestTrainingList()
+        //presenter.requestTrainingList()
 
         binding.arrowBack.setOnClickListener {
             router.navigateTo(Screen.Main(this))
