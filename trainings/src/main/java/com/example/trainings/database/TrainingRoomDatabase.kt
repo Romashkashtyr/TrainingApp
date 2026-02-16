@@ -14,8 +14,6 @@ import com.example.trainings.database.models.dao.TrainingDAO
 import java.lang.IllegalStateException
 
 
-
-
 @Database(
     entities = [
         TrainingResponseDBO::class,

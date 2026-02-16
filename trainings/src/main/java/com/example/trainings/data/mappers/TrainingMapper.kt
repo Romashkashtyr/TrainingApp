@@ -1,17 +1,32 @@
 package com.example.trainings.data.mappers
 
+import com.example.trainings.data.local.modelsDTO.TrainingDataDto
 import com.example.trainings.data.local.modelsDTO.TrainingVideosDTO
 import com.example.trainings.data.local.modelsDTO.VideoResultTrainingDTO
 import com.example.trainings.data.local.modelsDTO.WorkoutSessionDTO
+import com.example.trainings.data.response.TrainingData
 import com.example.trainings.data.response.VideoResultTraining
 import com.example.trainings.data.response.WorkoutSession
+import com.example.trainings.database.models.TrainingDataDbo
 import com.example.trainings.database.models.TrainingVideosDBO
 import com.example.trainings.database.models.VideoResultTrainingDBO
+import com.example.trainings.database.models.WorkoutSessionDBO
 
 object TrainingMapper {
 
     fun WorkoutSessionDTO.toWorkoutSession(): WorkoutSession {
         return WorkoutSession(
+            count = count,
+            next = next,
+            previous = previous,
+            results = results
+        )
+    }
+
+
+    fun WorkoutSessionDTO.toWorkoutSessionDbo(): WorkoutSessionDBO {
+        return WorkoutSessionDBO(
+            id = id,
             count = count,
             next = next,
             previous = previous,
@@ -36,6 +51,30 @@ object TrainingMapper {
 
     fun VideoResultTrainingDTO.toVideoResultTraining(): VideoResultTraining {
         return VideoResultTraining(
+            id, uuid, exercise, exerciseUuid, videoUrl, isMain, duration
+        )
+    }
+
+    fun TrainingDataDto.toTrainingData(): TrainingData {
+        return TrainingData(
+            id, uuid, exercise, exerciseUuid, videoUrl, isMain, duration
+        )
+    }
+
+    fun TrainingDataDbo.toTrainingData(): TrainingData {
+        return TrainingData(
+            id, uuid, exercise, exerciseUuid, videoUrl, isMain, duration
+        )
+    }
+
+    fun TrainingData.toTrainingDataDbo(): TrainingDataDbo {
+        return TrainingDataDbo(
+            id, uuid, exercise, exerciseUuid, videoUrl, isMain, duration
+        )
+    }
+
+    fun TrainingData.toTrainingDataDto(): TrainingDataDto {
+        return TrainingDataDto(
             id, uuid, exercise, exerciseUuid, videoUrl, isMain, duration
         )
     }

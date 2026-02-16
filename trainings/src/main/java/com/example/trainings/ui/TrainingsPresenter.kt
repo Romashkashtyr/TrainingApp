@@ -2,9 +2,18 @@ package com.example.trainings.ui
 
 
 import com.example.core.base.BasePresenter
+import com.example.trainings.data.response.TrainingResponse
+import com.example.trainings.data.response.VideoResultTraining
+import com.example.trainings.data.response.WorkoutSession
+import com.example.trainings.database.models.TrainingResponseDBO
 import com.example.trainings.domain.FitnessRepositoryResult
 import com.example.trainings.domain.TrainingsRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import moxy.InjectViewState
@@ -26,6 +35,32 @@ class TrainingsPresenter @Inject constructor(
 //            }
 //        }
 //    }
+
+    val state: StateFlow<>
+
+    suspend fun observeVideo() {
+        val urls = repository.observeTrainingResponse()
+            .map { response ->
+                response.videoResultTraining
+                    .mapNotNull { it.videoUrl }
+            }
+            .flowOn(Dispatchers.Main)
+
+        return urls
+            .map { it }
+            .collect {
+                viewState.showVideoTraining(it)
+            }
+    }
+
+
+    fun observeWorkout(): Flow<TrainingResponse> {
+        return repository.observeTrainingResponse()
+            .onEach { workout ->
+                workout.workouts.map { it.results }
+            }
+            .flowOn(Dispatchers.Main)
+    }
 
     suspend fun getWorkoutSessions(
 

@@ -10,7 +10,7 @@ import com.example.trainings.database.converters.Converters
 
 
 
-@Entity(tableName = "training")
+@Entity(tableName = "training_data")
 data class TrainingResponseDBO(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,

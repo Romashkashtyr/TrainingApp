@@ -7,6 +7,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class WorkoutSession(
+    @SerializedName("id") override var id: Int = 0 ,
     @SerializedName("count") override var count: Int = 10 ,
     @SerializedName("next") override var next: String? = null,
     @SerializedName("previous") override var previous: String? = null,

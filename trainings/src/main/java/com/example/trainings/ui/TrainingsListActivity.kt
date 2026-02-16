@@ -41,6 +41,11 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
             router.navigateTo(Screen.Main(this))
             finish()
         }
+
+        binding.trainingList.setOnClickListener {
+            presenter.observeVideo()
+            presenter.observeWorkout()
+        }
     }
 
 
@@ -50,6 +55,10 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
             layoutManager = LinearLayoutManager(this@TrainingsListActivity)
             adapter = trainingAdapter
         }
+    }
+
+    override fun showVideoTraining(trainingList: List<String>): String {
+        TODO("Not yet implemented")
     }
 
     companion object {
