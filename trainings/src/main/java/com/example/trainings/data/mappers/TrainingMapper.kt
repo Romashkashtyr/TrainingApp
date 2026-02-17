@@ -57,25 +57,31 @@ object TrainingMapper {
 
     fun TrainingDataDto.toTrainingData(): TrainingData {
         return TrainingData(
-            id, uuid, exercise, exerciseUuid, videoUrl, isMain, duration
+            id, authorHistory, uuid, exercise, exerciseUuid, videoUrl, isMain, duration
+        )
+    }
+
+    fun TrainingDataDto.toTrainingDataDbo(): TrainingDataDbo {
+        return TrainingDataDbo(
+            id, authorHistory, uuid, exercise, exerciseUuid, videoUrl, isMain, duration
         )
     }
 
     fun TrainingDataDbo.toTrainingData(): TrainingData {
         return TrainingData(
-            id, uuid, exercise, exerciseUuid, videoUrl, isMain, duration
+            id,authorHistory, uuid, exercise, exerciseUuid, videoUrl, isMain, duration
         )
     }
 
     fun TrainingData.toTrainingDataDbo(): TrainingDataDbo {
         return TrainingDataDbo(
-            id, uuid, exercise, exerciseUuid, videoUrl, isMain, duration
+            id, authorHistory, uuid, exercise, exerciseUuid, videoUrl, isMain, duration
         )
     }
 
     fun TrainingData.toTrainingDataDto(): TrainingDataDto {
         return TrainingDataDto(
-            id, uuid, exercise, exerciseUuid, videoUrl, isMain, duration
+            id, authorHistory, uuid, exercise, exerciseUuid, videoUrl, isMain, duration
         )
     }
 

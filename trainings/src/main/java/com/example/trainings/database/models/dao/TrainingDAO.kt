@@ -29,6 +29,9 @@ interface TrainingDAO {
     suspend fun insertCache(cache: TrainingResponseDBO)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertDataCache(cache: List<TrainingDataDbo>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCacheVideo(cache: List<VideoResultTrainingDBO>)
 
     @Query("SELECT * FROM video_results")

@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class TrainingDataDto(
     @SerializedName("id")  var id: Int? = null,
+    @SerializedName("author_history") var authorHistory: List<String?> = emptyList(),
     @SerializedName("uuid")  var uuid: String? = null,
     @SerializedName("exercise")  var exercise: Int? = null,
     @SerializedName("exercise_uuid")  var exerciseUuid: String? = null,

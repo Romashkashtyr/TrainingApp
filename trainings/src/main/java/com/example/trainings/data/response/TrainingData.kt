@@ -7,6 +7,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class TrainingData(
     @SerializedName("id") override var id: Int? = null,
+    @SerializedName("author_history") override var authorHistory: List<String?> = emptyList(),
     @SerializedName("uuid") override var uuid: String? = null,
     @SerializedName("exercise") override var exercise: Int? = null,
     @SerializedName("exercise_uuid") override var exerciseUuid: String? = null,

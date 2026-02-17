@@ -14,6 +14,7 @@ import com.google.gson.annotations.SerializedName
 data class TrainingDataDbo(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo("id")  var id: Int? = null,
+    @ColumnInfo("author_history") var authorHistory: List<String?> = emptyList(),
     @ColumnInfo("uuid")  var uuid: String? = null,
     @ColumnInfo("exercise")  var exercise: Int? = null,
     @ColumnInfo("exercise_uuid")  var exerciseUuid: String? = null,
