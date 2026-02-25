@@ -1,14 +1,18 @@
 package com.example.trainings.data.mappers
 
+import com.example.trainings.data.local.modelsDTO.EquipmentDto
 import com.example.trainings.data.local.modelsDTO.ExerciseDto
 import com.example.trainings.data.local.modelsDTO.ExerciseInfoDto
+import com.example.trainings.data.local.modelsDTO.MusclesDto
 import com.example.trainings.data.local.modelsDTO.TrainingDataDto
 import com.example.trainings.data.local.modelsDTO.TrainingVideosDTO
 import com.example.trainings.data.local.modelsDTO.VideoResultTrainingDTO
 import com.example.trainings.data.local.modelsDTO.WorkoutSessionDTO
 import com.example.trainings.data.mappers.TrainingMapper.toExercise
+import com.example.trainings.data.response.Equipment
 import com.example.trainings.data.response.Exercise
 import com.example.trainings.data.response.ExerciseInfo
+import com.example.trainings.data.response.Muscles
 import com.example.trainings.data.response.TrainingData
 import com.example.trainings.data.response.VideoResultTraining
 import com.example.trainings.data.response.WorkoutSession
@@ -100,8 +104,18 @@ object TrainingMapper {
         return this.map {
             ExerciseInfoDto(
                 id = it.id,
-                muscles = it.muscles,
-                equipment = it.equipment
+                muscles = it.muscles.map {muscle ->
+                    MusclesDto(
+                        name = muscle.name,
+                        imageUrlMain = muscle.imageUrlMain
+                    )
+                },
+                equipment = it.equipment.map { equipment ->
+                    EquipmentDto(
+                        id = equipment.id,
+                        name = equipment.name
+                    )
+                }
             )
         }
     }
@@ -124,8 +138,18 @@ object TrainingMapper {
             results = results.map {
                 ExerciseInfo(
                     id = it.id,
-                    muscles = it.muscles,
-                    equipment = it.equipment
+                    muscles = it.muscles.map {muscle ->
+                        Muscles(
+                            name = muscle.name,
+                            imageUrlMain = muscle.imageUrlMain
+                        )
+                    },
+                    equipment = it.equipment.map {equip ->
+                        Equipment(
+                            id = equip.id,
+                            name = equip.name
+                        )
+                    }
                 )
             }
         )
