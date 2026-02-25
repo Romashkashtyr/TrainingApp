@@ -4,43 +4,45 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.trainings.database.models.TrainingDataDbo
-import com.example.trainings.database.models.TrainingResponseDBO
-import com.example.trainings.database.models.TrainingVideosDBO
-import com.example.trainings.database.models.VideoResultTrainingDBO
-import com.example.trainings.database.models.WorkoutSessionDBO
-import kotlinx.coroutines.flow.Flow
+import com.example.trainings.database.models.ExerciseInfoDbo
 
 @Dao
 interface TrainingDAO {
 
 
-    @Query("SELECT * FROM training WHERE id = 1")
-    fun observeCache(): Flow<TrainingResponseDBO?>
-
-    @Query("SELECT * FROM training_data")
-    fun observeAll(): Flow<List<TrainingDataDbo>>
-
-
-    @Query("SELECT * FROM training_data")
-    fun getAll(): List<TrainingDataDbo?>
+    @Query("SELECT * FROM exercise_info")
+    suspend fun getCache(): ExerciseInfoDbo?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertCache(cache: TrainingResponseDBO)
+    suspend fun insertExerciseCache(cache: ExerciseInfoDbo)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertDataCache(cache: List<TrainingDataDbo>)
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertCacheVideo(cache: List<VideoResultTrainingDBO>)
-
-    @Query("SELECT * FROM video_results")
-    fun observeVideos(): Flow<List<VideoResultTrainingDBO>>
-
-
-    @Query("SELECT * FROM workout_sessions")
-    fun observeWorkoutSession(): Flow<List<WorkoutSessionDBO>>
-
+// probably temporary
+//    @Query("SELECT * FROM training WHERE id = 1")
+//    fun observeCache(): Flow<TrainingResponseDBO?>
+//
+//    @Query("SELECT * FROM training_data")
+//    fun observeAll(): Flow<List<TrainingDataDbo>>
+//
+//
+//    @Query("SELECT * FROM training_data")
+//    fun getAll(): List<TrainingDataDbo?>
+//
+//    @Insert(onConflict = OnConflictStrategy.REPLACE)
+//    suspend fun insertCache(cache: TrainingResponseDBO)
+//
+//    @Insert(onConflict = OnConflictStrategy.REPLACE)
+//    suspend fun insertDataCache(cache: List<TrainingDataDbo>)
+//
+//    @Insert(onConflict = OnConflictStrategy.REPLACE)
+//    suspend fun insertCacheVideo(cache: List<VideoResultTrainingDBO>)
+//
+//    @Query("SELECT * FROM video_results")
+//    fun observeVideos(): Flow<List<VideoResultTrainingDBO>>
+//
+//
+//    @Query("SELECT * FROM workout_sessions")
+//    fun observeWorkoutSession(): Flow<List<WorkoutSessionDBO>>
+// probably temporary
 
 //    @Query("SELECT * FROM workout_sessions")
 //    fun observeWorkoutSession(): Flow<WorkoutSessionResult>

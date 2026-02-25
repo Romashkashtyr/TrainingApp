@@ -1,32 +1,25 @@
 package com.example.trainings.data
 
-import android.net.http.NetworkException
 import com.example.trainings.data.local.modelsDTO.TrainingDataDto
 import com.example.trainings.data.local.modelsDTO.VideoResultTrainingDTO
 import com.example.trainings.data.mappers.TrainingMapper.toTrainingData
 import com.example.trainings.data.mappers.TrainingMapper.toTrainingDataDbo
-import com.example.trainings.data.mappers.TrainingMapper.toTrainingDataDto
 import com.example.trainings.data.mappers.TrainingMapper.toVideoResultTrainingDBO
 import com.example.trainings.data.mappers.TrainingMapper.toVideoResultTrainingDTO
 import com.example.trainings.data.response.NetworkService
 import com.example.trainings.data.response.TrainingData
-import com.example.trainings.data.response.TrainingResponse
 import com.example.trainings.data.response.VideoResultTraining
 import com.example.trainings.database.TrainingRoomDatabase
 import com.example.trainings.database.models.TrainingDataDbo
 import com.example.trainings.database.models.TrainingResponseDBO
 import com.example.trainings.domain.TrainingsRepository
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
 import kotlinx.coroutines.flow.onEach
@@ -67,18 +60,7 @@ class TrainingsRepositoryImpl @Inject constructor(
     }
 
 
-    // temporary not actual
-    override fun observeTrainingResponse(): Flow<RequestResult<List<TrainingData>>> {
-        return database.trainingDao().observeCache()
-            .filterNotNull()
-            .map { cache ->
-                TrainingResponse(
-                    workouts = cache.workouts ?: emptyList(),
-                    videoResultTraining = cache.videoResultTraining ?: emptyList()
-                )
-            }
-            .flowOn(Dispatchers.IO)
-    }
+
 
     override suspend fun refresh() {
         val sessionsResult = api.getWorkoutSessions().map { it.results }
@@ -144,7 +126,12 @@ class TrainingsRepositoryImpl @Inject constructor(
             }
 
     }
-   // actual
+
+    override fun observeTrainingResponse(): Flow<TrainingData> {
+        TODO("Not yet implemented")
+    }
+
+    // actual
     private suspend fun saveTrainingDataToCache(data: List<TrainingDataDto>) {
         val dbos = data.map { trainingDto ->
             trainingDto.toTrainingDataDbo()

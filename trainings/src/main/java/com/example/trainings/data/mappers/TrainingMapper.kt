@@ -1,9 +1,14 @@
 package com.example.trainings.data.mappers
 
+import com.example.trainings.data.local.modelsDTO.ExerciseDto
+import com.example.trainings.data.local.modelsDTO.ExerciseInfoDto
 import com.example.trainings.data.local.modelsDTO.TrainingDataDto
 import com.example.trainings.data.local.modelsDTO.TrainingVideosDTO
 import com.example.trainings.data.local.modelsDTO.VideoResultTrainingDTO
 import com.example.trainings.data.local.modelsDTO.WorkoutSessionDTO
+import com.example.trainings.data.mappers.TrainingMapper.toExercise
+import com.example.trainings.data.response.Exercise
+import com.example.trainings.data.response.ExerciseInfo
 import com.example.trainings.data.response.TrainingData
 import com.example.trainings.data.response.VideoResultTraining
 import com.example.trainings.data.response.WorkoutSession
@@ -90,6 +95,42 @@ object TrainingMapper {
             id, uuid, exercise, exerciseUuid, videoUrl, isMain, duration
         )
     }
+
+    fun List<ExerciseInfo>.toExerciseInfoDto(): List<ExerciseInfoDto> {
+        return this.map {
+            ExerciseInfoDto(
+                id = it.id,
+                muscles = it.muscles,
+                equipment = it.equipment
+            )
+        }
+    }
+
+    fun List<ExerciseInfo>.toExerciseInfo(): List<ExerciseInfo> {
+        return this.map {
+            ExerciseInfo(
+                id = it.id,
+                muscles = it.muscles,
+                equipment = it.equipment
+            )
+        }
+    }
+
+    fun ExerciseDto.toExercise(): Exercise {
+        return Exercise(
+            count = count,
+            next = next,
+            previous = previous,
+            results = results.map {
+                ExerciseInfo(
+                    id = it.id,
+                    muscles = it.muscles,
+                    equipment = it.equipment
+                )
+            }
+        )
+    }
+
 
 
 //    fun WorkoutSessionResultDTO.toWorkoutSessionResult(): WorkoutSessionResult {
