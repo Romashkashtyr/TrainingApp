@@ -5,8 +5,8 @@ import androidx.room.Entity
 
 @Entity(tableName = "exercise")
 data class ExerciseDbo(
-    @ColumnInfo("count") val count: Int,
+    @ColumnInfo("count") val count: Int?,
     @ColumnInfo("next") val next: String?,
     @ColumnInfo("previous") val previous: String?,
-    @ColumnInfo("results") val results: List<ExerciseInfoDbo>
+    @ColumnInfo("results") val results: List<ExerciseInfoDbo>?
 )

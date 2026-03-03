@@ -8,6 +8,6 @@ import com.example.trainings.data.response.Muscles
 @Entity(tableName = "exercise_info")
 data class ExerciseInfoDbo(
     @ColumnInfo("id") val id: Int,
-    @ColumnInfo("muscles") val muscles: List<Muscles>,
-    @ColumnInfo("equipment") val equipment: List<Equipment>
+    @ColumnInfo("muscles") val muscles: List<MusclesDbo>,
+    @ColumnInfo("equipment") val equipment: List<EquipmentDbo>
 )

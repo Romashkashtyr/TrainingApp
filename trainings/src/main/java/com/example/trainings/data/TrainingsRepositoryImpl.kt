@@ -2,14 +2,19 @@ package com.example.trainings.data
 
 import com.example.trainings.data.local.modelsDTO.TrainingDataDto
 import com.example.trainings.data.local.modelsDTO.VideoResultTrainingDTO
+import com.example.trainings.data.mappers.TrainingMapper.toExercise
+import com.example.trainings.data.mappers.TrainingMapper.toExerciseDbo
 import com.example.trainings.data.mappers.TrainingMapper.toTrainingData
 import com.example.trainings.data.mappers.TrainingMapper.toTrainingDataDbo
 import com.example.trainings.data.mappers.TrainingMapper.toVideoResultTrainingDBO
 import com.example.trainings.data.mappers.TrainingMapper.toVideoResultTrainingDTO
+import com.example.trainings.data.response.Exercise
+import com.example.trainings.data.response.ExerciseInfo
 import com.example.trainings.data.response.NetworkService
 import com.example.trainings.data.response.TrainingData
 import com.example.trainings.data.response.VideoResultTraining
 import com.example.trainings.database.TrainingRoomDatabase
+import com.example.trainings.database.models.ExerciseDbo
 import com.example.trainings.database.models.TrainingDataDbo
 import com.example.trainings.database.models.TrainingResponseDBO
 import com.example.trainings.domain.TrainingsRepository
@@ -35,168 +40,191 @@ class TrainingsRepositoryImpl @Inject constructor(
 ) : TrainingsRepository {
 
 
-    override fun getAllVideoFromServer(query: String): Flow<RequestResult<List<VideoResultTraining>>> {
-        return flow { emit(api.getVideosTraining(exercise = query)) }
-            .onEach { result ->
-                val response = result
-                if (result.isSuccess) saveVideosToCache(
-                    response.getOrThrow().map {
-                        it.toVideoResultTrainingDTO()
-                    }
-                )
-            }
-            .map { it.toRequestResult() }
-
-    }
+//    override fun getAllVideoFromServer(query: String): Flow<RequestResult<List<VideoResultTraining>>> {
+//        return flow { emit(api.getVideosTraining(exercise = query)) }
+//            .onEach { result ->
+//                val response = result
+//                if (result.isSuccess) saveVideosToCache(
+//                    response.getOrThrow().map {
+//                        it.toVideoResultTrainingDTO()
+//                    }
+//                )
+//            }
+//            .map { it.toRequestResult() }
+//
+//    }
 
 
     // временно
-    fun <T : Any> Result<T>.toRequestResult(): RequestResult<T> {
-        return when {
-            isSuccess -> RequestResult.Success(getOrThrow())
-            isFailure -> RequestResult.Error()
-            else -> error("Impossible branch")
-        }
-    }
+//    fun <T : Any> Result<T>.toRequestResult(): RequestResult<T> {
+//        return when {
+//            isSuccess -> RequestResult.Success(getOrThrow())
+//            isFailure -> RequestResult.Error()
+//            else -> error("Impossible branch")
+//        }
+//    }
 
 
 
 
-    override suspend fun refresh() {
-        val sessionsResult = api.getWorkoutSessions().map { it.results }
-        val videosResult = api.getVideos().map { it.results }
-
-        if (sessionsResult.isSuccess && videosResult.isSuccess) {
-            val workouts = sessionsResult.getOrNull()
-            val videos = videosResult.getOrNull()
-
-            database.trainingDao().insertCache(
-                TrainingResponseDBO(
-                    id = 1,
-                    workouts = workouts,
-                    videoResultTraining = videos
-                )
-            )
-        }
-    }
+//    override suspend fun refresh() {
+//        val sessionsResult = api.getWorkoutSessions().map { it.results }
+//        val videosResult = api.getVideos().map { it.results }
+//
+//        if (sessionsResult.isSuccess && videosResult.isSuccess) {
+//            val workouts = sessionsResult.getOrNull()
+//            val videos = videosResult.getOrNull()
+//
+//            database.trainingDao().insertCache(
+//                TrainingResponseDBO(
+//                    id = 1,
+//                    workouts = workouts,
+//                    videoResultTraining = videos
+//                )
+//            )
+//        }
+//    }
 
 
     // actual
-    @OptIn(ExperimentalCoroutinesApi::class)
-    override fun getAll(author: List<String>): Flow<RequestResult<List<TrainingData>>> {
-        val cachedAllTrainingData: Flow<RequestResult<List<TrainingData>>> = getAllFromDatabase()
-        val remoteTrainingData: Flow<RequestResult<List<TrainingData>>> = getAllFromServer(author)
+//    @OptIn(ExperimentalCoroutinesApi::class)
+//    override fun getAll(author: List<String>): Flow<RequestResult<List<TrainingData>>> {
+//        val cachedAllTrainingData: Flow<RequestResult<List<TrainingData>>> = getAllFromDatabase()
+//        val remoteTrainingData: Flow<RequestResult<List<TrainingData>>> = getAllFromServer(author)
+//
+//        return cachedAllTrainingData.combine(remoteTrainingData) { cachedResult, remoteResult ->
+//            when {
+//                remoteResult is RequestResult.Success -> {
+//                    remoteResult
+//                }
+//
+//                remoteResult is RequestResult.Error && cachedResult is RequestResult.Success -> {
+//                    cachedResult
+//                }
+//
+//                cachedResult is RequestResult.InProgress && remoteResult is RequestResult.InProgress -> {
+//                    RequestResult.InProgress(cachedResult.data ?: remoteResult.data)
+//                }
+//
+//                remoteResult is RequestResult.Error -> {
+//                    remoteResult
+//                }
+//
+//                else -> {
+//                    cachedResult
+//                }
+//            }
+//        }
+//            .onStart {
+//                RequestResult.InProgress(data = null)
+//            }
+//            .flatMapLatest { result ->
+//                if (result is RequestResult.Success) {
+//                    database.trainingDao().observeAll()
+//                        .map { dbos ->
+//                            dbos.map { it.toTrainingData() }
+//                        }
+//                        .map { RequestResult.Success(it) }
+//                } else {
+//                    flowOf(result)
+//                }
+//            }
+//
+//    }
 
-        return cachedAllTrainingData.combine(remoteTrainingData) { cachedResult, remoteResult ->
-            when {
-                remoteResult is RequestResult.Success -> {
-                    remoteResult
-                }
+    override suspend fun loadExercises(): Exercise {
+        val result = api.getExerciseInfo()
 
-                remoteResult is RequestResult.Error && cachedResult is RequestResult.Success -> {
-                    cachedResult
-                }
+        return if (result.isSuccess) {
+            val response = result.getOrNull()?.toExerciseDbo()
 
-                cachedResult is RequestResult.InProgress && remoteResult is RequestResult.InProgress -> {
-                    RequestResult.InProgress(cachedResult.data ?: remoteResult.data)
-                }
-
-                remoteResult is RequestResult.Error -> {
-                    remoteResult
-                }
-
-                else -> {
-                    cachedResult
-                }
-            }
+            database.trainingDao().insertExerciseCache(
+                ExerciseDbo(
+                    count = response?.count,
+                    next = response?.next,
+                    previous = response?.previous,
+                    results = response?.results
+                )
+            )
+        } else {
+         getCachedExercises()
         }
-            .onStart {
-                RequestResult.InProgress(data = null)
-            }
-            .flatMapLatest { result ->
-                if (result is RequestResult.Success) {
-                    database.trainingDao().observeAll()
-                        .map { dbos ->
-                            dbos.map { it.toTrainingData() }
-                        }
-                        .map { RequestResult.Success(it) }
-                } else {
-                    flowOf(result)
-                }
-            }
-
     }
 
-    override fun observeTrainingResponse(): Flow<TrainingData> {
+    override suspend fun getCachedExercises(): Exercise {
         TODO("Not yet implemented")
     }
 
-    // actual
-    private suspend fun saveTrainingDataToCache(data: List<TrainingDataDto>) {
-        val dbos = data.map { trainingDto ->
-            trainingDto.toTrainingDataDbo()
-        }
-        database.trainingDao().insertDataCache(dbos)
-    }
-
-
-    //actual
-    private fun getAllFromServer(query: List<String>): Flow<RequestResult<List<TrainingData>>> {
-        val apiRequest = flow { emit(api.getData(authorHistory = query)) }
-            .onEach { result ->
-                if (result.isSuccess) saveTrainingDataToCache(result.getOrThrow())
-            }
-            .onEach { result ->
-                if (result.isFailure) throw Exception()
-            }
-            .map { it.toRequestResult() }
-
-        val start = flowOf<RequestResult<List<TrainingDataDto>>>(RequestResult.InProgress())
-        return merge(apiRequest, start)
-            .map { result: RequestResult<List<TrainingDataDto>> ->
-                result.map { dtoList ->
-                    dtoList.map {
-                        it.toTrainingData()
-                    }
-                }
-            }
-    }
+//    override fun observeTrainingResponse(): Flow<TrainingData> {
+//        TODO("Not yet implemented")
+//    }
 
     // actual
-    private fun getAllFromDatabase(): Flow<RequestResult<List<TrainingData>>> {
-        val dbRequest = database.trainingDao()::getAll.asFlow()
-            .map { RequestResult.Success(it) }
-
-        val start = flowOf<RequestResult<List<TrainingDataDbo>>>(RequestResult.InProgress())
-
-        return merge(start, dbRequest).map {result ->
-            result.map { dbos ->
-                dbos.map {
-                    it?.toTrainingData() ?: TrainingData()
-                }
-            }
-        }
-
-    }
-
-    override suspend fun <T> safeApiCall(call: suspend () -> Response<T>): Result<T> {
-        return try {
-            val response = call()
-            if (response.isSuccessful) {
-                response.body()?.let { Result.success(it) }
-                    ?: Result.failure(Exception("Empty body"))
-            } else {
-                Result.failure(Exception("API error: ${response.code()}"))
-            }
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
-    }
-
-
-    private suspend fun saveVideosToCache(data: List<VideoResultTrainingDTO>) {
-        val dbos = data.map { videoDTO -> videoDTO.toVideoResultTrainingDBO() }
-        database.trainingDao().insertCacheVideo(dbos)
-
-    }
+//    private suspend fun saveTrainingDataToCache(data: List<TrainingDataDto>) {
+//        val dbos = data.map { trainingDto ->
+//            trainingDto.toTrainingDataDbo()
+//        }
+//        database.trainingDao().insertDataCache(dbos)
+//    }
+//
+//
+//    //actual
+//    private fun getAllFromServer(query: List<String>): Flow<RequestResult<List<TrainingData>>> {
+//        val apiRequest = flow { emit(api.getData(authorHistory = query)) }
+//            .onEach { result ->
+//                if (result.isSuccess) saveTrainingDataToCache(result.getOrThrow())
+//            }
+//            .onEach { result ->
+//                if (result.isFailure) throw Exception()
+//            }
+//            .map { it.toRequestResult() }
+//
+//        val start = flowOf<RequestResult<List<TrainingDataDto>>>(RequestResult.InProgress())
+//        return merge(apiRequest, start)
+//            .map { result: RequestResult<List<TrainingDataDto>> ->
+//                result.map { dtoList ->
+//                    dtoList.map {
+//                        it.toTrainingData()
+//                    }
+//                }
+//            }
+//    }
+//
+//    // actual
+//    private fun getAllFromDatabase(): Flow<RequestResult<List<TrainingData>>> {
+//        val dbRequest = database.trainingDao()::getAll.asFlow()
+//            .map { RequestResult.Success(it) }
+//
+//        val start = flowOf<RequestResult<List<TrainingDataDbo>>>(RequestResult.InProgress())
+//
+//        return merge(start, dbRequest).map {result ->
+//            result.map { dbos ->
+//                dbos.map {
+//                    it?.toTrainingData() ?: TrainingData()
+//                }
+//            }
+//        }
+//
+//    }
+//
+//    override suspend fun <T> safeApiCall(call: suspend () -> Response<T>): Result<T> {
+//        return try {
+//            val response = call()
+//            if (response.isSuccessful) {
+//                response.body()?.let { Result.success(it) }
+//                    ?: Result.failure(Exception("Empty body"))
+//            } else {
+//                Result.failure(Exception("API error: ${response.code()}"))
+//            }
+//        } catch (e: Exception) {
+//            Result.failure(e)
+//        }
+//    }
+//
+//
+//    private suspend fun saveVideosToCache(data: List<VideoResultTrainingDTO>) {
+//        val dbos = data.map { videoDTO -> videoDTO.toVideoResultTrainingDBO() }
+//        database.trainingDao().insertCacheVideo(dbos)
+//
+//    }
 }
