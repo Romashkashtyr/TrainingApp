@@ -2,7 +2,6 @@ package com.example.trainings.ui
 
 import com.example.core.base.BaseView
 import com.example.trainings.Training
-import com.example.trainings.data.response.VideoResultTraining
 import kotlinx.coroutines.flow.Flow
 import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType

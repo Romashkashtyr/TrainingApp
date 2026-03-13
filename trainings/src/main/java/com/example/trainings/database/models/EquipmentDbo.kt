@@ -6,6 +6,6 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "equipment")
 data class EquipmentDbo(
-    @PrimaryKey @ColumnInfo("id") val id: Int = 0,
-    @ColumnInfo("name") val name: String? = null
+    @PrimaryKey val id: Int = 0,
+    val name: String? = null
 )

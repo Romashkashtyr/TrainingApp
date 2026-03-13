@@ -3,9 +3,6 @@ package com.example.trainings.ui
 
 import com.example.core.base.BasePresenter
 import com.example.trainings.data.response.TrainingResponse
-import com.example.trainings.data.response.VideoResultTraining
-import com.example.trainings.data.response.WorkoutSession
-import com.example.trainings.database.models.TrainingResponseDBO
 import com.example.trainings.domain.FitnessRepositoryResult
 import com.example.trainings.domain.TrainingsRepository
 import kotlinx.coroutines.Dispatchers

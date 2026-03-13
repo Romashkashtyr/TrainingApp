@@ -1,8 +1,6 @@
 package com.example.trainings.database.converters
 
 import androidx.room.TypeConverter
-import com.example.trainings.data.response.VideoResultTraining
-import com.example.trainings.data.response.WorkoutSession
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import javax.inject.Inject

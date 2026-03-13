@@ -1,9 +1,6 @@
 package com.example.trainings.data
 
 import com.example.trainings.data.response.NetworkService
-import com.example.trainings.data.response.VideoResultTraining
-import com.example.trainings.data.response.VideosResponse
-import com.example.trainings.data.response.WorkoutSession
 import com.example.trainings.domain.FitnessRepositoryResult
 import javax.inject.Inject
 

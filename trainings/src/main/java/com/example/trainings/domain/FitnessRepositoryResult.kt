@@ -1,9 +1,5 @@
 package com.example.trainings.domain
 
-import com.example.trainings.data.response.VideoResultTraining
-import com.example.trainings.data.response.VideosResponse
-import com.example.trainings.data.response.WorkoutSession
-
 interface FitnessRepositoryResult {
 
     suspend fun getWorkoutSessions(

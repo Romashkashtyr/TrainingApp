@@ -6,20 +6,22 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.trainings.database.converters.Converters
-import com.example.trainings.database.models.TrainingResponseDBO
-import com.example.trainings.database.models.TrainingVideosDBO
-import com.example.trainings.database.models.VideoResultTrainingDBO
-import com.example.trainings.database.models.WorkoutSessionDBO
+import com.example.trainings.database.models.EquipmentDbo
+import com.example.trainings.database.models.ExerciseDbo
+import com.example.trainings.database.models.ExerciseInfoDbo
+import com.example.trainings.database.models.MusclesDbo
+import com.example.trainings.database.models.TrainingDataDbo
 import com.example.trainings.database.models.dao.TrainingDAO
 import java.lang.IllegalStateException
 
 
 @Database(
     entities = [
-        TrainingResponseDBO::class,
-        TrainingVideosDBO::class,
-        VideoResultTrainingDBO::class,
-        WorkoutSessionDBO::class,
+        EquipmentDbo::class,
+        ExerciseDbo::class,
+        ExerciseInfoDbo::class,
+        MusclesDbo::class,
+        TrainingDataDbo::class
     ], version = 1,
     exportSchema = false
 )
@@ -41,6 +43,7 @@ abstract class TrainingRoomDatabase : RoomDatabase() {
             ).build()
         }
 
-        fun getInstanceDb(): TrainingRoomDatabase = instance ?: throw IllegalStateException("Unexpected database")
+        fun getInstanceDb(): TrainingRoomDatabase =
+            instance ?: throw IllegalStateException("Unexpected database")
     }
 }

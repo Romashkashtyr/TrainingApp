@@ -2,9 +2,10 @@ package com.example.trainings.database.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 @Entity(tableName = "muscles")
 data class MusclesDbo(
-    @ColumnInfo("name") val name: String?,
-    @ColumnInfo("imageUrlMain") val imageUrlMain: String?
+    @PrimaryKey val name: String?,
+    val imageUrlMain: String?
 )
