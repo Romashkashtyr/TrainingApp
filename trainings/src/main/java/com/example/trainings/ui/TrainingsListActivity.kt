@@ -57,9 +57,6 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
         }
     }
 
-    override fun showVideoTraining(trainingList: List<String>): String {
-        TODO("Not yet implemented")
-    }
 
     companion object {
         fun getIntent(fromContext: Context): Intent =

@@ -1,10 +1,11 @@
 package com.example.trainings.data
 
+import android.util.Log
+import com.example.trainings.data.mappers.TrainingMapper.toExercise
 import com.example.trainings.data.mappers.TrainingMapper.toExerciseDbo
 import com.example.trainings.data.response.Exercise
 import com.example.trainings.data.response.NetworkService
 import com.example.trainings.database.TrainingRoomDatabase
-import com.example.trainings.database.models.ExerciseDbo
 import com.example.trainings.domain.TrainingsRepository
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -19,25 +20,26 @@ class TrainingsRepositoryImpl @Inject constructor(
     override suspend fun loadExercises(): Exercise {
         val result = api.getExerciseInfo()
 
-        return if (result.isSuccess) {
-            val response = result.getOrNull()?.toExerciseDbo()
+        if (result.isSuccess) {
+            val response = result.getOrNull()
 
-            database.trainingDao().insertExerciseCache(
-                ExerciseDbo(
-                    count = response?.count,
-                    next = response?.next,
-                    previous = response?.previous,
-                    results = response?.results
-                )
-            )
-        } else {
-            getCachedExercises()
+            if (response != null) {
+                val dbo = response.toExerciseDbo()
+
+                val success = database.trainingDao().insertExerciseCache(dbo)
+
+                if (success) {
+                    return response.toExercise()
+                } else {
+                    Log.e("Repo", "Не удалось сохранить данные в Room")
+                }
+            }
         }
+        return getCachedExercises()
     }
 
     override suspend fun getCachedExercises(): Exercise {
         TODO("Not yet implemented")
     }
-
 
 }

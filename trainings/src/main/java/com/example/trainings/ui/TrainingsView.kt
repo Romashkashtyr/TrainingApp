@@ -12,5 +12,4 @@ interface TrainingsView : BaseView {
 
     fun showTrainingsList(trainingList: List<Training>)
 
-    fun showVideoTraining(trainingList: List<String>) : String
 }
