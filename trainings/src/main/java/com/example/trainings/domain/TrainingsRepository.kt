@@ -18,7 +18,7 @@ interface TrainingsRepository {
 
     suspend fun loadExercises(): Exercise
 
-    suspend fun getCachedExercises(): Exercise
+    suspend fun getCachedExercises(): Exercise?
 
 //
 //

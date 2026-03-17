@@ -3,11 +3,13 @@ package com.example.trainings.ui
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.core.base.BaseActivity
 import com.example.core.navigation.RouterHolder.router
 import com.example.core.navigation.Screen
 import com.example.trainings.Training
+import com.example.trainings.data.response.Exercise
 import com.example.trainings.databinding.ActivityTrainingsListBinding
 import com.example.trainings.di.TrainingComponent
 import com.example.trainings.di.modules.TrainingFactory
@@ -43,8 +45,6 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
         }
 
         binding.trainingList.setOnClickListener {
-            presenter.observeVideo()
-            presenter.observeWorkout()
         }
     }
 
@@ -55,6 +55,14 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
             layoutManager = LinearLayoutManager(this@TrainingsListActivity)
             adapter = trainingAdapter
         }
+    }
+
+    override fun showLoading() {
+        TODO()
+    }
+
+    override fun showExercises(exercise: Exercise) {
+        trainingAdapter = TrainingAdapter(exercise)
     }
 
 

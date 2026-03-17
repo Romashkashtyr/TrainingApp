@@ -6,9 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trainings.R
 import com.example.trainings.Training
+import com.example.trainings.data.response.Exercise
 import com.example.trainings.databinding.ItemTrainingBinding
 
-class TrainingAdapter(private val trainingsList: List<Training>) :
+class TrainingAdapter(private val trainingsList: List<Exercise>) :
     RecyclerView.Adapter<TrainingAdapter.TrainingViewHolder>() {
 
     inner class TrainingViewHolder(

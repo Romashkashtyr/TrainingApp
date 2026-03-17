@@ -20,46 +20,6 @@ import com.example.trainings.database.models.TrainingDataDbo
 
 object TrainingMapper {
 
-    fun WorkoutSessionDTO.toWorkoutSession(): WorkoutSession {
-        return WorkoutSession(
-            count = count,
-            next = next,
-            previous = previous,
-            results = results
-        )
-    }
-
-
-    fun WorkoutSessionDTO.toWorkoutSessionDbo(): WorkoutSessionDBO {
-        return WorkoutSessionDBO(
-            id = id,
-            count = count,
-            next = next,
-            previous = previous,
-            results = results
-        )
-    }
-
-    fun TrainingVideosDTO.toTrainingVideosDBO(): TrainingVideosDBO {
-        return TrainingVideosDBO(
-            count = count,
-            previous = previous,
-            next = next,
-            result = result
-        )
-    }
-
-    fun VideoResultTrainingDTO.toVideoResultTrainingDBO(): VideoResultTrainingDBO {
-        return VideoResultTrainingDBO(
-            id, uuid, exercise, exerciseUuid, videoUrl, isMain, duration
-        )
-    }
-
-    fun VideoResultTrainingDTO.toVideoResultTraining(): VideoResultTraining {
-        return VideoResultTraining(
-            id, uuid, exercise, exerciseUuid, videoUrl, isMain, duration
-        )
-    }
 
     fun TrainingDataDto.toTrainingData(): TrainingData {
         return TrainingData(
@@ -91,11 +51,6 @@ object TrainingMapper {
         )
     }
 
-    fun VideoResultTraining.toVideoResultTrainingDTO(): VideoResultTrainingDTO {
-        return VideoResultTrainingDTO(
-            id, uuid, exercise, exerciseUuid, videoUrl, isMain, duration
-        )
-    }
 
     fun List<ExerciseInfo>.toExerciseInfoDto(): List<ExerciseInfoDto> {
         return this.map {
@@ -103,6 +58,7 @@ object TrainingMapper {
                 id = it.id,
                 muscles = it.muscles.map { muscle ->
                     MusclesDto(
+                        id = it.id,
                         name = muscle.name,
                         imageUrlMain = muscle.imageUrlMain
                     )
@@ -155,6 +111,7 @@ object TrainingMapper {
 
     fun ExerciseDto.toExerciseDbo(): ExerciseDbo {
         return ExerciseDbo(
+            id = id,
             count = count,
             next = next,
             previous = previous,
@@ -163,6 +120,7 @@ object TrainingMapper {
                     id = exerciseInfo.id,
                     muscles = exerciseInfo.muscles.map {
                         MusclesDbo(
+                            id = it.id,
                             name = it.name,
                             imageUrlMain = it.imageUrlMain
                         )
@@ -179,15 +137,32 @@ object TrainingMapper {
     }
 
 
-//    fun WorkoutSessionResultDTO.toWorkoutSessionResult(): WorkoutSessionResult {
-//        return WorkoutSessionResult(
-//            id = id,
-//            day = day,
-//            timeStart = timeStart,
-//            timeEnd = timeEnd
-//        )
-//
-//
-//    }
+    fun ExerciseDbo.toExercise(): Exercise? {
+        return results?.map { exerciseInfo ->
+            ExerciseInfo(
+                id = exerciseInfo.id,
+                muscles = exerciseInfo.muscles.map {
+                    Muscles(
+                        name = it.name,
+                        imageUrlMain = it.imageUrlMain
+                    )
+                },
+                equipment = exerciseInfo.equipment.map {
+                    Equipment(
+                        id = it.id,
+                        name = it.name
+                    )
+                }
+            )
+        }?.let {
+            Exercise(
+                count = count ?: 0,
+                next = next,
+                previous = previous,
+                results = it
+            )
+        }
+    }
+
 
 }

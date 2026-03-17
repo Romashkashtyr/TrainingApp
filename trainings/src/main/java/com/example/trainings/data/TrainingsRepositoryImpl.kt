@@ -31,15 +31,17 @@ class TrainingsRepositoryImpl @Inject constructor(
                 if (success) {
                     return response.toExercise()
                 } else {
-                    Log.e("Repo", "Не удалось сохранить данные в Room")
+                    Log.e("Repo", "Не удалось сохранить данные")
                 }
             }
         }
-        return getCachedExercises()
+        return getCachedExercises() ?: Exercise(0, null, null, emptyList())
     }
 
-    override suspend fun getCachedExercises(): Exercise {
-        TODO("Not yet implemented")
+    override suspend fun getCachedExercises(): Exercise? {
+        val cache = database.trainingDao().getCache() ?: return null
+
+        return cache.toExercise()
     }
 
 }

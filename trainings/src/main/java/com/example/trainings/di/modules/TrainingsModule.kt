@@ -1,6 +1,5 @@
 package com.example.trainings.di.modules
 
-import com.example.trainings.data.FitnessResultRepositoryImpl
 import com.example.trainings.domain.TrainingsRepository
 import com.example.trainings.ui.TrainingsPresenter
 import dagger.Module
