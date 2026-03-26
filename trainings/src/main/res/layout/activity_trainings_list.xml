@@ -14,7 +14,8 @@
         android:src="@drawable/back"
         app:layout_constraintBottom_toTopOf="@+id/training_list"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></ImageView>
+        app:layout_constraintTop_toTopOf="parent">
+    </ImageView>
 
     <TextView
         android:id="@+id/training_list"
@@ -28,6 +29,17 @@
         app:layout_constraintTop_toBottomOf="@id/arrow_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ProgressBar
+        android:id="@+id/training_pg_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/training_list"
+        app:layout_constraintTop_toTopOf="@id/rc_view_training"
+        app:layout_constraintStart_toStartOf="@id/training_list"
+        app:layout_constraintEnd_toEndOf="@id/training_list"
+        android:visibility="gone">
+    </ProgressBar>
 
 
     <androidx.recyclerview.widget.RecyclerView

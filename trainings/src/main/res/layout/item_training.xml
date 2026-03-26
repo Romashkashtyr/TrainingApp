@@ -15,18 +15,18 @@
         android:padding="16dp">
 
         <TextView
-            android:id="@+id/training_name"
+            android:id="@+id/muscles_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/training_name"
+            android:text="@string/muscles_group"
             android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/training_duration"
+            android:id="@+id/training_equipment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/duration"
+            android:text="@string/training_equipment"
             android:textSize="14sp"
             android:layout_marginTop="4dp" />
 

@@ -37,6 +37,7 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
         super.onCreate(savedInstanceState)
         binding = ActivityTrainingsListBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        presenter.loadExercises()
         //presenter.requestTrainingList()
 
         binding.arrowBack.setOnClickListener {
@@ -44,25 +45,23 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
             finish()
         }
 
-        binding.trainingList.setOnClickListener {
-        }
     }
 
 
-    override fun showTrainingsList(trainingList: List<Training>) {
-        trainingAdapter = TrainingAdapter(trainingList)
+    override fun showLoading() {
+        binding.trainingPgBar.visibility = View.VISIBLE
+    }
+
+    override fun stopLoading() {
+        binding.trainingPgBar.visibility = View.GONE
+    }
+
+    override fun showExercises(exercises: List<Exercise>) {
+        trainingAdapter = TrainingAdapter(exercises)
         binding.rcViewTraining.apply {
             layoutManager = LinearLayoutManager(this@TrainingsListActivity)
             adapter = trainingAdapter
         }
-    }
-
-    override fun showLoading() {
-        TODO()
-    }
-
-    override fun showExercises(exercise: Exercise) {
-        trainingAdapter = TrainingAdapter(exercise)
     }
 
 

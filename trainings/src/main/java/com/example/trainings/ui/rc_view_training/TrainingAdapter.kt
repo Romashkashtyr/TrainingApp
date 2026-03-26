@@ -1,11 +1,8 @@
 package com.example.trainings.ui.rc_view_training
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.trainings.R
-import com.example.trainings.Training
 import com.example.trainings.data.response.Exercise
 import com.example.trainings.databinding.ItemTrainingBinding
 
@@ -14,18 +11,13 @@ class TrainingAdapter(private val trainingsList: List<Exercise>) :
 
     inner class TrainingViewHolder(
         private val binding: ItemTrainingBinding,
-        private val context: Context
     ) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Training) {
-            binding.trainingName.text = item.trainingName
-            binding.trainingDuration.text = item.duration.toIsoString()
-            binding.trainingComplexity.text = when (item.complexity) {
-                0 -> context.getString(R.string.level_easy)
-                1 -> context.getString(R.string.level_medium)
-                else -> context.getString(R.string.level_hard)
-            }
+        fun bind(item: Exercise) {
+            binding.musclesGroup.text = item.results.firstOrNull()?.muscles?.joinToString { ", " }
+            binding.trainingEquipment.text =
+                item.results.firstOrNull()?.equipment?.joinToString { ", " }
         }
 
     }
@@ -33,7 +25,7 @@ class TrainingAdapter(private val trainingsList: List<Exercise>) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrainingViewHolder {
         val binding = ItemTrainingBinding
             .inflate(LayoutInflater.from(parent.context), parent, false)
-        return TrainingViewHolder(binding, parent.context)
+        return TrainingViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
