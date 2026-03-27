@@ -1,8 +1,8 @@
 package com.example.trainings.data.response
 
 data class Exercise(
-    val count: Int,
-    val next: String?,
-    val previous: String?,
-    val results: List<ExerciseInfo>
-)
+    override val count: Int,
+    override val next: String?,
+    override val previous: String?,
+    override val results: List<ExerciseInfo>
+) : ExerciseInterface
