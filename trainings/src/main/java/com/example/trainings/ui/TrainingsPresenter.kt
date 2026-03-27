@@ -18,7 +18,7 @@ class TrainingsPresenter @Inject constructor(
         withLoad {
             try {
                 val data = repository.loadExercises()
-                viewState.showExercises(data)
+                viewState.showExercises(listOf(data))
             } catch (e: Exception) {
                 if (e is CancellationException) {
                     throw e

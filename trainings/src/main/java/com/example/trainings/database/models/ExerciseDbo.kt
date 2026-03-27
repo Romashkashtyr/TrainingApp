@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "exercise")
 data class ExerciseDbo(
-    @PrimaryKey(autoGenerate = true) val id: Int?,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val count: Int?,
     val next: String?,
     val previous: String?,

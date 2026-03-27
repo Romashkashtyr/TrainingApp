@@ -3,10 +3,12 @@ package com.example.trainings.ui.rc_view_training
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.trainings.data.local.modelsDTO.ExerciseInfoDto
 import com.example.trainings.data.response.Exercise
+import com.example.trainings.data.response.ExerciseInfo
 import com.example.trainings.databinding.ItemTrainingBinding
 
-class TrainingAdapter(private val trainingsList: List<Exercise>) :
+class TrainingAdapter(private val trainingsList: MutableList<Exercise>) :
     RecyclerView.Adapter<TrainingAdapter.TrainingViewHolder>() {
 
     inner class TrainingViewHolder(
@@ -34,5 +36,11 @@ class TrainingAdapter(private val trainingsList: List<Exercise>) :
 
     override fun onBindViewHolder(holder: TrainingViewHolder, position: Int) {
         return holder.bind(trainingsList[position])
+    }
+
+    fun updateList(newItems: List<Exercise>) {
+        trainingsList.clear()
+        trainingsList.addAll(newItems)
+        notifyItemChanged(newItems.size)
     }
 }

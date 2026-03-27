@@ -10,7 +10,7 @@ import retrofit2.Response
 
 interface TrainingsRepository {
 
-    suspend fun loadExercises(): List<Exercise>
+    suspend fun loadExercises(): Exercise
 
     suspend fun getCachedExercises(): Exercise?
 }

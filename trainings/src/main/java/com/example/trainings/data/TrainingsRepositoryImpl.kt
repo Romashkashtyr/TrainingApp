@@ -1,6 +1,7 @@
 package com.example.trainings.data
 
 import android.util.Log
+import com.example.trainings.data.local.modelsDTO.ExerciseDto
 import com.example.trainings.data.mappers.TrainingMapper.toExercise
 import com.example.trainings.data.mappers.TrainingMapper.toExerciseDbo
 import com.example.trainings.data.response.Exercise
@@ -42,6 +43,11 @@ class TrainingsRepositoryImpl @Inject constructor(
         val cache = database.trainingDao().getCache() ?: return null
 
         return cache.toExercise()
+    }
+
+    private suspend fun saveToDatabase(dto: ExerciseDto) {
+        val exerciseDbo = dto.toExerciseDbo()
+        database.trainingDao().insertExerciseCache(exerciseDbo)
     }
 
 }

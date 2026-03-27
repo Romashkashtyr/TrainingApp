@@ -57,12 +57,14 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
     }
 
     override fun showExercises(exercises: List<Exercise>) {
-        trainingAdapter = TrainingAdapter(exercises)
+        trainingAdapter.updateList(exercises)
         binding.rcViewTraining.apply {
             layoutManager = LinearLayoutManager(this@TrainingsListActivity)
             adapter = trainingAdapter
         }
     }
+
+
 
 
     companion object {

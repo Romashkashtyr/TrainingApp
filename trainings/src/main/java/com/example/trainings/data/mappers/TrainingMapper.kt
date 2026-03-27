@@ -21,37 +21,6 @@ import com.example.trainings.database.models.TrainingDataDbo
 object TrainingMapper {
 
 
-    fun TrainingDataDto.toTrainingData(): TrainingData {
-        return TrainingData(
-            id, authorHistory, uuid, exercise, exerciseUuid, videoUrl, isMain, duration
-        )
-    }
-
-    fun TrainingDataDto.toTrainingDataDbo(): TrainingDataDbo {
-        return TrainingDataDbo(
-            id, authorHistory, uuid, exercise, exerciseUuid, videoUrl, isMain, duration
-        )
-    }
-
-    fun TrainingDataDbo.toTrainingData(): TrainingData {
-        return TrainingData(
-            id, authorHistory, uuid, exercise, exerciseUuid, videoUrl, isMain, duration
-        )
-    }
-
-    fun TrainingData.toTrainingDataDbo(): TrainingDataDbo {
-        return TrainingDataDbo(
-            id, authorHistory, uuid, exercise, exerciseUuid, videoUrl, isMain, duration
-        )
-    }
-
-    fun TrainingData.toTrainingDataDto(): TrainingDataDto {
-        return TrainingDataDto(
-            id, authorHistory, uuid, exercise, exerciseUuid, videoUrl, isMain, duration
-        )
-    }
-
-
     fun List<ExerciseInfo>.toExerciseInfoDto(): List<ExerciseInfoDto> {
         return this.map {
             ExerciseInfoDto(
@@ -111,7 +80,6 @@ object TrainingMapper {
 
     fun ExerciseDto.toExerciseDbo(): ExerciseDbo {
         return ExerciseDbo(
-            id = id,
             count = count,
             next = next,
             previous = previous,
