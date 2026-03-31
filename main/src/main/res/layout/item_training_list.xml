@@ -17,6 +17,8 @@
 
         <Button
             android:id="@+id/view_workouts_button"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/trains_county"

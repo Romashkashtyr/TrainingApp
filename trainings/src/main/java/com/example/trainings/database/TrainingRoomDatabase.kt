@@ -10,9 +10,7 @@ import com.example.trainings.database.models.EquipmentDbo
 import com.example.trainings.database.models.ExerciseDbo
 import com.example.trainings.database.models.ExerciseInfoDbo
 import com.example.trainings.database.models.MusclesDbo
-import com.example.trainings.database.models.TrainingDataDbo
 import com.example.trainings.database.models.dao.TrainingDAO
-import java.lang.IllegalStateException
 
 
 @Database(
@@ -21,7 +19,6 @@ import java.lang.IllegalStateException
         ExerciseDbo::class,
         ExerciseInfoDbo::class,
         MusclesDbo::class,
-        TrainingDataDbo::class
     ], version = 1,
     exportSchema = false
 )

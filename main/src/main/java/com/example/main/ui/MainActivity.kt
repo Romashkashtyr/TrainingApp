@@ -9,6 +9,7 @@ import com.example.core.navigation.RouterHolder
 import com.example.core.navigation.Screen
 import com.example.core.structures.DashboardItem
 import com.example.main.databinding.ActivityMainBinding
+import com.example.main.databinding.ItemTrainingListBinding
 import com.example.main.di.MainComponent
 import com.example.main.domain.MainRepository
 import com.example.main.ui.adapters.DashboardAdapterDelegates
@@ -24,6 +25,7 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
 
     private val mainPresenter by moxyPresenter { MainPresenter(mainRepository) }
     private lateinit var binding: ActivityMainBinding
+    private lateinit var bindingSecond: ItemTrainingListBinding
 
 
     private val items = listOf(
@@ -46,8 +48,12 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        bindingSecond = ItemTrainingListBinding.inflate(layoutInflater)
         setContentView(binding.root)
         mainPresenter.requestGetScreenData()
+        bindingSecond.viewWorkoutsButton.setOnClickListener {
+            onTrainingClick()
+        }
     }
 
 

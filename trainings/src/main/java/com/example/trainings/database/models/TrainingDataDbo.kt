@@ -8,15 +8,15 @@ import com.example.trainings.database.converters.Converters
 import com.google.gson.annotations.SerializedName
 
 
-@Entity(tableName = "training")
-data class TrainingDataDbo(
-    @PrimaryKey(autoGenerate = true)
-    var id: Int? = null,
-    var authorHistory: List<String?> = emptyList(),
-    var uuid: String? = null,
-    var exercise: Int? = null,
-    var exerciseUuid: String? = null,
-    var videoUrl: String? = null,
-    var isMain: Boolean? = null,
-    var duration: String? = null,
-)
+//@Entity(tableName = "training")
+//data class TrainingDataDbo(
+//    @PrimaryKey(autoGenerate = true)
+//    var id: Int? = null,
+//    var authorHistory: List<String?> = emptyList(),
+//    var uuid: String? = null,
+//    var exercise: Int? = null,
+//    var exerciseUuid: String? = null,
+//    var videoUrl: String? = null,
+//    var isMain: Boolean? = null,
+//    var duration: String? = null,
+//)

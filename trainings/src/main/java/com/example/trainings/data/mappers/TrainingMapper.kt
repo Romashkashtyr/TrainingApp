@@ -16,7 +16,6 @@ import com.example.trainings.database.models.EquipmentDbo
 import com.example.trainings.database.models.ExerciseDbo
 import com.example.trainings.database.models.ExerciseInfoDbo
 import com.example.trainings.database.models.MusclesDbo
-import com.example.trainings.database.models.TrainingDataDbo
 
 object TrainingMapper {
 

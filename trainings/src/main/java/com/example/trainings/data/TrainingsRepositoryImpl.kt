@@ -27,9 +27,9 @@ class TrainingsRepositoryImpl @Inject constructor(
             if (response != null) {
                 val dbo = response.toExerciseDbo()
 
-                val success = database.trainingDao().insertExerciseCache(dbo)
+                val rowId = database.trainingDao().insertExerciseCacheWithId(dbo)
 
-                if (success) {
+                if (rowId != -1L) {
                     return response.toExercise()
                 } else {
                     Log.e("Repo", "Не удалось сохранить данные")

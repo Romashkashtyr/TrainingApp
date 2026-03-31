@@ -13,8 +13,8 @@ class TrainingsModule {
 
     @Provides
     @Singleton
-    fun provideTrainingPresenterFactory(trainingsRepository: TrainingsRepository, repositoryImpl: FitnessResultRepositoryImpl): TrainingsPresenter {
-        return TrainingsPresenter(trainingsRepository, repositoryImpl)
+    fun provideTrainingPresenterFactory(trainingsRepository: TrainingsRepository): TrainingsPresenter {
+        return TrainingsPresenter(trainingsRepository)
     }
 
 }

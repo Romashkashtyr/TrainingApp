@@ -20,7 +20,7 @@ interface TrainingDAO {
     suspend fun getCache(): ExerciseDbo?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertExerciseCache(cache: ExerciseDbo): Boolean
+    suspend fun insertExerciseCache(cache: ExerciseDbo)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertExerciseCacheWithId(cache: ExerciseDbo): Long

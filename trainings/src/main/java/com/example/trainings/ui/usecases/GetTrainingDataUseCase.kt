@@ -10,7 +10,7 @@ class GetTrainingDataUseCase @Inject constructor(
     private val repository: TrainingsRepository
 ){
 
-    operator fun invoke(author: String): Flow<RequestResult<List<TrainingUI> {
-        return repository.
+    operator fun invoke(author: String): Flow<RequestResult<List<TrainingUI>>> {
+        TODO()
     }
 }
