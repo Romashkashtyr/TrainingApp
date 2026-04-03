@@ -47,7 +47,6 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
 
     }
 
-
     override fun showLoading() {
         binding.trainingPgBar.visibility = View.VISIBLE
     }
@@ -63,8 +62,6 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
             adapter = trainingAdapter
         }
     }
-
-
 
 
     companion object {

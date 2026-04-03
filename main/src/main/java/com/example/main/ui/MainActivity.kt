@@ -25,7 +25,6 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
 
     private val mainPresenter by moxyPresenter { MainPresenter(mainRepository) }
     private lateinit var binding: ActivityMainBinding
-    private lateinit var bindingSecond: ItemTrainingListBinding
 
 
     private val items = listOf(
@@ -48,12 +47,8 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        bindingSecond = ItemTrainingListBinding.inflate(layoutInflater)
         setContentView(binding.root)
         mainPresenter.requestGetScreenData()
-        bindingSecond.viewWorkoutsButton.setOnClickListener {
-            onTrainingClick()
-        }
     }
 
 
@@ -84,4 +79,6 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
     companion object {
         fun getIntent(fromContext: Context) = Intent(fromContext, MainActivity::class.java)
     }
+
+
 }

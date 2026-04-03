@@ -17,14 +17,10 @@ class TrainingListItemDelegate(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
-        return TrainingListViewHolder(
-            ItemTrainingListBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            ),
-            onTrainingClick = onTrainingClick::onTrainingClick,
+        val binding = ItemTrainingListBinding.inflate(
+            LayoutInflater.from(parent.context), parent, false
         )
+         return TrainingListViewHolder(binding, onTrainingClick)
     }
 
     override fun onBindViewHolder(
@@ -38,12 +34,12 @@ class TrainingListItemDelegate(
 
     inner class TrainingListViewHolder(
         private val binding: ItemTrainingListBinding,
-        private val onTrainingClick: () -> Unit
+        private val onTrainingClick: OnTrainingClick
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: DashboardItem.TrainingListItem) {
             binding.viewWorkoutsButton.setText(R.string.training_list)
             binding.viewWorkoutsButton.setOnClickListener {
-                onTrainingClick
+                onTrainingClick.onTrainingClick()
             }
         }
     }

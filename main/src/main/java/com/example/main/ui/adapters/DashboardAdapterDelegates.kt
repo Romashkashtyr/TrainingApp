@@ -36,6 +36,7 @@ class DashboardAdapterDelegates(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         delegatesManager.onBindViewHolder(items, position, holder)
+
     }
 
     override fun getItemCount(): Int {
@@ -46,4 +47,6 @@ class DashboardAdapterDelegates(
         this.items = newItems
         notifyItemChanged(itemCount)
     }
+
+    
 }
