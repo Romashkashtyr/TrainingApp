@@ -3,6 +3,7 @@ package com.example.trainings.ui
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.core.base.BaseActivity
@@ -58,6 +59,14 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
     }
 
     override fun showExercises(exercises: List<Exercise>) {
+        Log.d("TrainingsDebug", "showExercises вызван. Получено элементов: ${exercises.size}")
+
+        if (exercises.isEmpty()) {
+            Log.d("TrainingsDebug", "ВНИМАНИЕ: Список упражнений пустой!")
+        } else {
+            Log.d("TrainingsDebug", "Первый элемент: ${exercises.firstOrNull()?.results?.firstOrNull()?.muscles}")
+        }
+
         trainingAdapter.updateList(exercises)
         binding.rcViewTraining.apply {
             layoutManager = LinearLayoutManager(this@TrainingsListActivity)

@@ -1,10 +1,13 @@
 package com.example.trainings.ui
 
 
+import android.util.Log
 import com.example.core.base.BasePresenter
 import com.example.trainings.domain.TrainingsRepository
 import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import moxy.InjectViewState
 import javax.inject.Inject
 
@@ -15,15 +18,25 @@ class TrainingsPresenter @Inject constructor(
 ) : BasePresenter<TrainingsView>() {
 
     fun loadExercises() {
+        Log.d("TrainingsDebug", "loadExercises() вызван в презентере")
         withLoad {
             try {
+                Log.d("TrainingsDebug", "showLoading() вызван")
                 val data = repository.loadExercises()
-                viewState.showExercises(listOf(data))
+                Log.d("TrainingsDebug", "repository.loadExercises() вернул элементы")
+                withContext(Dispatchers.Main) {
+                    Log.d("TrainingsDebug", "Переключились на Main thread")
+                    viewState.showExercises(listOf(data))
+                    Log.d("TrainingsDebug", "showExercises() успешно вызван")
+                }
             } catch (e: Exception) {
                 if (e is CancellationException) {
                     throw e
                 }
-                viewState.showToast(e.message.toString())
+                Log.e("TrainingsDebug", "Ошибка в loadExercises: ${e.message}", e)
+                withContext(Dispatchers.Main) {
+                    viewState.showToast(e.message.toString())
+                }
             }
         }
 

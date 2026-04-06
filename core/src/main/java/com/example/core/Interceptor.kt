@@ -9,9 +9,11 @@ import javax.inject.Inject
 
 class Interceptor @Inject constructor() : Interceptor, Authenticator {
     override fun intercept(chain: Interceptor.Chain): Response {
-        var request: Request = chain.request()
-        request = request.newBuilder()
-            .addHeader("", "").build()
+        val originalRequest: Request = chain.request()
+        val newRequest = originalRequest.newBuilder()
+            .build()
+//        request = request.newBuilder()
+//            .addHeader("", "").build()
 //        when(chain.proceed(request)) {
 //            400 -> {
 //
@@ -20,14 +22,14 @@ class Interceptor @Inject constructor() : Interceptor, Authenticator {
 //
 //            }
 //        }
-        return chain.proceed(request)
+        return chain.proceed(newRequest)
     }
 
     override fun authenticate(route: Route?, response: Response): Request? {
         var requestAvailable: Request? = null
         try {
             requestAvailable = response.request.newBuilder()
-                .addHeader("", "")
+                //.addHeader("", "")
                 .build()
             return requestAvailable
         } catch (e: Exception) {
