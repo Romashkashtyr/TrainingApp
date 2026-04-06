@@ -8,7 +8,7 @@ import com.example.trainings.data.response.Exercise
 import com.example.trainings.data.response.ExerciseInfo
 import com.example.trainings.databinding.ItemTrainingBinding
 
-class TrainingAdapter(private val trainingsList: MutableList<Exercise>) :
+class TrainingAdapter(private val trainingsList: MutableList<Exercise> = mutableListOf()) :
     RecyclerView.Adapter<TrainingAdapter.TrainingViewHolder>() {
 
     inner class TrainingViewHolder(

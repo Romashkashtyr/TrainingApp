@@ -37,6 +37,8 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
         super.onCreate(savedInstanceState)
         binding = ActivityTrainingsListBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        trainingAdapter = TrainingAdapter()
         presenter.loadExercises()
         //presenter.requestTrainingList()
 
@@ -48,11 +50,11 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
     }
 
     override fun showLoading() {
-        binding.trainingPgBar.visibility = View.VISIBLE
+       // binding.trainingPgBar.visibility = View.VISIBLE
     }
 
     override fun stopLoading() {
-        binding.trainingPgBar.visibility = View.GONE
+       // binding.trainingPgBar.visibility = View.GONE
     }
 
     override fun showExercises(exercises: List<Exercise>) {
