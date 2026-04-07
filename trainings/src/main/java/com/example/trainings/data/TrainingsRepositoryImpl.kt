@@ -19,15 +19,24 @@ class TrainingsRepositoryImpl @Inject constructor(
 
 
     override suspend fun loadExercises(): Exercise {
+
+        Log.d("TrainingsDebug", "=== НАЧАЛО ЗАПРОСА К API ===")
+
         val result = api.getExerciseInfo()
+
+        Log.d("TrainingsDebug", "Результат запроса: isSuccess = ${result.isSuccess}")
 
         if (result.isSuccess) {
             val response = result.getOrNull()
 
+            Log.d("TrainingsDebug", "response получен: ${response != null}")
             if (response != null) {
+                Log.d("TrainingsDebug", "Raw data from API: ${response.toString().take(500)}")
                 val dbo = response.toExerciseDbo()
 
                 val rowId = database.trainingDao().insertExerciseCacheWithId(dbo)
+
+                Log.d("TrainingsDebug", "Сохранено в Room, rowId = $rowId")
 
                 if (rowId != -1L) {
                     return response.toExercise()
