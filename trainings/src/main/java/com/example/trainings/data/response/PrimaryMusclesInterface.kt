@@ -1,6 +1,6 @@
 package com.example.trainings.data.response
 
-interface EquipmentInterface {
+interface PrimaryMusclesInterface {
     val id: Int
-    val name: String?
+    val name: String
 }

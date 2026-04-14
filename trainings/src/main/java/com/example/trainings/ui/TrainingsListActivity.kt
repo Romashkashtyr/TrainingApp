@@ -10,7 +10,6 @@ import com.example.core.base.BaseActivity
 import com.example.core.navigation.RouterHolder.router
 import com.example.core.navigation.Screen
 import com.example.trainings.Training
-import com.example.trainings.data.response.Exercise
 import com.example.trainings.databinding.ActivityTrainingsListBinding
 import com.example.trainings.di.TrainingComponent
 import com.example.trainings.di.modules.TrainingFactory

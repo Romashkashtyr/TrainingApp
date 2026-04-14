@@ -3,9 +3,6 @@ package com.example.trainings.ui.rc_view_training
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.trainings.data.local.modelsDTO.ExerciseInfoDto
-import com.example.trainings.data.response.Exercise
-import com.example.trainings.data.response.ExerciseInfo
 import com.example.trainings.databinding.ItemTrainingBinding
 
 class TrainingAdapter(private val trainingsList: MutableList<Exercise> = mutableListOf()) :

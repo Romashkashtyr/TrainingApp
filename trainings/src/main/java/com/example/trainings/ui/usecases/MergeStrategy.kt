@@ -1,7 +1,6 @@
 package com.example.trainings.ui.usecases
 
 import com.example.trainings.data.RequestResult
-import com.example.trainings.data.response.TrainingData
 import kotlinx.coroutines.flow.Flow
 
 class MergeStrategy<T: Any> {

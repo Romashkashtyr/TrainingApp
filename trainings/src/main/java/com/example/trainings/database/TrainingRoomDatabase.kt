@@ -6,19 +6,15 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.trainings.database.converters.Converters
-import com.example.trainings.database.models.EquipmentDbo
 import com.example.trainings.database.models.ExerciseDbo
-import com.example.trainings.database.models.ExerciseInfoDbo
-import com.example.trainings.database.models.MusclesDbo
+import com.example.trainings.database.models.PrimaryMusclesDbo
 import com.example.trainings.database.models.dao.TrainingDAO
 
 
 @Database(
     entities = [
-        EquipmentDbo::class,
         ExerciseDbo::class,
-        ExerciseInfoDbo::class,
-        MusclesDbo::class,
+        PrimaryMusclesDbo::class,
     ], version = 1,
     exportSchema = false
 )

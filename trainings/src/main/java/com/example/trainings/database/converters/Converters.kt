@@ -1,9 +1,9 @@
 package com.example.trainings.database.converters
 
 import androidx.room.TypeConverter
-import com.example.trainings.database.models.EquipmentDbo
-import com.example.trainings.database.models.ExerciseInfoDbo
-import com.example.trainings.database.models.MusclesDbo
+import com.example.trainings.data.response.PrimaryMuscles
+import com.example.trainings.database.models.ExerciseDbo
+import com.example.trainings.database.models.PrimaryMusclesDbo
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import javax.inject.Inject
@@ -15,40 +15,22 @@ class Converters {
      internal lateinit var json: Json
 
     @TypeConverter
-    fun fromExerciseInfoList(list: List<ExerciseInfoDbo>?): String {
-        return json.encodeToString(list ?: emptyList<ExerciseInfoDbo>())
+    fun fromExerciseInfoList(list: List<ExerciseDbo>?): String {
+        return json.encodeToString(list ?: emptyList<ExerciseDbo>())
+    }
+
+
+    @TypeConverter
+    fun fromMusclesList(list: List<PrimaryMusclesDbo>?): String {
+        return json.encodeToString(list ?: emptyList<PrimaryMusclesDbo>())
     }
 
     @TypeConverter
-    fun toExerciseInfoList(jsonString: String?): List<ExerciseInfoDbo> {
+    fun toMusclesList(jsonString: String?): List<PrimaryMusclesDbo> {
         return jsonString?.let {
-            json.decodeFromString<List<ExerciseInfoDbo>>(it)
+            json.decodeFromString<List<PrimaryMusclesDbo>>(it)
         } ?: emptyList()
     }
 
-
-    @TypeConverter
-    fun fromMusclesList(list: List<MusclesDbo>?): String {
-        return json.encodeToString(list ?: emptyList<MusclesDbo>())
-    }
-
-    @TypeConverter
-    fun toMusclesList(jsonString: String?): List<MusclesDbo> {
-        return jsonString?.let {
-            json.decodeFromString<List<MusclesDbo>>(it)
-        } ?: emptyList()
-    }
-
-    @TypeConverter
-    fun fromEquipmentList(list: List<EquipmentDbo>?): String {
-        return json.encodeToString(list ?: emptyList<EquipmentDbo>())
-    }
-
-    @TypeConverter
-    fun toEquipmentList(jsonString: String?): List<EquipmentDbo> {
-        return jsonString?.let {
-            json.decodeFromString<List<EquipmentDbo>>(it)
-        } ?: emptyList()
-    }
 
 }

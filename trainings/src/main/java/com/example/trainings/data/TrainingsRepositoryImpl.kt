@@ -22,7 +22,7 @@ class TrainingsRepositoryImpl @Inject constructor(
 
         Log.d("TrainingsDebug", "=== НАЧАЛО ЗАПРОСА К API ===")
 
-        val result = api.getExerciseInfo()
+        val result = api.getAllExercises()
 
         Log.d("TrainingsDebug", "Результат запроса: isSuccess = ${result.isSuccess}")
 
@@ -45,12 +45,11 @@ class TrainingsRepositoryImpl @Inject constructor(
                 }
             }
         }
-        return getCachedExercises() ?: Exercise(0, null, null, emptyList())
+        return getCachedExercises() ?: Exercise(0, emptyList(), null, null)
     }
 
     override suspend fun getCachedExercises(): Exercise? {
         val cache = database.trainingDao().getCache() ?: return null
-
         return cache.toExercise()
     }
 

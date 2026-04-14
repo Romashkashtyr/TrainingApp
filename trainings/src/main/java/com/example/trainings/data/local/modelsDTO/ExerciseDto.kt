@@ -1,12 +1,13 @@
 package com.example.trainings.data.local.modelsDTO
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+
 
 @Serializable
 data class ExerciseDto(
-    @SerializedName("count") val count: Int,
-    @SerializedName("next") val next: String?,
-    @SerializedName("previous") val previous: String?,
-    @SerializedName("results") val results: List<ExerciseInfoDto>
+    @SerialName("id") val id: Int,
+    @SerialName("primaryMuscles") val primaryMuscles: List<PrimaryMusclesDto>,
+    @SerialName("name") val musclesName: String,
+    @SerialName("description") val description: String,
 )
