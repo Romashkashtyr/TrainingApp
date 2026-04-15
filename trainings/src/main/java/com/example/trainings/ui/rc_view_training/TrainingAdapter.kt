@@ -3,6 +3,7 @@ package com.example.trainings.ui.rc_view_training
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.trainings.data.response.Exercise
 import com.example.trainings.databinding.ItemTrainingBinding
 
 class TrainingAdapter(private val trainingsList: MutableList<Exercise> = mutableListOf()) :
@@ -14,9 +15,11 @@ class TrainingAdapter(private val trainingsList: MutableList<Exercise> = mutable
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Exercise) {
-            binding.musclesGroup.text = item.results.firstOrNull()?.muscles?.joinToString { ", " }
-            binding.trainingEquipment.text =
-                item.results.firstOrNull()?.equipment?.joinToString { ", " }
+            binding.trainingName.text = item.musclesName
+            binding.trainingDescription.text = item.description
+            binding.musclesGroupName.text = item.primaryMuscles.map {
+                it.name
+            }.toString()
         }
 
     }

@@ -1,16 +1,14 @@
 package com.example.trainings.ui.usecases
 
-import com.example.trainings.data.RequestResult
+import com.example.trainings.data.response.Exercise
 import com.example.trainings.domain.TrainingsRepository
-import com.example.trainings.ui.TrainingUI
-import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class GetTrainingDataUseCase @Inject constructor(
     private val repository: TrainingsRepository
 ){
 
-    operator fun invoke(author: String): Flow<RequestResult<List<TrainingUI>>> {
-        TODO()
+    suspend operator fun invoke(): List<Exercise> {
+        return repository.loadExercises()
     }
 }

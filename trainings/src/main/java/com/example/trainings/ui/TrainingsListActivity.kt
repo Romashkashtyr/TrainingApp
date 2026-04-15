@@ -10,6 +10,7 @@ import com.example.core.base.BaseActivity
 import com.example.core.navigation.RouterHolder.router
 import com.example.core.navigation.Screen
 import com.example.trainings.Training
+import com.example.trainings.data.response.Exercise
 import com.example.trainings.databinding.ActivityTrainingsListBinding
 import com.example.trainings.di.TrainingComponent
 import com.example.trainings.di.modules.TrainingFactory
@@ -63,7 +64,7 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
         if (exercises.isEmpty()) {
             Log.d("TrainingsDebug", "ВНИМАНИЕ: Список упражнений пустой!")
         } else {
-            Log.d("TrainingsDebug", "Первый элемент: ${exercises.firstOrNull()?.results?.firstOrNull()?.muscles}")
+            Log.d("TrainingsDebug", "Первый элемент: ${exercises.firstOrNull()?.musclesName?.firstOrNull()}")
         }
 
         trainingAdapter.updateList(exercises)
