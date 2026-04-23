@@ -6,6 +6,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class PrimaryMusclesDto(
-    @SerialName("id") override val id: Int,
+    @SerialName("id") override val id: String,
     @SerialName("name") override val name: String
 ) : PrimaryMusclesInterface

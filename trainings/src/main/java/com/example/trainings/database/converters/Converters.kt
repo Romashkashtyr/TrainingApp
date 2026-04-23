@@ -4,6 +4,7 @@ import androidx.room.TypeConverter
 import com.example.trainings.data.response.PrimaryMuscles
 import com.example.trainings.database.models.ExerciseDbo
 import com.example.trainings.database.models.PrimaryMusclesDbo
+import com.google.gson.Gson
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import javax.inject.Inject
@@ -11,8 +12,12 @@ import javax.inject.Inject
 
 class Converters {
 
-    @Inject
-     internal lateinit var json: Json
+    private val json = Json {
+        ignoreUnknownKeys = true
+        coerceInputValues = true
+    }
+
+    private val gson = Gson()
 
     @TypeConverter
     fun fromExerciseInfoList(list: List<ExerciseDbo>?): String {
@@ -31,6 +36,8 @@ class Converters {
             json.decodeFromString<List<PrimaryMusclesDbo>>(it)
         } ?: emptyList()
     }
+
+
 
 
 }

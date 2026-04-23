@@ -1,10 +1,7 @@
 package com.example.trainings.data.mappers
 
 import com.example.trainings.data.local.modelsDTO.ExerciseDto
-import com.example.trainings.data.local.modelsDTO.MusclesDto
 import com.example.trainings.data.local.modelsDTO.PrimaryMusclesDto
-import com.example.trainings.data.mappers.TrainingMapper.toExercise
-import com.example.trainings.data.mappers.TrainingMapper.toExerciseDbo
 import com.example.trainings.data.response.Exercise
 import com.example.trainings.data.response.PrimaryMuscles
 import com.example.trainings.database.models.ExerciseDbo
@@ -34,8 +31,59 @@ object TrainingMapper {
     }
 
 
+    fun List<ExerciseDto>.toListExerciseFromDto(): List<Exercise> {
+        return this.map {
+            Exercise(
+                id = it.id,
+                primaryMuscles = it.primaryMuscles.map {
+                    PrimaryMuscles(
+                        id = it.id,
+                        name = it.name
+                    )
+                },
+                musclesName = it.musclesName,
+                description = it.description
+            )
+        }
+    }
 
-    fun ExerciseDto.toExercise(): Exercise {
+
+    fun List<ExerciseDto>.toListExerciseDbo(): List<ExerciseDbo> {
+        return this.map {
+            ExerciseDbo(
+                id = it.id,
+                primaryMuscles = it.primaryMuscles.map {
+                    PrimaryMusclesDbo(
+                        id = it.id,
+                        name = it.name
+                    )
+                },
+                musclesName = it.musclesName,
+                description = it.description
+            )
+        }
+    }
+
+
+    fun List<ExerciseDbo>.toListExerciseFromDbo(): List<Exercise> {
+        return this.map {
+            Exercise(
+                id = it.id,
+                primaryMuscles = it.primaryMuscles.map {
+                    PrimaryMuscles(
+                        id = it.id,
+                        name = it.name
+                    )
+                },
+                musclesName = it.musclesName,
+                description = it.description
+            )
+        }
+    }
+
+
+
+    fun ExerciseDto.toListExerciseFromDto(): Exercise {
         return Exercise(
             id = id,
             primaryMuscles = primaryMuscles.map {
@@ -65,7 +113,7 @@ object TrainingMapper {
     }
 
 
-    fun ExerciseDbo.toExercise(): Exercise? {
+    fun ExerciseDbo.toListExerciseFromDto(): Exercise? {
         return Exercise(
             id = id,
             primaryMuscles = primaryMuscles.map {

@@ -26,7 +26,7 @@ class TrainingsPresenter @Inject constructor(
                 Log.d("TrainingsDebug", "repository.loadExercises() вернул элементы")
                 withContext(Dispatchers.Main) {
                     Log.d("TrainingsDebug", "Переключились на Main thread")
-                    viewState.showExercises(listOf(data))
+                    viewState.showExercises(data)
                     Log.d("TrainingsDebug", "showExercises() успешно вызван")
                 }
             } catch (e: Exception) {

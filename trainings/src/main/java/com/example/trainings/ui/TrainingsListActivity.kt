@@ -58,6 +58,10 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
        // binding.trainingPgBar.visibility = View.GONE
     }
 
+//    override fun showExercises(exercises: Exercise) {
+//        TODO("Not yet implemented")
+//    }
+
     override fun showExercises(exercises: List<Exercise>) {
         Log.d("TrainingsDebug", "showExercises вызван. Получено элементов: ${exercises.size}")
 

@@ -12,13 +12,13 @@ interface TrainingDAO {
 
 
     @Query("SELECT * FROM exercise")
-    suspend fun getCache(): ExerciseDbo?
+    suspend fun getCache(): List<ExerciseDbo>?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertExerciseCache(cache: ExerciseDbo)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertExerciseCacheWithId(cache: ExerciseDbo): Long
+    suspend fun insertExerciseCacheWithId(cache: List<ExerciseDbo>): List<Long>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPrimaryMuscles(list: List<PrimaryMusclesDbo>)

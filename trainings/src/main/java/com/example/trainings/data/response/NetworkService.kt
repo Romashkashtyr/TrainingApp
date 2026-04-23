@@ -1,6 +1,7 @@
 package com.example.trainings.data.response
 
 import com.example.trainings.data.local.modelsDTO.ExerciseDto
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -9,9 +10,9 @@ interface NetworkService {
 
     @GET("/exercises/")
     suspend fun getAllExercises(
-        @Query("name") name: List<String>? = null,
+        @Query("name") name: String? = null,
         @Query("description") description: String? = null,
-    ): Result<ExerciseDto>
+    ): Response<List<ExerciseDto>>
 
 
     @GET("/exercises/search")

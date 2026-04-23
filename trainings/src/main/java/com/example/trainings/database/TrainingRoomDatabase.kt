@@ -15,7 +15,7 @@ import com.example.trainings.database.models.dao.TrainingDAO
     entities = [
         ExerciseDbo::class,
         PrimaryMusclesDbo::class,
-    ], version = 1,
+    ], version = 2,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
@@ -33,7 +33,9 @@ abstract class TrainingRoomDatabase : RoomDatabase() {
                 checkNotNull(applicationContext.applicationContext),
                 TrainingRoomDatabase::class.java,
                 "train"
-            ).build()
+            )
+                .fallbackToDestructiveMigration()
+                .build()
         }
 
         fun getInstanceDb(): TrainingRoomDatabase =

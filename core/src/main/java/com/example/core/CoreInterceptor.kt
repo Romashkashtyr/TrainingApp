@@ -1,5 +1,6 @@
 package com.example.core
 
+import android.util.Log
 import okhttp3.Authenticator
 import okhttp3.Interceptor
 import okhttp3.Request
@@ -7,21 +8,15 @@ import okhttp3.Response
 import okhttp3.Route
 import javax.inject.Inject
 
-class Interceptor @Inject constructor() : Interceptor, Authenticator {
+class CoreInterceptor @Inject constructor() : Interceptor, Authenticator {
+
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest: Request = chain.request()
+
+        Log.d("CoreInterceptor", "Interceptor сработал! Ключ начинается с: ${BuildConfig.TRAINING_API_KEY.take(10)}")
         val newRequest = originalRequest.newBuilder()
+            .addHeader("Accept" , "application/json")
             .build()
-//        request = request.newBuilder()
-//            .addHeader("", "").build()
-//        when(chain.proceed(request)) {
-//            400 -> {
-//
-//            }
-//            401 -> {
-//
-//            }
-//        }
         return chain.proceed(newRequest)
     }
 
