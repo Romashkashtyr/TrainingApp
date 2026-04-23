@@ -3,8 +3,6 @@ package com.example.trainings.database.models
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.trainings.data.response.ExerciseInterface
-import com.example.trainings.data.response.PrimaryMuscles
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -12,6 +10,6 @@ import kotlinx.serialization.Serializable
 data class ExerciseDbo(
     @PrimaryKey val id: String,
     val primaryMuscles: List<PrimaryMusclesDbo>,
-    @ColumnInfo("name") val musclesName: String?,
+    @ColumnInfo("name") val name: String?,
     val description: String,
 )

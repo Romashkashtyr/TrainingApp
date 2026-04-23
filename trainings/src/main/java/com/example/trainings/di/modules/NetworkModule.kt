@@ -35,24 +35,24 @@ object NetworkModule {
     }
 
 
-    @Provides
-    @Singleton
-    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
-        return Retrofit.Builder()
-            .baseUrl(ApiSettings.BASE_URL)
-            .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-    }
-
 //    @Provides
 //    @Singleton
-//    fun provideJson(): Json {
-//        return Json{
-//            ignoreUnknownKeys = true
-//            coerceInputValues = true
-//        }
+//    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
+//        return Retrofit.Builder()
+//            .baseUrl(ApiSettings.BASE_URL)
+//            .client(okHttpClient)
+//            .addConverterFactory(GsonConverterFactory.create())
+//            .build()
 //    }
+
+    @Provides
+    @Singleton
+    fun provideJson(): Json {
+        return Json{
+            ignoreUnknownKeys = true
+            coerceInputValues = true
+        }
+    }
 //
 //    @Provides
 //    @Singleton
@@ -63,6 +63,20 @@ object NetworkModule {
 //            "application/json".toMediaType()
 //        )
 //    }
+
+    @Provides
+    @Singleton
+    fun provideRetrofit(
+        okHttpClient: OkHttpClient,
+        json: Json
+    ): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(ApiSettings.BASE_URL)
+            .client(okHttpClient)
+            .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
+            .build()
+    }
+
 
 
     @Provides

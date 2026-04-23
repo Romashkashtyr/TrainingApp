@@ -8,6 +8,6 @@ import kotlinx.serialization.Serializable
 data class ExerciseDto(
     @SerialName("id") val id: String,
     @SerialName("primaryMuscles") val primaryMuscles: List<PrimaryMusclesDto>,
-    @SerialName("name") val musclesName: String?,
+    @SerialName("name") val name: String?,
     @SerialName("description") val description: String,
 )

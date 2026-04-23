@@ -15,7 +15,7 @@ class TrainingAdapter(private val trainingsList: MutableList<Exercise> = mutable
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Exercise) {
-            binding.trainingName.text = item.musclesName
+            binding.trainingName.text = item.name ?: "No name"
             binding.trainingDescription.text = item.description
             binding.musclesGroupName.text = item.primaryMuscles.map {
                 it.name

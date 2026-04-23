@@ -4,12 +4,10 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.core.base.BaseActivity
 import com.example.core.navigation.RouterHolder.router
 import com.example.core.navigation.Screen
-import com.example.trainings.Training
 import com.example.trainings.data.response.Exercise
 import com.example.trainings.databinding.ActivityTrainingsListBinding
 import com.example.trainings.di.TrainingComponent
@@ -68,7 +66,7 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
         if (exercises.isEmpty()) {
             Log.d("TrainingsDebug", "ВНИМАНИЕ: Список упражнений пустой!")
         } else {
-            Log.d("TrainingsDebug", "Первый элемент: ${exercises.firstOrNull()?.musclesName?.firstOrNull()}")
+            Log.d("TrainingsDebug", "Первый элемент: ${exercises.firstOrNull()?.name?.firstOrNull()}")
         }
 
         trainingAdapter.updateList(exercises)

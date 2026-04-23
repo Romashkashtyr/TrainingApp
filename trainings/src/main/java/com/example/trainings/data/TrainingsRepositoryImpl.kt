@@ -59,7 +59,9 @@ class TrainingsRepositoryImpl @Inject constructor(
             if (!response.isSuccessful) {
                 Log.e("TrainingsDebug", "HTTP error: ${response.code()}")
                 return getCachedExercises() ?: emptyList()
+
             }
+
 
             val body = response.body()
             if (body.isNullOrEmpty()) {
@@ -68,6 +70,7 @@ class TrainingsRepositoryImpl @Inject constructor(
             }
 
             Log.d("TrainingsDebug", "Получено элементов: ${body.size}")
+
 
             val dboList = body.map { it.toExerciseDbo() }
 

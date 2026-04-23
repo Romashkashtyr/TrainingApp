@@ -8,10 +8,10 @@ import retrofit2.http.Query
 
 interface NetworkService {
 
-    @GET("/exercises/")
+    @GET("/exercises")
     suspend fun getAllExercises(
-        @Query("name") name: String? = null,
-        @Query("description") description: String? = null,
+        //@Query("name") name: String? = null,
+        //@Query("description") description: String? = null,
     ): Response<List<ExerciseDto>>
 
 

@@ -12,7 +12,7 @@ object TrainingMapper {
 
     fun List<Exercise>.toExerciseDto(): List<ExerciseDto> {
         return this.map {
-            it.musclesName?.let { muscle ->
+            it.name?.let { muscle ->
                 it.description?.let { description ->
                     ExerciseDto(
                         id = it.id,
@@ -22,7 +22,7 @@ object TrainingMapper {
                                 name = it.name
                             )
                         },
-                        musclesName = muscle,
+                        name = muscle,
                         description = description
                     )
                 }
@@ -41,7 +41,7 @@ object TrainingMapper {
                         name = it.name
                     )
                 },
-                musclesName = it.musclesName,
+                name = it.name,
                 description = it.description
             )
         }
@@ -58,7 +58,7 @@ object TrainingMapper {
                         name = it.name
                     )
                 },
-                musclesName = it.musclesName,
+                name = it.name,
                 description = it.description
             )
         }
@@ -75,7 +75,7 @@ object TrainingMapper {
                         name = it.name
                     )
                 },
-                musclesName = it.musclesName,
+                name = it.name,
                 description = it.description
             )
         }
@@ -92,7 +92,7 @@ object TrainingMapper {
                     name = it.name
                 )
             },
-            musclesName = musclesName,
+            name = name,
             description = description
         )
     }
@@ -107,7 +107,7 @@ object TrainingMapper {
                     name = it.name
                 )
             },
-            musclesName = musclesName,
+            name = name,
             description = description
         )
     }
@@ -122,7 +122,7 @@ object TrainingMapper {
                     name = it.name
                 )
             },
-            musclesName = musclesName,
+            name = name,
             description = description
         )
     }
