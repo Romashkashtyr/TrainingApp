@@ -47,8 +47,7 @@
     <string name="training_list">Список тренировок</string>
     <string name="water_input">Добавьте количество воды (мл)</string>
     <string name="invalid_amount">Введите положительное значение</string>
-
-
+    <string name="exercise_search">Поиск упражнения</string>
 
 
 </resources>
