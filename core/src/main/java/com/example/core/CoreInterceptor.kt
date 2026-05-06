@@ -16,6 +16,7 @@ class CoreInterceptor @Inject constructor() : Interceptor, Authenticator {
         Log.d("CoreInterceptor", "Interceptor сработал! Ключ начинается с: ${BuildConfig.TRAINING_API_KEY.take(10)}")
         val newRequest = originalRequest.newBuilder()
             .addHeader("Accept" , "application/json")
+            .addHeader("x-api-key" , BuildConfig.TRAINING_API_KEY)
             .build()
         return chain.proceed(newRequest)
     }
