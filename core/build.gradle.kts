@@ -60,6 +60,8 @@ dependencies {
     implementation(libs.moxy.ktx)
     kapt(libs.moxy.compiler)
 
+    api (libs.glide)
+
     implementation(libs.dagger)
     kapt(libs.dagger.compiler)
 

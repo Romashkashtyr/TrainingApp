@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.core.base.BaseActivity
 import com.example.core.navigation.RouterHolder.router
 import com.example.core.navigation.Screen
+import androidx.core.widget.addTextChangedListener
 import com.example.trainings.data.response.Exercise
 import com.example.trainings.databinding.ActivityTrainingsListBinding
 import com.example.trainings.di.TrainingComponent
@@ -46,6 +47,12 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
             finish()
         }
 
+        binding.searchButton.setOnClickListener {
+            val query = binding.searchExercise.text.toString()
+
+            trainingAdapter.filterList(query)
+        }
+
     }
 
     override fun showLoading() {
@@ -56,9 +63,7 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
        // binding.trainingPgBar.visibility = View.GONE
     }
 
-//    override fun showExercises(exercises: Exercise) {
-//        TODO("Not yet implemented")
-//    }
+
 
     override fun showExercises(exercises: List<Exercise>) {
         Log.d("TrainingsDebug", "showExercises вызван. Получено элементов: ${exercises.size}")

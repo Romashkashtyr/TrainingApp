@@ -19,6 +19,7 @@ class CoreInterceptor @Inject constructor() : Interceptor, Authenticator {
             .addHeader("x-api-key" , BuildConfig.TRAINING_API_KEY)
             .build()
         return chain.proceed(newRequest)
+
     }
 
     override fun authenticate(route: Route?, response: Response): Request? {

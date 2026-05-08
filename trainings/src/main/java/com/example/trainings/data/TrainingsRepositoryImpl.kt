@@ -15,39 +15,8 @@ import javax.inject.Singleton
 @Singleton
 class TrainingsRepositoryImpl @Inject constructor(
     private val api: NetworkService,
-    private val database: TrainingRoomDatabase
+    private val database: TrainingRoomDatabase,
 ) : TrainingsRepository {
-
-
-//    override suspend fun loadExercises(): List<Exercise> {
-//
-//        Log.d("TrainingsDebug", "=== НАЧАЛО ЗАПРОСА К API ===")
-//
-//        val result = api.getAllExercises()
-//
-//        Log.d("TrainingsDebug", "Результат запроса: isSuccess = ${result.isSuccess}")
-//
-//        if (result.isSuccess) {
-//            val response = result.getOrNull()
-//
-//            Log.d("TrainingsDebug", "response получен: ${response != null}")
-//            if (response != null) {
-//                Log.d("TrainingsDebug", "Raw data from API: ${response.toString().take(500)}")
-//                val dbo = response.toListExerciseDbo()
-//
-//                val rowId = database.trainingDao().insertExerciseCacheWithId(dbo)
-//
-//                Log.d("TrainingsDebug", "Сохранено в Room, rowId = $rowId")
-//
-//                if (rowId != -1L) {
-//                    return response.toListExercise()
-//                } else {
-//                    Log.e("Repo", "Не удалось сохранить данные")
-//                }
-//            }
-//        }
-//        return getCachedExercises() ?: listOf<Exercise>()
-//    }
 
     override suspend fun loadExercises(): List<Exercise> {
 
@@ -61,7 +30,6 @@ class TrainingsRepositoryImpl @Inject constructor(
                 return getCachedExercises() ?: emptyList()
 
             }
-
 
             val body = response.body()
             if (body.isNullOrEmpty()) {

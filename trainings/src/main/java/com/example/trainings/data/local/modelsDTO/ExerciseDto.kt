@@ -11,4 +11,5 @@ data class ExerciseDto(
     @SerializedName("primaryMuscles") val primaryMuscles: List<PrimaryMusclesDto>,
     @SerializedName("name") val name: String?,
     @SerializedName("description") val description: String,
+
 )
