@@ -46,6 +46,17 @@
             android:text="@string/muscles_group"
             android:textSize="14sp" />
 
+
+        <ImageView
+            android:id="@+id/exercise_image"
+            android:layout_width="120dp"
+            android:layout_height="120dp"/>
+
+        <ProgressBar
+            android:id="@+id/image_progress"
+            android:layout_width="24dp"
+            android:layout_height="24dp"/>
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

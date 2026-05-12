@@ -1,6 +1,7 @@
 package com.example.trainings.data
 
 import android.util.Log
+import com.example.core.ApiSettings
 import com.example.trainings.data.local.modelsDTO.ExerciseDto
 import com.example.trainings.data.mappers.TrainingMapper.toListExerciseFromDto
 import com.example.trainings.data.mappers.TrainingMapper.toExerciseDbo
@@ -60,6 +61,10 @@ class TrainingsRepositoryImpl @Inject constructor(
     override suspend fun getCachedExercises(): List<Exercise>? {
         val cache = database.trainingDao().getCache() ?: return null
         return cache.toListExerciseFromDbo()
+    }
+
+    override fun getExerciseImageUrl(id: String): String {
+        return "${ApiSettings.BASE_URL}exercises/$id/image?format=png"
     }
 
     private suspend fun saveToDatabase(dto: ExerciseDto) {

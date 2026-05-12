@@ -1,34 +1,35 @@
 package com.example.trainings.ui.rc_view_training
 
+
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.trainings.data.response.Exercise
+import com.example.trainings.data.response.ExerciseUi
 import com.example.trainings.databinding.ItemTrainingBinding
 
-class TrainingAdapter(
-//private val trainingsList: MutableList<Exercise> = mutableListOf()//
-) :
-    RecyclerView.Adapter<TrainingAdapter.TrainingViewHolder>() {
+class TrainingAdapter : ListAdapter<ExerciseUi, TrainingAdapter.TrainingViewHolder>(DiffCallback()) {
 
-    private val fullList = mutableListOf<Exercise>()
-    //val fullList: List<Exercise> = _fullList.toList()
-
-    private val filteredList = mutableListOf<Exercise>()
-    //val filteredList = _filteredList.toList()
+    private var fullList = listOf<ExerciseUi>()
 
     inner class TrainingViewHolder(
         private val binding: ItemTrainingBinding,
     ) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Exercise) {
+        fun bind(item: ExerciseUi) {
             binding.trainingName.text = item.name ?: "No name"
             binding.trainingDescription.text = item.description
             binding.musclesGroupName.text = item.primaryMuscles.joinToString { it.name }
 
-            val imageUrl = "https://api.workoutapi.com/exercises/${item.id}/image"
+
+            binding.imageProgress.visibility = View.VISIBLE
+
+            Glide.with(binding.root.context)
+                .load(item.imageUrl)
+                .into(binding.exerciseImage)
         }
 
     }
@@ -39,39 +40,30 @@ class TrainingAdapter(
         return TrainingViewHolder(binding)
     }
 
-    override fun getItemCount(): Int {
-        return filteredList.size
-    }
 
     override fun onBindViewHolder(holder: TrainingViewHolder, position: Int) {
-        return holder.bind(filteredList[position])
+        return holder.bind(getItem(position))
     }
 
-    fun updateList(newItems: List<Exercise>) {
-        fullList.clear()
-        fullList.addAll(newItems)
+    fun updateList(newItems: List<ExerciseUi>) {
+        fullList = newItems
 
-        filteredList.clear()
-        filteredList.addAll(newItems)
-
-       // trainingsList.clear()
-        //trainingsList.addAll(newItems)
-        notifyItemChanged(newItems.size)
+        submitList(newItems)
     }
 
     fun filterList(query: String) {
-        val resultList = if (query.isBlank()) {
-            fullList
+        if (query.isBlank()) {
+            submitList(fullList)
         } else {
-            fullList.filter {
+            val filtered = fullList.filter {
                 it.name?.contains(query, ignoreCase = true) == true ||
                         it.primaryMuscles.any {muscle ->
                             muscle.name.contains(query, ignoreCase = true)
                         }
             }
+            submitList(filtered)
         }
-        filteredList.clear()
-        filteredList.addAll(resultList)
+
     }
 
 

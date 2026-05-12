@@ -3,6 +3,7 @@ package com.example.trainings.ui
 import com.example.core.base.BaseView
 import com.example.trainings.Training
 import com.example.trainings.data.response.Exercise
+import com.example.trainings.data.response.ExerciseUi
 import kotlinx.coroutines.flow.Flow
 import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType
@@ -17,5 +18,5 @@ interface TrainingsView : BaseView {
 
     //fun showExercises(exercises: Exercise)
 
-    fun showExercises(exercises: List<Exercise>)
+    fun showExercises(exercises: List<ExerciseUi>)
 }
