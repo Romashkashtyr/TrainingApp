@@ -7,6 +7,7 @@ import com.example.trainings.data.mappers.TrainingMapper.toListExerciseFromDto
 import com.example.trainings.data.mappers.TrainingMapper.toExerciseDbo
 import com.example.trainings.data.mappers.TrainingMapper.toListExerciseFromDbo
 import com.example.trainings.data.response.Exercise
+import com.example.trainings.data.response.ExerciseUi
 import com.example.trainings.data.response.NetworkService
 import com.example.trainings.database.TrainingRoomDatabase
 import com.example.trainings.domain.TrainingsRepository
