@@ -2,6 +2,7 @@ package com.example.trainings.di.modules
 
 import com.example.trainings.domain.TrainingsRepository
 import com.example.trainings.ui.TrainingsPresenter
+import com.example.trainings.ui.usecases.GetCombineDataAndImageTrainings
 import dagger.Module
 import dagger.Provides
 import javax.inject.Inject
@@ -13,8 +14,8 @@ class TrainingsModule {
 
     @Provides
     @Singleton
-    fun provideTrainingPresenterFactory(trainingsRepository: TrainingsRepository): TrainingsPresenter {
-        return TrainingsPresenter(trainingsRepository)
+    fun provideTrainingPresenterFactory(useCase: GetCombineDataAndImageTrainings): TrainingsPresenter {
+        return TrainingsPresenter(useCase)
     }
 
 }
