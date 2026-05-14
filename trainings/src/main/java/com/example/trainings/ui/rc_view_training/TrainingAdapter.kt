@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.example.trainings.R
 import com.example.trainings.data.response.ExerciseUi
 import com.example.trainings.databinding.ItemTrainingBinding
+import okhttp3.internal.notify
 
 class TrainingAdapter : ListAdapter<ExerciseUi, TrainingAdapter.TrainingViewHolder>(DiffCallback()) {
 

@@ -6,7 +6,9 @@ import com.example.auth.domain.usecase.SignInUseCase
 import com.example.auth.domain.usecase.SignUpUseCase
 import com.example.core.base.BasePresenter
 import com.example.core.structures.Status
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import moxy.InjectViewState
 import javax.inject.Inject
 
@@ -21,20 +23,23 @@ open class AuthorizationPresenter @Inject constructor(
 
         viewState.showViewProgress()
         launch {
-            when (signInUseCase(email, password)) {
-                is Status.Failure<*> -> {
-                    viewState.showToast(R.string.sign_in_failure)
-                }
+            withContext(Dispatchers.Main) {
+                when (signInUseCase(email, password)) {
+                    is Status.Failure<*> -> {
+                        viewState.showToast(R.string.sign_in_failure)
+                    }
 
-                is Status.NoNetwork<*> -> {
-                    viewState.showToast(R.string.sign_in_failure)
-                }
+                    is Status.NoNetwork<*> -> {
+                        viewState.showToast(R.string.sign_in_failure)
+                    }
 
-                is Status.Success<*> -> {
-                    viewState.showToast(R.string.sign_in_success)
-                    viewState.navigateToHome()
+                    is Status.Success<*> -> {
+                        viewState.showToast(R.string.sign_in_success)
+                        viewState.navigateToHome()
+                    }
                 }
             }
+
         }
     }
 
@@ -44,20 +49,23 @@ open class AuthorizationPresenter @Inject constructor(
         viewState.showViewProgress()
 
         launch {
-            when (signUpUseCase(email, password, confirmPassword)) {
-                is Status.Failure<*> -> {
-                    viewState.showToast(R.string.sign_in_failure)
-                }
+            withContext(Dispatchers.Main) {
+                when (signUpUseCase(email, password, confirmPassword)) {
+                    is Status.Failure<*> -> {
+                        viewState.showToast(R.string.sign_in_failure)
+                    }
 
-                is Status.NoNetwork<*> -> {
-                    viewState.showToast(R.string.network_failure)
-                }
+                    is Status.NoNetwork<*> -> {
+                        viewState.showToast(R.string.network_failure)
+                    }
 
-                is Status.Success<*> -> {
-                    viewState.showToast(R.string.sign_in_success)
-                    viewState.navigateToHome()
+                    is Status.Success<*> -> {
+                        viewState.showToast(R.string.sign_in_success)
+                        viewState.navigateToHome()
+                    }
                 }
             }
+
         }
     }
 

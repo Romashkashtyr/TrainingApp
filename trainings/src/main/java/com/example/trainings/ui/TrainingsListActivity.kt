@@ -91,6 +91,7 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
 
         binding.searchExercise.addTextChangedListener {
             trainingAdapter.filterList(it.toString())
+            binding.rcViewTraining.scrollToPosition(0)
         }
     }
 
