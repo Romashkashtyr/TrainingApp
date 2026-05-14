@@ -57,22 +57,6 @@ class TrainingAdapter : ListAdapter<ExerciseUi, TrainingAdapter.TrainingViewHold
 
                 notifyItemChanged(adapterPosition)
             }
-
-//                binding.toggleDescription.setOnClickListener {
-//
-//                    item.isExpanded = !item.isExpanded
-//
-//                    if (item.isExpanded) {
-//                        binding.trainingDescription.maxLines = Int.MAX_VALUE
-//                        binding.trainingDescription.ellipsize = null
-//                        binding.toggleDescription.setText(R.string.hide)
-//                    } else {
-//                        binding.trainingDescription.maxLines = 3
-//                        binding.trainingDescription.ellipsize = TextUtils.TruncateAt.END
-//                        binding.toggleDescription.setText(R.string.show_more)
-//                    }
-//                }
-
         }
 
     }

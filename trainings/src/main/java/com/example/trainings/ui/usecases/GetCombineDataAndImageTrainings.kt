@@ -1,6 +1,6 @@
 package com.example.trainings.ui.usecases
 
-import com.example.trainings.data.response.Exercise
+
 import com.example.trainings.data.response.ExerciseUi
 import com.example.trainings.domain.TrainingsRepository
 import javax.inject.Inject
