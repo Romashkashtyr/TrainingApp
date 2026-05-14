@@ -1,18 +1,22 @@
 package com.example.trainings.ui.rc_view_training
 
 
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.trainings.R
 import com.example.trainings.data.response.ExerciseUi
 import com.example.trainings.databinding.ItemTrainingBinding
 
 class TrainingAdapter : ListAdapter<ExerciseUi, TrainingAdapter.TrainingViewHolder>(DiffCallback()) {
 
     private var fullList = listOf<ExerciseUi>()
+
+    private var expandedItems = mutableSetOf<String>()
 
     inner class TrainingViewHolder(
         private val binding: ItemTrainingBinding,
@@ -30,6 +34,45 @@ class TrainingAdapter : ListAdapter<ExerciseUi, TrainingAdapter.TrainingViewHold
             Glide.with(binding.root.context)
                 .load(item.imageUrl)
                 .into(binding.exerciseImage)
+
+
+            val isExpanded = expandedItems.contains(item.id)
+
+            if (isExpanded) {
+                binding.trainingDescription.maxLines = Int.MAX_VALUE
+                binding.trainingDescription.ellipsize = null
+                binding.toggleDescription.setText(R.string.hide)
+            } else {
+                binding.trainingDescription.maxLines = 3
+                binding.trainingDescription.ellipsize = TextUtils.TruncateAt.END
+                binding.toggleDescription.setText(R.string.show_more)
+            }
+
+            binding.toggleDescription.setOnClickListener {
+                if (expandedItems.contains(item.id)) {
+                    expandedItems.remove(item.id)
+                } else {
+                    expandedItems.add(item.id)
+                }
+
+                notifyItemChanged(adapterPosition)
+            }
+
+//                binding.toggleDescription.setOnClickListener {
+//
+//                    item.isExpanded = !item.isExpanded
+//
+//                    if (item.isExpanded) {
+//                        binding.trainingDescription.maxLines = Int.MAX_VALUE
+//                        binding.trainingDescription.ellipsize = null
+//                        binding.toggleDescription.setText(R.string.hide)
+//                    } else {
+//                        binding.trainingDescription.maxLines = 3
+//                        binding.trainingDescription.ellipsize = TextUtils.TruncateAt.END
+//                        binding.toggleDescription.setText(R.string.show_more)
+//                    }
+//                }
+
         }
 
     }

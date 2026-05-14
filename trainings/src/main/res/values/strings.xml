@@ -53,8 +53,8 @@
 
 
     <string name="exercise_search">Найти упражнение</string>
-
-
+    <string name="show_more">Показать больше</string>
+    <string name="hide">Скрыть</string>
 
 
 </resources>

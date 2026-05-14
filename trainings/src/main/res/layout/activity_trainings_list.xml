@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <!-- Кнопка назад -->
+
     <ImageView
         android:id="@+id/arrow_back"
         android:layout_width="40dp"
@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <!-- Заголовок -->
+
     <TextView
         android:id="@+id/training_list"
         android:layout_width="0dp"
@@ -31,7 +31,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Поле поиска -->
+
     <EditText
         android:id="@+id/search_exercise"
         android:layout_width="0dp"
@@ -46,7 +46,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/search_button" />
 
-    <!-- Кнопка поиска -->
+
     <ImageView
         android:id="@+id/search_button"
         android:layout_width="40dp"
@@ -59,7 +59,7 @@
         app:layout_constraintStart_toEndOf="@id/search_exercise"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- RecyclerView -->
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rc_view_training"
         android:layout_width="0dp"
