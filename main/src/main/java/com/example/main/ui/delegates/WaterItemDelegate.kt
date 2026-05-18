@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.example.core.structures.DashboardItem
+import com.example.main.structures.DashboardItem
 import com.example.main.R
 import com.example.main.databinding.ItemWaterBinding
 import com.example.main.ui.OnAddWaterClicked

@@ -1,4 +1,4 @@
-package com.example.core.structures
+package com.example.main.structures
 
 sealed class DashboardItem {
     data class StepsItem(val stepsCount: Int) : DashboardItem()

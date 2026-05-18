@@ -8,14 +8,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.model.GlideUrl
+import com.bumptech.glide.load.model.LazyHeaders
+import com.example.core.BuildConfig
 import com.example.trainings.R
-import com.example.trainings.data.response.ExerciseUi
+import com.example.trainings.data.response.FullExercise
 import com.example.trainings.databinding.ItemTrainingBinding
-import okhttp3.internal.notify
 
-class TrainingAdapter : ListAdapter<ExerciseUi, TrainingAdapter.TrainingViewHolder>(DiffCallback()) {
+class TrainingAdapter : ListAdapter<FullExercise, TrainingAdapter.TrainingViewHolder>(DiffCallback()) {
 
-    private var fullList = listOf<ExerciseUi>()
+    private var fullList = listOf<FullExercise>()
 
     private var expandedItems = mutableSetOf<String>()
 
@@ -24,7 +26,7 @@ class TrainingAdapter : ListAdapter<ExerciseUi, TrainingAdapter.TrainingViewHold
     ) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: ExerciseUi) {
+        fun bind(item: FullExercise) {
             binding.trainingName.text = item.name ?: "No name"
             binding.trainingDescription.text = item.description
             binding.musclesGroupName.text = item.primaryMuscles.joinToString { it.name }
@@ -33,7 +35,7 @@ class TrainingAdapter : ListAdapter<ExerciseUi, TrainingAdapter.TrainingViewHold
             binding.imageProgress.visibility = View.VISIBLE
 
             Glide.with(binding.root.context)
-                .load(item.imageUrl)
+                .load(buildGlideUrl(item.imageUrl))
                 .into(binding.exerciseImage)
 
 
@@ -73,7 +75,7 @@ class TrainingAdapter : ListAdapter<ExerciseUi, TrainingAdapter.TrainingViewHold
         return holder.bind(getItem(position))
     }
 
-    fun updateList(newItems: List<ExerciseUi>) {
+    fun updateList(newItems: List<FullExercise>) {
         fullList = newItems
 
         submitList(newItems)
@@ -94,5 +96,14 @@ class TrainingAdapter : ListAdapter<ExerciseUi, TrainingAdapter.TrainingViewHold
 
     }
 
+
+    private fun buildGlideUrl(startUrl: String): GlideUrl =
+        GlideUrl(
+            startUrl,
+            LazyHeaders.Builder()
+                .addHeader("Accept", "application/json")
+                .addHeader("x-api-key", BuildConfig.TRAINING_API_KEY)
+                .build()
+        )
 
 }

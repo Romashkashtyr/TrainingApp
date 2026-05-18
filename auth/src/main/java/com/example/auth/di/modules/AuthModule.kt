@@ -1,4 +1,4 @@
-package com.example.auth.domain.di.modules
+package com.example.auth.di.modules
 
 import com.example.auth.data.AuthRepositoryImpl
 import com.example.auth.repository.AuthRepository

@@ -2,7 +2,7 @@ package com.example.trainings.di.modules
 
 import com.example.trainings.domain.TrainingsRepository
 import com.example.trainings.ui.TrainingsPresenter
-import com.example.trainings.ui.usecases.GetCombineDataAndImageTrainings
+import com.example.trainings.domain.usecases.GetCombineDataAndImageTrainings
 import dagger.Module
 import dagger.Provides
 import javax.inject.Inject

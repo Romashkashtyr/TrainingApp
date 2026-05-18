@@ -3,7 +3,6 @@ package com.example.trainings.data.mappers
 import com.example.trainings.data.local.modelsDTO.ExerciseDto
 import com.example.trainings.data.local.modelsDTO.PrimaryMusclesDto
 import com.example.trainings.data.response.Exercise
-import com.example.trainings.data.response.ExerciseUi
 import com.example.trainings.data.response.PrimaryMuscles
 import com.example.trainings.database.models.ExerciseDbo
 import com.example.trainings.database.models.PrimaryMusclesDbo

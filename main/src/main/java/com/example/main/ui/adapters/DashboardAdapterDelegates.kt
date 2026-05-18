@@ -2,7 +2,7 @@ package com.example.main.ui.adapters
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.core.structures.DashboardItem
+import com.example.main.structures.DashboardItem
 import com.example.main.ui.OnAddWaterClicked
 import com.example.main.ui.OnTrainingClick
 import com.example.main.ui.delegates.StepsItemDelegate

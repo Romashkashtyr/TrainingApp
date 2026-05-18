@@ -4,7 +4,7 @@ package com.example.trainings.ui
 import android.util.Log
 import com.example.core.base.BasePresenter
 import com.example.trainings.domain.TrainingsRepository
-import com.example.trainings.ui.usecases.GetCombineDataAndImageTrainings
+import com.example.trainings.domain.usecases.GetCombineDataAndImageTrainings
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

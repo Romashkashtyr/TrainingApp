@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.core.structures.DashboardItem
+import com.example.main.structures.DashboardItem
 import com.example.main.databinding.ItemStepsBinding
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 

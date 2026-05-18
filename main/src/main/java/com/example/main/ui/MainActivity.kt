@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.core.base.BaseActivity
 import com.example.core.navigation.RouterHolder
 import com.example.core.navigation.Screen
-import com.example.core.structures.DashboardItem
+import com.example.main.structures.DashboardItem
 import com.example.main.databinding.ActivityMainBinding
 import com.example.main.databinding.ItemTrainingListBinding
 import com.example.main.di.MainComponent

@@ -1,7 +1,7 @@
 package com.example.trainingapp
 
 import android.app.Application
-import com.example.auth.domain.di.AuthComponent
+import com.example.auth.di.AuthComponent
 import com.example.auth.ui.AuthorizationActivity
 import com.example.core.di.CoreComponent
 import com.example.core.navigation.Router

@@ -1,7 +1,6 @@
 package com.example.trainings.domain
 
 import com.example.trainings.data.response.Exercise
-import com.example.trainings.data.response.ExerciseUi
 
 
 interface TrainingsRepository {

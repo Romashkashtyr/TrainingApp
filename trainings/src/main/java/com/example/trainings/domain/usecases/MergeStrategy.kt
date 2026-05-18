@@ -1,4 +1,4 @@
-package com.example.trainings.ui.usecases
+package com.example.trainings.domain.usecases
 
 import com.example.trainings.data.RequestResult
 import kotlinx.coroutines.flow.Flow
