@@ -1,10 +1,13 @@
 package com.example.trainings.database.models.dao
 
 import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Ignore
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.trainings.database.models.ExerciseDbo
+import com.example.trainings.database.models.FavoriteExerciseDbo
 import com.example.trainings.database.models.PrimaryMusclesDbo
 
 @Dao
@@ -22,6 +25,29 @@ interface TrainingDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPrimaryMuscles(list: List<PrimaryMusclesDbo>)
+
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun addFavorite(item: FavoriteExerciseDbo)
+
+    @Query(
+        """
+            DELETE FROM favorite_exercises
+            WHERE id = :id
+        """
+    )
+    suspend fun removeFavorite(id: String)
+
+    @Query(
+        """
+            SELECT EXISTS(
+            SELECT 1 
+            FROM favorite_exercises
+            WHERE id=:id
+            )
+        """
+    )
+    suspend fun isFavorite(id: String): Boolean
 
 
 }

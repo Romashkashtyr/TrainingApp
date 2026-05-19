@@ -15,7 +15,9 @@ import com.example.trainings.R
 import com.example.trainings.data.response.FullExercise
 import com.example.trainings.databinding.ItemTrainingBinding
 
-class TrainingAdapter : ListAdapter<FullExercise, TrainingAdapter.TrainingViewHolder>(DiffCallback()) {
+class TrainingAdapter(
+    private val onDetailClick: (FullExercise) -> Unit
+) : ListAdapter<FullExercise, TrainingAdapter.TrainingViewHolder>(DiffCallback()) {
 
     private var fullList = listOf<FullExercise>()
 
@@ -59,6 +61,10 @@ class TrainingAdapter : ListAdapter<FullExercise, TrainingAdapter.TrainingViewHo
                 }
 
                 notifyItemChanged(adapterPosition)
+            }
+
+            binding.root.setOnClickListener {
+                onDetailClick(item)
             }
         }
 

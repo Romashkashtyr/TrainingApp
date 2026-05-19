@@ -1,7 +1,6 @@
 package com.example.trainings.di.modules
 
-import com.example.trainings.domain.TrainingsRepository
-import com.example.trainings.ui.TrainingsPresenter
+import com.example.trainings.ui.training_activity.TrainingsPresenter
 import com.example.trainings.domain.usecases.GetCombineDataAndImageTrainings
 import dagger.Module
 import dagger.Provides

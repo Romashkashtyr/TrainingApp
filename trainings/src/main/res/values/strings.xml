@@ -56,6 +56,11 @@
     <string name="show_more">Показать больше</string>
     <string name="hide">Скрыть</string>
     <string name="back">Назад</string>
+    <string name="training_detail_name">Название тренировки</string>
+    <string name="training_not_found">Тренировка не найдена</string>
+    <string name="error">Ошибка</string>
+    <string name="remove_from_favorite">Удалить из избранного</string>
+    <string name="add_to_favorite">Добавить в избранное</string>
 
 
 </resources>

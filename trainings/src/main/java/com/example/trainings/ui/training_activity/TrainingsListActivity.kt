@@ -1,18 +1,22 @@
-package com.example.trainings.ui
+package com.example.trainings.ui.training_activity
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.core.base.BaseActivity
 import com.example.core.navigation.RouterHolder.router
 import com.example.core.navigation.Screen
 import androidx.core.widget.addTextChangedListener
+import com.example.trainings.R
 import com.example.trainings.data.response.FullExercise
 import com.example.trainings.databinding.ActivityTrainingsListBinding
 import com.example.trainings.di.TrainingComponent
 import com.example.trainings.di.modules.TrainingFactory
+import com.example.trainings.ui.fragment_detail_training.ExerciseDetailFragment
 import com.example.trainings.ui.rc_view_training.TrainingAdapter
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
@@ -37,7 +41,31 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
         super.onCreate(savedInstanceState)
         binding = ActivityTrainingsListBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        trainingAdapter = TrainingAdapter()
+
+        onBackPressedDispatcher.addCallback(
+            this,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    if (supportFragmentManager.backStackEntryCount > 0) {
+                        supportFragmentManager.popBackStack()
+                        binding.fragmentContainer.visibility = View.GONE
+                    } else {
+                        finish()
+                    }
+                }
+
+            }
+        )
+
+        trainingAdapter = TrainingAdapter { exercise ->
+            supportFragmentManager.beginTransaction()
+                .replace(
+                    R.id.fragment_container,
+                    ExerciseDetailFragment.newInstance(exercise.id)
+                )
+                .addToBackStack(null)
+                .commit()
+        }
         initRecyclerView()
         initSearch()
         presenter.loadExercises()
@@ -50,14 +78,15 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
 
     }
 
+
+
     override fun showLoading() {
-       // binding.trainingPgBar.visibility = View.VISIBLE
+        // binding.trainingPgBar.visibility = View.VISIBLE
     }
 
     override fun stopLoading() {
-      // binding.trainingPgBar.visibility = View.GONE
+        // binding.trainingPgBar.visibility = View.GONE
     }
-
 
 
     override fun showExercises(exercises: List<FullExercise>) {
@@ -66,7 +95,10 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
         if (exercises.isEmpty()) {
             Log.d("TrainingsDebug", "ВНИМАНИЕ: Список упражнений пустой!")
         } else {
-            Log.d("TrainingsDebug", "Первый элемент: ${exercises.firstOrNull()?.name?.firstOrNull()}")
+            Log.d(
+                "TrainingsDebug",
+                "Первый элемент: ${exercises.firstOrNull()?.name?.firstOrNull()}"
+            )
         }
 
         trainingAdapter.updateList(exercises)
