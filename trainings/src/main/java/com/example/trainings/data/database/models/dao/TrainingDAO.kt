@@ -1,4 +1,4 @@
-package com.example.trainings.database.models.dao
+package com.example.trainings.data.database.models.dao
 
 import androidx.room.Dao
 import androidx.room.Delete
@@ -6,9 +6,9 @@ import androidx.room.Ignore
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.trainings.database.models.ExerciseDbo
-import com.example.trainings.database.models.FavoriteExerciseDbo
-import com.example.trainings.database.models.PrimaryMusclesDbo
+import com.example.trainings.data.database.models.ExerciseDbo
+import com.example.trainings.data.database.models.FavoriteExerciseDbo
+import com.example.trainings.data.database.models.PrimaryMusclesDbo
 
 @Dao
 interface TrainingDAO {

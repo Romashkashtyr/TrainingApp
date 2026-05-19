@@ -29,9 +29,9 @@ class TrainingsPresenter @Inject constructor(
                     viewState.showExercises(data)
                     Log.d("TrainingsDebug", "showExercises() успешно вызван")
                 }
-            } catch (e:Exception) {
+            } catch (e: Exception) {
                 if (e is CancellationException) {
-                    throw  e
+                    throw e
                 }
                 Log.e("TrainingsDebug", "Ошибка в loadExercises: ${e.message}", e)
                 withContext(Dispatchers.Main) {
@@ -46,32 +46,6 @@ class TrainingsPresenter @Inject constructor(
 
         }
     }
-
-//    fun loadExercises() {
-//        Log.d("TrainingsDebug", "loadExercises() вызван в презентере")
-//        withLoad {
-//            try {
-//                Log.d("TrainingsDebug", "showLoading() вызван")
-//                val data = repository.loadExercises()
-//                Log.d("TrainingsDebug", "repository.loadExercises() вернул элементы")
-//                withContext(Dispatchers.Main) {
-//                    Log.d("TrainingsDebug", "Переключились на Main thread")
-//                    viewState.showExercises(data)
-//                    Log.d("TrainingsDebug", "showExercises() успешно вызван")
-//                }
-//            } catch (e: Exception) {
-//                if (e is CancellationException) {
-//                    throw e
-//                }
-//                Log.e("TrainingsDebug", "Ошибка в loadExercises: ${e.message}", e)
-//                withContext(Dispatchers.Main) {
-//                    viewState.showToast(e.message.toString())
-//                }
-//            }
-//        }
-//
-//    }
-
 
 
     private fun withLoad(job: suspend () -> Unit) {

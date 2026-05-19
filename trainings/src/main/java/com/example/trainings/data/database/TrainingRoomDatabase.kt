@@ -1,14 +1,14 @@
-package com.example.trainings.database
+package com.example.trainings.data.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.trainings.database.converters.Converters
-import com.example.trainings.database.models.ExerciseDbo
-import com.example.trainings.database.models.PrimaryMusclesDbo
-import com.example.trainings.database.models.dao.TrainingDAO
+import com.example.trainings.data.database.converters.Converters
+import com.example.trainings.data.database.models.ExerciseDbo
+import com.example.trainings.data.database.models.PrimaryMusclesDbo
+import com.example.trainings.data.database.models.dao.TrainingDAO
 
 
 @Database(

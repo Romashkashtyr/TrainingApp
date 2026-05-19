@@ -23,8 +23,9 @@ open class AuthorizationPresenter @Inject constructor(
 
         viewState.showViewProgress()
         launch {
+            val signInStatus = signInUseCase(email, password)
             withContext(Dispatchers.Main) {
-                when (signInUseCase(email, password)) {
+                when (signInStatus) {
                     is Status.Failure<*> -> {
                         viewState.showToast(R.string.sign_in_failure)
                     }
@@ -49,8 +50,9 @@ open class AuthorizationPresenter @Inject constructor(
         viewState.showViewProgress()
 
         launch {
+            val signUpStatus = signUpUseCase(email, password, confirmPassword)
             withContext(Dispatchers.Main) {
-                when (signUpUseCase(email, password, confirmPassword)) {
+                when (signUpStatus) {
                     is Status.Failure<*> -> {
                         viewState.showToast(R.string.sign_in_failure)
                     }
@@ -74,13 +76,3 @@ open class AuthorizationPresenter @Inject constructor(
     }
 
 }
-
-
-
-
-
-
-
-
-
-

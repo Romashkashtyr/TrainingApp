@@ -6,9 +6,9 @@ import com.example.trainings.data.response.Exercise
 import com.example.trainings.data.response.ExerciseInterface
 import com.example.trainings.data.response.FullExercise
 import com.example.trainings.data.response.PrimaryMuscles
-import com.example.trainings.database.models.ExerciseDbo
-import com.example.trainings.database.models.FavoriteExerciseDbo
-import com.example.trainings.database.models.PrimaryMusclesDbo
+import com.example.trainings.data.database.models.ExerciseDbo
+import com.example.trainings.data.database.models.FavoriteExerciseDbo
+import com.example.trainings.data.database.models.PrimaryMusclesDbo
 
 object TrainingMapper {
 

@@ -13,7 +13,5 @@ interface TrainingsView : BaseView {
 
     fun stopLoading()
 
-    //fun showExercises(exercises: Exercise)
-
     fun showExercises(exercises: List<FullExercise>)
 }

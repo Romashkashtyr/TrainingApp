@@ -10,8 +10,8 @@ import com.example.trainings.data.mappers.TrainingMapper.toListExerciseFromDbo
 import com.example.trainings.data.response.Exercise
 import com.example.trainings.data.response.FullExercise
 import com.example.trainings.data.response.NetworkService
-import com.example.trainings.database.TrainingRoomDatabase
-import com.example.trainings.database.models.FavoriteExerciseDbo
+import com.example.trainings.data.database.TrainingRoomDatabase
+import com.example.trainings.data.database.models.FavoriteExerciseDbo
 import com.example.trainings.domain.TrainingsRepository
 import javax.inject.Inject
 import javax.inject.Singleton
