@@ -2,34 +2,82 @@ package com.example.trainings.ui.fragment_detail_training
 
 import android.os.Bundle
 import android.view.View
+import com.bumptech.glide.load.model.GlideUrl
+import com.bumptech.glide.load.model.LazyHeaders
+import com.example.core.BuildConfig
 import com.example.core.base.BaseFragment
+import com.example.core.extensions.loadExerciseImage
 import com.example.trainings.R
 import com.example.trainings.data.response.FullExercise
 import com.example.trainings.databinding.DetailExerciseFragmentBinding
+import com.example.trainings.di.TrainingComponent
+import com.example.trainings.di.modules.TrainingDetailFactory
 import moxy.InjectViewState
+import moxy.ktx.moxyPresenter
+import javax.inject.Inject
 
 
 @InjectViewState
 class ExerciseDetailFragment: BaseFragment(), ExerciseDetailView {
 
-
     private var _binding: DetailExerciseFragmentBinding? = null
     private val binding get() = _binding!!
 
+    @Inject
+    lateinit var factory: TrainingDetailFactory
+
     private var exerciseId: String? = null
-    private var isFavorite = false
+
+
+    private val presenter by moxyPresenter { factory.createTrainingDetailPresenter() }
+
+    init {
+        TrainingComponent
+            .getTrainingInstance()
+            .inject(this)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        _binding = DetailExerciseFragmentBinding.bind(view)
+
+        exerciseId = arguments?.getString(ARG_ID)
+
+        setupClicks()
+
+        exerciseId?.let {
+             presenter.loadExercise(it)
+        }
+    }
 
 
     override fun showExercise(exercise: FullExercise) {
-        TODO("Not yet implemented")
+
+        with(binding) {
+            exerciseName.text = exercise.name
+
+            exerciseDescription.text = exercise.description
+
+            musclesGroup.text = exercise.primaryMuscles.joinToString { it.name }
+
+            exerciseImage.loadExerciseImage(
+                buildGlideUrl(exercise.imageUrl),
+                binding.imageProgress
+            )
+        }
+
+//        Glide.with(this)
+//            .load(buildGlideUrl(exercise.imageUrl))
+//            .into(binding.exerciseImage)
     }
 
     override fun showLoading() {
-        TODO("Not yet implemented")
+        binding.imageProgress.visibility = View.VISIBLE
     }
 
     override fun stopLoading() {
-        TODO("Not yet implemented")
+        binding.imageProgress.visibility = View.GONE
     }
 
     override fun updateFavoriteState(isFavorite: Boolean) {
@@ -42,16 +90,9 @@ class ExerciseDetailFragment: BaseFragment(), ExerciseDetailView {
 
 
     override fun showToastInfo(message: String) {
-        TODO("Not yet implemented")
+        showToastInfo(R.string.error)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        _binding = DetailExerciseFragmentBinding.bind(view)
-
-        exerciseId = arguments?.getString(ARG_ID)
-    }
 
     private fun setupClicks() {
         binding.arrowBack.setOnClickListener {
@@ -59,16 +100,23 @@ class ExerciseDetailFragment: BaseFragment(), ExerciseDetailView {
         }
 
         binding.toggleFavorite.setOnClickListener {
-            isFavorite != isFavorite
-            updateFavoriteState(isFavorite)
+            presenter.onFavoriteClicked()
         }
 
     }
 
-    private fun loadData() {
-        val id = exerciseId ?: return
+    private fun buildGlideUrl(startUrl: String): GlideUrl =
+        GlideUrl(
+            startUrl,
+            LazyHeaders.Builder()
+                .addHeader("Accept", "application/json")
+                .addHeader("x-api-key", BuildConfig.TRAINING_API_KEY)
+                .build()
+        )
 
-        val url = "https://api.workoutapi.com/exercises/$id/image"
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     companion object {
@@ -80,5 +128,7 @@ class ExerciseDetailFragment: BaseFragment(), ExerciseDetailView {
                     putString(ARG_ID,id)
                 }
             }
+
+       // val url = "https://api.workoutapi.com/exercises/$id/image"
     }
 }

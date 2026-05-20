@@ -109,6 +109,7 @@ object TrainingMapper {
     }
 
 
+
     fun ExerciseDto.toExerciseDbo(): ExerciseDbo {
         return ExerciseDbo(
             id = id,

@@ -1,14 +1,12 @@
 package com.example.trainings.ui.fragment_detail_training
 
 import com.example.core.base.BaseFragmentPresenter
-import com.example.core.base.BaseFragmentView
 import com.example.trainings.R
 import com.example.trainings.data.response.FullExercise
 import com.example.trainings.domain.usecases.GetCombineDataAndImageTrainings
 import com.example.trainings.domain.usecases.ToggleFavoriteUseCase
 import kotlinx.coroutines.launch
 import moxy.InjectViewState
-import moxy.MvpPresenter
 import javax.inject.Inject
 
 @InjectViewState
@@ -56,7 +54,7 @@ class FragmentDetailPresenter @Inject constructor(
 
         currentExercise?.let { exercise ->
             launch {
-                val favoriteState = toggleFavoriteUseCase.invoke(exercise)
+                val favoriteState = toggleFavoriteUseCase(exercise)
                 viewState.updateFavoriteState(favoriteState)
             }
         }

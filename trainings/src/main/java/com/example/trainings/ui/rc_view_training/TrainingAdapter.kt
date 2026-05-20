@@ -37,7 +37,7 @@ class TrainingAdapter(
             binding.imageProgress.visibility = View.VISIBLE
 
             Glide.with(binding.root.context)
-                .load(buildGlideUrl(item.imageUrl))
+                .load((item.imageUrl))
                 .into(binding.exerciseImage)
 
 

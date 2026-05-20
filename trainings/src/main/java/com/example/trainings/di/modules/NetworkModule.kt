@@ -35,16 +35,6 @@ object NetworkModule {
     }
 
 
-//    @Provides
-//    @Singleton
-//    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
-//        return Retrofit.Builder()
-//            .baseUrl(ApiSettings.BASE_URL)
-//            .client(okHttpClient)
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .build()
-//    }
-
     @Provides
     @Singleton
     fun provideJson(): Json {
@@ -53,16 +43,7 @@ object NetworkModule {
             coerceInputValues = true
         }
     }
-//
-//    @Provides
-//    @Singleton
-//    fun provideConverterFactory(
-//        json: Json
-//    ): Converter.Factory {
-//        return  json.asConverterFactory(
-//            "application/json".toMediaType()
-//        )
-//    }
+
 
     @Provides
     @Singleton

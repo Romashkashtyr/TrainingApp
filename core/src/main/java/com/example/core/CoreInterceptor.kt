@@ -1,6 +1,8 @@
 package com.example.core
 
 import android.util.Log
+import com.bumptech.glide.load.model.GlideUrl
+import com.bumptech.glide.load.model.LazyHeaders
 import okhttp3.Authenticator
 import okhttp3.Interceptor
 import okhttp3.Request
@@ -34,4 +36,6 @@ class CoreInterceptor @Inject constructor() : Interceptor, Authenticator {
         }
         return null
     }
+
+
 }

@@ -2,16 +2,14 @@ package com.example.trainings.data
 
 import android.util.Log
 import com.example.core.ApiSettings
-import com.example.trainings.data.local.modelsDTO.ExerciseDto
-import com.example.trainings.data.mappers.TrainingMapper.toListExerciseFromDto
+import com.example.trainings.data.database.TrainingRoomDatabase
 import com.example.trainings.data.mappers.TrainingMapper.toExerciseDbo
 import com.example.trainings.data.mappers.TrainingMapper.toFavoriteExerciseDbo
 import com.example.trainings.data.mappers.TrainingMapper.toListExerciseFromDbo
+import com.example.trainings.data.mappers.TrainingMapper.toListExerciseFromDto
 import com.example.trainings.data.response.Exercise
 import com.example.trainings.data.response.FullExercise
 import com.example.trainings.data.response.NetworkService
-import com.example.trainings.data.database.TrainingRoomDatabase
-import com.example.trainings.data.database.models.FavoriteExerciseDbo
 import com.example.trainings.domain.TrainingsRepository
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -29,6 +27,7 @@ class TrainingsRepositoryImpl @Inject constructor(
         try {
             val response = api.getAllExercises()
 
+
             if (!response.isSuccessful) {
                 Log.e("TrainingsDebug", "HTTP error: ${response.code()}")
                 return getCachedExercises() ?: emptyList()
@@ -36,6 +35,7 @@ class TrainingsRepositoryImpl @Inject constructor(
             }
 
             val body = response.body()
+
             if (body.isNullOrEmpty()) {
                 Log.e("TrainingsDebug", "Пустой ответ от API")
                 return getCachedExercises() ?: emptyList()
@@ -82,11 +82,6 @@ class TrainingsRepositoryImpl @Inject constructor(
 
     override suspend fun isFavorite(id: String): Boolean {
         return database.trainingDao().isFavorite(id)
-    }
-
-    private suspend fun saveToDatabase(dto: ExerciseDto) {
-        val exerciseDbo = dto.toExerciseDbo()
-        database.trainingDao().insertExerciseCache(exerciseDbo)
     }
 
 }
