@@ -7,6 +7,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.trainings.data.database.converters.Converters
 import com.example.trainings.data.database.models.ExerciseDbo
+import com.example.trainings.data.database.models.FavoriteExerciseDbo
 import com.example.trainings.data.database.models.PrimaryMusclesDbo
 import com.example.trainings.data.database.models.dao.TrainingDAO
 
@@ -15,6 +16,7 @@ import com.example.trainings.data.database.models.dao.TrainingDAO
     entities = [
         ExerciseDbo::class,
         PrimaryMusclesDbo::class,
+        FavoriteExerciseDbo::class
     ], version = 2,
     exportSchema = false
 )

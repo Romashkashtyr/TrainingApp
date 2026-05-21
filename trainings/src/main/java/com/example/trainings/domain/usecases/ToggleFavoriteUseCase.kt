@@ -23,4 +23,8 @@ class ToggleFavoriteUseCase @Inject constructor(
 
         return true
     }
+
+    suspend fun isFavorite(id: String): Boolean {
+        return repository.isFavorite(id)
+    }
 }

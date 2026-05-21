@@ -2,6 +2,7 @@ package com.example.trainings.ui.rc_view_training
 
 
 import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,8 +37,9 @@ class TrainingAdapter(
 
             binding.imageProgress.visibility = View.VISIBLE
 
+
             Glide.with(binding.root.context)
-                .load((item.imageUrl))
+                .load(buildGlideUrl(item.imageUrl))
                 .into(binding.exerciseImage)
 
 
@@ -54,16 +56,20 @@ class TrainingAdapter(
             }
 
             binding.toggleDescription.setOnClickListener {
+                if (adapterPosition == RecyclerView.NO_POSITION) return@setOnClickListener
+
                 if (expandedItems.contains(item.id)) {
                     expandedItems.remove(item.id)
                 } else {
                     expandedItems.add(item.id)
                 }
 
+
                 notifyItemChanged(adapterPosition)
             }
 
             binding.root.setOnClickListener {
+                Log.d("CLICK", "clicked ${item.name}")
                 onDetailClick(item)
             }
         }
@@ -81,6 +87,8 @@ class TrainingAdapter(
         return holder.bind(getItem(position))
     }
 
+
+
     fun updateList(newItems: List<FullExercise>) {
         fullList = newItems
 
@@ -93,7 +101,7 @@ class TrainingAdapter(
         } else {
             val filtered = fullList.filter {
                 it.name?.contains(query, ignoreCase = true) == true ||
-                        it.primaryMuscles.any {muscle ->
+                        it.primaryMuscles.any { muscle ->
                             muscle.name.contains(query, ignoreCase = true)
                         }
             }

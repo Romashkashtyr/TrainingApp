@@ -17,7 +17,7 @@ open class BasePresenter<T : BaseView> : MvpPresenter<T>(), CoroutineScope {
 
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
         Log.e("ExceptionHandler", throwable.stackTraceToString())
-        requireShowToast(R.string.sign_up_failure)
+        requireShowToast(R.string.error_error)
     }
 
     private fun requireShowToast(message: Int) {

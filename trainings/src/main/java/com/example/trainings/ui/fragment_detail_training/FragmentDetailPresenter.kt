@@ -4,6 +4,7 @@ import com.example.core.base.BaseFragmentPresenter
 import com.example.trainings.R
 import com.example.trainings.data.response.FullExercise
 import com.example.trainings.domain.usecases.GetCombineDataAndImageTrainings
+import com.example.trainings.domain.usecases.GetExerciseByIdUseCase
 import com.example.trainings.domain.usecases.ToggleFavoriteUseCase
 import kotlinx.coroutines.launch
 import moxy.InjectViewState
@@ -11,7 +12,7 @@ import javax.inject.Inject
 
 @InjectViewState
 class FragmentDetailPresenter @Inject constructor(
-    private val getCombineDataAndImageTrainings: GetCombineDataAndImageTrainings,
+    private val getExerciseByIdUseCase: GetExerciseByIdUseCase,
     private val toggleFavoriteUseCase: ToggleFavoriteUseCase
 ) : BaseFragmentPresenter<ExerciseDetailView>() {
 
@@ -25,19 +26,26 @@ class FragmentDetailPresenter @Inject constructor(
 
                 viewState.showLoading()
 
-                val exercises = getCombineDataAndImageTrainings()
-
-                val exercise = exercises.firstOrNull { it.id == id }
-
-                if (exercise == null) {
-                    viewState.showToastInfo(R.string.training_not_found)
-                    return@launch
-                }
+                val exercise = getExerciseByIdUseCase(id)
 
                 currentExercise = exercise
 
-
                 viewState.showExercise(exercise)
+
+                val isFavorite = toggleFavoriteUseCase.isFavorite(exercise.id)
+                viewState.updateFavoriteState(isFavorite)
+
+              //  val exercise = exercises.firstOrNull { it.id == id }
+
+//                if (exercise == null) {
+//                    viewState.showToastInfo(R.string.training_not_found)
+//                    return@launch
+//                }
+//
+//                currentExercise = exercise
+//
+//
+//                viewState.showExercise(exercise)
 
             } catch (e: Exception) {
 

@@ -9,6 +9,7 @@ import com.example.trainings.data.mappers.TrainingMapper.toListExerciseFromDbo
 import com.example.trainings.data.mappers.TrainingMapper.toListExerciseFromDto
 import com.example.trainings.data.response.Exercise
 import com.example.trainings.data.response.FullExercise
+import com.example.trainings.data.response.FullExercise.Companion.toFullExercise
 import com.example.trainings.data.response.NetworkService
 import com.example.trainings.domain.TrainingsRepository
 import javax.inject.Inject
@@ -82,6 +83,58 @@ class TrainingsRepositoryImpl @Inject constructor(
 
     override suspend fun isFavorite(id: String): Boolean {
         return database.trainingDao().isFavorite(id)
+    }
+
+    override suspend fun getExerciseById(id: String): FullExercise {
+        try {
+
+            val cached = database.trainingDao().getExerciseById(id)
+
+            if (cached != null) {
+                return cached.toListExerciseFromDto()
+                    .toFullExercise(getExerciseImageUrl(id))
+            }
+
+            val response = api.getExerciseById(id)
+
+            if (!response.isSuccessful) {
+                throw Exception("HTTP ${response.code()}")
+            }
+
+            val body = response.body()
+                ?: throw Exception("Empty response")
+
+            val dbo = body.toExerciseDbo()
+            database.trainingDao().insertExerciseCache(dbo)
+
+            return body.toListExerciseFromDto()
+                .toFullExercise(getExerciseImageUrl(id))
+
+        } catch (e: Exception) {
+            Log.e("DETAIL_ERROR", "getExerciseById failed", e)
+            throw e
+        }
+//        try {
+//            val cached = database.trainingDao().getExerciseById(id)
+//
+//            if (cached != null) {
+//                return cached.toListExerciseFromDto() ?: Exercise("null", emptyList(), null, null)
+//            }
+//
+//            val response = api.getExerciseById(id)
+//
+//            if (!response.isSuccessful) {
+//                throw Exception("HTTP ${response.code()}")
+//            }
+//
+//            val body = response.body() ?: throw Exception("Пустой ответ")
+//
+//            database.trainingDao().insertExerciseCache(body.toExerciseDbo())
+//
+//            return body.toListExerciseFromDto()
+//        } catch (e: Exception) {
+//            throw e
+//        }
     }
 
 }

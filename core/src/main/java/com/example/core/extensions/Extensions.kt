@@ -17,7 +17,7 @@ fun ImageView.loadExerciseImage(
 ) {
     progressBar.visibility = View.VISIBLE
 
-    Glide.with(context)
+    Glide.with(this)
         .load(url)
         .listener(
             object : RequestListener<Drawable> {

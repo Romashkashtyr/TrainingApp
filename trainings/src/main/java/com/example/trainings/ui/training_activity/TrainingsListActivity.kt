@@ -11,7 +11,6 @@ import com.example.core.base.BaseActivity
 import com.example.core.navigation.RouterHolder.router
 import com.example.core.navigation.Screen
 import androidx.core.widget.addTextChangedListener
-import com.example.trainings.R
 import com.example.trainings.data.response.FullExercise
 import com.example.trainings.databinding.ActivityTrainingsListBinding
 import com.example.trainings.di.TrainingComponent
@@ -48,6 +47,7 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
                 override fun handleOnBackPressed() {
                     if (supportFragmentManager.backStackEntryCount > 0) {
                         supportFragmentManager.popBackStack()
+
                         binding.fragmentContainer.visibility = View.GONE
                     } else {
                         finish()
@@ -58,13 +58,7 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
         )
 
         trainingAdapter = TrainingAdapter { exercise ->
-            supportFragmentManager.beginTransaction()
-                .replace(
-                    R.id.fragment_container,
-                    ExerciseDetailFragment.newInstance(exercise.id)
-                )
-                .addToBackStack(null)
-                .commit()
+            openDetailFragment(exercise.id)
         }
         initRecyclerView()
         initSearch()
@@ -78,8 +72,6 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
 
     }
 
-
-
     override fun showLoading() {
         // binding.trainingPgBar.visibility = View.VISIBLE
     }
@@ -87,7 +79,6 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
     override fun stopLoading() {
         // binding.trainingPgBar.visibility = View.GONE
     }
-
 
     override fun showExercises(exercises: List<FullExercise>) {
         Log.d("TrainingsDebug", "showExercises вызван. Получено элементов: ${exercises.size}")
@@ -103,6 +94,19 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
 
         trainingAdapter.updateList(exercises)
 
+    }
+
+    private fun openDetailFragment(id: String) {
+
+        binding.fragmentContainer.visibility = View.VISIBLE
+
+        supportFragmentManager.beginTransaction()
+            .replace(
+                binding.fragmentContainer.id,
+                ExerciseDetailFragment.newInstance(id)
+            )
+            .addToBackStack(null)
+            .commit()
     }
 
     private fun initRecyclerView() {

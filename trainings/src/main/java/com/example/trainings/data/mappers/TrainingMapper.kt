@@ -125,7 +125,7 @@ object TrainingMapper {
     }
 
 
-    fun ExerciseDbo.toListExerciseFromDto(): Exercise? {
+    fun ExerciseDbo.toListExerciseFromDto(): Exercise {
         return Exercise(
             id = id,
             primaryMuscles = primaryMuscles.map {

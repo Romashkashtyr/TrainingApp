@@ -1,7 +1,11 @@
 package com.example.trainings.ui.fragment_detail_training
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.load.model.LazyHeaders
 import com.example.core.BuildConfig
@@ -12,12 +16,13 @@ import com.example.trainings.data.response.FullExercise
 import com.example.trainings.databinding.DetailExerciseFragmentBinding
 import com.example.trainings.di.TrainingComponent
 import com.example.trainings.di.modules.TrainingDetailFactory
+import com.example.trainings.ui.training_activity.TrainingsListActivity
 import moxy.InjectViewState
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 
 
-@InjectViewState
+
 class ExerciseDetailFragment: BaseFragment(), ExerciseDetailView {
 
     private var _binding: DetailExerciseFragmentBinding? = null
@@ -35,6 +40,15 @@ class ExerciseDetailFragment: BaseFragment(), ExerciseDetailView {
         TrainingComponent
             .getTrainingInstance()
             .inject(this)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = DetailExerciseFragmentBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -130,5 +144,7 @@ class ExerciseDetailFragment: BaseFragment(), ExerciseDetailView {
             }
 
        // val url = "https://api.workoutapi.com/exercises/$id/image"
+
     }
+
 }

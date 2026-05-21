@@ -2,6 +2,7 @@ package com.example.trainings.di.modules
 
 import com.example.trainings.ui.training_activity.TrainingsPresenter
 import com.example.trainings.domain.usecases.GetCombineDataAndImageTrainings
+import com.example.trainings.domain.usecases.GetExerciseByIdUseCase
 import com.example.trainings.domain.usecases.ToggleFavoriteUseCase
 import com.example.trainings.ui.fragment_detail_training.FragmentDetailPresenter
 import dagger.Module
@@ -22,7 +23,7 @@ class TrainingsModule {
     @Provides
     @Singleton
     fun provideFragmentDetailPresenterFactory(
-        useCase: GetCombineDataAndImageTrainings,
+        useCase: GetExerciseByIdUseCase,
         toggleFavoriteUseCase: ToggleFavoriteUseCase): FragmentDetailPresenter {
         return FragmentDetailPresenter(useCase,toggleFavoriteUseCase)
     }

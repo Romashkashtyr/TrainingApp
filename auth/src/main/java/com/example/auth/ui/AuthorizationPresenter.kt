@@ -1,6 +1,7 @@
 package com.example.auth.ui
 
 
+import android.util.Log
 import com.example.auth.R
 import com.example.auth.domain.usecase.SignInUseCase
 import com.example.auth.domain.usecase.SignUpUseCase
@@ -47,22 +48,29 @@ open class AuthorizationPresenter @Inject constructor(
 
     fun signUp(email: String, password: String, confirmPassword: String) {
 
+        Log.d("AUTH_PRESENTER", "signUp called")
+
         viewState.showViewProgress()
 
         launch {
+            Log.d("AUTH_PRESENTER", "inside coroutine")
             val signUpStatus = signUpUseCase(email, password, confirmPassword)
+            Log.d("AUTH_PRESENTER", "result=$signUpStatus")
             withContext(Dispatchers.Main) {
                 when (signUpStatus) {
                     is Status.Failure<*> -> {
-                        viewState.showToast(R.string.sign_in_failure)
+                        viewState.hideViewProgress()
+                        viewState.showToast(R.string.sign_up_failure)
                     }
 
                     is Status.NoNetwork<*> -> {
+                        viewState.hideViewProgress()
                         viewState.showToast(R.string.network_failure)
                     }
 
                     is Status.Success<*> -> {
                         viewState.showToast(R.string.sign_in_success)
+                        viewState.hideViewProgress()
                         viewState.navigateToHome()
                     }
                 }

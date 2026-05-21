@@ -26,6 +26,8 @@ interface TrainingDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPrimaryMuscles(list: List<PrimaryMusclesDbo>)
 
+    @Query("SELECT * FROM exercise WHERE id = :id LIMIT 1")
+    suspend fun getExerciseById(id: String): ExerciseDbo?
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addFavorite(item: FavoriteExerciseDbo)
