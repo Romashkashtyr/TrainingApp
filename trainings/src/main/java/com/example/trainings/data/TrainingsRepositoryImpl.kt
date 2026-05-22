@@ -91,8 +91,10 @@ class TrainingsRepositoryImpl @Inject constructor(
             val cached = database.trainingDao().getExerciseById(id)
 
             if (cached != null) {
+
+                val isFav = database.trainingDao().isFavorite(id)
                 return cached.toListExerciseFromDto()
-                    .toFullExercise(getExerciseImageUrl(id))
+                    .toFullExercise(getExerciseImageUrl(id), isFav)
             }
 
             val response = api.getExerciseById(id)
@@ -107,8 +109,10 @@ class TrainingsRepositoryImpl @Inject constructor(
             val dbo = body.toExerciseDbo()
             database.trainingDao().insertExerciseCache(dbo)
 
+            val isFav = database.trainingDao().isFavorite(id)
+
             return body.toListExerciseFromDto()
-                .toFullExercise(getExerciseImageUrl(id))
+                .toFullExercise(getExerciseImageUrl(id),isFav)
 
         } catch (e: Exception) {
             Log.e("DETAIL_ERROR", "getExerciseById failed", e)

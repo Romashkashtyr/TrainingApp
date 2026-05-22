@@ -70,6 +70,15 @@
             android:layout_width="24dp"
             android:layout_height="24dp"/>
 
+
+        <ImageView
+            android:id="@+id/favorite_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="end"
+            android:contentDescription="Favorite icon"
+            android:src="@drawable/baseline_favorite_24" />
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

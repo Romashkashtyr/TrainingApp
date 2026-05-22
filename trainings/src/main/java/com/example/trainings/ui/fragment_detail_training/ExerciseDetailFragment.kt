@@ -79,11 +79,11 @@ class ExerciseDetailFragment: BaseFragment(), ExerciseDetailView {
                 buildGlideUrl(exercise.imageUrl),
                 binding.imageProgress
             )
+
+            updateFavoriteState(exercise.isFavorite)
+            updateFavoriteUI(exercise.isFavorite)
         }
 
-//        Glide.with(this)
-//            .load(buildGlideUrl(exercise.imageUrl))
-//            .into(binding.exerciseImage)
     }
 
     override fun showLoading() {
@@ -95,6 +95,14 @@ class ExerciseDetailFragment: BaseFragment(), ExerciseDetailView {
     }
 
     override fun updateFavoriteState(isFavorite: Boolean) {
+        binding.favoriteIcon.setImageResource(
+            if (isFavorite) {
+                R.drawable.baseline_favorite_filled_24
+            } else {
+                R.drawable.baseline_favorite_24
+            }
+        )
+
         binding.toggleFavorite.text = if (isFavorite) {
             getString(R.string.remove_from_favorite)
         } else {
@@ -107,6 +115,15 @@ class ExerciseDetailFragment: BaseFragment(), ExerciseDetailView {
         showToastInfo(R.string.error)
     }
 
+    private fun updateFavoriteUI(isFavorite: Boolean) {
+        binding.favoriteIcon.setImageResource(
+            if (isFavorite) {
+                R.drawable.baseline_favorite_filled_24
+            } else {
+                R.drawable.baseline_favorite_24
+            }
+        )
+    }
 
     private fun setupClicks() {
         binding.arrowBack.setOnClickListener {
@@ -114,6 +131,10 @@ class ExerciseDetailFragment: BaseFragment(), ExerciseDetailView {
         }
 
         binding.toggleFavorite.setOnClickListener {
+            presenter.onFavoriteClicked()
+        }
+
+        binding.favoriteIcon.setOnClickListener {
             presenter.onFavoriteClicked()
         }
 

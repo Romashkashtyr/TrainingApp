@@ -62,8 +62,14 @@ class FragmentDetailPresenter @Inject constructor(
 
         currentExercise?.let { exercise ->
             launch {
-                val favoriteState = toggleFavoriteUseCase(exercise)
-                viewState.updateFavoriteState(favoriteState)
+                val newState = toggleFavoriteUseCase(exercise)
+                currentExercise = exercise.copy(
+                    isFavorite = newState
+                )
+
+                viewState.updateFavoriteState(newState)
+//                val favoriteState = toggleFavoriteUseCase(exercise)
+//                viewState.updateFavoriteState(favoriteState)
             }
         }
     }

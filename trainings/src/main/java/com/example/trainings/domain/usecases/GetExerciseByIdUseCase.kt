@@ -14,7 +14,8 @@ class GetExerciseByIdUseCase @Inject constructor(
         val exercise = repository.getExerciseById(id)
 
         return exercise.toFullExercise(
-            image = repository.getExerciseImageUrl(id)
+            image = repository.getExerciseImageUrl(id),
+            isFavorite = exercise.isFavorite
         )
     }
 }

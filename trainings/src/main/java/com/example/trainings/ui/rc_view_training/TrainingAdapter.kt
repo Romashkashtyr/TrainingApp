@@ -37,6 +37,12 @@ class TrainingAdapter(
 
             binding.imageProgress.visibility = View.VISIBLE
 
+            binding.favoriteIcon.setImageResource(
+                if (item.isFavorite)
+                    R.drawable.baseline_favorite_filled_24
+                else R.drawable.baseline_favorite_24
+            )
+
 
             Glide.with(binding.root.context)
                 .load(buildGlideUrl(item.imageUrl))
@@ -86,7 +92,6 @@ class TrainingAdapter(
     override fun onBindViewHolder(holder: TrainingViewHolder, position: Int) {
         return holder.bind(getItem(position))
     }
-
 
 
     fun updateList(newItems: List<FullExercise>) {
