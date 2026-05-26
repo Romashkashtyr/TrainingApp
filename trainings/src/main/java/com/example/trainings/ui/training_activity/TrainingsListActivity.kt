@@ -70,6 +70,13 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
         }
 
 
+        supportFragmentManager.addOnBackStackChangedListener {
+            if (supportFragmentManager.backStackEntryCount == 0) {
+                binding.fragmentContainer.visibility = View.GONE
+            }
+        }
+
+
     }
 
     override fun showLoading() {
