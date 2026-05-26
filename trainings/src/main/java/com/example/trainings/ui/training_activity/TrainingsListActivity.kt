@@ -41,21 +41,7 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
         binding = ActivityTrainingsListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        onBackPressedDispatcher.addCallback(
-            this,
-            object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    if (supportFragmentManager.backStackEntryCount > 0) {
-                        supportFragmentManager.popBackStack()
-
-                        binding.fragmentContainer.visibility = View.GONE
-                    } else {
-                        finish()
-                    }
-                }
-
-            }
-        )
+        onBackPressedCallback()
 
         trainingAdapter = TrainingAdapter { exercise ->
             openDetailFragment(exercise.id)
@@ -69,15 +55,15 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
             finish()
         }
 
-
         supportFragmentManager.addOnBackStackChangedListener {
             if (supportFragmentManager.backStackEntryCount == 0) {
                 binding.fragmentContainer.visibility = View.GONE
             }
         }
 
-
     }
+
+
 
     override fun showLoading() {
         // binding.trainingPgBar.visibility = View.VISIBLE
@@ -121,6 +107,24 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
             layoutManager = LinearLayoutManager(this@TrainingsListActivity)
             adapter = trainingAdapter
         }
+    }
+
+    private fun onBackPressedCallback() {
+        onBackPressedDispatcher.addCallback(
+            this,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    if (supportFragmentManager.backStackEntryCount > 0) {
+                        supportFragmentManager.popBackStack()
+
+                        binding.fragmentContainer.visibility = View.GONE
+                    } else {
+                        finish()
+                    }
+                }
+
+            }
+        )
     }
 
     private fun initSearch() {
