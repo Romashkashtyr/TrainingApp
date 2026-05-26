@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.load.model.LazyHeaders
 import com.example.core.BuildConfig
+import com.example.core.extensions.loadExerciseImage
 import com.example.trainings.R
 import com.example.trainings.data.response.FullExercise
 import com.example.trainings.databinding.ItemTrainingBinding
@@ -48,6 +49,11 @@ class TrainingAdapter(
                 .load(buildGlideUrl(item.imageUrl))
                 .into(binding.exerciseImage)
 
+
+            binding.exerciseImage.loadExerciseImage(
+                buildGlideUrl(item.imageUrl),
+                binding.imageProgress
+            )
 
             val isExpanded = expandedItems.contains(item.id)
 

@@ -6,7 +6,9 @@ import com.example.trainings.data.response.FullExercise
 import com.example.trainings.domain.usecases.GetCombineDataAndImageTrainings
 import com.example.trainings.domain.usecases.GetExerciseByIdUseCase
 import com.example.trainings.domain.usecases.ToggleFavoriteUseCase
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import moxy.InjectViewState
 import javax.inject.Inject
 
@@ -27,13 +29,13 @@ class FragmentDetailPresenter @Inject constructor(
                 viewState.showLoading()
 
                 val exercise = getExerciseByIdUseCase(id)
+                val isFavorite = toggleFavoriteUseCase.isFavorite(exercise.id)
 
                 currentExercise = exercise
-
-                viewState.showExercise(exercise)
-
-                val isFavorite = toggleFavoriteUseCase.isFavorite(exercise.id)
-                viewState.updateFavoriteState(isFavorite)
+                withContext(Dispatchers.Main) {
+                    viewState.showExercise(exercise)
+                    viewState.updateFavoriteState(isFavorite)
+                }
 
               //  val exercise = exercises.firstOrNull { it.id == id }
 
