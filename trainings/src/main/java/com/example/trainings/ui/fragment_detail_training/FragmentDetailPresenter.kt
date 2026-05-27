@@ -1,9 +1,7 @@
 package com.example.trainings.ui.fragment_detail_training
 
 import com.example.core.base.BaseFragmentPresenter
-import com.example.trainings.R
 import com.example.trainings.data.response.FullExercise
-import com.example.trainings.domain.usecases.GetCombineDataAndImageTrainings
 import com.example.trainings.domain.usecases.GetExerciseByIdUseCase
 import com.example.trainings.domain.usecases.ToggleFavoriteUseCase
 import kotlinx.coroutines.Dispatchers
@@ -37,18 +35,6 @@ class FragmentDetailPresenter @Inject constructor(
                     viewState.updateFavoriteState(isFavorite)
                 }
 
-              //  val exercise = exercises.firstOrNull { it.id == id }
-
-//                if (exercise == null) {
-//                    viewState.showToastInfo(R.string.training_not_found)
-//                    return@launch
-//                }
-//
-//                currentExercise = exercise
-//
-//
-//                viewState.showExercise(exercise)
-
             } catch (e: Exception) {
 
                 viewState.showToastInfo(e.message ?: "Error")
@@ -70,8 +56,6 @@ class FragmentDetailPresenter @Inject constructor(
                 )
 
                 viewState.updateFavoriteState(newState)
-//                val favoriteState = toggleFavoriteUseCase(exercise)
-//                viewState.updateFavoriteState(favoriteState)
             }
         }
     }

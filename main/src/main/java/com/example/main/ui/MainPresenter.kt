@@ -5,9 +5,7 @@ import com.example.core.base.BasePresenter
 import com.example.core.structures.Status
 import com.example.main.R
 import com.example.main.domain.MainRepository
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import moxy.InjectViewState
 
 @InjectViewState
@@ -19,7 +17,7 @@ class MainPresenter(
     fun requestGetScreenData() {
         launch {
             val waterAmount = mainRepository.getWaterAmount()
-            withContext(Dispatchers.Main.immediate) {
+            onMainThread {
                 when (waterAmount) {
                     is Status.Failure -> {
                         viewState.showToast(R.string.sign_up_failure)

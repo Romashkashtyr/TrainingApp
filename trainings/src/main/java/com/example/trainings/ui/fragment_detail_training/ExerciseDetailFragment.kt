@@ -1,7 +1,5 @@
 package com.example.trainings.ui.fragment_detail_training
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,11 +14,8 @@ import com.example.trainings.data.response.FullExercise
 import com.example.trainings.databinding.DetailExerciseFragmentBinding
 import com.example.trainings.di.TrainingComponent
 import com.example.trainings.di.modules.TrainingDetailFactory
-import com.example.trainings.ui.training_activity.TrainingsListActivity
-import moxy.InjectViewState
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
-
 
 
 class ExerciseDetailFragment: BaseFragment(), ExerciseDetailView {

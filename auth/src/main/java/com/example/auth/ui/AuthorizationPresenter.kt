@@ -7,9 +7,7 @@ import com.example.auth.domain.usecase.SignInUseCase
 import com.example.auth.domain.usecase.SignUpUseCase
 import com.example.core.base.BasePresenter
 import com.example.core.structures.Status
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import moxy.InjectViewState
 import javax.inject.Inject
 
@@ -25,7 +23,7 @@ open class AuthorizationPresenter @Inject constructor(
         viewState.showViewProgress()
         launch {
             val signInStatus = signInUseCase(email, password)
-            withContext(Dispatchers.Main) {
+            onMainThread {
                 when (signInStatus) {
                     is Status.Failure<*> -> {
                         viewState.showToast(R.string.sign_in_failure)
@@ -56,7 +54,7 @@ open class AuthorizationPresenter @Inject constructor(
             Log.d("AUTH_PRESENTER", "inside coroutine")
             val signUpStatus = signUpUseCase(email, password, confirmPassword)
             Log.d("AUTH_PRESENTER", "result=$signUpStatus")
-            withContext(Dispatchers.Main) {
+            onMainThread {
                 when (signUpStatus) {
                     is Status.Failure<*> -> {
                         viewState.hideViewProgress()

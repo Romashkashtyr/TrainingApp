@@ -118,27 +118,6 @@ class TrainingsRepositoryImpl @Inject constructor(
             Log.e("DETAIL_ERROR", "getExerciseById failed", e)
             throw e
         }
-//        try {
-//            val cached = database.trainingDao().getExerciseById(id)
-//
-//            if (cached != null) {
-//                return cached.toListExerciseFromDto() ?: Exercise("null", emptyList(), null, null)
-//            }
-//
-//            val response = api.getExerciseById(id)
-//
-//            if (!response.isSuccessful) {
-//                throw Exception("HTTP ${response.code()}")
-//            }
-//
-//            val body = response.body() ?: throw Exception("Пустой ответ")
-//
-//            database.trainingDao().insertExerciseCache(body.toExerciseDbo())
-//
-//            return body.toListExerciseFromDto()
-//        } catch (e: Exception) {
-//            throw e
-//        }
     }
 
 }

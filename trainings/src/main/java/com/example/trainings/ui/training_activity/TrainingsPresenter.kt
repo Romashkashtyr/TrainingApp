@@ -24,7 +24,7 @@ class TrainingsPresenter @Inject constructor(
             try {
                 val data = useCase.invoke()
                 Log.d("TrainingsDebug", "repository.loadExercises() вернул элементы")
-                withContext(Dispatchers.Main) {
+                onMainThread{
                     Log.d("TrainingsDebug", "Переключились на Main thread")
                     viewState.showExercises(data)
                     Log.d("TrainingsDebug", "showExercises() успешно вызван")
@@ -34,11 +34,11 @@ class TrainingsPresenter @Inject constructor(
                     throw e
                 }
                 Log.e("TrainingsDebug", "Ошибка в loadExercises: ${e.message}", e)
-                withContext(Dispatchers.Main) {
+                onMainThread {
                     viewState.showToast(e.message ?: "Unknown error")
                 }
             } finally {
-                withContext(Dispatchers.Main) {
+                onMainThread {
                     viewState.stopLoading()
                     Log.d("TrainingsDebug", "Loading завершен")
                 }
