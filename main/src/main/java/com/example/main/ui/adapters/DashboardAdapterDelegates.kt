@@ -48,5 +48,22 @@ class DashboardAdapterDelegates(
         notifyItemChanged(itemCount)
     }
 
+    fun updateSteps(newSteps: Int) {
+
+        val index = items.indexOfFirst {
+            it is DashboardItem.StepsItem
+        }
+
+        if (index == -1) return
+
+        val updatedItems = items.toMutableList()
+
+        updatedItems[index] = DashboardItem.StepsItem(newSteps)
+
+        items = updatedItems
+
+        notifyItemChanged(index)
+    }
+
     
 }
