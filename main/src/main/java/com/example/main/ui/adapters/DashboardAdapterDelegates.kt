@@ -56,11 +56,15 @@ class DashboardAdapterDelegates(
 
         if (index == -1) return
 
-        val updatedItems = items.toMutableList()
+//        val updatedItems = items.toMutableList()
+//
+//        updatedItems[index] = DashboardItem.StepsItem(newSteps)
 
-        updatedItems[index] = DashboardItem.StepsItem(newSteps)
+    //    items = updatedItems
 
-        items = updatedItems
+        items = items.toMutableList().apply {
+            this[index] = DashboardItem.StepsItem(newSteps)
+        }
 
         notifyItemChanged(index)
     }

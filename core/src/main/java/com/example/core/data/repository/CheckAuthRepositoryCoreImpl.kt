@@ -1,10 +1,9 @@
-package com.example.core.data
+package com.example.core.data.repository
 
 import android.content.SharedPreferences
 import androidx.core.content.edit
 import com.example.core.Constants.IS_LOGGED_IN
 import com.example.core.repository.CheckAuthRepositoryCore
-import com.example.core.structures.Status
 import com.google.firebase.auth.FirebaseAuth
 import javax.inject.Inject
 

@@ -3,7 +3,7 @@ package com.example.core.di.modules
 import android.content.Context
 import android.content.SharedPreferences
 import com.example.core.Constants
-import com.example.core.data.CheckAuthRepositoryCoreImpl
+import com.example.core.data.repository.CheckAuthRepositoryCoreImpl
 import com.example.core.repository.CheckAuthRepositoryCore
 import com.google.firebase.auth.FirebaseAuth
 import dagger.Binds

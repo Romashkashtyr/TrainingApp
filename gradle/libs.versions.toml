@@ -3,6 +3,7 @@ adapterdelegates4KotlinDslViewbinding = "4.3.2"
 agp = "8.5.0-rc02"
 converterGson = "2.11.0"
 dagger = "2.55"
+datastorePreferences = "1.2.1"
 firebaseBom = "33.1.1"
 firebaseCore = "21.1.1"
 firebaseDatabase = "21.0.0"
@@ -35,6 +36,7 @@ retrofitKotlinxSerialization = "1.0.0"
 [libraries]
 adapterdelegates4-kotlin-dsl-viewbinding = { module = "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding", version.ref = "adapterdelegates4KotlinDslViewbinding" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomRuntime" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomRuntime" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
