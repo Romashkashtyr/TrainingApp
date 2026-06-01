@@ -1,6 +1,7 @@
 package com.example.trainings.ui.fragment_detail_training
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,7 +43,9 @@ class ExerciseDetailFragment: BaseFragment(), ExerciseDetailView {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        Log.d("DEBUG_APP", "Fragment onCreateView START")
         _binding = DetailExerciseFragmentBinding.inflate(inflater, container, false)
+        Log.d("DEBUG_APP", "Fragment binding created")
         return binding.root
     }
 
@@ -51,11 +54,14 @@ class ExerciseDetailFragment: BaseFragment(), ExerciseDetailView {
 
         _binding = DetailExerciseFragmentBinding.bind(view)
 
+        Log.d("DEBUG_APP", "Fragment onViewCreated START")
         exerciseId = arguments?.getString(ARG_ID)
 
         setupClicks()
 
+        Log.d("DEBUG_APP", "exerciseId = $exerciseId")
         exerciseId?.let {
+            Log.d("DEBUG_APP", "calling presenter.loadExercise")
              presenter.loadExercise(it)
         }
     }

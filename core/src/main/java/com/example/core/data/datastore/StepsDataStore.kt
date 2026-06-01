@@ -7,13 +7,14 @@ import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.first
+import javax.inject.Inject
 
 
 private val Context.dataStore by preferencesDataStore(
     name = "steps_prefs"
 )
 
-class StepsDataStore(
+class StepsDataStore @Inject constructor(
     private val context: Context
 ) {
 

@@ -10,6 +10,7 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -24,15 +25,15 @@ import com.example.main.di.MainComponent
 import com.example.main.domain.MainRepository
 import com.example.main.structures.DashboardItem
 import com.example.main.ui.adapters.DashboardAdapterDelegates
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import moxy.ktx.moxyPresenter
 import java.time.LocalDate
 import javax.inject.Inject
 
 class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
     OnTrainingClick, OnViewTrainingsClicked, SensorEventListener {
-
-        private lateinit var stepsDataStore: StepsDataStore
 
     private lateinit var sensorManager: SensorManager
     private var stepSensor: Sensor? = null
@@ -41,8 +42,11 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
     @Inject
     lateinit var mainRepository: MainRepository
 
+    @Inject
+    lateinit var stepsDataStore: StepsDataStore
 
-    private val mainPresenter by moxyPresenter { MainPresenter(mainRepository) }
+
+    private val mainPresenter by moxyPresenter { MainPresenter(mainRepository,stepsDataStore) }
     private lateinit var binding: ActivityMainBinding
 
 
@@ -68,13 +72,12 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        initRecycler()
         mainPresenter.requestGetScreenData()
-        stepsDataStore = StepsDataStore(this)
-
-        restoringSteps()
 
         initSensor()
         checkRuntimePermission()
+        restoringSteps()
     }
 
 
@@ -116,8 +119,28 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
         }
     }
 
+    private fun initRecycler() {
+        binding.dashboardRecyclerView.apply {
+            layoutManager = LinearLayoutManager(this@MainActivity)
+            adapter = adapterDelegate
+        }
+    }
+
     override fun addWater(waterCount: Int) {
         mainPresenter.requestAddWater(waterCount)
+    }
+
+    override fun updateSteps(steps: Int) {
+        val updatedItems = items.toMutableList()
+
+        val index = updatedItems.indexOfFirst {
+            it is DashboardItem.StepsItem
+        }
+
+        if (index != -1) {
+            updatedItems[index] = DashboardItem.StepsItem(steps)
+            adapterDelegate.updateItems(updatedItems)
+        }
     }
 
 
@@ -139,9 +162,13 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
 
     private fun restoringSteps() {
         lifecycleScope.launch {
-            val savedSteps = stepsDataStore.getCurrentSteps()
+                val savedSteps = withContext(Dispatchers.IO) {
+                    stepsDataStore.getCurrentSteps()
+                }
 
-            adapterDelegate.updateSteps(savedSteps)
+                withContext(Dispatchers.Main) {
+                    adapterDelegate.updateSteps(savedSteps)
+                }
         }
     }
 
@@ -163,33 +190,40 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onSensorChanged(event: SensorEvent?) {
+
         if (event?.sensor?.type != Sensor.TYPE_STEP_COUNTER) return
 
         val totalSteps = event.values[0]
+        mainPresenter.onStepReceived(totalSteps)
 
-        lifecycleScope.launch {
-
-            val today = getTodayDate()
-
-            val savedDate = stepsDataStore.getDate()
-            var savedInitial = stepsDataStore.getInitialSteps()
-
-            if (savedDate != today || savedInitial == null) {
-
-                savedInitial = totalSteps
-
-                stepsDataStore.saveInitialSteps(totalSteps)
-                stepsDataStore.saveDate(today)
-            }
-
-            val currentSteps = (totalSteps - savedInitial).toInt()
-
-            val safeSteps = if (currentSteps < 0) 0 else currentSteps
-
-            stepsDataStore.saveCurrentSteps(safeSteps)
-
-            adapterDelegate.updateSteps(safeSteps)
-        }
+//        if (event?.sensor?.type != Sensor.TYPE_STEP_COUNTER) return
+//
+//
+//        val totalSteps = event.values[0]
+//
+//        lifecycleScope.launch {
+//
+//            val today = getTodayDate()
+//
+//            val savedDate = stepsDataStore.getDate()
+//            var savedInitial = stepsDataStore.getInitialSteps()
+//
+//            if (savedDate != today || savedInitial == null) {
+//
+//                savedInitial = totalSteps
+//
+//                stepsDataStore.saveInitialSteps(totalSteps)
+//                stepsDataStore.saveDate(today)
+//            }
+//
+//            val currentSteps = (totalSteps - savedInitial).toInt()
+//
+//            val safeSteps = if (currentSteps < 0) 0 else currentSteps
+//
+//            stepsDataStore.saveCurrentSteps(safeSteps)
+//
+//            adapterDelegate.updateSteps(safeSteps)
+//        }
     }
 
     override fun onAccuracyChanged(p0: Sensor?, p1: Int) = Unit

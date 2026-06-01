@@ -1,8 +1,12 @@
 package com.example.main.ui
 
 
+import android.util.Log
 import com.example.core.base.BasePresenter
+import com.example.core.data.datastore.StepsDataStore
+import com.example.core.exception.ExceptionCatcher
 import com.example.core.structures.Status
+import com.example.core.utils.getTodayDate
 import com.example.main.R
 import com.example.main.domain.MainRepository
 import kotlinx.coroutines.launch
@@ -10,9 +14,12 @@ import moxy.InjectViewState
 
 @InjectViewState
 class MainPresenter(
-    private val mainRepository: MainRepository
+    private val mainRepository: MainRepository,
+    private val stepsDataStore: StepsDataStore,
 ) : BasePresenter<MainView>() {
 
+
+    private var lastTotalSteps: Float? = null
 
     fun requestGetScreenData() {
         launch {
@@ -40,4 +47,28 @@ class MainPresenter(
     }
 
 
-}
+    fun onStepReceived(totalSteps: Float) {
+        launch {
+                val today = getTodayDate()
+                val savedDate = stepsDataStore.getDate()
+                var initialSteps = stepsDataStore.getInitialSteps()
+
+                if (savedDate != today || initialSteps == null) {
+                    initialSteps = totalSteps
+                    stepsDataStore.saveInitialSteps(totalSteps)
+                    stepsDataStore.saveDate(today)
+                }
+
+                val currentSteps = (totalSteps - initialSteps).toInt().coerceAtLeast(0)
+
+                stepsDataStore.saveCurrentSteps(currentSteps)
+
+                onMainThread {
+                    viewState.updateSteps(currentSteps)
+                }
+            }
+
+        }
+    }
+
+
