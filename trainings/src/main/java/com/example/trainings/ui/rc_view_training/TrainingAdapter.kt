@@ -18,7 +18,8 @@ import com.example.trainings.data.response.FullExercise
 import com.example.trainings.databinding.ItemTrainingBinding
 
 class TrainingAdapter(
-    private val onDetailClick: (FullExercise) -> Unit
+    private val onDetailClick: (FullExercise) -> Unit,
+    private val onFavoriteClick: (FullExercise) -> Unit,
 ) : ListAdapter<FullExercise, TrainingAdapter.TrainingViewHolder>(DiffCallback()) {
 
     private var fullList = listOf<FullExercise>()
@@ -43,6 +44,10 @@ class TrainingAdapter(
                     R.drawable.baseline_favorite_filled_24
                 else R.drawable.baseline_favorite_24
             )
+
+            binding.favoriteIcon.setOnClickListener {
+                onFavoriteClick(item)
+            }
 
 
             Glide.with(binding.root.context)

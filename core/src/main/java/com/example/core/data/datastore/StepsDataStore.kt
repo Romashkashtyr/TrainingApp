@@ -6,7 +6,9 @@ import androidx.datastore.preferences.core.floatPreferencesKey
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 
@@ -25,6 +27,13 @@ class StepsDataStore @Inject constructor(
         private val CURRENT_STEPS = intPreferencesKey("current_steps")
 
         private val LAST_DATE = stringPreferencesKey("last_date")
+    }
+
+    fun observeSteps(): Flow<Int> {
+        return context.dataStore.data
+            .map { prefs ->
+                prefs[CURRENT_STEPS] ?: 0
+            }
     }
 
     suspend fun saveInitialSteps(value: Float) {

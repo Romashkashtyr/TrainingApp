@@ -3,7 +3,9 @@ package com.example.trainings.ui.training_activity
 
 import android.util.Log
 import com.example.core.base.BasePresenter
+import com.example.trainings.data.response.FullExercise
 import com.example.trainings.domain.usecases.GetCombineDataAndImageTrainings
+import com.example.trainings.domain.usecases.ToggleFavoriteUseCase
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -14,9 +16,9 @@ import javax.inject.Inject
 
 @InjectViewState
 class TrainingsPresenter @Inject constructor(
-    private val useCase: GetCombineDataAndImageTrainings
+    private val useCase: GetCombineDataAndImageTrainings,
+    private val toggleFavoriteUseCase: ToggleFavoriteUseCase
 ) : BasePresenter<TrainingsView>() {
-
 
     fun loadExercises() {
         Log.d("TrainingsDebug", "loadExercises() вызван в презентере")
@@ -47,6 +49,24 @@ class TrainingsPresenter @Inject constructor(
         }
     }
 
+    fun onFavoriteClicked(exercise: FullExercise) {
+        launch {
+            try {
+                toggleFavoriteUseCase(exercise)
+
+                val updatedExercises = useCase.invoke()
+
+                onMainThread {
+                    viewState.showExercises(updatedExercises)
+                }
+
+            } catch (e: Exception) {
+                onMainThread {
+                    viewState.showToast(e.message ?: "Error")
+                }
+            }
+        }
+    }
 
     private fun withLoad(job: suspend () -> Unit) {
         viewState.showLoading()

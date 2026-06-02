@@ -6,11 +6,11 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.activity.OnBackPressedCallback
+import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.core.base.BaseActivity
 import com.example.core.navigation.RouterHolder.router
 import com.example.core.navigation.Screen
-import androidx.core.widget.addTextChangedListener
 import com.example.trainings.data.response.FullExercise
 import com.example.trainings.databinding.ActivityTrainingsListBinding
 import com.example.trainings.di.TrainingComponent
@@ -43,9 +43,14 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
 
         onBackPressedCallback()
 
-        trainingAdapter = TrainingAdapter { exercise ->
-            openDetailFragment(exercise.id)
-        }
+        trainingAdapter = TrainingAdapter(
+            onDetailClick = { exercise ->
+                openDetailFragment(exercise.id)
+            },
+            onFavoriteClick = { exercise ->
+                presenter.onFavoriteClicked(exercise)
+            }
+        )
         initRecyclerView()
         initSearch()
         presenter.loadExercises()
@@ -63,7 +68,10 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
 
     }
 
-
+    override fun onResume() {
+        super.onResume()
+        presenter.loadExercises()
+    }
 
     override fun showLoading() {
         // binding.trainingPgBar.visibility = View.VISIBLE

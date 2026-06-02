@@ -16,8 +16,11 @@ class TrainingsModule {
 
     @Provides
     @Singleton
-    fun provideTrainingPresenterFactory(useCase: GetCombineDataAndImageTrainings): TrainingsPresenter {
-        return TrainingsPresenter(useCase)
+    fun provideTrainingPresenterFactory(
+        useCase: GetCombineDataAndImageTrainings,
+        toggleFavoriteUseCase: ToggleFavoriteUseCase
+    ): TrainingsPresenter {
+        return TrainingsPresenter(useCase, toggleFavoriteUseCase)
     }
 
     @Provides

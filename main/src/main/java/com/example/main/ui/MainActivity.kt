@@ -23,6 +23,8 @@ import com.example.core.navigation.Screen
 import com.example.main.databinding.ActivityMainBinding
 import com.example.main.di.MainComponent
 import com.example.main.domain.MainRepository
+import com.example.main.domain.StepsRepository
+import com.example.main.service.StepsCounterService
 import com.example.main.structures.DashboardItem
 import com.example.main.ui.adapters.DashboardAdapterDelegates
 import kotlinx.coroutines.Dispatchers
@@ -33,7 +35,7 @@ import java.time.LocalDate
 import javax.inject.Inject
 
 class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
-    OnTrainingClick, OnViewTrainingsClicked, SensorEventListener {
+    OnTrainingClick, OnViewTrainingsClicked {
 
     private lateinit var sensorManager: SensorManager
     private var stepSensor: Sensor? = null
@@ -43,10 +45,18 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
     lateinit var mainRepository: MainRepository
 
     @Inject
+    lateinit var stepsRepository: StepsRepository
+
+    @Inject
     lateinit var stepsDataStore: StepsDataStore
 
 
-    private val mainPresenter by moxyPresenter { MainPresenter(mainRepository,stepsDataStore) }
+    private val mainPresenter by moxyPresenter { MainPresenter(
+        mainRepository,
+        stepsRepository,
+        stepsDataStore
+    )
+    }
     private lateinit var binding: ActivityMainBinding
 
 
@@ -74,6 +84,9 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
         setContentView(binding.root)
         initRecycler()
         mainPresenter.requestGetScreenData()
+        mainPresenter.observeSteps()
+
+        startService(StepsCounterService.getIntentService(this))
 
         initSensor()
         checkRuntimePermission()
@@ -84,18 +97,10 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
     override fun onResume() {
         super.onResume()
 
-        stepSensor?.also {
-            sensorManager.registerListener(
-                this,
-                it,
-                SensorManager.SENSOR_DELAY_UI
-            )
-        }
     }
 
     override fun onPause() {
         super.onPause()
-        sensorManager.unregisterListener(this)
     }
 
 
@@ -188,45 +193,6 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
         fun getIntent(fromContext: Context) = Intent(fromContext, MainActivity::class.java)
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    override fun onSensorChanged(event: SensorEvent?) {
-
-        if (event?.sensor?.type != Sensor.TYPE_STEP_COUNTER) return
-
-        val totalSteps = event.values[0]
-        mainPresenter.onStepReceived(totalSteps)
-
-//        if (event?.sensor?.type != Sensor.TYPE_STEP_COUNTER) return
-//
-//
-//        val totalSteps = event.values[0]
-//
-//        lifecycleScope.launch {
-//
-//            val today = getTodayDate()
-//
-//            val savedDate = stepsDataStore.getDate()
-//            var savedInitial = stepsDataStore.getInitialSteps()
-//
-//            if (savedDate != today || savedInitial == null) {
-//
-//                savedInitial = totalSteps
-//
-//                stepsDataStore.saveInitialSteps(totalSteps)
-//                stepsDataStore.saveDate(today)
-//            }
-//
-//            val currentSteps = (totalSteps - savedInitial).toInt()
-//
-//            val safeSteps = if (currentSteps < 0) 0 else currentSteps
-//
-//            stepsDataStore.saveCurrentSteps(safeSteps)
-//
-//            adapterDelegate.updateSteps(safeSteps)
-//        }
-    }
-
-    override fun onAccuracyChanged(p0: Sensor?, p1: Int) = Unit
 
 
 }

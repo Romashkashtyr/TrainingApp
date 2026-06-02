@@ -1,4 +1,4 @@
-package com.example.trainings.data
+package com.example.trainings.data.repository
 
 import android.util.Log
 import com.example.core.ApiSettings
