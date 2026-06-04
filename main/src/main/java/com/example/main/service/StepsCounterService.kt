@@ -30,8 +30,6 @@ class StepsCounterService : Service(), SensorEventListener {
     @Inject
     lateinit var repository: StepsRepository
 
-    private var totalSteps: Float? = null
-
     override fun onCreate() {
         super.onCreate()
 
