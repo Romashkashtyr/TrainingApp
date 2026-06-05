@@ -5,13 +5,9 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.hardware.Sensor
-import android.hardware.SensorEvent
-import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
-import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
@@ -22,8 +18,8 @@ import com.example.core.navigation.RouterHolder
 import com.example.core.navigation.Screen
 import com.example.main.databinding.ActivityMainBinding
 import com.example.main.di.MainComponent
-import com.example.main.domain.MainRepository
-import com.example.main.domain.StepsRepository
+import com.example.main.domain.repository.MainRepository
+import com.example.main.domain.repository.StepsRepository
 import com.example.main.service.StepsCounterService
 import com.example.main.structures.DashboardItem
 import com.example.main.ui.adapters.DashboardAdapterDelegates
@@ -31,7 +27,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import moxy.ktx.moxyPresenter
-import java.time.LocalDate
 import javax.inject.Inject
 
 class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
@@ -86,21 +81,11 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
         mainPresenter.requestGetScreenData()
         mainPresenter.observeSteps()
 
-        startService(StepsCounterService.getIntentService(this))
+        startStepCounterService()
 
         initSensor()
         checkRuntimePermission()
         restoringSteps()
-    }
-
-
-    override fun onResume() {
-        super.onResume()
-
-    }
-
-    override fun onPause() {
-        super.onPause()
     }
 
 
@@ -177,11 +162,16 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
         }
     }
 
+    private fun startStepCounterService() {
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun getTodayDate(): String {
-        return LocalDate.now().toString()
+        val intent = StepsCounterService.getIntentService(this)
+
+        ContextCompat.startForegroundService(
+            this,
+            intent
+        )
     }
+
 
     private fun initSensor() {
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager

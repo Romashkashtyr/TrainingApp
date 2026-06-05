@@ -1,13 +1,11 @@
-package com.example.trainings.data.database.converters
+package com.example.core.database.converters
 
 import androidx.room.TypeConverter
-import com.example.trainings.data.response.PrimaryMuscles
-import com.example.trainings.data.database.models.ExerciseDbo
-import com.example.trainings.data.database.models.PrimaryMusclesDbo
+import com.example.core.database.models.training_modules.ExerciseDbo
+import com.example.core.database.models.training_modules.PrimaryMusclesDbo
 import com.google.gson.Gson
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import javax.inject.Inject
 
 
 class Converters {

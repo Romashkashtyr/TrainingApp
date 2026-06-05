@@ -10,7 +10,7 @@ import com.example.core.navigation.Screen
 import com.example.main.di.MainComponent
 import com.example.main.ui.MainActivity
 import com.example.splash.di.SplashComponent
-import com.example.trainings.data.database.TrainingRoomDatabase
+import com.example.core.database.TrainingRoomDatabase
 import com.example.trainings.di.TrainingComponent
 import com.example.trainings.ui.fragment_detail_training.ExerciseDetailFragment
 import com.example.trainings.ui.training_activity.TrainingsListActivity

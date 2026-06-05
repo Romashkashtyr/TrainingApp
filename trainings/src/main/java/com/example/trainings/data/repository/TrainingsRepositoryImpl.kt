@@ -2,7 +2,7 @@ package com.example.trainings.data.repository
 
 import android.util.Log
 import com.example.core.ApiSettings
-import com.example.trainings.data.database.TrainingRoomDatabase
+import com.example.core.database.TrainingRoomDatabase
 import com.example.trainings.data.mappers.TrainingMapper.toExerciseDbo
 import com.example.trainings.data.mappers.TrainingMapper.toFavoriteExerciseDbo
 import com.example.trainings.data.mappers.TrainingMapper.toListExerciseFromDbo

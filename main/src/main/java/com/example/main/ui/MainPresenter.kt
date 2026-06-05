@@ -1,15 +1,13 @@
 package com.example.main.ui
 
 
-import android.util.Log
 import com.example.core.base.BasePresenter
 import com.example.core.data.datastore.StepsDataStore
-import com.example.core.exception.ExceptionCatcher
 import com.example.core.structures.Status
 import com.example.core.utils.getTodayDate
 import com.example.main.R
-import com.example.main.domain.MainRepository
-import com.example.main.domain.StepsRepository
+import com.example.main.domain.repository.MainRepository
+import com.example.main.domain.repository.StepsRepository
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import moxy.InjectViewState
@@ -55,7 +53,7 @@ class MainPresenter @Inject constructor(
         stepsJob?.cancel()
 
         stepsJob = launch {
-            stepsRepository.observeSteps()
+            stepsRepository.observeTodaySteps()
                 .collect { steps ->
                     onMainThread {
                         viewState.updateSteps(steps)

@@ -1,15 +1,12 @@
 package com.example.main.di.modules
 
 
-import android.content.Context
-import com.example.core.data.datastore.StepsDataStore
-import com.example.main.data.MainRepositoryImpl
+import com.example.main.data.repository.MainRepositoryImpl
 import com.example.main.data.repository.StepsRepositoryImpl
-import com.example.main.domain.MainRepository
-import com.example.main.domain.StepsRepository
+import com.example.main.domain.repository.MainRepository
+import com.example.main.domain.repository.StepsRepository
 import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import javax.inject.Singleton
 
 @Module

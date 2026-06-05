@@ -1,14 +1,13 @@
-package com.example.trainings.data.database.models.dao
+package com.example.core.database.models.dao
 
 import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Ignore
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.trainings.data.database.models.ExerciseDbo
-import com.example.trainings.data.database.models.FavoriteExerciseDbo
-import com.example.trainings.data.database.models.PrimaryMusclesDbo
+import com.example.core.database.models.training_modules.ExerciseDbo
+import com.example.core.database.models.training_modules.FavoriteExerciseDbo
+import com.example.core.database.models.training_modules.PrimaryMusclesDbo
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TrainingDAO {
@@ -50,6 +49,7 @@ interface TrainingDAO {
         """
     )
     suspend fun isFavorite(id: String): Boolean
+
 
 
 }

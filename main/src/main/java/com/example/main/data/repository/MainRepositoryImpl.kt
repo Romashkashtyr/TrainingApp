@@ -1,9 +1,9 @@
-package com.example.main.data
+package com.example.main.data.repository
 
 import com.example.core.Constants
 import com.example.core.exception.FirebaseExceptionCatcher
 import com.example.core.structures.Status
-import com.example.main.domain.MainRepository
+import com.example.main.domain.repository.MainRepository
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
