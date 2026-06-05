@@ -16,6 +16,7 @@ import com.example.core.base.BaseActivity
 import com.example.core.data.datastore.StepsDataStore
 import com.example.core.navigation.RouterHolder
 import com.example.core.navigation.Screen
+import com.example.core.utils.getTodayDate
 import com.example.main.databinding.ActivityMainBinding
 import com.example.main.di.MainComponent
 import com.example.main.domain.repository.MainRepository
@@ -79,7 +80,7 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
         setContentView(binding.root)
         initRecycler()
         mainPresenter.requestGetScreenData()
-        mainPresenter.observeSteps()
+        mainPresenter.observeSteps(getTodayDate())
 
         startStepCounterService()
 

@@ -49,11 +49,11 @@ class MainPresenter @Inject constructor(
     }
 
 
-    fun observeSteps() {
+    fun observeSteps(date: String) {
         stepsJob?.cancel()
 
         stepsJob = launch {
-            stepsRepository.observeTodaySteps()
+            stepsRepository.observeTodaySteps(date)
                 .collect { steps ->
                     onMainThread {
                         viewState.updateSteps(steps)
