@@ -74,5 +74,6 @@ open class AuthorizationPresenter @Inject constructor(
     fun requestChangeMode() {
         viewState.changeAuthMode()
     }
-
+//
+    //
 }
