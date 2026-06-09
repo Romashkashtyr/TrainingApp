@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools" >
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
     <application
         android:allowBackup="true"
@@ -14,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TrainingApp"
-        tools:targetApi="31" >
+        tools:targetApi="31"
+        tools:ignore="ForegroundServicePermission">
         <activity
             android:name="com.example.splash.ui.SplashActivity"
             android:exported="true"
@@ -37,6 +40,10 @@
             android:name="com.example.main.ui.MainActivity"
             android:exported="false" >
         </activity>
+        <service
+            android:name="com.example.main.service.StepsCounterService"
+            android:foregroundServiceType="health"
+            android:exported="false"/>
     </application>
 
 </manifest>

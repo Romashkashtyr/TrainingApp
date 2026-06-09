@@ -10,4 +10,5 @@ interface MainView : BaseView {
 
     fun initListData(waterAmount: Int)
     fun addWater(waterCount: Int)
+    fun updateSteps(steps: Int)
 }

@@ -19,6 +19,11 @@ interface NetworkService {
         @Query("q") query: String? = null,
     ): Result<List<ExerciseDto>>
 
+    @GET("/exercises/{id}")
+    suspend fun getExerciseById(
+        @Path("id") id: String,
+    ): Response<ExerciseDto>
+
 
     @GET("/exercises/:id/image")
     suspend fun getExerciseImage(

@@ -1,5 +1,6 @@
 package com.example.core.exception
 
+import android.util.Log
 import com.example.core.structures.Status
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseNetworkException
@@ -25,6 +26,7 @@ class ExceptionCatcher @Inject constructor() {
         } catch (e: FirebaseException) {
             Status.Failure("Unidentified error: ${e.message}")
         } catch (e: Exception) {
+            Log.e("AUTH_CATCHER", "ERROR", e)
             Status.Failure("An unknown error occurred: ${e.message}")
         }
     }

@@ -1,17 +1,16 @@
-package com.example.trainings.data
+package com.example.trainings.data.repository
 
 import android.util.Log
 import com.example.core.ApiSettings
-import com.example.trainings.data.local.modelsDTO.ExerciseDto
-import com.example.trainings.data.mappers.TrainingMapper.toListExerciseFromDto
+import com.example.core.database.TrainingRoomDatabase
 import com.example.trainings.data.mappers.TrainingMapper.toExerciseDbo
 import com.example.trainings.data.mappers.TrainingMapper.toFavoriteExerciseDbo
 import com.example.trainings.data.mappers.TrainingMapper.toListExerciseFromDbo
+import com.example.trainings.data.mappers.TrainingMapper.toListExerciseFromDto
 import com.example.trainings.data.response.Exercise
 import com.example.trainings.data.response.FullExercise
+import com.example.trainings.data.response.FullExercise.Companion.toFullExercise
 import com.example.trainings.data.response.NetworkService
-import com.example.trainings.data.database.TrainingRoomDatabase
-import com.example.trainings.data.database.models.FavoriteExerciseDbo
 import com.example.trainings.domain.TrainingsRepository
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -29,6 +28,7 @@ class TrainingsRepositoryImpl @Inject constructor(
         try {
             val response = api.getAllExercises()
 
+
             if (!response.isSuccessful) {
                 Log.e("TrainingsDebug", "HTTP error: ${response.code()}")
                 return getCachedExercises() ?: emptyList()
@@ -36,6 +36,7 @@ class TrainingsRepositoryImpl @Inject constructor(
             }
 
             val body = response.body()
+
             if (body.isNullOrEmpty()) {
                 Log.e("TrainingsDebug", "Пустой ответ от API")
                 return getCachedExercises() ?: emptyList()
@@ -84,9 +85,39 @@ class TrainingsRepositoryImpl @Inject constructor(
         return database.trainingDao().isFavorite(id)
     }
 
-    private suspend fun saveToDatabase(dto: ExerciseDto) {
-        val exerciseDbo = dto.toExerciseDbo()
-        database.trainingDao().insertExerciseCache(exerciseDbo)
+    override suspend fun getExerciseById(id: String): FullExercise {
+        try {
+
+            val cached = database.trainingDao().getExerciseById(id)
+
+            if (cached != null) {
+
+                val isFav = database.trainingDao().isFavorite(id)
+                return cached.toListExerciseFromDto()
+                    .toFullExercise(getExerciseImageUrl(id), isFav)
+            }
+
+            val response = api.getExerciseById(id)
+
+            if (!response.isSuccessful) {
+                throw Exception("HTTP ${response.code()}")
+            }
+
+            val body = response.body()
+                ?: throw Exception("Empty response")
+
+            val dbo = body.toExerciseDbo()
+            database.trainingDao().insertExerciseCache(dbo)
+
+            val isFav = database.trainingDao().isFavorite(id)
+
+            return body.toListExerciseFromDto()
+                .toFullExercise(getExerciseImageUrl(id),isFav)
+
+        } catch (e: Exception) {
+            Log.e("DETAIL_ERROR", "getExerciseById failed", e)
+            throw e
+        }
     }
 
 }

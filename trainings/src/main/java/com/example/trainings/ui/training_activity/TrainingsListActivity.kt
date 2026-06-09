@@ -6,12 +6,11 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.activity.OnBackPressedCallback
+import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.core.base.BaseActivity
 import com.example.core.navigation.RouterHolder.router
 import com.example.core.navigation.Screen
-import androidx.core.widget.addTextChangedListener
-import com.example.trainings.R
 import com.example.trainings.data.response.FullExercise
 import com.example.trainings.databinding.ActivityTrainingsListBinding
 import com.example.trainings.di.TrainingComponent
@@ -42,30 +41,16 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
         binding = ActivityTrainingsListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        onBackPressedDispatcher.addCallback(
-            this,
-            object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    if (supportFragmentManager.backStackEntryCount > 0) {
-                        supportFragmentManager.popBackStack()
-                        binding.fragmentContainer.visibility = View.GONE
-                    } else {
-                        finish()
-                    }
-                }
+        onBackPressedCallback()
 
+        trainingAdapter = TrainingAdapter(
+            onDetailClick = { exercise ->
+                openDetailFragment(exercise.id)
+            },
+            onFavoriteClick = { exercise ->
+                presenter.onFavoriteClicked(exercise)
             }
         )
-
-        trainingAdapter = TrainingAdapter { exercise ->
-            supportFragmentManager.beginTransaction()
-                .replace(
-                    R.id.fragment_container,
-                    ExerciseDetailFragment.newInstance(exercise.id)
-                )
-                .addToBackStack(null)
-                .commit()
-        }
         initRecyclerView()
         initSearch()
         presenter.loadExercises()
@@ -75,10 +60,18 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
             finish()
         }
 
+        supportFragmentManager.addOnBackStackChangedListener {
+            if (supportFragmentManager.backStackEntryCount == 0) {
+                binding.fragmentContainer.visibility = View.GONE
+            }
+        }
 
     }
 
-
+    override fun onResume() {
+        super.onResume()
+        presenter.loadExercises()
+    }
 
     override fun showLoading() {
         // binding.trainingPgBar.visibility = View.VISIBLE
@@ -87,7 +80,6 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
     override fun stopLoading() {
         // binding.trainingPgBar.visibility = View.GONE
     }
-
 
     override fun showExercises(exercises: List<FullExercise>) {
         Log.d("TrainingsDebug", "showExercises вызван. Получено элементов: ${exercises.size}")
@@ -105,11 +97,42 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
 
     }
 
+    private fun openDetailFragment(id: String) {
+
+        binding.fragmentContainer.visibility = View.VISIBLE
+
+        supportFragmentManager.beginTransaction()
+            .replace(
+                binding.fragmentContainer.id,
+                ExerciseDetailFragment.newInstance(id)
+            )
+            .addToBackStack(null)
+            .commit()
+    }
+
     private fun initRecyclerView() {
         binding.rcViewTraining.apply {
             layoutManager = LinearLayoutManager(this@TrainingsListActivity)
             adapter = trainingAdapter
         }
+    }
+
+    private fun onBackPressedCallback() {
+        onBackPressedDispatcher.addCallback(
+            this,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    if (supportFragmentManager.backStackEntryCount > 0) {
+                        supportFragmentManager.popBackStack()
+
+                        binding.fragmentContainer.visibility = View.GONE
+                    } else {
+                        finish()
+                    }
+                }
+
+            }
+        )
     }
 
     private fun initSearch() {

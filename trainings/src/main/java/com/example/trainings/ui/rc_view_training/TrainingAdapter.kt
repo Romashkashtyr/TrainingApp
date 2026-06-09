@@ -2,6 +2,7 @@ package com.example.trainings.ui.rc_view_training
 
 
 import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,12 +12,14 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.load.model.LazyHeaders
 import com.example.core.BuildConfig
+import com.example.core.extensions.loadExerciseImage
 import com.example.trainings.R
 import com.example.trainings.data.response.FullExercise
 import com.example.trainings.databinding.ItemTrainingBinding
 
 class TrainingAdapter(
-    private val onDetailClick: (FullExercise) -> Unit
+    private val onDetailClick: (FullExercise) -> Unit,
+    private val onFavoriteClick: (FullExercise) -> Unit,
 ) : ListAdapter<FullExercise, TrainingAdapter.TrainingViewHolder>(DiffCallback()) {
 
     private var fullList = listOf<FullExercise>()
@@ -36,10 +39,26 @@ class TrainingAdapter(
 
             binding.imageProgress.visibility = View.VISIBLE
 
+            binding.favoriteIcon.setImageResource(
+                if (item.isFavorite)
+                    R.drawable.baseline_favorite_filled_24
+                else R.drawable.baseline_favorite_24
+            )
+
+            binding.favoriteIcon.setOnClickListener {
+                onFavoriteClick(item)
+            }
+
+
             Glide.with(binding.root.context)
                 .load(buildGlideUrl(item.imageUrl))
                 .into(binding.exerciseImage)
 
+
+            binding.exerciseImage.loadExerciseImage(
+                buildGlideUrl(item.imageUrl),
+                binding.imageProgress
+            )
 
             val isExpanded = expandedItems.contains(item.id)
 
@@ -54,16 +73,20 @@ class TrainingAdapter(
             }
 
             binding.toggleDescription.setOnClickListener {
+                if (adapterPosition == RecyclerView.NO_POSITION) return@setOnClickListener
+
                 if (expandedItems.contains(item.id)) {
                     expandedItems.remove(item.id)
                 } else {
                     expandedItems.add(item.id)
                 }
 
+
                 notifyItemChanged(adapterPosition)
             }
 
             binding.root.setOnClickListener {
+                Log.d("CLICK", "clicked ${item.name}")
                 onDetailClick(item)
             }
         }
@@ -81,6 +104,7 @@ class TrainingAdapter(
         return holder.bind(getItem(position))
     }
 
+
     fun updateList(newItems: List<FullExercise>) {
         fullList = newItems
 
@@ -93,7 +117,7 @@ class TrainingAdapter(
         } else {
             val filtered = fullList.filter {
                 it.name?.contains(query, ignoreCase = true) == true ||
-                        it.primaryMuscles.any {muscle ->
+                        it.primaryMuscles.any { muscle ->
                             muscle.name.contains(query, ignoreCase = true)
                         }
             }

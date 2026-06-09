@@ -12,6 +12,6 @@ class GetCombineDataAndImageTrainings @Inject constructor(
 
     suspend operator fun invoke(): List<FullExercise> {
         val exercises = repository.loadExercises()
-        return exercises.map { it.toFullExercise(image = repository.getExerciseImageUrl(id = it.id)) }
+        return exercises.map { it.toFullExercise(image = repository.getExerciseImageUrl(id = it.id), isFavorite = repository.isFavorite(it.id)) }
     }
 }

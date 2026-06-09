@@ -38,15 +38,23 @@ class AuthRepositoryImpl @Inject constructor(
         password: String,
         confirmPassword: String
     ): Status<Boolean> {
+
+        Log.d("AUTH_REPO", "signUp START email=$email")
+
         if (password != confirmPassword) {
+            Log.d("AUTH_REPO", "FAIL: password mismatch")
             return Status.Failure("Passwords do not match")
         }
         return catcher.launchWithCatch {
+            Log.d("AUTH_REPO", "Firebase createUser START")
             val resultSignUp = firebaseAuth.createUserWithEmailAndPassword(email, password).await()
+            Log.d("AUTH_REPO", "Firebase response received")
             if (resultSignUp.user != null) {
+                Log.d("AUTH_REPO", "SUCCESS user=${resultSignUp.user?.uid}")
                 checkAuthRepositoryCore.setUserLoggedIn(true)
                 return@launchWithCatch Status.Success(true)
             } else {
+                Log.d("AUTH_REPO", "FAIL: user == null")
                 return@launchWithCatch Status.Failure("Failed to create user")
             }
         }

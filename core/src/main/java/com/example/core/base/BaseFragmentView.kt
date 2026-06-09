@@ -1,11 +1,11 @@
 package com.example.core.base
 
-import moxy.MvpView
+
 import moxy.viewstate.strategy.OneExecutionStateStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(value = OneExecutionStateStrategy::class)
-interface BaseFragmentView: MvpView {
+interface BaseFragmentView: BaseView {
 
     fun showToastInfo(message: Int)
 

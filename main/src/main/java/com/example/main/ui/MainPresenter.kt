@@ -2,24 +2,31 @@ package com.example.main.ui
 
 
 import com.example.core.base.BasePresenter
+import com.example.core.data.datastore.StepsDataStore
 import com.example.core.structures.Status
+import com.example.core.utils.getTodayDate
 import com.example.main.R
-import com.example.main.domain.MainRepository
-import kotlinx.coroutines.Dispatchers
+import com.example.main.domain.repository.MainRepository
+import com.example.main.domain.repository.StepsRepository
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import moxy.InjectViewState
+import javax.inject.Inject
 
 @InjectViewState
-class MainPresenter(
-    private val mainRepository: MainRepository
+class MainPresenter @Inject constructor(
+    private val mainRepository: MainRepository,
+    private val stepsRepository: StepsRepository,
+    private val stepsDataStore: StepsDataStore,
 ) : BasePresenter<MainView>() {
 
+
+    private var stepsJob: Job? = null
 
     fun requestGetScreenData() {
         launch {
             val waterAmount = mainRepository.getWaterAmount()
-            withContext(Dispatchers.Main.immediate) {
+            onMainThread {
                 when (waterAmount) {
                     is Status.Failure -> {
                         viewState.showToast(R.string.sign_up_failure)
@@ -42,4 +49,41 @@ class MainPresenter(
     }
 
 
-}
+    fun observeSteps(date: String) {
+        stepsJob?.cancel()
+
+        stepsJob = launch {
+            stepsRepository.observeTodaySteps(date)
+                .collect { steps ->
+                    onMainThread {
+                        viewState.updateSteps(steps)
+                    }
+                }
+        }
+    }
+
+    fun onStepReceived(totalSteps: Float) {
+        launch {
+                val today = getTodayDate()
+                val savedDate = stepsDataStore.getDate()
+                var initialSteps = stepsDataStore.getInitialSteps()
+
+                if (savedDate != today || initialSteps == null) {
+                    initialSteps = totalSteps
+                    stepsDataStore.saveInitialSteps(totalSteps)
+                    stepsDataStore.saveDate(today)
+                }
+
+                val currentSteps = (totalSteps - initialSteps).toInt().coerceAtLeast(0)
+
+                stepsDataStore.saveCurrentSteps(currentSteps)
+
+                onMainThread {
+                    viewState.updateSteps(currentSteps)
+                }
+            }
+
+        }
+    }
+
+

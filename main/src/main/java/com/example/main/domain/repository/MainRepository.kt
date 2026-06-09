@@ -1,4 +1,4 @@
-package com.example.main.domain
+package com.example.main.domain.repository
 
 import com.example.core.structures.Status
 

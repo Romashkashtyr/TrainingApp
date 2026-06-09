@@ -1,14 +1,13 @@
 package com.example.auth.ui
 
 
+import android.util.Log
 import com.example.auth.R
 import com.example.auth.domain.usecase.SignInUseCase
 import com.example.auth.domain.usecase.SignUpUseCase
 import com.example.core.base.BasePresenter
 import com.example.core.structures.Status
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import moxy.InjectViewState
 import javax.inject.Inject
 
@@ -24,7 +23,7 @@ open class AuthorizationPresenter @Inject constructor(
         viewState.showViewProgress()
         launch {
             val signInStatus = signInUseCase(email, password)
-            withContext(Dispatchers.Main) {
+            onMainThread {
                 when (signInStatus) {
                     is Status.Failure<*> -> {
                         viewState.showToast(R.string.sign_in_failure)
@@ -47,22 +46,29 @@ open class AuthorizationPresenter @Inject constructor(
 
     fun signUp(email: String, password: String, confirmPassword: String) {
 
+        Log.d("AUTH_PRESENTER", "signUp called")
+
         viewState.showViewProgress()
 
         launch {
+            Log.d("AUTH_PRESENTER", "inside coroutine")
             val signUpStatus = signUpUseCase(email, password, confirmPassword)
-            withContext(Dispatchers.Main) {
+            Log.d("AUTH_PRESENTER", "result=$signUpStatus")
+            onMainThread {
                 when (signUpStatus) {
                     is Status.Failure<*> -> {
-                        viewState.showToast(R.string.sign_in_failure)
+                        viewState.hideViewProgress()
+                        viewState.showToast(R.string.sign_up_failure)
                     }
 
                     is Status.NoNetwork<*> -> {
+                        viewState.hideViewProgress()
                         viewState.showToast(R.string.network_failure)
                     }
 
                     is Status.Success<*> -> {
                         viewState.showToast(R.string.sign_in_success)
+                        viewState.hideViewProgress()
                         viewState.navigateToHome()
                     }
                 }

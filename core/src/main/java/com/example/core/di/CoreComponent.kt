@@ -15,6 +15,8 @@ import dagger.Component
 @Component(modules = [CoreModule::class, ExceptionModule::class, RouterModule::class])
 interface CoreComponent {
 
+    fun context(): Context
+
     @Component.Builder
     interface Builder {
 

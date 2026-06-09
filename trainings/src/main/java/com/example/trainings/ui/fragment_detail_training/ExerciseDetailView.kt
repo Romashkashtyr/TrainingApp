@@ -1,9 +1,7 @@
 package com.example.trainings.ui.fragment_detail_training
 
 import com.example.core.base.BaseFragmentView
-import com.example.core.base.BaseView
 import com.example.trainings.data.response.FullExercise
-import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType
 

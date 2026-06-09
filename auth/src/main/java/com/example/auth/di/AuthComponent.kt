@@ -2,7 +2,7 @@ package com.example.auth.di
 
 
 import com.example.auth.di.modules.AuthModule
-import com.example.auth.domain.di.DaggerAuthComponent
+import com.example.auth.di.DaggerAuthComponent
 import com.example.auth.repository.AuthRepository
 import com.example.auth.ui.AuthorizationActivity
 import com.example.core.di.CoreComponent

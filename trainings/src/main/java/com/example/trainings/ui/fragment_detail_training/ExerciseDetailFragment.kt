@@ -1,38 +1,109 @@
 package com.example.trainings.ui.fragment_detail_training
 
 import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import com.bumptech.glide.load.model.GlideUrl
+import com.bumptech.glide.load.model.LazyHeaders
+import com.example.core.BuildConfig
 import com.example.core.base.BaseFragment
+import com.example.core.extensions.loadExerciseImage
 import com.example.trainings.R
 import com.example.trainings.data.response.FullExercise
 import com.example.trainings.databinding.DetailExerciseFragmentBinding
-import moxy.InjectViewState
+import com.example.trainings.di.TrainingComponent
+import com.example.trainings.di.modules.TrainingDetailFactory
+import moxy.ktx.moxyPresenter
+import javax.inject.Inject
 
 
-@InjectViewState
 class ExerciseDetailFragment: BaseFragment(), ExerciseDetailView {
-
 
     private var _binding: DetailExerciseFragmentBinding? = null
     private val binding get() = _binding!!
 
+    @Inject
+    lateinit var factory: TrainingDetailFactory
+
     private var exerciseId: String? = null
-    private var isFavorite = false
+
+
+    private val presenter by moxyPresenter { factory.createTrainingDetailPresenter() }
+
+    init {
+        TrainingComponent
+            .getTrainingInstance()
+            .inject(this)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        Log.d("DEBUG_APP", "Fragment onCreateView START")
+        _binding = DetailExerciseFragmentBinding.inflate(inflater, container, false)
+        Log.d("DEBUG_APP", "Fragment binding created")
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        _binding = DetailExerciseFragmentBinding.bind(view)
+
+        Log.d("DEBUG_APP", "Fragment onViewCreated START")
+        exerciseId = arguments?.getString(ARG_ID)
+
+        setupClicks()
+
+        Log.d("DEBUG_APP", "exerciseId = $exerciseId")
+        exerciseId?.let {
+            Log.d("DEBUG_APP", "calling presenter.loadExercise")
+             presenter.loadExercise(it)
+        }
+    }
 
 
     override fun showExercise(exercise: FullExercise) {
-        TODO("Not yet implemented")
+
+        with(binding) {
+            exerciseName.text = exercise.name
+
+            exerciseDescription.text = exercise.description
+
+            musclesGroup.text = exercise.primaryMuscles.joinToString { it.name }
+
+            exerciseImage.loadExerciseImage(
+                buildGlideUrl(exercise.imageUrl),
+                binding.imageProgress
+            )
+
+            updateFavoriteState(exercise.isFavorite)
+            updateFavoriteUI(exercise.isFavorite)
+        }
+
     }
 
     override fun showLoading() {
-        TODO("Not yet implemented")
+        binding.imageProgress.visibility = View.VISIBLE
     }
 
     override fun stopLoading() {
-        TODO("Not yet implemented")
+        binding.imageProgress.visibility = View.GONE
     }
 
     override fun updateFavoriteState(isFavorite: Boolean) {
+        binding.favoriteIcon.setImageResource(
+            if (isFavorite) {
+                R.drawable.baseline_favorite_filled_24
+            } else {
+                R.drawable.baseline_favorite_24
+            }
+        )
+
         binding.toggleFavorite.text = if (isFavorite) {
             getString(R.string.remove_from_favorite)
         } else {
@@ -42,15 +113,17 @@ class ExerciseDetailFragment: BaseFragment(), ExerciseDetailView {
 
 
     override fun showToastInfo(message: String) {
-        TODO("Not yet implemented")
+        showToastInfo(R.string.error)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        _binding = DetailExerciseFragmentBinding.bind(view)
-
-        exerciseId = arguments?.getString(ARG_ID)
+    private fun updateFavoriteUI(isFavorite: Boolean) {
+        binding.favoriteIcon.setImageResource(
+            if (isFavorite) {
+                R.drawable.baseline_favorite_filled_24
+            } else {
+                R.drawable.baseline_favorite_24
+            }
+        )
     }
 
     private fun setupClicks() {
@@ -59,16 +132,27 @@ class ExerciseDetailFragment: BaseFragment(), ExerciseDetailView {
         }
 
         binding.toggleFavorite.setOnClickListener {
-            isFavorite != isFavorite
-            updateFavoriteState(isFavorite)
+            presenter.onFavoriteClicked()
+        }
+
+        binding.favoriteIcon.setOnClickListener {
+            presenter.onFavoriteClicked()
         }
 
     }
 
-    private fun loadData() {
-        val id = exerciseId ?: return
+    private fun buildGlideUrl(startUrl: String): GlideUrl =
+        GlideUrl(
+            startUrl,
+            LazyHeaders.Builder()
+                .addHeader("Accept", "application/json")
+                .addHeader("x-api-key", BuildConfig.TRAINING_API_KEY)
+                .build()
+        )
 
-        val url = "https://api.workoutapi.com/exercises/$id/image"
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     companion object {
@@ -80,5 +164,9 @@ class ExerciseDetailFragment: BaseFragment(), ExerciseDetailView {
                     putString(ARG_ID,id)
                 }
             }
+
+       // val url = "https://api.workoutapi.com/exercises/$id/image"
+
     }
+
 }
