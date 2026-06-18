@@ -27,7 +27,6 @@ class TrainingApp : Application(), Router {
         RouterHolder.router = this
     }
 
-
     private fun initDi() {
         val coreComponent = CoreComponent.init(applicationContext)
         MainComponent.init(coreComponent)
@@ -36,11 +35,6 @@ class TrainingApp : Application(), Router {
         TrainingComponent.init(coreComponent)
     }
 
-    companion object {
-
-        lateinit var instance: Application
-
-    }
 
     override fun navigateTo(screen: Screen) {
         when (screen) {
@@ -57,6 +51,10 @@ class TrainingApp : Application(), Router {
                 )
             )
         }
+    }
+
+    companion object {
+        lateinit var instance: Application
     }
 
 }
