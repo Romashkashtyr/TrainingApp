@@ -1,8 +1,8 @@
-package com.example.core.database.converters
+package com.example.database.converters
 
 import androidx.room.TypeConverter
-import com.example.core.database.models.training_modules.ExerciseDbo
-import com.example.core.database.models.training_modules.PrimaryMusclesDbo
+import com.example.database.models.training_modules.ExerciseDbo
+import com.example.database.models.training_modules.PrimaryMusclesDbo
 import com.google.gson.Gson
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json

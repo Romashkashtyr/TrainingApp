@@ -39,6 +39,7 @@ android {
 dependencies {
 
     implementation(project(":core"))
+    implementation(project(":database"))
 
     // Firebase
     implementation(libs.firebase.analytics)

@@ -1,13 +1,12 @@
-package com.example.core.database.models.dao
+package com.example.database.models.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.core.database.models.training_modules.ExerciseDbo
-import com.example.core.database.models.training_modules.FavoriteExerciseDbo
-import com.example.core.database.models.training_modules.PrimaryMusclesDbo
-import kotlinx.coroutines.flow.Flow
+import com.example.database.models.training_modules.ExerciseDbo
+import com.example.database.models.training_modules.FavoriteExerciseDbo
+import com.example.database.models.training_modules.PrimaryMusclesDbo
 
 @Dao
 interface TrainingDAO {

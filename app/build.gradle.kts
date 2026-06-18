@@ -49,6 +49,7 @@ dependencies {
     implementation(project(":trainings"))
     implementation(project(":auth"))
     implementation(project(":main"))
+    implementation(project(":database"))
 
 
     implementation (libs.androidx.room.runtime)

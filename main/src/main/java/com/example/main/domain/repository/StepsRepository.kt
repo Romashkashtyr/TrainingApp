@@ -1,6 +1,6 @@
 package com.example.main.domain.repository
 
-import com.example.core.database.models.main_modules.StepsDb
+import com.example.database.models.main_modules.StepsDb
 import kotlinx.coroutines.flow.Flow
 
 interface StepsRepository {

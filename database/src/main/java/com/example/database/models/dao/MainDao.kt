@@ -1,10 +1,10 @@
-package com.example.core.database.models.dao
+package com.example.database.models.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.core.database.models.main_modules.StepsDb
+import com.example.database.models.main_modules.StepsDb
 import kotlinx.coroutines.flow.Flow
 
 

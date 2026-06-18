@@ -1,8 +1,9 @@
-package com.example.core.database.models.training_modules
+package com.example.database.models.training_modules
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.serialization.Serializable
 
 @Serializable
 @Entity(tableName = "exercise")

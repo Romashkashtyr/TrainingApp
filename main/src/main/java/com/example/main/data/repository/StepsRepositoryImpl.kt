@@ -1,14 +1,14 @@
 package com.example.main.data.repository
 
 import com.example.core.data.datastore.StepsDataStore
-import com.example.core.database.models.dao.MainDao
-import com.example.core.database.models.main_modules.StepsDb
+import com.example.database.TrainingRoomDatabase
+import com.example.database.models.main_modules.StepsDb
 import com.example.main.domain.repository.StepsRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class StepsRepositoryImpl @Inject constructor(
-    private val dao: MainDao,
+    private val database: TrainingRoomDatabase,
     private val stepsDataStore: StepsDataStore
 ) : StepsRepository {
     override suspend fun saveCurrentSteps(steps: Int) {
@@ -17,16 +17,16 @@ class StepsRepositoryImpl @Inject constructor(
 
     override fun observeTodaySteps(date: String): Flow<Int> {
        //return stepsDataStore.observeSteps()
-        return dao.observeTodaySteps(date)
+        return database.mainDao().observeTodaySteps(date)
     }
 
     override fun observeStepsHistory(): Flow<List<StepsDb>> {
-        return dao.observeStepsHistory()
+        return database.mainDao().observeStepsHistory()
     }
 
     override suspend fun saveSteps(date: String, steps: Int) {
        // stepsDataStore.saveCurrentSteps(steps)
-        dao.insertOrUpdate(StepsDb(
+        database.mainDao().insertOrUpdate(StepsDb(
             date = date,
             steps = steps
         ))

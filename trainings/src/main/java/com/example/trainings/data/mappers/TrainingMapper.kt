@@ -1,13 +1,13 @@
 package com.example.trainings.data.mappers
 
+import com.example.database.models.training_modules.ExerciseDbo
+import com.example.database.models.training_modules.FavoriteExerciseDbo
+import com.example.database.models.training_modules.PrimaryMusclesDbo
 import com.example.trainings.data.local.modelsDTO.ExerciseDto
 import com.example.trainings.data.local.modelsDTO.PrimaryMusclesDto
 import com.example.trainings.data.response.Exercise
 import com.example.trainings.data.response.FullExercise
 import com.example.trainings.data.response.PrimaryMuscles
-import com.example.core.database.models.training_modules.ExerciseDbo
-import com.example.core.database.models.training_modules.FavoriteExerciseDbo
-import com.example.core.database.models.training_modules.PrimaryMusclesDbo
 
 object TrainingMapper {
 

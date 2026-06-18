@@ -1,6 +1,6 @@
 package com.example.trainings.di.modules
 
-import com.example.core.database.TrainingRoomDatabase
+import com.example.database.TrainingRoomDatabase
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
