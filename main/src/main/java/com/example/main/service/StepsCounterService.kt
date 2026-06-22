@@ -39,10 +39,12 @@ class StepsCounterService : Service(), SensorEventListener {
         MainComponent.getMainInstance().inject(this)
     }
 
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) = Unit
+
+    override fun onBind(intent: Intent?): IBinder? = null
+
     override fun onCreate() {
         super.onCreate()
-
-
         createNotificationChannel()
 
         startForeground(
@@ -53,8 +55,17 @@ class StepsCounterService : Service(), SensorEventListener {
         initSensor()
         restoreInitialSteps()
 
-
         startForegroundService()
+    }
+
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        registerSensor()
+        return START_STICKY
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        sensorManager.unregisterListener(this)
     }
 
     private fun restoreInitialSteps() {
@@ -101,11 +112,6 @@ class StepsCounterService : Service(), SensorEventListener {
         startForeground(1, notification)
     }
 
-    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        registerSensor()
-        return START_STICKY
-    }
-
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onSensorChanged(event: SensorEvent?) {
 
@@ -115,31 +121,6 @@ class StepsCounterService : Service(), SensorEventListener {
 
         CoroutineScope(Dispatchers.IO).launch {
             handleSteps(totalSteps)
-
-//            if (initialSteps == null || initialSteps == 0f) {
-//                initialSteps = totalSteps
-//                repository.saveInitialSteps(totalSteps)
-//            }
-//
-//            val currentSteps = (totalSteps - (initialSteps ?: 0f)).toInt().coerceAtLeast(0)
-//            val today = getTodayDate()
-//
-//            if (System.currentTimeMillis() - lastSavedSteps > 5_000) {
-//                repository.save
-//            }
-
-//            val savedDate = repository.getDate()
-//            var initial = repository.getInitialSteps()
-
-//            if (savedDate != today || initial == null) {
-//                initial = totalSteps
-//                repository.saveInitialSteps(totalSteps)
-//                repository.saveDate(today)
-//            }
-
-
-
-           // repository.saveSteps(currentSteps)
         }
     }
 
@@ -163,8 +144,6 @@ class StepsCounterService : Service(), SensorEventListener {
             steps = currentSteps
         )
     }
-
-
 
     private fun createNotification(): Notification {
         return NotificationCompat.Builder(
@@ -194,14 +173,6 @@ class StepsCounterService : Service(), SensorEventListener {
         }
     }
 
-    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) = Unit
-
-    override fun onBind(intent: Intent?): IBinder? = null
-
-    override fun onDestroy() {
-        super.onDestroy()
-        sensorManager.unregisterListener(this)
-    }
 
     companion object {
         fun getIntentService(fromContext: Context) = Intent(fromContext, StepsCounterService::class.java)
