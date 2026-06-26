@@ -11,11 +11,12 @@ class StepsRepositoryImpl @Inject constructor(
     private val database: TrainingRoomDatabase,
     private val stepsDataStore: StepsDataStore
 ) : StepsRepository {
+
     override suspend fun saveCurrentSteps(steps: Int) {
         stepsDataStore.saveCurrentSteps(steps)
     }
 
-    override fun observeTodaySteps(date: String): Flow<Int> {
+    override fun observeTodaySteps(date: String): Flow<Int?> {
        //return stepsDataStore.observeSteps()
         return database.mainDao().observeTodaySteps(date)
     }

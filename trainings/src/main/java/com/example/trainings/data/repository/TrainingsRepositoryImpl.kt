@@ -12,6 +12,8 @@ import com.example.trainings.data.response.FullExercise
 import com.example.trainings.data.response.FullExercise.Companion.toFullExercise
 import com.example.trainings.data.response.NetworkService
 import com.example.trainings.domain.TrainingsRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -119,5 +121,16 @@ class TrainingsRepositoryImpl @Inject constructor(
             throw e
         }
     }
+
+    override suspend fun getFavoriteExercises(): List<FullExercise> {
+        return withContext(Dispatchers.IO) {
+            val favoritesDbo = database.trainingDao().getAllFavoriteExercises()
+            favoritesDbo.map { dbo ->
+                dbo.toListExerciseFromDto()
+                    .toFullExercise(getExerciseImageUrl(dbo.id), true)
+            }
+        }
+    }
+
 
 }

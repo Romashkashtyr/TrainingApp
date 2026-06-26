@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.Flow
 interface MainDao {
 
     @Query("SELECT steps FROM steps_history WHERE date = :date")
-    fun observeTodaySteps(date: String): Flow<Int>
+    fun observeTodaySteps(date: String): Flow<Int?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertOrUpdate(entity: StepsDb)

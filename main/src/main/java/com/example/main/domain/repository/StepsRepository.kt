@@ -7,8 +7,7 @@ interface StepsRepository {
 
     suspend fun saveCurrentSteps(steps: Int)
 
-    fun observeTodaySteps(date: String): Flow<Int>
-
+    fun observeTodaySteps(date: String): Flow<Int?>
 
     fun observeStepsHistory(): Flow<List<StepsDb>>
 

@@ -16,6 +16,7 @@ import com.example.core.base.BaseActivity
 import com.example.core.data.datastore.StepsDataStore
 import com.example.core.navigation.RouterHolder
 import com.example.core.navigation.Screen
+import com.example.core.utils.getLocalDate
 import com.example.core.utils.getTodayDate
 import com.example.main.databinding.ActivityMainBinding
 import com.example.main.di.MainComponent
@@ -47,11 +48,12 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
     lateinit var stepsDataStore: StepsDataStore
 
 
-    private val mainPresenter by moxyPresenter { MainPresenter(
-        mainRepository,
-        stepsRepository,
-        stepsDataStore
-    )
+    private val mainPresenter by moxyPresenter {
+        MainPresenter(
+            mainRepository,
+            stepsRepository,
+            stepsDataStore
+        )
     }
     private lateinit var binding: ActivityMainBinding
 
@@ -80,7 +82,7 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
         setContentView(binding.root)
         initRecycler()
         mainPresenter.requestGetScreenData()
-        mainPresenter.observeSteps(getTodayDate())
+        mainPresenter.observeSteps(getLocalDate())
 
         startStepCounterService()
 
@@ -153,13 +155,13 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
 
     private fun restoringSteps() {
         lifecycleScope.launch {
-                val savedSteps = withContext(Dispatchers.IO) {
-                    stepsDataStore.getCurrentSteps()
-                }
+            val savedSteps = withContext(Dispatchers.IO) {
+                stepsDataStore.getCurrentSteps()
+            }
 
-                withContext(Dispatchers.Main) {
-                    adapterDelegate.updateSteps(savedSteps)
-                }
+            withContext(Dispatchers.Main) {
+                adapterDelegate.updateSteps(savedSteps)
+            }
         }
     }
 
@@ -183,7 +185,6 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
     companion object {
         fun getIntent(fromContext: Context) = Intent(fromContext, MainActivity::class.java)
     }
-
 
 
 }

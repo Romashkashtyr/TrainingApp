@@ -56,34 +56,12 @@ class MainPresenter @Inject constructor(
             stepsRepository.observeTodaySteps(date)
                 .collect { steps ->
                     onMainThread {
-                        viewState.updateSteps(steps)
+                        viewState.updateSteps(steps ?: 0)
                     }
                 }
         }
     }
 
-    fun onStepReceived(totalSteps: Float) {
-        launch {
-                val today = getTodayDate()
-                val savedDate = stepsDataStore.getDate()
-                var initialSteps = stepsDataStore.getInitialSteps()
-
-                if (savedDate != today || initialSteps == null) {
-                    initialSteps = totalSteps
-                    stepsDataStore.saveInitialSteps(totalSteps)
-                    stepsDataStore.saveDate(today)
-                }
-
-                val currentSteps = (totalSteps - initialSteps).toInt().coerceAtLeast(0)
-
-                stepsDataStore.saveCurrentSteps(currentSteps)
-
-                onMainThread {
-                    viewState.updateSteps(currentSteps)
-                }
-            }
-
-        }
-    }
+}
 
 

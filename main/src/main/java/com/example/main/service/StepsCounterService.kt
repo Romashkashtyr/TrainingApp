@@ -21,6 +21,7 @@ import com.example.main.domain.repository.StepsRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -34,6 +35,8 @@ class StepsCounterService : Service(), SensorEventListener {
 
     private var initialSteps: Float? = null
     private var lastSavedSteps = -1
+
+    private val serviceScope = CoroutineScope(Dispatchers.IO)
 
     init {
         MainComponent.getMainInstance().inject(this)
@@ -55,17 +58,23 @@ class StepsCounterService : Service(), SensorEventListener {
         initSensor()
         restoreInitialSteps()
 
-        startForegroundService()
+       // startForegroundService()
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+
+        if (stepSensor == null) {
+            stopSelf()
+            return START_NOT_STICKY
+        }
         registerSensor()
         return START_STICKY
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         sensorManager.unregisterListener(this)
+        serviceScope.cancel()
+        super.onDestroy()
     }
 
     private fun restoreInitialSteps() {
@@ -89,28 +98,28 @@ class StepsCounterService : Service(), SensorEventListener {
         stepSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
     }
 
-    private fun startForegroundService() {
-        val channelId = "steps_channel"
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(
-                channelId,
-                "Step Counter",
-                NotificationManager.IMPORTANCE_LOW
-            )
-
-            getSystemService(NotificationManager::class.java)
-                .createNotificationChannel(channel)
-        }
-
-        val notification = NotificationCompat.Builder(this, channelId)
-            .setContentTitle("Шаги считаются")
-            .setContentText("Фоновый подсчёт шагов активен")
-            .setSmallIcon(R.drawable.baseline_steps)
-            .build()
-
-        startForeground(1, notification)
-    }
+//    private fun startForegroundService() {
+//        val channelId = "steps_channel"
+//
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            val channel = NotificationChannel(
+//                channelId,
+//                "Step Counter",
+//                NotificationManager.IMPORTANCE_LOW
+//            )
+//
+//            getSystemService(NotificationManager::class.java)
+//                .createNotificationChannel(channel)
+//        }
+//
+//        val notification = NotificationCompat.Builder(this, channelId)
+//            .setContentTitle("Шаги считаются")
+//            .setContentText("Фоновый подсчёт шагов активен")
+//            .setSmallIcon(R.drawable.baseline_steps)
+//            .build()
+//
+//        startForeground(1, notification)
+//    }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onSensorChanged(event: SensorEvent?) {
@@ -119,7 +128,7 @@ class StepsCounterService : Service(), SensorEventListener {
 
         val totalSteps = event.values[0]
 
-        CoroutineScope(Dispatchers.IO).launch {
+        serviceScope.launch {
             handleSteps(totalSteps)
         }
     }
@@ -127,6 +136,15 @@ class StepsCounterService : Service(), SensorEventListener {
 
     private suspend fun handleSteps(totalSteps: Float) {
         val today = getTodayDate()
+
+        val savedDate = repository.getDate()
+
+        if (savedDate != today) {
+            initialSteps = totalSteps
+
+            repository.saveInitialSteps(totalSteps)
+            repository.saveDate(today)
+        }
 
         if (initialSteps == null) {
             initialSteps = repository.getInitialSteps() ?: totalSteps

@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 data class FavoriteExerciseDbo (
     @PrimaryKey
     val id: String,
-    val name: String?,
-    val description: String,
-    val imageUrl: String
+//    val name: String?,
+//    val description: String,
+//    val imageUrl: String,
 )

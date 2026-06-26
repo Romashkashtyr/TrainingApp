@@ -7,6 +7,7 @@ import androidx.room.Query
 import com.example.database.models.training_modules.ExerciseDbo
 import com.example.database.models.training_modules.FavoriteExerciseDbo
 import com.example.database.models.training_modules.PrimaryMusclesDbo
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TrainingDAO {
@@ -15,13 +16,13 @@ interface TrainingDAO {
     @Query("SELECT * FROM exercise")
     suspend fun getCache(): List<ExerciseDbo>?
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.Companion.REPLACE)
     suspend fun insertExerciseCache(cache: ExerciseDbo)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.Companion.REPLACE)
     suspend fun insertExerciseCacheWithId(cache: List<ExerciseDbo>): List<Long>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.Companion.REPLACE)
     suspend fun insertPrimaryMuscles(list: List<PrimaryMusclesDbo>)
 
     @Query("SELECT * FROM exercise WHERE id = :id LIMIT 1")
@@ -49,6 +50,10 @@ interface TrainingDAO {
     )
     suspend fun isFavorite(id: String): Boolean
 
+    @Query("SELECT * FROM favorite_exercises")
+    fun getFavoritesByIds(): List<String>
 
+    @Query("SELECT * FROM exercise WHERE id IN (SELECT id FROM favorite_exercises)")
+    suspend fun getAllFavoriteExercises(): List<ExerciseDbo>
 
 }

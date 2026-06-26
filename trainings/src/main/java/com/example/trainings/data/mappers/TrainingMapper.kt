@@ -34,10 +34,7 @@ object TrainingMapper {
 
     fun FullExercise.toFavoriteExerciseDbo(): FavoriteExerciseDbo {
         return FavoriteExerciseDbo(
-            id = this.id,
-            name = this.name,
-            description = this.description ?: "",
-            imageUrl = this.imageUrl
+            id = this.id
         )
     }
 
@@ -106,7 +103,6 @@ object TrainingMapper {
             description = description
         )
     }
-
 
 
     fun ExerciseDto.toExerciseDbo(): ExerciseDbo {

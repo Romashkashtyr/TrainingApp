@@ -1,7 +1,9 @@
 package com.example.trainings.domain
 
+import com.example.database.models.training_modules.FavoriteExerciseDbo
 import com.example.trainings.data.response.Exercise
 import com.example.trainings.data.response.FullExercise
+import kotlinx.coroutines.flow.Flow
 
 
 interface TrainingsRepository {
@@ -18,7 +20,8 @@ interface TrainingsRepository {
 
     suspend fun isFavorite(id: String): Boolean
 
-
     suspend fun getExerciseById(id: String): FullExercise
+
+    suspend fun getFavoriteExercises(): List<FullExercise>
 
 }
