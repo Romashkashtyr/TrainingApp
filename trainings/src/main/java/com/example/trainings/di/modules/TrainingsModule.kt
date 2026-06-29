@@ -5,6 +5,7 @@ import com.example.trainings.domain.usecases.GetCombineDataAndImageTrainings
 import com.example.trainings.domain.usecases.GetExerciseByIdUseCase
 import com.example.trainings.domain.usecases.ToggleFavoriteUseCase
 import com.example.trainings.ui.fragment_detail_training.FragmentDetailPresenter
+import com.example.trainings.ui.fragment_favorites.FavoritesPresenter
 import dagger.Module
 import dagger.Provides
 import javax.inject.Inject
@@ -48,6 +49,15 @@ class TrainingDetailFactory @Inject constructor(
     private val trainingDetailPresenterProvider: Provider<FragmentDetailPresenter>
 ) {
     fun createTrainingDetailPresenter(): FragmentDetailPresenter = trainingDetailPresenterProvider.get()
+}
+
+@Singleton
+class FavoritesFactory @Inject constructor(
+    private val presenter: Provider<FavoritesPresenter>
+) {
+    fun createFavoritesPresenter(): FavoritesPresenter {
+        return presenter.get()
+    }
 }
 
 

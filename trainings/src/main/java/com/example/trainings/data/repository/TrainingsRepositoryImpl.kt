@@ -13,6 +13,8 @@ import com.example.trainings.data.response.FullExercise.Companion.toFullExercise
 import com.example.trainings.data.response.NetworkService
 import com.example.trainings.domain.TrainingsRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -122,14 +124,27 @@ class TrainingsRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getFavoriteExercises(): List<FullExercise> {
-        return withContext(Dispatchers.IO) {
-            val favoritesDbo = database.trainingDao().getAllFavoriteExercises()
-            favoritesDbo.map { dbo ->
-                dbo.toListExerciseFromDto()
-                    .toFullExercise(getExerciseImageUrl(dbo.id), true)
+//    override suspend fun getFavoriteExercises(): List<FullExercise> {
+//        return withContext(Dispatchers.IO) {
+//            val favoritesDbo = database.trainingDao().getAllFavoriteExercises()
+//            favoritesDbo.map { dbo ->
+//                dbo.toListExerciseFromDto()
+//                    .toFullExercise(getExerciseImageUrl(dbo.id), true)
+//            }
+//        }
+//    }
+
+    override fun observeFavoriteExercises(): Flow<List<FullExercise>> {
+        return database.trainingDao().observeFavoriteExercises()
+            .map { list ->
+                list.map { dbo ->
+                    dbo.toListExerciseFromDto()
+                        .toFullExercise(
+                            image = getExerciseImageUrl(dbo.id),
+                            isFavorite = true
+                        )
+                }
             }
-        }
     }
 
 

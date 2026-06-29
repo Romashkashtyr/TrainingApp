@@ -5,11 +5,11 @@ import android.util.Log
 import com.example.core.base.BasePresenter
 import com.example.trainings.data.response.FullExercise
 import com.example.trainings.domain.usecases.GetCombineDataAndImageTrainings
+import com.example.trainings.domain.usecases.ObserveFavoriteExercisesUseCase
 import com.example.trainings.domain.usecases.ToggleFavoriteUseCase
 import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import moxy.InjectViewState
 import javax.inject.Inject
 
@@ -17,9 +17,10 @@ import javax.inject.Inject
 @InjectViewState
 class TrainingsPresenter @Inject constructor(
     private val useCase: GetCombineDataAndImageTrainings,
-    private val toggleFavoriteUseCase: ToggleFavoriteUseCase
+    private val toggleFavoriteUseCase: ToggleFavoriteUseCase,
 ) : BasePresenter<TrainingsView>() {
 
+    private var observeJob: Job? = null
     fun loadExercises() {
         Log.d("TrainingsDebug", "loadExercises() вызван в презентере")
         withLoad {
@@ -48,6 +49,23 @@ class TrainingsPresenter @Inject constructor(
 
         }
     }
+
+
+//    fun loadFavorites() {
+//        launch {
+//            try {
+//                val exercises = getFavoriteUseCase.invoke()
+//
+//                onMainThread {
+//                    viewState.showExercises(exercises)
+//                }
+//            } catch (e: Exception) {
+//                onMainThread {
+//                    viewState.showToast(e.message ?: "Error")
+//                }
+//            }
+//        }
+//    }
 
     fun onFavoriteClicked(exercise: FullExercise) {
         launch {

@@ -56,4 +56,9 @@ interface TrainingDAO {
     @Query("SELECT * FROM exercise WHERE id IN (SELECT id FROM favorite_exercises)")
     suspend fun getAllFavoriteExercises(): List<ExerciseDbo>
 
+    @Query("""
+        SELECT e.* FROM exercise e INNER JOIN favorite_exercises f ON e.id = f.id ORDER BY e.name
+    """)
+    fun observeFavoriteExercises(): Flow<List<ExerciseDbo>>
+
 }

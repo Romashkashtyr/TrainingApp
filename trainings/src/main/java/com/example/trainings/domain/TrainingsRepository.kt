@@ -22,6 +22,8 @@ interface TrainingsRepository {
 
     suspend fun getExerciseById(id: String): FullExercise
 
-    suspend fun getFavoriteExercises(): List<FullExercise>
+//    suspend fun getFavoriteExercises(): List<FullExercise>
+
+    fun observeFavoriteExercises(): Flow<List<FullExercise>>
 
 }
