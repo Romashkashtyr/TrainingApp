@@ -6,6 +6,7 @@ import com.example.trainings.di.modules.TrainingDatabaseModule
 import com.example.trainings.di.modules.TrainingFitnessModule
 import com.example.trainings.di.modules.TrainingsModule
 import com.example.trainings.ui.fragment_detail_training.ExerciseDetailFragment
+import com.example.trainings.ui.fragment_favorites.FavoritesFragment
 import com.example.trainings.ui.training_activity.TrainingsListActivity
 import dagger.Component
 import javax.inject.Singleton
@@ -28,6 +29,8 @@ interface TrainingComponent {
     fun inject(activity: TrainingsListActivity)
 
     fun inject(fragment: ExerciseDetailFragment)
+
+    fun inject(fragment: FavoritesFragment)
 
     @Component.Builder
     interface Builder {
