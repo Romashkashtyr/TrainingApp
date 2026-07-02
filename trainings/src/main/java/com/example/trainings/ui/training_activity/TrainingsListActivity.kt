@@ -30,13 +30,8 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
 
     private val presenter by moxyPresenter { trainingFactory.createTrainingPresenter() }
 
-
-    init {
-        TrainingComponent.getTrainingInstance().inject(this)
-    }
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
+        TrainingComponent.getTrainingInstance().inject(this)
         super.onCreate(savedInstanceState)
         binding = ActivityTrainingsListBinding.inflate(layoutInflater)
         setContentView(binding.root)

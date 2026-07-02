@@ -89,6 +89,12 @@ class TrainingsRepositoryImpl @Inject constructor(
         return database.trainingDao().isFavorite(id)
     }
 
+    override suspend fun getFavoriteIds(): List<String> {
+        return withContext(Dispatchers.IO) {
+            database.trainingDao().getFavoritesByIds()
+        }
+    }
+
     override suspend fun getExerciseById(id: String): FullExercise {
         try {
 
@@ -123,16 +129,6 @@ class TrainingsRepositoryImpl @Inject constructor(
             throw e
         }
     }
-
-//    override suspend fun getFavoriteExercises(): List<FullExercise> {
-//        return withContext(Dispatchers.IO) {
-//            val favoritesDbo = database.trainingDao().getAllFavoriteExercises()
-//            favoritesDbo.map { dbo ->
-//                dbo.toListExerciseFromDto()
-//                    .toFullExercise(getExerciseImageUrl(dbo.id), true)
-//            }
-//        }
-//    }
 
     override fun observeFavoriteExercises(): Flow<List<FullExercise>> {
         return database.trainingDao().observeFavoriteExercises()

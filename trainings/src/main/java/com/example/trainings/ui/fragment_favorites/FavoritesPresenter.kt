@@ -7,9 +7,10 @@ import com.example.trainings.domain.usecases.ToggleFavoriteUseCase
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import moxy.InjectViewState
+import javax.inject.Inject
 
 @InjectViewState
-class FavoritesPresenter(
+class FavoritesPresenter @Inject constructor(
     private val observeFavoriteExercisesUseCase: ObserveFavoriteExercisesUseCase,
     private val toggleFavoriteUseCase: ToggleFavoriteUseCase
 ) : BasePresenter<FavoritesView>() {
@@ -21,12 +22,21 @@ class FavoritesPresenter(
     fun observeFavorites() {
         observeJob?.cancel()
         observeJob = launch {
-            observeFavoriteExercisesUseCase()
-                .collect { exercises ->
-                    onMainThread {
-                        viewState.showExercises(exercises)
+            try {
+                observeFavoriteExercisesUseCase()
+                    .collect { exercises ->
+                        allExercises = exercises
+                        onMainThread {
+                            viewState.showExercises(exercises)
+                            viewState.stopLoading()
+                        }
                     }
+            } catch (e: Exception) {
+                onMainThread {
+                    viewState.showToast(e.message ?: "Error")
+                    viewState.stopLoading()
                 }
+            }
         }
     }
 

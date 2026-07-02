@@ -16,7 +16,6 @@ import javax.inject.Singleton
 class TrainingsModule {
 
     @Provides
-    @Singleton
     fun provideTrainingPresenterFactory(
         useCase: GetCombineDataAndImageTrainings,
         toggleFavoriteUseCase: ToggleFavoriteUseCase
@@ -25,14 +24,11 @@ class TrainingsModule {
     }
 
     @Provides
-    @Singleton
     fun provideFragmentDetailPresenterFactory(
         useCase: GetExerciseByIdUseCase,
         toggleFavoriteUseCase: ToggleFavoriteUseCase): FragmentDetailPresenter {
         return FragmentDetailPresenter(useCase,toggleFavoriteUseCase)
     }
-
-
 
 }
 
