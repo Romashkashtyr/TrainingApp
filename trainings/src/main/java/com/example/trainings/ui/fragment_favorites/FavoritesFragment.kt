@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.core.base.BaseFragment
 import com.example.trainings.R
@@ -48,6 +49,7 @@ class FavoritesFragment : BaseFragment(), FavoritesView {
         super.onViewCreated(view, savedInstanceState)
 
         initRecycler()
+        initSearch()
 
         presenter.observeFavorites()
 
@@ -66,6 +68,13 @@ class FavoritesFragment : BaseFragment(), FavoritesView {
         _binding = null
     }
 
+    private fun initSearch() {
+        binding.searchExercise.addTextChangedListener {
+            presenter.search(it.toString())
+        }
+        binding.favoritesRecycler.scrollToPosition(0)
+    }
+
     private fun initRecycler() {
         adapter = TrainingAdapter (
             onDetailClick = { exercise ->
@@ -77,7 +86,7 @@ class FavoritesFragment : BaseFragment(), FavoritesView {
                     .addToBackStack(null)
                     .commit()
             },
-            onFavoriteClick = {exercise ->
+            onFavoriteClick = { exercise ->
                 presenter.toggleFavorite(exercise)
             }
         )

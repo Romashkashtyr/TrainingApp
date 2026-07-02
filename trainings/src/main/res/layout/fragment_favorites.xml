@@ -21,6 +21,35 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
+    <EditText
+        android:id="@+id/search_exercise"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:background="@android:drawable/edit_text"
+        android:hint="@string/exercise_search"
+        android:inputType="text"
+        android:maxLines="1"
+        android:padding="12dp"
+        app:layout_constraintEnd_toStartOf="@id/search_button"
+        app:layout_constraintStart_toEndOf="@id/arrowBack"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/titleFavorites" />
+
+
+    <ImageView
+        android:id="@+id/search_button"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:contentDescription="@string/exercise_search"
+        android:src="@android:drawable/ic_menu_search"
+        app:layout_constraintBottom_toBottomOf="@id/search_exercise"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/search_exercise"
+        app:layout_constraintTop_toTopOf="@id/search_exercise" />
+
     <TextView
         android:id="@+id/titleFavorites"
         android:layout_width="0dp"

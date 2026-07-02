@@ -13,4 +13,5 @@ interface FavoritesView: BaseView {
     fun showLoading()
 
     fun stopLoading()
+
 }
