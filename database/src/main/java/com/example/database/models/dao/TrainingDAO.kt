@@ -50,8 +50,8 @@ interface TrainingDAO {
     )
     suspend fun isFavorite(id: String): Boolean
 
-    @Query("SELECT * FROM favorite_exercises")
-    fun getFavoritesByIds(): List<String>
+    @Query("SELECT id FROM favorite_exercises")
+    suspend fun getFavoritesByIds(): List<String>
 
     @Query("SELECT * FROM exercise WHERE id IN (SELECT id FROM favorite_exercises)")
     suspend fun getAllFavoriteExercises(): List<ExerciseDbo>

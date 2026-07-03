@@ -32,10 +32,9 @@ class ExerciseDetailFragment: BaseFragment(), ExerciseDetailView {
 
     private val presenter by moxyPresenter { factory.createTrainingDetailPresenter() }
 
-    init {
-        TrainingComponent
-            .getTrainingInstance()
-            .inject(this)
+    override fun onAttach(context: android.content.Context) {
+        TrainingComponent.getTrainingInstance().inject(this)
+        super.onAttach(context)
     }
 
     override fun onCreateView(

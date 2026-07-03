@@ -1,5 +1,6 @@
 package com.example.trainings.ui.fragment_favorites
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -31,8 +32,9 @@ class FavoritesFragment : BaseFragment(), FavoritesView {
 
     private lateinit var adapter: TrainingAdapter
 
-    init {
+    override fun onAttach(context: Context) {
         TrainingComponent.getTrainingInstance().inject(this)
+        super.onAttach(context)
     }
 
     override fun onCreateView(
@@ -72,7 +74,6 @@ class FavoritesFragment : BaseFragment(), FavoritesView {
         binding.searchExercise.addTextChangedListener {
             presenter.search(it.toString())
         }
-        binding.favoritesRecycler.scrollToPosition(0)
     }
 
     private fun initRecycler() {
@@ -98,6 +99,7 @@ class FavoritesFragment : BaseFragment(), FavoritesView {
 
     override fun showExercises(exercises: List<FullExercise>) {
         adapter.updateList(exercises)
+        binding.favoritesRecycler.scrollToPosition(0)
     }
 
     override fun showLoading() {

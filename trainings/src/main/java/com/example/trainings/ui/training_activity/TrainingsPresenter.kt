@@ -32,19 +32,36 @@ class TrainingsPresenter @Inject constructor(
     }
 
     fun loadExercises() {
-        Log.d("TrainingsDebug", "loadExercises() вызван в презентере")
-        withLoad {
+        Log.d("TrainingsDebug", "loadExercises() запущен")
+        launch {
+            viewState.showLoading()
             try {
                 val data = useCase.invoke()
-                Log.d("TrainingsDebug", "repository.loadExercises() вернул ${data.size} элементов")
+                Log.d("TrainingsDebug", "Презентер получил ${data.size} элементов, передаю в View")
+                // Гарантируем, что список передается в UI
+                viewState.showExercises(data.toList()) 
+            } catch (e: Exception) {
+                if (e is CancellationException) throw e
+                Log.e("TrainingsDebug", "Ошибка в презентере: ${e.message}", e)
+                viewState.showToast(e.message ?: "Error")
+            } finally {
+                viewState.stopLoading()
+            }
+        }
+    }
+
+    fun onFavoriteClicked(exercise: FullExercise) {
+        withLoad {
+            try {
+                toggleFavoriteUseCase(exercise)
+                val updatedExercises = useCase.invoke()
                 onMainThread {
-                    viewState.showExercises(data)
+                    viewState.showExercises(updatedExercises)
                 }
             } catch (e: Exception) {
                 if (e is CancellationException) throw e
-                Log.e("TrainingsDebug", "Ошибка в loadExercises: ${e.message}", e)
                 onMainThread {
-                    viewState.showToast(e.message ?: "Unknown error")
+                    viewState.showToast(e.message ?: "Error")
                 }
             }
         }
