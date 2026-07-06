@@ -3,10 +3,12 @@ package com.example.trainings.data.repository
 import android.util.Log
 import com.example.core.ApiSettings
 import com.example.database.TrainingRoomDatabase
+import com.example.trainings.data.mappers.TrainingMapper.toExercise
 import com.example.trainings.data.mappers.TrainingMapper.toExerciseDbo
+import com.example.trainings.data.mappers.TrainingMapper.toExerciseDboList
+import com.example.trainings.data.mappers.TrainingMapper.toExerciseList
+import com.example.trainings.data.mappers.TrainingMapper.toExerciseListFromDbo
 import com.example.trainings.data.mappers.TrainingMapper.toFavoriteExerciseDbo
-import com.example.trainings.data.mappers.TrainingMapper.toListExerciseFromDbo
-import com.example.trainings.data.mappers.TrainingMapper.toListExerciseFromDto
 import com.example.trainings.data.response.Exercise
 import com.example.trainings.data.response.FullExercise
 import com.example.trainings.data.response.FullExercise.Companion.toFullExercise
@@ -26,21 +28,16 @@ class TrainingsRepositoryImpl @Inject constructor(
 ) : TrainingsRepository {
 
     override suspend fun loadExercises(): List<Exercise> {
-
         Log.d("TrainingsDebug", "=== НАЧАЛО ЗАПРОСА К API ===")
-
         try {
             val response = api.getAllExercises()
-
 
             if (!response.isSuccessful) {
                 Log.e("TrainingsDebug", "HTTP error: ${response.code()}")
                 return getCachedExercises() ?: emptyList()
-
             }
 
             val body = response.body()
-
             if (body.isNullOrEmpty()) {
                 Log.e("TrainingsDebug", "Пустой ответ от API")
                 return getCachedExercises() ?: emptyList()
@@ -48,27 +45,21 @@ class TrainingsRepositoryImpl @Inject constructor(
 
             Log.d("TrainingsDebug", "Получено элементов: ${body.size}")
 
-
-            val dboList = body.map { it.toExerciseDbo() }
-
-
+            val dboList = body.toExerciseDboList()
             val ids = database.trainingDao().insertExerciseCacheWithId(dboList)
-
             Log.d("TrainingsDebug", "Сохранено в Room, ids count = ${ids.size}")
 
-
-            return body.map { it.toListExerciseFromDto() }
+            return body.toExerciseList()
 
         } catch (e: Exception) {
             Log.e("TrainingsDebug", "Ошибка: ${e.message}", e)
-
             return getCachedExercises() ?: emptyList()
         }
     }
 
     override suspend fun getCachedExercises(): List<Exercise>? {
         val cache = database.trainingDao().getCache() ?: return null
-        return cache.toListExerciseFromDbo()
+        return cache.toExerciseListFromDbo()
     }
 
     override fun getExerciseImageUrl(id: String): String {
@@ -97,18 +88,15 @@ class TrainingsRepositoryImpl @Inject constructor(
 
     override suspend fun getExerciseById(id: String): FullExercise {
         try {
-
             val cached = database.trainingDao().getExerciseById(id)
 
             if (cached != null) {
-
                 val isFav = database.trainingDao().isFavorite(id)
-                return cached.toListExerciseFromDto()
+                return cached.toExercise()
                     .toFullExercise(getExerciseImageUrl(id), isFav)
             }
 
             val response = api.getExerciseById(id)
-
             if (!response.isSuccessful) {
                 throw Exception("HTTP ${response.code()}")
             }
@@ -121,8 +109,8 @@ class TrainingsRepositoryImpl @Inject constructor(
 
             val isFav = database.trainingDao().isFavorite(id)
 
-            return body.toListExerciseFromDto()
-                .toFullExercise(getExerciseImageUrl(id),isFav)
+            return body.toExercise()
+                .toFullExercise(getExerciseImageUrl(id), isFav)
 
         } catch (e: Exception) {
             Log.e("DETAIL_ERROR", "getExerciseById failed", e)
@@ -134,7 +122,7 @@ class TrainingsRepositoryImpl @Inject constructor(
         return database.trainingDao().observeFavoriteExercises()
             .map { list ->
                 list.map { dbo ->
-                    dbo.toListExerciseFromDto()
+                    dbo.toExercise()
                         .toFullExercise(
                             image = getExerciseImageUrl(dbo.id),
                             isFavorite = true
@@ -142,6 +130,4 @@ class TrainingsRepositoryImpl @Inject constructor(
                 }
             }
     }
-
-
 }

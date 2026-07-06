@@ -104,28 +104,9 @@ class TrainingAdapter(
         return holder.bind(getItem(position))
     }
 
-
     fun updateList(newItems: List<FullExercise>) {
-        fullList = newItems
-
         submitList(newItems)
     }
-
-    fun filterList(query: String) {
-        if (query.isBlank()) {
-            submitList(fullList)
-        } else {
-            val filtered = fullList.filter {
-                it.name?.contains(query, ignoreCase = true) == true ||
-                        it.primaryMuscles.any { muscle ->
-                            muscle.name.contains(query, ignoreCase = true)
-                        }
-            }
-            submitList(filtered)
-        }
-
-    }
-
 
     private fun buildGlideUrl(startUrl: String): GlideUrl =
         GlideUrl(

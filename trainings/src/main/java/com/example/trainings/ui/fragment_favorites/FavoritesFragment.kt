@@ -53,16 +53,9 @@ class FavoritesFragment : BaseFragment(), FavoritesView {
         initRecycler()
         initSearch()
 
-        presenter.observeFavorites()
-
         binding.arrowBack.setOnClickListener {
             parentFragmentManager.popBackStack()
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        presenter.observeFavorites()
     }
 
     override fun onDestroyView() {

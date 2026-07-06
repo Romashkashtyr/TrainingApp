@@ -48,7 +48,6 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
         )
         initRecyclerView()
         initSearch()
-        presenter.loadExercises()
 
         binding.arrowBack.setOnClickListener {
             router.navigateTo(Screen.Main(this))
@@ -61,11 +60,6 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
             }
         }
 
-    }
-
-    override fun onResume() {
-        super.onResume()
-        presenter.loadExercises()
     }
 
     override fun showLoading() {
@@ -133,12 +127,11 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
     private fun initSearch() {
         binding.searchButton.setOnClickListener {
             val query = binding.searchExercise.text.toString()
-
-            trainingAdapter.filterList(query)
+            presenter.search(query)
         }
 
         binding.searchExercise.addTextChangedListener {
-            trainingAdapter.filterList(it.toString())
+            presenter.search(it.toString())
             binding.rcViewTraining.scrollToPosition(0)
         }
     }

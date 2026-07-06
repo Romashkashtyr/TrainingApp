@@ -22,6 +22,13 @@ class Converters {
         return json.encodeToString(list ?: emptyList<ExerciseDbo>())
     }
 
+    @TypeConverter
+    fun toExerciseInfoList(jsonString: String?): List<ExerciseDbo> {
+        return jsonString?.let {
+            json.decodeFromString<List<ExerciseDbo>>(it)
+        } ?: emptyList()
+    }
+
 
     @TypeConverter
     fun fromMusclesList(list: List<PrimaryMusclesDbo>?): String {

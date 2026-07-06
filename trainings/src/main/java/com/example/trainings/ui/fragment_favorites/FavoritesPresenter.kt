@@ -19,6 +19,11 @@ class FavoritesPresenter @Inject constructor(
 
     private var allExercises = emptyList<FullExercise>()
 
+    override fun onFirstViewAttach() {
+        super.onFirstViewAttach()
+        observeFavorites()
+    }
+
     fun observeFavorites() {
         observeJob?.cancel()
         observeJob = launch {

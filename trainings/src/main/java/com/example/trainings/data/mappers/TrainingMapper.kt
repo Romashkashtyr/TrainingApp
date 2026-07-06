@@ -11,86 +11,25 @@ import com.example.trainings.data.response.PrimaryMuscles
 
 object TrainingMapper {
 
-
-    fun List<Exercise>.toExerciseDto(): List<ExerciseDto> {
-        return this.map {
-            it.name?.let { muscle ->
-                it.description?.let { description ->
-                    ExerciseDto(
-                        id = it.id,
-                        primaryMuscles = it.primaryMuscles.map {
-                            PrimaryMusclesDto(
-                                id = it.id,
-                                name = it.name
-                            )
-                        },
-                        name = muscle,
-                        description = description
-                    )
-                }
-            }!!
-        }
-    }
-
     fun FullExercise.toFavoriteExerciseDbo(): FavoriteExerciseDbo {
         return FavoriteExerciseDbo(
             id = this.id
         )
     }
 
-
-    fun List<ExerciseDto>.toListExerciseFromDto(): List<Exercise> {
-        return this.map {
-            Exercise(
-                id = it.id,
-                primaryMuscles = it.primaryMuscles.map {
-                    PrimaryMuscles(
-                        id = it.id,
-                        name = it.name
-                    )
-                },
-                name = it.name,
-                description = it.description
-            )
-        }
+    fun List<ExerciseDto>.toExerciseList(): List<Exercise> {
+        return this.map { it.toExercise() }
     }
 
-
-    fun List<ExerciseDto>.toListExerciseDbo(): List<ExerciseDbo> {
-        return this.map {
-            ExerciseDbo(
-                id = it.id,
-                primaryMuscles = it.primaryMuscles.map {
-                    PrimaryMusclesDbo(
-                        id = it.id,
-                        name = it.name
-                    )
-                },
-                name = it.name,
-                description = it.description
-            )
-        }
+    fun List<ExerciseDto>.toExerciseDboList(): List<ExerciseDbo> {
+        return this.map { it.toExerciseDbo() }
     }
 
-
-    fun List<ExerciseDbo>.toListExerciseFromDbo(): List<Exercise> {
-        return this.map {
-            Exercise(
-                id = it.id,
-                primaryMuscles = it.primaryMuscles.map {
-                    PrimaryMuscles(
-                        id = it.id,
-                        name = it.name
-                    )
-                },
-                name = it.name,
-                description = it.description
-            )
-        }
+    fun List<ExerciseDbo>.toExerciseListFromDbo(): List<Exercise> {
+        return this.map { it.toExercise() }
     }
 
-
-    fun ExerciseDto.toListExerciseFromDto(): Exercise {
+    fun ExerciseDto.toExercise(): Exercise {
         return Exercise(
             id = id,
             primaryMuscles = primaryMuscles.map {
@@ -103,7 +42,6 @@ object TrainingMapper {
             description = description
         )
     }
-
 
     fun ExerciseDto.toExerciseDbo(): ExerciseDbo {
         return ExerciseDbo(
@@ -119,8 +57,7 @@ object TrainingMapper {
         )
     }
 
-
-    fun ExerciseDbo.toListExerciseFromDto(): Exercise {
+    fun ExerciseDbo.toExercise(): Exercise {
         return Exercise(
             id = id,
             primaryMuscles = primaryMuscles.map {
