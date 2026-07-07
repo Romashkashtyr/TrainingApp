@@ -70,7 +70,8 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
     private val adapterDelegate = DashboardAdapterDelegates(
         onAddWaterClicked = this,
         onTrainingClick = this,
-        items = items
+        items = items,
+        onFavoritesTrainingClick = this
     )
 
 
