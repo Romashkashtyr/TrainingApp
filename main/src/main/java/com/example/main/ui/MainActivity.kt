@@ -33,7 +33,7 @@ import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 
 class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
-    OnTrainingClick, OnViewTrainingsClicked {
+    OnTrainingClick, OnFavoritesTrainingClick, OnViewTrainingsClicked {
 
     private lateinit var sensorManager: SensorManager
     private var stepSensor: Sensor? = null
@@ -63,7 +63,8 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
         DashboardItem.StepsItem(5000),
         DashboardItem.WaterItem(1500),
         DashboardItem.WorkoutItem(3),
-        DashboardItem.TrainingListItem()
+        DashboardItem.TrainingListItem(),
+        DashboardItem.FavoritesItem
     )
 
     private val adapterDelegate = DashboardAdapterDelegates(
@@ -98,13 +99,17 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
         mainPresenter.requestAddWater(newAmount)
     }
 
+    override fun onTrainingClick() {
+        RouterHolder.router.navigateTo(Screen.TrainingNav(this))
+    }
+
 
     override fun onViewTrainingsClicked() {
         TODO()
     }
 
-    override fun onTrainingClick() {
-        RouterHolder.router.navigateTo(Screen.TrainingNav(this))
+    override fun onFavoriteTrainingClick() {
+        RouterHolder.router.navigateTo(Screen.TrainingFav(this))
     }
 
     override fun initListData(waterAmount: Int) {
@@ -137,6 +142,8 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
             adapterDelegate.updateItems(updatedItems)
         }
     }
+
+
 
 
     private fun checkRuntimePermission() {
@@ -183,6 +190,8 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
 
         stepSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
     }
+
+
 
     companion object {
         fun getIntent(fromContext: Context) = Intent(fromContext, MainActivity::class.java)

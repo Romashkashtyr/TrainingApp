@@ -50,6 +50,12 @@ class TrainingApp : Application(), Router {
                     screen.fromContext
                 )
             )
+
+            is Screen.TrainingFav -> screen.fromContext.startActivity(
+                MainActivity.getIntent(
+                    screen.fromContext
+                )
+            )
         }
     }
 
