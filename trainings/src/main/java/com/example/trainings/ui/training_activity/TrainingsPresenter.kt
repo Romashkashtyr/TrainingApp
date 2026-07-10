@@ -47,7 +47,9 @@ class TrainingsPresenter @Inject constructor(
             } catch (e: Exception) {
                 if (e is CancellationException) throw e
                 Log.e("TrainingsDebug", "Ошибка в презентере: ${e.message}", e)
-                viewState.showToast(e.message ?: "Error")
+                onMainThread {
+                    viewState.showToast(e.message ?: "Error")
+                }
             } finally {
                 viewState.stopLoading()
             }

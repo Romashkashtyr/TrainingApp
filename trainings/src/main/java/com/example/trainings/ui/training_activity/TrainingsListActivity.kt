@@ -36,29 +36,10 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
         binding = ActivityTrainingsListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        onBackPressedCallback()
+        initOnBackPressedCallback()
 
-        trainingAdapter = TrainingAdapter(
-            onDetailClick = { exercise ->
-                openDetailFragment(exercise.id)
-            },
-            onFavoriteClick = { exercise ->
-                presenter.onFavoriteClicked(exercise)
-            }
-        )
         initRecyclerView()
-        initSearch()
-
-        binding.arrowBack.setOnClickListener {
-            router.navigateTo(Screen.Main(this))
-            finish()
-        }
-
-        supportFragmentManager.addOnBackStackChangedListener {
-            if (supportFragmentManager.backStackEntryCount == 0) {
-                binding.fragmentContainer.visibility = View.GONE
-            }
-        }
+        initSearchListeners()
 
     }
 
@@ -86,6 +67,17 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
 
     }
 
+    private fun initAdapter() {
+        trainingAdapter = TrainingAdapter(
+            onDetailClick = { exercise ->
+                openDetailFragment(exercise.id)
+            },
+            onFavoriteClick = { exercise ->
+                presenter.onFavoriteClicked(exercise)
+            }
+        )
+    }
+
     private fun openDetailFragment(id: String) {
 
         binding.fragmentContainer.visibility = View.VISIBLE
@@ -100,13 +92,14 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
     }
 
     private fun initRecyclerView() {
+        initAdapter()
         binding.rcViewTraining.apply {
             layoutManager = LinearLayoutManager(this@TrainingsListActivity)
             adapter = trainingAdapter
         }
     }
 
-    private fun onBackPressedCallback() {
+    private fun initOnBackPressedCallback() {
         onBackPressedDispatcher.addCallback(
             this,
             object : OnBackPressedCallback(true) {
@@ -122,9 +115,20 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
 
             }
         )
+
+        supportFragmentManager.addOnBackStackChangedListener {
+            if (supportFragmentManager.backStackEntryCount == 0) {
+                binding.fragmentContainer.visibility = View.GONE
+            }
+        }
+
+        binding.arrowBack.setOnClickListener {
+            router.navigateTo(Screen.Main(this))
+            finish()
+        }
     }
 
-    private fun initSearch() {
+    private fun initSearchListeners() {
         binding.searchButton.setOnClickListener {
             val query = binding.searchExercise.text.toString()
             presenter.search(query)
