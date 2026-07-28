@@ -20,6 +20,8 @@ interface TrainingsRepository {
 
     suspend fun isFavorite(id: String): Boolean
 
+    suspend fun updateFavorite(id: String, isFavorite: Boolean)
+
     suspend fun getFavoriteIds(): List<String>
 
     suspend fun getExerciseById(id: String): FullExercise

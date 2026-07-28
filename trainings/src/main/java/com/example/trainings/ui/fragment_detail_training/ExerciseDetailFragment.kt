@@ -19,7 +19,7 @@ import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 
 
-class ExerciseDetailFragment: BaseFragment(), ExerciseDetailView {
+class ExerciseDetailFragment : BaseFragment(), ExerciseDetailView {
 
     private var _binding: DetailExerciseFragmentBinding? = null
     private val binding get() = _binding!!
@@ -28,6 +28,9 @@ class ExerciseDetailFragment: BaseFragment(), ExerciseDetailView {
     lateinit var factory: TrainingDetailFactory
 
     private var exerciseId: String? = null
+
+
+    lateinit var listener: DetailsListener
 
 
     private val presenter by moxyPresenter { factory.createTrainingDetailPresenter() }
@@ -61,7 +64,7 @@ class ExerciseDetailFragment: BaseFragment(), ExerciseDetailView {
         Log.d("DEBUG_APP", "exerciseId = $exerciseId")
         exerciseId?.let {
             Log.d("DEBUG_APP", "calling presenter.loadExercise")
-             presenter.loadExercise(it)
+            presenter.loadExercise(it)
         }
     }
 
@@ -127,6 +130,10 @@ class ExerciseDetailFragment: BaseFragment(), ExerciseDetailView {
 
     private fun setupClicks() {
         binding.arrowBack.setOnClickListener {
+            if (presenter.isFavoriteChanged()) listener.onFavoriteChange(
+                id = presenter.getExerciseId(),
+                isFavorite = presenter.getFavorite()
+            )
             parentFragmentManager.popBackStack()
         }
 
@@ -157,15 +164,20 @@ class ExerciseDetailFragment: BaseFragment(), ExerciseDetailView {
     companion object {
         private const val ARG_ID = "exercise_id"
 
-        fun newInstance(id: String) =
+        fun newInstance(id: String, listenerImpl: DetailsListener) =
             ExerciseDetailFragment().apply {
-                arguments = Bundle(). apply {
-                    putString(ARG_ID,id)
+                listener = listenerImpl
+                arguments = Bundle().apply {
+                    putString(ARG_ID, id)
                 }
             }
 
-       // val url = "https://api.workoutapi.com/exercises/$id/image"
+        // val url = "https://api.workoutapi.com/exercises/$id/image"
 
+    }
+
+    interface DetailsListener {
+        fun onFavoriteChange(id: String, isFavorite: Boolean)
     }
 
 }

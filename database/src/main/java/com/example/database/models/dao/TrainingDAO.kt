@@ -31,6 +31,9 @@ interface TrainingDAO {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addFavorite(item: FavoriteExerciseDbo)
 
+    @Query("UPDATE exercise SET isFavorite = :isFavorite WHERE id = :id")
+    fun updateFavorite(id: String, isFavorite: Boolean)
+
     @Query(
         """
             DELETE FROM favorite_exercises

@@ -4,6 +4,7 @@ import com.example.trainings.ui.training_activity.TrainingsPresenter
 import com.example.trainings.domain.usecases.GetCombineDataAndImageTrainings
 import com.example.trainings.domain.usecases.GetExerciseByIdUseCase
 import com.example.trainings.domain.usecases.ToggleFavoriteUseCase
+import com.example.trainings.domain.usecases.UpdateFavoriteUseCase
 import com.example.trainings.ui.fragment_detail_training.FragmentDetailPresenter
 import com.example.trainings.ui.fragment_favorites.FavoritesPresenter
 import dagger.Module
@@ -17,17 +18,23 @@ class TrainingsModule {
 
     @Provides
     fun provideTrainingPresenterFactory(
-        useCase: GetCombineDataAndImageTrainings,
+        getCombineDataAndImageTrainings: GetCombineDataAndImageTrainings,
         toggleFavoriteUseCase: ToggleFavoriteUseCase
     ): TrainingsPresenter {
-        return TrainingsPresenter(useCase, toggleFavoriteUseCase)
+        return TrainingsPresenter(getCombineDataAndImageTrainings, toggleFavoriteUseCase)
     }
 
     @Provides
     fun provideFragmentDetailPresenterFactory(
-        useCase: GetExerciseByIdUseCase,
-        toggleFavoriteUseCase: ToggleFavoriteUseCase): FragmentDetailPresenter {
-        return FragmentDetailPresenter(useCase,toggleFavoriteUseCase)
+        getExerciseByIdUseCase: GetExerciseByIdUseCase,
+        toggleFavoriteUseCase: ToggleFavoriteUseCase,
+        updateFavoriteUseCase: UpdateFavoriteUseCase
+    ): FragmentDetailPresenter {
+        return FragmentDetailPresenter(
+            getExerciseByIdUseCase,
+            toggleFavoriteUseCase,
+            updateFavoriteUseCase
+        )
     }
 
 }
@@ -44,7 +51,8 @@ class TrainingFactory @Inject constructor(
 class TrainingDetailFactory @Inject constructor(
     private val trainingDetailPresenterProvider: Provider<FragmentDetailPresenter>
 ) {
-    fun createTrainingDetailPresenter(): FragmentDetailPresenter = trainingDetailPresenterProvider.get()
+    fun createTrainingDetailPresenter(): FragmentDetailPresenter =
+        trainingDetailPresenterProvider.get()
 }
 
 @Singleton

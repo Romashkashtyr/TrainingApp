@@ -20,7 +20,7 @@ import com.example.trainings.ui.rc_view_training.TrainingAdapter
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 
-class TrainingsListActivity : BaseActivity(), TrainingsView {
+class TrainingsListActivity : BaseActivity(), TrainingsView, ExerciseDetailFragment.DetailsListener {
     private lateinit var binding: ActivityTrainingsListBinding
     private lateinit var trainingAdapter: TrainingAdapter
 
@@ -85,7 +85,7 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
         supportFragmentManager.beginTransaction()
             .replace(
                 binding.fragmentContainer.id,
-                ExerciseDetailFragment.newInstance(id)
+                ExerciseDetailFragment.newInstance(id, this)
             )
             .addToBackStack(null)
             .commit()
@@ -138,6 +138,10 @@ class TrainingsListActivity : BaseActivity(), TrainingsView {
             presenter.search(it.toString())
             binding.rcViewTraining.scrollToPosition(0)
         }
+    }
+
+    override fun onFavoriteChange(id: String, isFavorite: Boolean) {
+        presenter.updateExercise(id, isFavorite)
     }
 
 

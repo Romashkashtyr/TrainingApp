@@ -5,6 +5,7 @@ import com.example.core.base.BaseFragmentPresenter
 import com.example.trainings.data.response.FullExercise
 import com.example.trainings.domain.usecases.GetExerciseByIdUseCase
 import com.example.trainings.domain.usecases.ToggleFavoriteUseCase
+import com.example.trainings.domain.usecases.UpdateFavoriteUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -14,11 +15,18 @@ import javax.inject.Inject
 @InjectViewState
 class FragmentDetailPresenter @Inject constructor(
     private val getExerciseByIdUseCase: GetExerciseByIdUseCase,
-    private val toggleFavoriteUseCase: ToggleFavoriteUseCase
+    private val toggleFavoriteUseCase: ToggleFavoriteUseCase,
+    private val updateFavoriteUseCase: UpdateFavoriteUseCase
 ) : BaseFragmentPresenter<ExerciseDetailView>() {
 
-
     private var currentExercise: FullExercise? = null
+
+    private var startFavorite: Boolean? = null
+
+    private var isFavorite: Boolean? = null
+
+    private lateinit var exerciseId: String
+
 
      fun loadExercise(id: String) {
 
@@ -33,41 +41,44 @@ class FragmentDetailPresenter @Inject constructor(
                 val exercise = getExerciseByIdUseCase(id)
 
                 Log.d("DEBUG_APP", "usecase success")
-                val isFavorite = toggleFavoriteUseCase.isFavorite(exercise.id)
+                isFavorite = toggleFavoriteUseCase.isFavorite(exercise.id)
+                startFavorite = isFavorite
+                exerciseId = exercise.id
 
                 currentExercise = exercise
-
 
                 withContext(Dispatchers.Main) {
                     viewState.showExercise(exercise)
                     Log.d("DEBUG_APP", "viewState.showExercise called")
-                    viewState.updateFavoriteState(isFavorite)
+                    isFavorite?.let {
+                        viewState.updateFavoriteState(it)
+                    }
                 }
 
             } catch (e: Exception) {
-
                 Log.e("DEBUG_APP", "PRESENTER CRASH", e)
                 viewState.showToastInfo(e.message ?: "Error")
-
             } finally {
-
                 viewState.stopLoading()
-
                 Log.d("DEBUG_APP", "Presenter loadExercise END")
             }
         }
     }
 
-    fun onFavoriteClicked() {
+    fun getExerciseId(): String = exerciseId
+    fun getFavorite(): Boolean = isFavorite ?: false
 
+    fun isFavoriteChanged(): Boolean = if (startFavorite == null) false else (startFavorite == isFavorite)
+
+    fun onFavoriteClicked() {
+        isFavorite = isFavorite?.let { !it } ?: return
         currentExercise?.let { exercise ->
             launch {
-                val newState = toggleFavoriteUseCase(exercise)
-                currentExercise = exercise.copy(
-                    isFavorite = newState
-                )
+                isFavorite?.let {newState ->
+                    updateFavoriteUseCase(exercise.id, newState)
 
-                viewState.updateFavoriteState(newState)
+                    viewState.updateFavoriteState(newState)
+                }
             }
         }
     }

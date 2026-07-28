@@ -80,6 +80,10 @@ class TrainingsRepositoryImpl @Inject constructor(
         return database.trainingDao().isFavorite(id)
     }
 
+    override suspend fun updateFavorite(id: String, isFavorite: Boolean) {
+        database.trainingDao().updateFavorite(id, isFavorite)
+    }
+
     override suspend fun getFavoriteIds(): List<String> {
         return withContext(Dispatchers.IO) {
             database.trainingDao().getFavoritesByIds()

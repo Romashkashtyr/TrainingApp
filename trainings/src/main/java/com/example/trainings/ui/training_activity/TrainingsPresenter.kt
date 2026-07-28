@@ -43,7 +43,9 @@ class TrainingsPresenter @Inject constructor(
                 val data = useCase.invoke()
                 allExercises = data
                 Log.d("TrainingsDebug", "Презентер получил ${data.size} элементов")
-                applyFilter()
+                onMainThread {
+                    applyFilter()
+                }
             } catch (e: Exception) {
                 if (e is CancellationException) throw e
                 Log.e("TrainingsDebug", "Ошибка в презентере: ${e.message}", e)
