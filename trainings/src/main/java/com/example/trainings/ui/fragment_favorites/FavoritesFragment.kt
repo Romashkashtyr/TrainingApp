@@ -18,7 +18,7 @@ import com.example.trainings.ui.rc_view_training.TrainingAdapter
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 
-class FavoritesFragment : BaseFragment(), FavoritesView {
+class FavoritesFragment : BaseFragment(), FavoritesView, ExerciseDetailFragment.DetailsListener {
 
     private var _binding: FragmentFavoritesBinding? = null
     private val binding get() = _binding!!
@@ -75,7 +75,7 @@ class FavoritesFragment : BaseFragment(), FavoritesView {
                 parentFragmentManager.beginTransaction()
                     .replace(
                         R.id.fragment_container,
-                        ExerciseDetailFragment.newInstance(exercise.id)
+                        ExerciseDetailFragment.newInstance(exercise.id, this)
                     )
                     .addToBackStack(null)
                     .commit()
@@ -101,5 +101,9 @@ class FavoritesFragment : BaseFragment(), FavoritesView {
 
     override fun stopLoading() {
         binding.progressBar.visibility = View.GONE
+    }
+
+    override fun onFavoriteChange(id: String, isFavorite: Boolean) {
+        TODO("Not yet implemented")
     }
 }
