@@ -8,6 +8,7 @@ import android.hardware.Sensor
 import android.hardware.SensorManager
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -85,6 +86,7 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initRecycler()
+        refreshFragment()
         mainPresenter.requestGetScreenData()
         mainPresenter.observeSteps(getLocalDate())
 
@@ -110,6 +112,9 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
     }
 
     override fun onFavoriteTrainingClick() {
+        binding.dashboardRecyclerView.visibility = View.GONE
+        binding.mainFragmentContainer.visibility = View.VISIBLE
+
         RouterHolder.router.navigateToFragment(
             Screen.TrainingFav(this,
                 R.id.mainFragmentContainer
@@ -188,6 +193,16 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
             this,
             intent
         )
+    }
+
+    private fun refreshFragment() {
+        supportFragmentManager.addOnBackStackChangedListener {
+            val hasFragment = supportFragmentManager.backStackEntryCount > 0
+
+            binding.mainFragmentContainer.visibility = if (hasFragment) View.VISIBLE else View.GONE
+
+            binding.dashboardRecyclerView.visibility = if (hasFragment) View.GONE else View.VISIBLE
+        }
     }
 
 

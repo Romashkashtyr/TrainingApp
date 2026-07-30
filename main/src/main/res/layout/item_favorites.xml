@@ -10,6 +10,7 @@
     app:cardElevation="6dp">
 
     <LinearLayout
+        android:id="@+id/favorites_exercises"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="18dp"
