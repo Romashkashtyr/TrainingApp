@@ -18,7 +18,7 @@ import com.example.core.data.datastore.StepsDataStore
 import com.example.core.navigation.RouterHolder
 import com.example.core.navigation.Screen
 import com.example.core.utils.getLocalDate
-import com.example.core.utils.getTodayDate
+import com.example.main.R
 import com.example.main.databinding.ActivityMainBinding
 import com.example.main.di.MainComponent
 import com.example.main.domain.repository.MainRepository
@@ -110,7 +110,12 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
     }
 
     override fun onFavoriteTrainingClick() {
-        RouterHolder.router.navigateTo(Screen.TrainingFav(this))
+        RouterHolder.router.navigateToFragment(
+            Screen.TrainingFav(this,
+                R.id.mainFragmentContainer
+        ),
+            supportFragmentManager
+        )
     }
 
     override fun initListData(waterAmount: Int) {

@@ -77,6 +77,14 @@ class TrainingsPresenter @Inject constructor(
         viewState.showExercises(filtered)
     }
 
+    fun updateExercise(id: String, isFavorite: Boolean) {
+        val exercise = allExercises.find { it.id == id } ?: return
+        val updatedExercise = exercise.copy(isFavorite = isFavorite)
+        allExercises.map {
+            if (it.id == id) updatedExercise else it
+        }
+    }
+
     fun onFavoriteClicked(exercise: FullExercise) {
         withLoad {
             try {

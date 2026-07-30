@@ -10,5 +10,5 @@ sealed class Screen {
     data class Auth(val fromContext: Activity) : Screen()
     data class Main(val fromContext: Activity) : Screen()
     data class TrainingNav(val fromContext: Activity) : Screen()
-    data class TrainingFav(val fromContext: Activity) : Screen()
+    data class TrainingFav(val fromContext: Activity, val containerId: Int) : Screen()
 }

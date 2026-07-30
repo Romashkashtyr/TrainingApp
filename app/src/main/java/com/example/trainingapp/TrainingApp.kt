@@ -1,6 +1,8 @@
 package com.example.trainingapp
 
 import android.app.Application
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.example.auth.di.AuthComponent
 import com.example.auth.ui.AuthorizationActivity
 import com.example.core.di.CoreComponent
@@ -12,6 +14,7 @@ import com.example.main.ui.MainActivity
 import com.example.splash.di.SplashComponent
 import com.example.database.TrainingRoomDatabase
 import com.example.trainings.di.TrainingComponent
+import com.example.trainings.ui.TrainingsScreens
 import com.example.trainings.ui.training_activity.TrainingsListActivity
 import com.google.firebase.FirebaseApp
 
@@ -51,11 +54,30 @@ class TrainingApp : Application(), Router {
                 )
             )
 
-            is Screen.TrainingFav -> screen.fromContext.startActivity(
-                MainActivity.getIntent(
-                    screen.fromContext
-                )
-            )
+            is Screen.TrainingFav -> {}
+//                screen.fromContext.startActivity(
+//                MainActivity.getIntent(
+//                    screen.fromContext
+//                )
+//            )
+        }
+    }
+
+    override fun navigateToFragment(
+        screen: Screen,
+        fragmentManager: FragmentManager,
+    ) {
+        when (screen) {
+            is Screen.TrainingFav ->  {
+                fragmentManager.beginTransaction()
+                    .replace(
+                        screen.containerId,
+                        TrainingsScreens.favorites()
+                    )
+                    .addToBackStack(null)
+                    .commit()
+            }
+            else -> Unit
         }
     }
 

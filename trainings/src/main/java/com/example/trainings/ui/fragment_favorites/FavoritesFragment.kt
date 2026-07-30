@@ -104,6 +104,12 @@ class FavoritesFragment : BaseFragment(), FavoritesView, ExerciseDetailFragment.
     }
 
     override fun onFavoriteChange(id: String, isFavorite: Boolean) {
-        TODO("Not yet implemented")
+        presenter.observeFavorites()
+    }
+
+    companion object {
+        fun newInstance() : FavoritesFragment {
+            return FavoritesFragment()
+        }
     }
 }
