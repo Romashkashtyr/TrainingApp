@@ -22,6 +22,8 @@ interface MainComponent {
     fun inject(activity: MainActivity)
     fun inject(service: StepsCounterService)
 
+    fun inject(fragment: WaterFragment)
+
     companion object {
         private var instance: MainComponent? = null
 

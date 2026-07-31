@@ -8,7 +8,9 @@ import androidx.room.TypeConverters
 import com.example.database.models.dao.MainDao
 import com.example.database.converters.Converters
 import com.example.database.models.dao.TrainingDAO
+import com.example.database.models.dao.WaterDao
 import com.example.database.models.main_modules.StepsDb
+import com.example.database.models.main_modules.water.WaterDb
 import com.example.database.models.training_modules.ExerciseDbo
 import com.example.database.models.training_modules.FavoriteExerciseDbo
 import com.example.database.models.training_modules.PrimaryMusclesDbo
@@ -19,7 +21,8 @@ import com.example.database.models.training_modules.PrimaryMusclesDbo
         ExerciseDbo::class,
         PrimaryMusclesDbo::class,
         FavoriteExerciseDbo::class,
-        StepsDb::class
+        StepsDb::class,
+        WaterDb::class,
     ], version = 3,
     exportSchema = false
 )
@@ -29,6 +32,8 @@ abstract class TrainingRoomDatabase : RoomDatabase() {
     abstract fun trainingDao(): TrainingDAO
 
     abstract fun mainDao(): MainDao
+
+    abstract fun waterDao(): WaterDao
 
 
     companion object {
