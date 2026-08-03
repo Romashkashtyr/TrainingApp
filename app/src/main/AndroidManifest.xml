@@ -40,7 +40,7 @@
             android:theme="@style/Theme.TrainingApp" >
         </activity>
         <activity
-            android:name="com.example.main.ui.MainActivity"
+            android:name="com.example.main.ui.activity.MainActivity"
             android:exported="false" >
         </activity>
         <service

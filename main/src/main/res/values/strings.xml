@@ -49,5 +49,7 @@
     <string name="invalid_amount">Введите положительное значение</string>
     <string name="exercise_search">Поиск упражнения</string>
 
+    <!-- Water List -->
+    <string name="ml">мл</string>
 
 </resources>

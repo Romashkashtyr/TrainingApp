@@ -1,13 +1,12 @@
-package com.example.main.ui
-
+package com.example.main.ui.activity
 
 import com.example.core.base.BasePresenter
 import com.example.core.data.datastore.StepsDataStore
 import com.example.core.structures.Status
-import com.example.core.utils.getTodayDate
 import com.example.main.R
 import com.example.main.domain.repository.MainRepository
 import com.example.main.domain.repository.StepsRepository
+import com.example.main.ui.activity.MainView
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import moxy.InjectViewState
@@ -63,5 +62,3 @@ class MainPresenter @Inject constructor(
     }
 
 }
-
-

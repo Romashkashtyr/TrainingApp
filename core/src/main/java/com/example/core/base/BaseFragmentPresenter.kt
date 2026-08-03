@@ -22,6 +22,12 @@ open class BaseFragmentPresenter<T : BaseFragmentView> : MvpPresenter<T>(), Coro
         requireShowToast(R.string.sign_up_failure)
     }
 
+    suspend fun onMainThread(action: suspend () -> Unit) {
+        withContext(Dispatchers.Main) {
+            action()
+        }
+    }
+
     private fun requireShowToast(message: Int) {
         launch {
             withContext(Dispatchers.Main) {

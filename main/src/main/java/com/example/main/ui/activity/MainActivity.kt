@@ -1,4 +1,4 @@
-package com.example.main.ui
+package com.example.main.ui.activity
 
 import android.Manifest
 import android.content.Context
@@ -26,6 +26,12 @@ import com.example.main.domain.repository.MainRepository
 import com.example.main.domain.repository.StepsRepository
 import com.example.main.service.StepsCounterService
 import com.example.main.structures.DashboardItem
+import com.example.main.ui.activity.MainPresenter
+import com.example.main.ui.activity.MainView
+import com.example.main.ui.OnAddWaterClicked
+import com.example.main.ui.OnFavoritesTrainingClick
+import com.example.main.ui.OnTrainingClick
+import com.example.main.ui.OnViewTrainingsClicked
 import com.example.main.ui.adapters.DashboardAdapterDelegates
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -187,7 +193,7 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
 
     private fun startStepCounterService() {
 
-        val intent = StepsCounterService.getIntentService(this)
+        val intent = StepsCounterService.Companion.getIntentService(this)
 
         ContextCompat.startForegroundService(
             this,
@@ -207,7 +213,7 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
 
 
     private fun initSensor() {
-        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
 
         stepSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
     }

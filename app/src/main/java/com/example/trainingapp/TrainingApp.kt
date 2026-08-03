@@ -10,7 +10,7 @@ import com.example.core.navigation.Router
 import com.example.core.navigation.RouterHolder
 import com.example.core.navigation.Screen
 import com.example.main.di.MainComponent
-import com.example.main.ui.MainActivity
+import com.example.main.ui.activity.MainActivity
 import com.example.splash.di.SplashComponent
 import com.example.database.TrainingRoomDatabase
 import com.example.trainings.di.TrainingComponent
