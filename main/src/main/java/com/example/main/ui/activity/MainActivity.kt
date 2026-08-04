@@ -24,6 +24,7 @@ import com.example.main.databinding.ActivityMainBinding
 import com.example.main.di.MainComponent
 import com.example.main.domain.repository.MainRepository
 import com.example.main.domain.repository.StepsRepository
+import com.example.main.domain.repository.WaterRepository
 import com.example.main.service.StepsCounterService
 import com.example.main.structures.DashboardItem
 import com.example.main.ui.activity.MainPresenter
@@ -51,6 +52,9 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
 
     @Inject
     lateinit var stepsRepository: StepsRepository
+
+    @Inject
+    lateinit var waterRepository: WaterRepository
 
     @Inject
     lateinit var stepsDataStore: StepsDataStore
@@ -108,6 +112,18 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
         mainPresenter.requestAddWater(newAmount)
     }
 
+    override fun onWaterItemClick() {
+        binding.dashboardRecyclerView.visibility = View.GONE
+        binding.mainFragmentContainer.visibility = View.VISIBLE
+
+        RouterHolder.router.navigateToFragment(Screen.WaterFrag(
+            this,
+            R.id.mainFragmentContainer
+        ),
+            supportFragmentManager
+        )
+    }
+
     override fun onTrainingClick() {
         RouterHolder.router.navigateTo(Screen.TrainingNav(this))
     }
@@ -128,6 +144,8 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
             supportFragmentManager
         )
     }
+
+
 
     override fun initListData(waterAmount: Int) {
         binding.dashboardRecyclerView.apply {

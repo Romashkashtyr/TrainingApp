@@ -13,6 +13,7 @@ import com.example.main.di.MainComponent
 import com.example.main.ui.activity.MainActivity
 import com.example.splash.di.SplashComponent
 import com.example.database.TrainingRoomDatabase
+import com.example.main.MainScreens
 import com.example.trainings.di.TrainingComponent
 import com.example.trainings.ui.TrainingsScreens
 import com.example.trainings.ui.training_activity.TrainingsListActivity
@@ -60,6 +61,8 @@ class TrainingApp : Application(), Router {
 //                    screen.fromContext
 //                )
 //            )
+            else -> Unit
+
         }
     }
 
@@ -73,6 +76,15 @@ class TrainingApp : Application(), Router {
                     .replace(
                         screen.containerId,
                         TrainingsScreens.favorites()
+                    )
+                    .addToBackStack(null)
+                    .commit()
+            }
+            is Screen.WaterFrag -> {
+                fragmentManager.beginTransaction()
+                    .replace(
+                        screen.containerId,
+                        MainScreens.getWaterFrag()
                     )
                     .addToBackStack(null)
                     .commit()

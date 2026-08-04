@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class WaterRepositoryImpl @Inject constructor (
-    private val database: TrainingRoomDatabase
+    database: TrainingRoomDatabase
 ): WaterRepository {
 
     private val waterDao = database.waterDao()

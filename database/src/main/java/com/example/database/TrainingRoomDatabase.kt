@@ -23,7 +23,7 @@ import com.example.database.models.training_modules.PrimaryMusclesDbo
         FavoriteExerciseDbo::class,
         StepsDb::class,
         WaterDb::class,
-    ], version = 3,
+    ], version = 4,
     exportSchema = false
 )
 @TypeConverters(Converters::class)

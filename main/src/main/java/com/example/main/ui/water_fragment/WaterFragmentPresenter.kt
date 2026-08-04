@@ -1,6 +1,7 @@
 package com.example.main.ui.water_fragment
 
 import com.example.core.base.BaseFragmentPresenter
+import com.example.main.domain.repository.WaterRepository
 import com.example.main.domain.usecase.GetTodayWaterUseCase
 import com.example.main.domain.usecase.GetWaterHistoryUseCase
 import kotlinx.coroutines.Job
@@ -11,6 +12,7 @@ import javax.inject.Inject
 
 @InjectViewState
 class WaterFragmentPresenter @Inject constructor(
+    private val waterRepository: WaterRepository,
     private val getTodayWaterUseCase: GetTodayWaterUseCase,
     private val getWaterHistoryUseCase: GetWaterHistoryUseCase,
 ) : BaseFragmentPresenter<WaterView>() {
@@ -23,6 +25,13 @@ class WaterFragmentPresenter @Inject constructor(
         observeHistory()
     }
 
+
+    private fun addWater(amount: Int) {
+        launch {
+            waterRepository.addWater(amount)
+        }
+
+    }
 
     private fun loadTodayWater() {
         launch {
