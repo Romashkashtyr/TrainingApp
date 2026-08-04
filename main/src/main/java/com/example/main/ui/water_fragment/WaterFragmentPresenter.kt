@@ -13,7 +13,7 @@ import javax.inject.Inject
 class WaterFragmentPresenter @Inject constructor(
     private val getTodayWaterUseCase: GetTodayWaterUseCase,
     private val getWaterHistoryUseCase: GetWaterHistoryUseCase,
-): BaseFragmentPresenter<WaterView>() {
+) : BaseFragmentPresenter<WaterView>() {
 
     private var historyJob: Job? = null
 
@@ -32,11 +32,30 @@ class WaterFragmentPresenter @Inject constructor(
                 onMainThread {
                     viewState.showTodayWater(amount)
                 }
-            } catch(e: Exception) {
-
+            } catch (e: Exception) {
+                onMainThread {
+                    viewState.showTodayWater(0)
+                }
             }
 
         }
+    }
+
+    private fun observeHistory() {
+        historyJob?.cancel()
+        historyJob = launch {
+            getWaterHistoryUseCase().collect { history ->
+                onMainThread {
+                    viewState.showWaterHistory(history)
+                }
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        historyJob?.cancel()
+        super.onDestroy()
+
     }
 }
 

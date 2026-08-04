@@ -9,9 +9,12 @@ import com.example.main.data.repository.WaterRepositoryImpl
 import com.example.main.domain.repository.MainRepository
 import com.example.main.domain.repository.StepsRepository
 import com.example.main.domain.repository.WaterRepository
+import com.example.main.ui.water_fragment.WaterFragmentPresenter
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import javax.inject.Inject
+import javax.inject.Provider
 import javax.inject.Singleton
 
 @Module
@@ -37,4 +40,13 @@ interface MainModule {
         }
     }
 
+}
+
+@Singleton
+class WaterFragmentFactory @Inject constructor(
+    private val presenter: Provider<WaterFragmentPresenter>
+) {
+    fun createWaterFragmentPresenter(): WaterFragmentPresenter {
+        return presenter.get()
+    }
 }
