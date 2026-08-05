@@ -1,6 +1,7 @@
 package com.example.trainingapp
 
 import android.app.Application
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.auth.di.AuthComponent
@@ -70,6 +71,7 @@ class TrainingApp : Application(), Router {
         screen: Screen,
         fragmentManager: FragmentManager,
     ) {
+        Log.d("WATER_NAV", "navigateToFragment: $screen")
         when (screen) {
             is Screen.TrainingFav ->  {
                 fragmentManager.beginTransaction()

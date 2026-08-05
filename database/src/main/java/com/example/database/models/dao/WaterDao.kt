@@ -18,4 +18,7 @@ interface WaterDao {
 
     @Query("SELECT * FROM water ORDER BY date DESC")
     fun observeHistory(): Flow<List<WaterDb>>
+
+    @Query("SELECT * FROM water WHERE date = :date LIMIT 1")
+    fun observeTodayWater(date: String): Flow<WaterDb?>
 }

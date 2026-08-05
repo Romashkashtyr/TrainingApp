@@ -2,6 +2,7 @@ package com.example.main.ui.water_fragment
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,6 +41,7 @@ class WaterFragment: BaseFragment(), WaterView {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        Log.d("WATER_NAV", "WaterFragment created")
         _binding = WaterFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }

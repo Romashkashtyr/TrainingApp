@@ -29,6 +29,7 @@ class WaterFragmentPresenter @Inject constructor(
     private fun addWater(amount: Int) {
         launch {
             waterRepository.addWater(amount)
+            loadTodayWater()
         }
 
     }

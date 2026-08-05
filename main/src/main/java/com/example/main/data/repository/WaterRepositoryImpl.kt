@@ -52,4 +52,14 @@ class WaterRepositoryImpl @Inject constructor (
             }
         }
     }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun observeTodayWater(): Flow<Int> {
+        val today = getLocalDate()
+
+        return waterDao.observeTodayWater(today)
+            .map { water ->
+                water?.amount ?: 0
+            }
+    }
 }

@@ -8,6 +8,7 @@ import android.hardware.Sensor
 import android.hardware.SensorManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
@@ -20,8 +21,10 @@ import com.example.core.navigation.RouterHolder
 import com.example.core.navigation.Screen
 import com.example.core.utils.getLocalDate
 import com.example.main.R
+import com.example.main.data.entitieModules.Water
 import com.example.main.databinding.ActivityMainBinding
 import com.example.main.di.MainComponent
+import com.example.main.di.modules.MainPresenterFactory
 import com.example.main.domain.repository.MainRepository
 import com.example.main.domain.repository.StepsRepository
 import com.example.main.domain.repository.WaterRepository
@@ -46,33 +49,21 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
     private lateinit var sensorManager: SensorManager
     private var stepSensor: Sensor? = null
 
-
-    @Inject
-    lateinit var mainRepository: MainRepository
-
-    @Inject
-    lateinit var stepsRepository: StepsRepository
-
-    @Inject
-    lateinit var waterRepository: WaterRepository
-
     @Inject
     lateinit var stepsDataStore: StepsDataStore
 
+    @Inject
+    lateinit var mainPresenterFactory: MainPresenterFactory
 
     private val mainPresenter by moxyPresenter {
-        MainPresenter(
-            mainRepository,
-            stepsRepository,
-            stepsDataStore
-        )
+        mainPresenterFactory.createMainPresenter()
     }
     private lateinit var binding: ActivityMainBinding
 
 
     private val items = mutableListOf(
         DashboardItem.StepsItem(5000),
-        DashboardItem.WaterItem(1500),
+        DashboardItem.WaterItem(0),
         DashboardItem.WorkoutItem(3),
         DashboardItem.TrainingListItem(),
         DashboardItem.FavoritesItem
@@ -98,6 +89,7 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
         initRecycler()
         refreshFragment()
         mainPresenter.requestGetScreenData()
+        mainPresenter.observeWater()
         mainPresenter.observeSteps(getLocalDate())
 
         startStepCounterService()
@@ -109,10 +101,11 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
 
 
     override fun onAddWaterClicked(newAmount: Int) {
-        mainPresenter.requestAddWater(newAmount)
+        mainPresenter. requestAddWater(newAmount)
     }
 
     override fun onWaterItemClick() {
+        Log.d("WATER_NAV", "onWaterItemClick")
         binding.dashboardRecyclerView.visibility = View.GONE
         binding.mainFragmentContainer.visibility = View.VISIBLE
 
@@ -178,7 +171,23 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
         }
     }
 
+    override fun updateWater(amount: Int) {
+        val updatedItems = items.toMutableList()
 
+        val index = updatedItems.indexOfFirst {
+            it is DashboardItem.WaterItem
+        }
+
+        if(index != -1) {
+            updatedItems[index] = DashboardItem.WaterItem(amount)
+
+            adapterDelegate.updateItems(updatedItems)
+        }
+    }
+
+    override fun showWaterHistory(history: List<Water>) {
+        TODO("Not yet implemented")
+    }
 
 
     private fun checkRuntimePermission() {

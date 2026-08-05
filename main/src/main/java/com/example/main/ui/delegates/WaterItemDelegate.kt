@@ -22,7 +22,8 @@ class WaterItemDelegate(
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
         return WaterViewHolder(
             ItemWaterBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-            onAddWaterClicked = onAddWaterClicked::onAddWaterClicked
+            onAddWaterClicked = onAddWaterClicked::onAddWaterClicked,
+            onWaterItemClick = onAddWaterClicked::onWaterItemClick
         )
     }
 
@@ -37,14 +38,19 @@ class WaterItemDelegate(
 
     inner class WaterViewHolder(
         private val binding: ItemWaterBinding,
-        private val onAddWaterClicked: (Int) -> (Unit)
+        private val onAddWaterClicked: (Int) -> (Unit),
+        private val onWaterItemClick: () -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: DashboardItem.WaterItem) {
             binding.waterIntake.text = item.waterCount.toString()
+            binding.root.setOnClickListener {
+                onWaterItemClick()
+            }
             binding.addWaterButton.setOnClickListener {
                 val newAmount = binding.waterInputEditText.text.toString().toIntOrNull() ?: 0
                 if (newAmount > 0) {
                     onAddWaterClicked(newAmount)
+                    binding.waterInputEditText.text?.clear()
                 } else {
                     Toast.makeText(
                         binding.root.context,

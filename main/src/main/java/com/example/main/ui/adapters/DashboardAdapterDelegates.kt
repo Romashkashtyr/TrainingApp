@@ -49,7 +49,7 @@ class DashboardAdapterDelegates(
 
     fun updateItems(newItems: List<DashboardItem>) {
         this.items = newItems
-        notifyItemChanged(itemCount)
+        notifyDataSetChanged()
     }
 
     fun updateSteps(newSteps: Int) {

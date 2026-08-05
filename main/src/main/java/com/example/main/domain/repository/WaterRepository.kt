@@ -10,4 +10,6 @@ interface WaterRepository {
     suspend fun getTodayWater(): Int
 
     fun observeHistory(): Flow<List<Water>>
+
+    fun observeTodayWater(): Flow<Int>
 }
