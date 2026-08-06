@@ -62,12 +62,13 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
 
 
     private val items = mutableListOf(
-        DashboardItem.StepsItem(5000),
+        DashboardItem.StepsItem(0),
         DashboardItem.WaterItem(0),
         DashboardItem.WorkoutItem(3),
         DashboardItem.TrainingListItem(),
         DashboardItem.FavoritesItem
     )
+
 
     private val adapterDelegate = DashboardAdapterDelegates(
         onAddWaterClicked = this,
@@ -141,10 +142,11 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
 
 
     override fun initListData(waterAmount: Int) {
-        binding.dashboardRecyclerView.apply {
-            layoutManager = LinearLayoutManager(this@MainActivity)
-            adapter = adapterDelegate
-        }
+//        binding.dashboardRecyclerView.apply {
+//            layoutManager = LinearLayoutManager(this@MainActivity)
+//            adapter = adapterDelegate
+//        }
+        adapterDelegate.updateWater(waterAmount)
     }
 
     private fun initRecycler() {
@@ -172,17 +174,7 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
     }
 
     override fun updateWater(amount: Int) {
-        val updatedItems = items.toMutableList()
-
-        val index = updatedItems.indexOfFirst {
-            it is DashboardItem.WaterItem
-        }
-
-        if(index != -1) {
-            updatedItems[index] = DashboardItem.WaterItem(amount)
-
-            adapterDelegate.updateItems(updatedItems)
-        }
+        adapterDelegate.updateWater(amount)
     }
 
     override fun showWaterHistory(history: List<Water>) {
@@ -220,7 +212,7 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
 
     private fun startStepCounterService() {
 
-        val intent = StepsCounterService.Companion.getIntentService(this)
+        val intent = StepsCounterService.getIntentService(this)
 
         ContextCompat.startForegroundService(
             this,

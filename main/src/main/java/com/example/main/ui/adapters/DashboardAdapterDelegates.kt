@@ -52,6 +52,20 @@ class DashboardAdapterDelegates(
         notifyDataSetChanged()
     }
 
+    fun updateWater(newAmount: Int) {
+        val index = items.indexOfFirst {
+            it is DashboardItem.WaterItem
+        }
+
+        if (index == -1) return
+
+        items = items.toMutableList().apply {
+            this[index] = DashboardItem.WaterItem(newAmount)
+        }
+
+        notifyItemChanged(index)
+    }
+
     fun updateSteps(newSteps: Int) {
 
         val index = items.indexOfFirst {
