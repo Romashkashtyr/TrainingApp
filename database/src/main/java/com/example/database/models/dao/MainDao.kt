@@ -21,6 +21,9 @@ interface MainDao {
     @Query("SELECT * FROM steps_history ORDER BY date DESC")
     fun observeStepsHistory(): Flow<List<StepsDb>>
 
+    @Query("SELECT steps FROM steps_history WHERE date = :date")
+    suspend fun getTodaySteps(date: String): Int
+
 
     @Query("""SELECT * FROM steps_history WHERE date = :date""")
     suspend fun getByDate(date: String): StepsDb?

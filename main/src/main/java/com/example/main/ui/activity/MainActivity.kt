@@ -20,6 +20,7 @@ import com.example.core.data.datastore.StepsDataStore
 import com.example.core.navigation.RouterHolder
 import com.example.core.navigation.Screen
 import com.example.core.utils.getLocalDate
+import com.example.main.ui.OnStepsClick
 import com.example.main.R
 import com.example.main.data.entitieModules.Water
 import com.example.main.databinding.ActivityMainBinding
@@ -44,7 +45,7 @@ import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 
 class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
-    OnTrainingClick, OnFavoritesTrainingClick, OnViewTrainingsClicked {
+    OnTrainingClick, OnFavoritesTrainingClick, OnViewTrainingsClicked, OnStepsClick {
 
     private lateinit var sensorManager: SensorManager
     private var stepSensor: Sensor? = null
@@ -74,7 +75,8 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
         onAddWaterClicked = this,
         onTrainingClick = this,
         items = items,
-        onFavoritesTrainingClick = this
+        onFavoritesTrainingClick = this,
+        onStepsClick = this
     )
 
 
@@ -181,6 +183,18 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
         TODO("Not yet implemented")
     }
 
+    override fun onStepsClick() {
+        binding.dashboardRecyclerView.visibility = View.GONE
+        binding.mainFragmentContainer.visibility = View.VISIBLE
+
+        RouterHolder.router.navigateToFragment(
+            Screen.StepsFragmentRoute(this,
+                R.id.mainFragmentContainer
+            ),
+            supportFragmentManager
+        )
+    }
+
 
     private fun checkRuntimePermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -236,6 +250,7 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
 
         stepSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
     }
+
 
 
 

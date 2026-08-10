@@ -6,9 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.main.structures.DashboardItem
 import com.example.main.databinding.ItemStepsBinding
+import com.example.main.ui.OnStepsClick
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 
-class StepsItemDelegate : AdapterDelegate<List<DashboardItem>>() {
+class StepsItemDelegate(
+    private val onStepsClick: OnStepsClick
+) : AdapterDelegate<List<DashboardItem>>() {
 
 
     override fun isForViewType(items: List<DashboardItem>, position: Int): Boolean {
@@ -17,7 +20,8 @@ class StepsItemDelegate : AdapterDelegate<List<DashboardItem>>() {
 
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
         return StepsViewHolder(
-            ItemStepsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemStepsBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+            onStepsItemClick = onStepsClick::onStepsClick
         )
     }
 
@@ -31,11 +35,15 @@ class StepsItemDelegate : AdapterDelegate<List<DashboardItem>>() {
     }
 
     inner class StepsViewHolder(
-        private val binding: ItemStepsBinding
+        private val binding: ItemStepsBinding,
+        private val onStepsItemClick: () -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
         fun bind(item: DashboardItem.StepsItem) {
             binding.stepsCount.text = item.stepsCount.toString()
+            binding.root.setOnClickListener {
+                onStepsItemClick()
+            }
         }
     }
 

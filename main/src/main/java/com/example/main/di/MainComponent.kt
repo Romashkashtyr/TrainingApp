@@ -4,6 +4,7 @@ import com.example.core.di.CoreComponent
 import com.example.main.di.modules.MainModule
 import com.example.main.service.StepsCounterService
 import com.example.main.ui.activity.MainActivity
+import com.example.main.ui.steps_fragment.StepsFragment
 import com.example.main.ui.water_fragment.WaterFragment
 import dagger.Component
 import java.lang.IllegalStateException
@@ -23,8 +24,9 @@ interface MainComponent {
     fun inject(activity: MainActivity)
     fun inject(service: StepsCounterService)
 
-
     fun inject(fragment: WaterFragment)
+
+    fun inject(fragment: StepsFragment)
 
     companion object {
         private var instance: MainComponent? = null

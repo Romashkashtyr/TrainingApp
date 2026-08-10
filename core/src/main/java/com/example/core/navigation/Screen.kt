@@ -12,4 +12,6 @@ sealed class Screen {
     data class TrainingNav(val fromContext: Activity) : Screen()
     data class TrainingFav(val fromContext: Activity, val containerId: Int) : Screen()
     data class WaterFrag(val fromContext: Activity, val containerId: Int) : Screen()
+
+    data class StepsFragmentRoute(val fromContext: Activity, val containerId: Int) : Screen()
 }

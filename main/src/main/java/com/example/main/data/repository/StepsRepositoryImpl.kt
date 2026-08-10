@@ -1,10 +1,16 @@
 package com.example.main.data.repository
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import com.example.core.data.datastore.StepsDataStore
+import com.example.core.utils.getLocalDate
 import com.example.database.TrainingRoomDatabase
 import com.example.database.models.main_modules.StepsDb
+import com.example.main.data.MainMapper.toSteps
+import com.example.main.data.entitieModules.Steps
 import com.example.main.domain.repository.StepsRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class StepsRepositoryImpl @Inject constructor(
@@ -21,12 +27,26 @@ class StepsRepositoryImpl @Inject constructor(
         return database.mainDao().observeTodaySteps(date)
     }
 
-    override fun observeStepsHistory(): Flow<List<StepsDb>> {
+    override fun observeStepsHistory(): Flow<List<Steps>> {
         return database.mainDao().observeStepsHistory()
+            .map { history ->
+                history.map { entity ->
+                    entity.toSteps()
+                }
+            }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    override suspend fun getTodaySteps(): Int {
+        val today = getLocalDate()
+
+        return database
+            .mainDao()
+            .getTodaySteps(today)
+
     }
 
     override suspend fun saveSteps(date: String, steps: Int) {
-       // stepsDataStore.saveCurrentSteps(steps)
         database.mainDao().insertOrUpdate(StepsDb(
             date = date,
             steps = steps

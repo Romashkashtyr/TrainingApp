@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.main.structures.DashboardItem
 import com.example.main.ui.OnAddWaterClicked
 import com.example.main.ui.OnFavoritesTrainingClick
+import com.example.main.ui.OnStepsClick
 import com.example.main.ui.OnTrainingClick
 import com.example.main.ui.delegates.FavoriteItemDelegate
 import com.example.main.ui.delegates.StepsItemDelegate
@@ -15,6 +16,7 @@ import com.hannesdorfmann.adapterdelegates4.AdapterDelegatesManager
 
 class DashboardAdapterDelegates(
     private val onAddWaterClicked: OnAddWaterClicked,
+    private val onStepsClick: OnStepsClick,
     private val onTrainingClick: OnTrainingClick,
     private val onFavoritesTrainingClick: OnFavoritesTrainingClick,
     private var items: List<DashboardItem>
@@ -22,7 +24,7 @@ class DashboardAdapterDelegates(
 
     private val delegatesManager =
         AdapterDelegatesManager<List<DashboardItem>>().apply {
-            addDelegate(StepsItemDelegate())
+            addDelegate(StepsItemDelegate(onStepsClick))
             addDelegate(WaterItemDelegate(onAddWaterClicked))
             addDelegate(WorkoutItemDelegate())
             addDelegate(TrainingListItemDelegate(onTrainingClick))

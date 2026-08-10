@@ -1,7 +1,10 @@
-package com.example.main.ui.water_fragment
+package com.example.main.ui.steps_fragment
 
 import com.example.core.base.BaseFragmentPresenter
+import com.example.main.domain.repository.StepsRepository
 import com.example.main.domain.repository.WaterRepository
+import com.example.main.domain.usecase.GetStepsHistoryUseCase
+import com.example.main.domain.usecase.GetTodayStepsUseCase
 import com.example.main.domain.usecase.GetTodayWaterUseCase
 import com.example.main.domain.usecase.GetWaterHistoryUseCase
 import kotlinx.coroutines.Job
@@ -11,31 +14,30 @@ import javax.inject.Inject
 
 
 @InjectViewState
-class WaterFragmentPresenter @Inject constructor(
-    private val getTodayWaterUseCase: GetTodayWaterUseCase,
-    private val getWaterHistoryUseCase: GetWaterHistoryUseCase,
-) : BaseFragmentPresenter<WaterView>() {
+class StepsFragmentPresenter @Inject constructor(
+    private val getTodayStepsUseCase: GetTodayStepsUseCase,
+    private val getStepsHistoryUseCase: GetStepsHistoryUseCase,
+) : BaseFragmentPresenter<StepsView>() {
 
     private var historyJob: Job? = null
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        loadTodayWater()
+        loadTodaySteps()
         observeHistory()
     }
 
-
-    private fun loadTodayWater() {
+    private fun loadTodaySteps() {
         launch {
             try {
-                val amount = getTodayWaterUseCase()
+                val stepsCount = getTodayStepsUseCase()
 
                 onMainThread {
-                    viewState.showTodayWater(amount)
+                    viewState.showTodaySteps(stepsCount)
                 }
             } catch (e: Exception) {
                 onMainThread {
-                    viewState.showTodayWater(0)
+                    viewState.showTodaySteps(0)
                 }
             }
 
@@ -45,9 +47,9 @@ class WaterFragmentPresenter @Inject constructor(
     private fun observeHistory() {
         historyJob?.cancel()
         historyJob = launch {
-            getWaterHistoryUseCase().collect { history ->
+            getStepsHistoryUseCase().collect { history ->
                 onMainThread {
-                    viewState.showWaterHistory(history)
+                    viewState.showStepsHistory(history)
                 }
             }
         }

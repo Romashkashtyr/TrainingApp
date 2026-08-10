@@ -91,6 +91,15 @@ class TrainingApp : Application(), Router {
                     .addToBackStack(null)
                     .commit()
             }
+            is Screen.StepsFragmentRoute -> {
+                fragmentManager.beginTransaction()
+                    .replace(
+                        screen.containerId,
+                        MainScreens.getStepsFrag()
+                    )
+                    .addToBackStack(null)
+                    .commit()
+            }
             else -> Unit
         }
     }

@@ -1,6 +1,7 @@
 package com.example.main.domain.repository
 
 import com.example.database.models.main_modules.StepsDb
+import com.example.main.data.entitieModules.Steps
 import kotlinx.coroutines.flow.Flow
 
 interface StepsRepository {
@@ -9,7 +10,9 @@ interface StepsRepository {
 
     fun observeTodaySteps(date: String): Flow<Int?>
 
-    fun observeStepsHistory(): Flow<List<StepsDb>>
+    fun observeStepsHistory(): Flow<List<Steps>>
+
+    suspend fun getTodaySteps(): Int
 
     suspend fun saveSteps(date: String, steps: Int)
 
