@@ -12,6 +12,7 @@ import com.example.main.domain.repository.WaterRepository
 import com.example.main.ui.activity.MainPresenter
 import com.example.main.ui.steps_fragment.StepsFragmentPresenter
 import com.example.main.ui.water_fragment.WaterFragmentPresenter
+import com.example.main.ui.workout_fragment.WorkoutFragmentPresenter
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -59,6 +60,15 @@ class StepsFragmentFactory @Inject constructor(
     private val presenter: Provider<StepsFragmentPresenter>
 ) {
     fun createPresenter(): StepsFragmentPresenter {
+        return presenter.get()
+    }
+}
+
+@Singleton
+class WorkoutFragmentFactory @Inject constructor (
+    private val presenter: Provider<WorkoutFragmentPresenter>
+) {
+    fun createPresenter(): WorkoutFragmentPresenter {
         return presenter.get()
     }
 }

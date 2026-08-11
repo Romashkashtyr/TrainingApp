@@ -6,6 +6,7 @@ import com.example.main.service.StepsCounterService
 import com.example.main.ui.activity.MainActivity
 import com.example.main.ui.steps_fragment.StepsFragment
 import com.example.main.ui.water_fragment.WaterFragment
+import com.example.main.ui.workout_fragment.WorkoutFragment
 import dagger.Component
 import java.lang.IllegalStateException
 import javax.inject.Singleton
@@ -27,6 +28,8 @@ interface MainComponent {
     fun inject(fragment: WaterFragment)
 
     fun inject(fragment: StepsFragment)
+
+    fun inject(fragment: WorkoutFragment)
 
     companion object {
         private var instance: MainComponent? = null
