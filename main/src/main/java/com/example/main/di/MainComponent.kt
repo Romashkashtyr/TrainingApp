@@ -1,6 +1,7 @@
 package com.example.main.di
 
 import com.example.core.di.CoreComponent
+import com.example.core.providers.ExercisesProvider
 import com.example.main.di.modules.MainModule
 import com.example.main.service.StepsCounterService
 import com.example.main.ui.activity.MainActivity
@@ -12,12 +13,16 @@ import java.lang.IllegalStateException
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [MainModule::class], dependencies = [CoreComponent::class])
+@Component(modules = [MainModule::class], dependencies = [CoreComponent::class, ExercisesProvider::class])
 interface MainComponent {
 
     @Component.Builder
     interface Builder {
         fun coreComponent(coreComponent: CoreComponent): Builder
+
+        fun exercisesProvider(
+            exercisesProvider: ExercisesProvider
+        ): Builder
 
         fun build(): MainComponent
     }

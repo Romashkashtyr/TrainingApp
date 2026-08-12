@@ -1,6 +1,7 @@
 package com.example.trainings.di
 
 import com.example.core.di.CoreComponent
+import com.example.core.providers.ExercisesProvider
 import com.example.trainings.di.modules.NetworkModule
 import com.example.trainings.di.modules.TrainingDatabaseModule
 import com.example.trainings.di.modules.TrainingFitnessModule
@@ -31,6 +32,8 @@ interface TrainingComponent {
     fun inject(fragment: ExerciseDetailFragment)
 
     fun inject(fragment: FavoritesFragment)
+
+    fun exercisesProvider(): ExercisesProvider
 
     @Component.Builder
     interface Builder {
