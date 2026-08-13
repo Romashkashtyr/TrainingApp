@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.core.base.BaseFragment
+import com.example.main.data.entitieModules.WorkoutExercise
 import com.example.main.data.entitieModules.WorkoutHistory
 import com.example.main.databinding.WorkoutFragmentHistoryBinding
 import com.example.main.di.MainComponent
@@ -74,6 +75,30 @@ class WorkoutFragment: BaseFragment(), WorkoutView {
         } else {
             hideEmptyHistory()
         }
+    }
+
+    override fun showWorkout(workout: List<WorkoutExercise>) {
+        TODO("Not yet implemented")
+    }
+
+    override fun showExercise(
+        exercise: WorkoutExercise,
+        position: Int,
+        total: Int
+    ) {
+        TODO("Not yet implemented")
+    }
+
+    override fun updateTimer(seconds: Int) {
+        TODO("Not yet implemented")
+    }
+
+    override fun showWorkoutFinished() {
+        TODO("Not yet implemented")
+    }
+
+    override fun showError(message: String) {
+        TODO("Not yet implemented")
     }
 
 
