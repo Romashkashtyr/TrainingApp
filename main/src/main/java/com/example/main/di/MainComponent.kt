@@ -39,9 +39,15 @@ interface MainComponent {
     companion object {
         private var instance: MainComponent? = null
 
-        fun init(coreComponent: CoreComponent): MainComponent {
+        fun init(
+            coreComponent: CoreComponent,
+            exercisesProvider: ExercisesProvider
+        ): MainComponent {
             if (instance == null) {
-                instance = DaggerMainComponent.builder().coreComponent(coreComponent).build()
+                instance = DaggerMainComponent.builder()
+                    .coreComponent(coreComponent)
+                    .exercisesProvider(exercisesProvider)
+                    .build()
             }
 
             return instance!!

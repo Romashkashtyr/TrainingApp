@@ -6,9 +6,11 @@ import com.example.database.TrainingRoomDatabase
 import com.example.main.data.repository.MainRepositoryImpl
 import com.example.main.data.repository.StepsRepositoryImpl
 import com.example.main.data.repository.WaterRepositoryImpl
+import com.example.main.data.repository.WorkoutRepositoryImpl
 import com.example.main.domain.repository.MainRepository
 import com.example.main.domain.repository.StepsRepository
 import com.example.main.domain.repository.WaterRepository
+import com.example.main.domain.repository.WorkoutRepository
 import com.example.main.ui.activity.MainPresenter
 import com.example.main.ui.steps_fragment.StepsFragmentPresenter
 import com.example.main.ui.water_fragment.WaterFragmentPresenter
@@ -34,6 +36,10 @@ interface MainModule {
     @Binds
     @Singleton
     fun bindWaterRepository(impl: WaterRepositoryImpl): WaterRepository
+
+    @Binds
+    @Singleton
+    fun bindWorkoutRepository(impl: WorkoutRepositoryImpl): WorkoutRepository
 
     companion object {
         @Provides

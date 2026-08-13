@@ -52,4 +52,7 @@
     <!-- Water List -->
     <string name="ml">мл</string>
 
+    <!-- Workout Execution -->
+    <string name="exercise_image">Картинка упражнения</string>
+
 </resources>

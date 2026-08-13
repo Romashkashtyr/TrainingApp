@@ -1,14 +1,75 @@
 package com.example.main.data.repository
 
+import com.example.core.providers.ExercisesProvider
 import com.example.main.data.entitieModules.WorkoutExercise
 import com.example.main.data.entitieModules.WorkoutLevel
 import com.example.main.data.entitieModules.WorkoutType
 import com.example.main.domain.repository.WorkoutRepository
 
-class WorkoutRepositoryImpl: WorkoutRepository {
+class WorkoutRepositoryImpl(
+    private val exercisesProvider: ExercisesProvider
+): WorkoutRepository {
     override suspend fun getWorkout(
         type: WorkoutType,
         level: WorkoutLevel
     ): List<WorkoutExercise> {
+        val exercises = exercisesProvider.getExercises()
+
+        val selectedExercises = when (type) {
+            WorkoutType.FULL_BODY -> {
+                exercises.shuffled().take(8)
+            }
+
+            WorkoutType.UPPER_BODY -> {
+                exercises.filter { exercise ->
+                    exercise.muscleNames.any { muscle ->
+                        muscle.contains("chest", ignoreCase = true) ||
+                                muscle.contains("shoulder", ignoreCase = true) ||
+                                muscle.contains("biceps", ignoreCase = true) ||
+                                muscle.contains("triceps", ignoreCase = true) ||
+                                muscle.contains("back", ignoreCase = true)
+                    }
+                }
+                    .shuffled()
+                    .take(8)
+            }
+
+            WorkoutType.LOWER_BODY -> {
+                exercises.filter { exercise ->
+                    exercise.muscleNames.any { muscle ->
+                        muscle.contains("quadriceps", ignoreCase = true) ||
+                                muscle.contains("hamstrings", ignoreCase = true) ||
+                                muscle.contains("glutes", ignoreCase = true) ||
+                                muscle.contains("calves", ignoreCase = true) ||
+                                muscle.contains("legs", ignoreCase = true)
+                    }
+                }
+                    .shuffled()
+                    .take(8)
+            }
+
+            else -> {
+                exercises.filter { exercise ->
+                    exercise.muscleNames.any { muscle ->
+                        muscle.contains(type.name, ignoreCase = true)
+                    }
+                }
+                    .shuffled()
+                    .take(8)
+            }
+        }
+
+
+        return selectedExercises.map { exercise ->
+            WorkoutExercise(
+                exerciseId = exercise.id,
+                exerciseName = exercise.name,
+                description = exercise.description,
+                imageUrl = exercise.imageUrl,
+                durationSeconds = level.exerciseDuration
+            )
+        }
     }
 }
+
+

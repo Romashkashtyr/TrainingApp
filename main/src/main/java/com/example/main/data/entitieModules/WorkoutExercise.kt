@@ -1,7 +1,9 @@
 package com.example.main.data.entitieModules
 
 data class WorkoutExercise (
-    val type: WorkoutType,
-    val name: String,
-    val muscleName: List<String>
+    val exerciseId: String,
+    val exerciseName: String,
+    val description: String?,
+    val imageUrl: String,
+    val durationSeconds: Int
 )

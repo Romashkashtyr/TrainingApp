@@ -34,7 +34,9 @@ class TrainingApp : Application(), Router {
 
     private fun initDi() {
         val coreComponent = CoreComponent.init(applicationContext)
-        MainComponent.init(coreComponent)
+        val trainingComponent = TrainingComponent.init(coreComponent)
+        val exercisesProvider = trainingComponent.exercisesProvider()
+        MainComponent.init(coreComponent,exercisesProvider)
         SplashComponent.init(coreComponent)
         AuthComponent.init(coreComponent)
         TrainingComponent.init(coreComponent)
