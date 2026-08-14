@@ -1,133 +1,134 @@
 package com.example.main.ui.workout_fragment
 
-import android.content.Context
+
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
+import android.widget.Toast
 import com.example.core.base.BaseFragment
-import com.example.main.data.entitieModules.WorkoutExercise
-import com.example.main.data.entitieModules.WorkoutHistory
-import com.example.main.databinding.WorkoutFragmentHistoryBinding
+import com.example.core.navigation.Router
+import com.example.core.navigation.Screen
+import com.example.main.R
+import com.example.main.data.entitieModules.WorkoutLevel
+import com.example.main.data.entitieModules.WorkoutType
+import com.example.main.databinding.FragmentWorkoutBinding
 import com.example.main.di.MainComponent
-import com.example.main.di.modules.WorkoutFragmentFactory
-import com.example.main.ui.workout_rc_view.WorkoutHistoryAdapter
-import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 
-class WorkoutFragment: BaseFragment(), WorkoutView {
+class WorkoutFragment : BaseFragment(), WorkoutView {
 
-    private var _binding: WorkoutFragmentHistoryBinding? = null
-    private val binding
+    private var _binding: FragmentWorkoutBinding? = null
+
+    private val binding: FragmentWorkoutBinding
         get() = _binding!!
 
     @Inject
-    lateinit var factory: WorkoutFragmentFactory
+    lateinit var presenter: WorkoutPresenter
 
-    private val presenter by moxyPresenter {
-        factory.createPresenter()
-    }
+    @Inject
+    lateinit var router: Router
 
-    private lateinit var adapter: WorkoutHistoryAdapter
+    override fun onCreate(savedInstanceState: Bundle?) {
 
-    override fun onAttach(context: Context) {
-        MainComponent.getMainInstance().inject(this)
-        super.onAttach(context)
+        MainComponent
+            .getMainInstance()
+            .inject(this)
+
+        super.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        _binding = WorkoutFragmentHistoryBinding.inflate(inflater, container, false)
+    ): View {
+
+        _binding = FragmentWorkoutBinding.inflate(
+            inflater,
+            container,
+            false
+        )
+
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?
+    ) {
+        super.onViewCreated(
+            view,
+            savedInstanceState
+        )
 
-        initRecycler()
+        setupViews()
+    }
+
+    private fun setupViews() {
+
+        binding.easyRadioButton.isChecked = true
+
+        binding.startWorkoutButton.setOnClickListener {
+
+            val level = when {
+
+                binding.easyRadioButton.isChecked ->
+                    WorkoutLevel.EASY
+
+                binding.mediumRadioButton.isChecked ->
+                    WorkoutLevel.MEDIUM
+
+                binding.hardRadioButton.isChecked ->
+                    WorkoutLevel.HARD
+
+                else ->
+                    WorkoutLevel.EASY
+            }
+
+            openRunningWorkout(level)
+        }
 
         binding.arrowBack.setOnClickListener {
-            parentFragmentManager.popBackStack()
+
+            requireActivity()
+                .onBackPressedDispatcher
+                .onBackPressed()
         }
     }
 
-    private fun initRecycler() {
-        adapter = WorkoutHistoryAdapter()
-
-        binding.historyRecyclerView.apply {
-            layoutManager = LinearLayoutManager(requireContext())
-            adapter = this@WorkoutFragment.adapter
-            setHasFixedSize(true)
-        }
-    }
-
-    override fun showWorkoutHistory(history: List<WorkoutHistory>) {
-        adapter.submitList(history)
-
-        binding.workoutCount.text = "Всего тренировок: ${history.size}"
-
-        if (history.isEmpty()) {
-            showEmptyHistory()
-        } else {
-            hideEmptyHistory()
-        }
-    }
-
-    override fun showWorkout(workout: List<WorkoutExercise>) {
-        TODO("Not yet implemented")
-    }
-
-    override fun showExercise(
-        exercise: WorkoutExercise,
-        position: Int,
-        total: Int
+    private fun openRunningWorkout(
+        level: WorkoutLevel
     ) {
-        TODO("Not yet implemented")
+        router.navigateToFragment(
+
+            screen = Screen.WorkoutRunningFragmentRoute(
+                fromContext = requireActivity(),
+                containerId = R.id.workout_container,
+                level = level.name,
+                type = WorkoutType.FULL_BODY.name
+            ),
+
+            fragmentManager = parentFragmentManager
+        )
     }
 
-    override fun updateTimer(seconds: Int) {
-        TODO("Not yet implemented")
-    }
+    override fun showError(
+        message: String
+    ) {
 
-    override fun showWorkoutFinished() {
-        TODO("Not yet implemented")
-    }
-
-    override fun showError(message: String) {
-        TODO("Not yet implemented")
-    }
-
-
-    override fun showLoading() {
-        binding.progressBar.visibility = View.VISIBLE
-    }
-
-    override fun hideLoading() {
-        binding.progressBar.visibility = View.GONE
-    }
-
-    override fun showEmptyHistory() {
-        binding.emptyHistoryText.visibility = View.VISIBLE
-        binding.historyRecyclerView.visibility = View.GONE
-    }
-
-    override fun hideEmptyHistory() {
-        binding.emptyHistoryText.visibility = View.GONE
-        binding.historyRecyclerView.visibility = View.VISIBLE
+        Toast.makeText(
+            requireContext(),
+            message,
+            Toast.LENGTH_LONG
+        ).show()
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 
-    companion object {
-        fun newWorkoutInstance(): WorkoutFragment {
-            return WorkoutFragment()
-        }
+        _binding = null
+
+        super.onDestroyView()
     }
 }

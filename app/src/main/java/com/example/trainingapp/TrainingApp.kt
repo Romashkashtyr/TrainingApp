@@ -15,6 +15,8 @@ import com.example.main.ui.activity.MainActivity
 import com.example.splash.di.SplashComponent
 import com.example.database.TrainingRoomDatabase
 import com.example.main.MainScreens
+import com.example.main.data.entitieModules.WorkoutLevel
+import com.example.main.data.entitieModules.WorkoutType
 import com.example.trainings.di.TrainingComponent
 import com.example.trainings.ui.TrainingsScreens
 import com.example.trainings.ui.training_activity.TrainingsListActivity
@@ -102,8 +104,61 @@ class TrainingApp : Application(), Router {
                     .addToBackStack(null)
                     .commit()
             }
+            is Screen.WorkoutRunningFragmentRoute -> {
+                val level = try {
+
+                    WorkoutLevel.valueOf(
+                        screen.level
+                    )
+
+                } catch (e: IllegalArgumentException) {
+
+                    WorkoutLevel.EASY
+                }
+
+                val type = try {
+
+                    WorkoutType.valueOf(
+                        screen.type
+                    )
+
+                } catch (e: IllegalArgumentException) {
+
+                    WorkoutType.FULL_BODY
+                }
+
+                val fragment =
+                    MainScreens.getWorkoutRunningFrag(
+                        level = level,
+                        type = type
+                    )
+
+                fragmentManager
+                    .beginTransaction()
+                    .replace(
+                        screen.containerId,
+                        fragment
+                    )
+                    .addToBackStack(null)
+                    .commit()
+            }
             else -> Unit
         }
+    }
+
+    override fun navigateToFragment(
+        fragment: Fragment,
+        containerId: Int,
+        fragmentManager: FragmentManager
+    ) {
+        fragmentManager
+            .beginTransaction()
+            .replace(
+                containerId,
+                fragment
+            )
+            .addToBackStack(null)
+            .commit()
     }
 
     companion object {

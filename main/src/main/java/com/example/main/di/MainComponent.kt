@@ -8,6 +8,8 @@ import com.example.main.ui.activity.MainActivity
 import com.example.main.ui.steps_fragment.StepsFragment
 import com.example.main.ui.water_fragment.WaterFragment
 import com.example.main.ui.workout_fragment.WorkoutFragment
+import com.example.main.ui.workout_history_fragment.WorkoutHistoryHistoryFragment
+import com.example.main.ui.workout_running.WorkoutRunningFragment
 import dagger.Component
 import java.lang.IllegalStateException
 import javax.inject.Singleton
@@ -34,7 +36,11 @@ interface MainComponent {
 
     fun inject(fragment: StepsFragment)
 
+    fun inject(fragment: WorkoutHistoryHistoryFragment)
+
     fun inject(fragment: WorkoutFragment)
+
+    fun inject(fragment: WorkoutRunningFragment)
 
     companion object {
         private var instance: MainComponent? = null

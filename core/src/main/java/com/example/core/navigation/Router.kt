@@ -11,4 +11,10 @@ interface Router {
         fragmentManager: FragmentManager,
     )
 
+    fun navigateToFragment(
+        fragment: Fragment,
+        containerId: Int,
+        fragmentManager: FragmentManager,
+    )
+
 }
