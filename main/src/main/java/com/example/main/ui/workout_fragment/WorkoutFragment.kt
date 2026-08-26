@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.example.core.base.BaseFragment
 import com.example.core.navigation.Router
+import com.example.core.navigation.RouterHolder
 import com.example.core.navigation.Screen
 import com.example.main.R
 import com.example.main.data.entitieModules.WorkoutLevel
@@ -123,6 +124,21 @@ class WorkoutFragment : BaseFragment(), WorkoutView {
             message,
             Toast.LENGTH_LONG
         ).show()
+    }
+
+    override fun openWorkout(
+        level: WorkoutLevel,
+        type: WorkoutType
+    ) {
+        RouterHolder.router.navigateToFragment(
+            screen = Screen.WorkoutRunningFragmentRoute(
+                fromContext = requireActivity(),
+                containerId = R.id.mainFragmentContainer,
+                level = level.name,
+                type = type.name
+            ),
+            fragmentManager = parentFragmentManager
+        )
     }
 
     override fun onDestroyView() {

@@ -8,7 +8,7 @@ import com.example.main.ui.activity.MainActivity
 import com.example.main.ui.steps_fragment.StepsFragment
 import com.example.main.ui.water_fragment.WaterFragment
 import com.example.main.ui.workout_fragment.WorkoutFragment
-import com.example.main.ui.workout_history_fragment.WorkoutHistoryHistoryFragment
+import com.example.main.ui.workout_history_fragment.WorkoutHistoryFragment
 import com.example.main.ui.workout_running.WorkoutRunningFragment
 import dagger.Component
 import java.lang.IllegalStateException
@@ -36,7 +36,7 @@ interface MainComponent {
 
     fun inject(fragment: StepsFragment)
 
-    fun inject(fragment: WorkoutHistoryHistoryFragment)
+    fun inject(fragment: WorkoutHistoryFragment)
 
     fun inject(fragment: WorkoutFragment)
 

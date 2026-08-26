@@ -5,6 +5,7 @@ import com.example.core.base.BaseFragmentPresenter
 import com.example.main.data.entitieModules.WorkoutExercise
 import com.example.main.data.entitieModules.WorkoutLevel
 import com.example.main.data.entitieModules.WorkoutType
+import com.example.main.domain.usecase.GetWorkoutHistoryUseCase
 import com.example.main.domain.usecase.GetWorkoutUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -27,9 +28,7 @@ class WorkoutRunningPresenter(
         level: WorkoutLevel
     ) {
 
-        CoroutineScope(
-            Dispatchers.IO + SupervisorJob()
-        ).launch {
+        launch {
 
             try {
 
@@ -41,24 +40,17 @@ class WorkoutRunningPresenter(
                 workout = result
                 currentExerciseIndex = 0
 
-                withContext(Dispatchers.Main) {
-
+                onMainThread {
                     if (workout.isEmpty()) {
-
                         viewState.showError(
                             "В тренировке нет упражнений"
                         )
-
-                        return@withContext
+                        return@onMainThread
                     }
-
                     showCurrentExercise()
                 }
-
             } catch (e: Exception) {
-
-                withContext(Dispatchers.Main) {
-
+                onMainThread {
                     viewState.showError(
                         e.message
                             ?: "Не удалось загрузить тренировку"
@@ -69,13 +61,9 @@ class WorkoutRunningPresenter(
     }
 
     private fun showCurrentExercise() {
-
         if (currentExerciseIndex >= workout.size) {
-
             stopTimer()
-
             viewState.showWorkoutFinished()
-
             return
         }
 
@@ -132,7 +120,6 @@ class WorkoutRunningPresenter(
     }
 
     fun nextExercise() {
-
         stopTimer()
 
         currentExerciseIndex++
@@ -141,18 +128,15 @@ class WorkoutRunningPresenter(
     }
 
     fun stopWorkout() {
-
         stopTimer()
     }
 
     private fun stopTimer() {
-
         countDownTimer?.cancel()
         countDownTimer = null
     }
 
     override fun onDestroy() {
-
         stopTimer()
 
         super.onDestroy()

@@ -1,13 +1,19 @@
 package com.example.main.data.repository
 
 import com.example.core.providers.ExercisesProvider
+import com.example.database.TrainingRoomDatabase
+import com.example.main.data.MainMapper.toWorkoutHistory
 import com.example.main.data.entitieModules.WorkoutExercise
+import com.example.main.data.entitieModules.WorkoutHistory
 import com.example.main.data.entitieModules.WorkoutLevel
 import com.example.main.data.entitieModules.WorkoutType
 import com.example.main.domain.repository.WorkoutRepository
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 class WorkoutRepositoryImpl(
-    private val exercisesProvider: ExercisesProvider
+    private val exercisesProvider: ExercisesProvider,
+    private val database: TrainingRoomDatabase
 ): WorkoutRepository {
     override suspend fun getWorkout(
         type: WorkoutType,
@@ -69,6 +75,15 @@ class WorkoutRepositoryImpl(
                 durationSeconds = level.exerciseDuration
             )
         }
+    }
+
+    override fun observeHistory(): Flow<List<WorkoutHistory>> {
+        return database.workoutDao().observeHistory()
+            .map { history ->
+                history.map { entity ->
+                    entity.toWorkoutHistory()
+                }
+            }
     }
 }
 

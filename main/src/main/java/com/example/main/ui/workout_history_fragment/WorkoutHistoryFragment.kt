@@ -16,7 +16,7 @@ import com.example.main.ui.workout_rc_view.WorkoutHistoryAdapter
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 
-class WorkoutHistoryHistoryFragment: BaseFragment(), WorkoutHistoryView {
+class WorkoutHistoryFragment: BaseFragment(), WorkoutHistoryView {
 
     private var _binding: WorkoutFragmentHistoryBinding? = null
     private val binding
@@ -60,7 +60,7 @@ class WorkoutHistoryHistoryFragment: BaseFragment(), WorkoutHistoryView {
 
         binding.historyRecyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = this@WorkoutHistoryHistoryFragment.adapter
+            adapter = this@WorkoutHistoryFragment.adapter
             setHasFixedSize(true)
         }
     }
@@ -126,8 +126,8 @@ class WorkoutHistoryHistoryFragment: BaseFragment(), WorkoutHistoryView {
     }
 
     companion object {
-        fun newWorkoutInstance(): WorkoutHistoryHistoryFragment {
-            return WorkoutHistoryHistoryFragment()
+        fun newWorkoutInstance(): WorkoutHistoryFragment {
+            return WorkoutHistoryFragment()
         }
     }
 }

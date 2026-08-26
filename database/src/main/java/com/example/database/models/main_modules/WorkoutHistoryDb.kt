@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 data class WorkoutHistoryDb(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
-    val workoutId: Long,
+    val workoutId: String,
     val workoutName: String,
     val level: String,
     val date: String

@@ -9,11 +9,7 @@ import javax.inject.Inject
 class GetWorkoutUseCase @Inject constructor(
     private val repository: WorkoutRepository
 ) {
-
-    suspend operator fun invoke(
-        type: WorkoutType,
-        level: WorkoutLevel
-    ): List<WorkoutExercise> {
+    suspend operator fun invoke(type: WorkoutType, level: WorkoutLevel): List<WorkoutExercise> {
         return repository.getWorkout(type, level)
     }
 }

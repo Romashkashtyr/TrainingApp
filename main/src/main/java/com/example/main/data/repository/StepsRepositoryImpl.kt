@@ -23,7 +23,6 @@ class StepsRepositoryImpl @Inject constructor(
     }
 
     override fun observeTodaySteps(date: String): Flow<Int?> {
-       //return stepsDataStore.observeSteps()
         return database.mainDao().observeTodaySteps(date)
     }
 

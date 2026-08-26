@@ -9,7 +9,9 @@ import com.example.database.models.dao.MainDao
 import com.example.database.converters.Converters
 import com.example.database.models.dao.TrainingDAO
 import com.example.database.models.dao.WaterDao
+import com.example.database.models.dao.WorkoutDao
 import com.example.database.models.main_modules.StepsDb
+import com.example.database.models.main_modules.WorkoutHistoryDb
 import com.example.database.models.main_modules.water.WaterDb
 import com.example.database.models.training_modules.ExerciseDbo
 import com.example.database.models.training_modules.FavoriteExerciseDbo
@@ -23,7 +25,8 @@ import com.example.database.models.training_modules.PrimaryMusclesDbo
         FavoriteExerciseDbo::class,
         StepsDb::class,
         WaterDb::class,
-    ], version = 5,
+        WorkoutHistoryDb::class
+    ], version = 6,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
@@ -34,6 +37,8 @@ abstract class TrainingRoomDatabase : RoomDatabase() {
     abstract fun mainDao(): MainDao
 
     abstract fun waterDao(): WaterDao
+
+    abstract fun workoutDao(): WorkoutDao
 
 
     companion object {
