@@ -10,8 +10,9 @@ import com.example.main.data.entitieModules.WorkoutType
 import com.example.main.domain.repository.WorkoutRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-class WorkoutRepositoryImpl(
+class WorkoutRepositoryImpl @Inject constructor(
     private val exercisesProvider: ExercisesProvider,
     private val database: TrainingRoomDatabase
 ): WorkoutRepository {

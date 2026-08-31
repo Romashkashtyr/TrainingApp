@@ -12,8 +12,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class WorkoutRunningPresenter(
+class WorkoutRunningPresenter @Inject constructor(
     private val getWorkoutUseCase: GetWorkoutUseCase
 ): BaseFragmentPresenter<WorkoutRunningView>()  {
 
