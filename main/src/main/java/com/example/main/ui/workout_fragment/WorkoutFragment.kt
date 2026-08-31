@@ -106,7 +106,7 @@ class WorkoutFragment : BaseFragment(), WorkoutView {
 
             screen = Screen.WorkoutRunningFragmentRoute(
                 fromContext = requireActivity(),
-                containerId = R.id.workout_container,
+                containerId = R.id.mainFragmentContainer,
                 level = level.name,
                 type = WorkoutType.FULL_BODY.name
             ),
