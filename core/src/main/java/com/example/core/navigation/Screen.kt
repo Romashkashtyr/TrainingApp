@@ -21,4 +21,6 @@ sealed class Screen {
         val level: String,
         val type: String
     ) : Screen()
+
+    data class WorkoutFragment(val fromContext: Activity, val containerId: Int) : Screen()
 }

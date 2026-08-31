@@ -26,7 +26,7 @@ import com.example.database.models.training_modules.PrimaryMusclesDbo
         StepsDb::class,
         WaterDb::class,
         WorkoutHistoryDb::class
-    ], version = 6,
+    ], version = 7,
     exportSchema = false
 )
 @TypeConverters(Converters::class)

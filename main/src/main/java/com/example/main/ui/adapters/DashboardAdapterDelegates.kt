@@ -2,6 +2,7 @@ package com.example.main.ui.adapters
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.main.OnWorkoutClick
 import com.example.main.structures.DashboardItem
 import com.example.main.ui.OnAddWaterClicked
 import com.example.main.ui.OnFavoritesTrainingClick
@@ -19,6 +20,7 @@ class DashboardAdapterDelegates(
     private val onStepsClick: OnStepsClick,
     private val onTrainingClick: OnTrainingClick,
     private val onFavoritesTrainingClick: OnFavoritesTrainingClick,
+    private val onWorkoutClick: OnWorkoutClick,
     private var items: List<DashboardItem>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -26,7 +28,7 @@ class DashboardAdapterDelegates(
         AdapterDelegatesManager<List<DashboardItem>>().apply {
             addDelegate(StepsItemDelegate(onStepsClick))
             addDelegate(WaterItemDelegate(onAddWaterClicked))
-            addDelegate(WorkoutItemDelegate())
+            addDelegate(WorkoutItemDelegate(onWorkoutClick))
             addDelegate(TrainingListItemDelegate(onTrainingClick))
             addDelegate(FavoriteItemDelegate(onFavoritesTrainingClick))
         }

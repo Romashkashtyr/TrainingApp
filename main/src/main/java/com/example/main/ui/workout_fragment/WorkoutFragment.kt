@@ -147,4 +147,8 @@ class WorkoutFragment : BaseFragment(), WorkoutView {
 
         super.onDestroyView()
     }
+
+    companion object {
+        fun newWorkoutInstance() = WorkoutFragment()
+    }
 }

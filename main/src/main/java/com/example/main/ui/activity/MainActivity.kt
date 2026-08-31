@@ -20,19 +20,15 @@ import com.example.core.data.datastore.StepsDataStore
 import com.example.core.navigation.RouterHolder
 import com.example.core.navigation.Screen
 import com.example.core.utils.getLocalDate
+import com.example.main.OnWorkoutClick
 import com.example.main.ui.OnStepsClick
 import com.example.main.R
 import com.example.main.data.entitieModules.Water
 import com.example.main.databinding.ActivityMainBinding
 import com.example.main.di.MainComponent
 import com.example.main.di.modules.MainPresenterFactory
-import com.example.main.domain.repository.MainRepository
-import com.example.main.domain.repository.StepsRepository
-import com.example.main.domain.repository.WaterRepository
 import com.example.main.service.StepsCounterService
 import com.example.main.structures.DashboardItem
-import com.example.main.ui.activity.MainPresenter
-import com.example.main.ui.activity.MainView
 import com.example.main.ui.OnAddWaterClicked
 import com.example.main.ui.OnFavoritesTrainingClick
 import com.example.main.ui.OnTrainingClick
@@ -45,7 +41,7 @@ import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 
 class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
-    OnTrainingClick, OnFavoritesTrainingClick, OnViewTrainingsClicked, OnStepsClick {
+    OnTrainingClick, OnFavoritesTrainingClick, OnViewTrainingsClicked, OnStepsClick, OnWorkoutClick {
 
     private lateinit var sensorManager: SensorManager
     private var stepSensor: Sensor? = null
@@ -76,7 +72,8 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
         onTrainingClick = this,
         items = items,
         onFavoritesTrainingClick = this,
-        onStepsClick = this
+        onStepsClick = this,
+        onWorkoutClick = this
     )
 
 
@@ -195,6 +192,19 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
         )
     }
 
+    override fun onWorkoutClick() {
+        binding.dashboardRecyclerView.visibility = View.GONE
+        binding.mainFragmentContainer.visibility = View.VISIBLE
+
+        RouterHolder.router.navigateToFragment(
+            Screen.WorkoutFragment(
+                this,
+                R.id.mainFragmentContainer
+            ),
+            supportFragmentManager
+        )
+    }
+
 
     private fun checkRuntimePermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -250,8 +260,6 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
 
         stepSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
     }
-
-
 
 
     companion object {

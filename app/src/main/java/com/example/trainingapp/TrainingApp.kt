@@ -28,9 +28,9 @@ class TrainingApp : Application(), Router {
     override fun onCreate() {
         super.onCreate()
         instance = this
-        initDi()
         FirebaseApp.initializeApp(this)
         TrainingRoomDatabase.initializeDb(this)
+        initDi()
         RouterHolder.router = this
     }
 
@@ -138,6 +138,15 @@ class TrainingApp : Application(), Router {
                     .replace(
                         screen.containerId,
                         fragment
+                    )
+                    .addToBackStack(null)
+                    .commit()
+            }
+            is Screen.WorkoutFragment -> {
+                fragmentManager.beginTransaction()
+                    .replace(
+                        screen.containerId,
+                        MainScreens.getWorkoutFrag()
                     )
                     .addToBackStack(null)
                     .commit()
