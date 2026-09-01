@@ -1,6 +1,7 @@
 package com.example.main.ui.workout_running
 
 import android.os.CountDownTimer
+import android.util.Log
 import com.example.core.base.BaseFragmentPresenter
 import com.example.main.data.entitieModules.WorkoutExercise
 import com.example.main.data.entitieModules.WorkoutLevel
@@ -62,6 +63,11 @@ class WorkoutRunningPresenter @Inject constructor(
     }
 
     private fun showCurrentExercise() {
+        Log.d(
+            "WorkoutDebug",
+            "showCurrentExercise: index=$currentExerciseIndex, size=${workout.size}"
+        )
+
         if (currentExerciseIndex >= workout.size) {
             stopTimer()
             viewState.showWorkoutFinished()
@@ -114,6 +120,12 @@ class WorkoutRunningPresenter @Inject constructor(
 
                 currentExerciseIndex++
 
+                if (currentExerciseIndex >= workout.size) {
+                    viewState.showWorkoutFinished()
+                } else {
+                    showCurrentExercise()
+                }
+
                 showCurrentExercise()
             }
 
@@ -121,10 +133,12 @@ class WorkoutRunningPresenter @Inject constructor(
     }
 
     fun nextExercise() {
+        Log.d(
+            "WorkoutDebug",
+            "nextExercise: index=$currentExerciseIndex, size=${workout.size}"
+        )
         stopTimer()
-
         currentExerciseIndex++
-
         showCurrentExercise()
     }
 
