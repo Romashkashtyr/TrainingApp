@@ -40,6 +40,12 @@ class WorkoutRunningPresenter @Inject constructor(
                 )
 
                 workout = result
+
+                Log.d(
+                    "WorkoutDebug",
+                    "LOADED WORKOUT: ${workout.map { "${it.exerciseId}:${it.exerciseName}" }}"
+                )
+
                 currentExerciseIndex = 0
 
                 onMainThread {
@@ -74,8 +80,18 @@ class WorkoutRunningPresenter @Inject constructor(
             return
         }
 
-        val exercise =
-            workout[currentExerciseIndex]
+        val exercise = workout[currentExerciseIndex]
+
+        Log.d(
+            "WorkoutDebug",
+            """
+        INDEX = $currentExerciseIndex
+        ID = ${exercise.exerciseId}
+        NAME = ${exercise.exerciseName}
+        IMAGE = ${exercise.imageUrl}
+        DURATION = ${exercise.durationSeconds}
+        """.trimIndent()
+        )
 
         viewState.showExercise(
             exercise = exercise,
@@ -122,8 +138,7 @@ class WorkoutRunningPresenter @Inject constructor(
 
                 if (currentExerciseIndex >= workout.size) {
                     viewState.showWorkoutFinished()
-                } else {
-                    showCurrentExercise()
+                    return
                 }
 
                 showCurrentExercise()
@@ -137,6 +152,9 @@ class WorkoutRunningPresenter @Inject constructor(
             "WorkoutDebug",
             "nextExercise: index=$currentExerciseIndex, size=${workout.size}"
         )
+        if (workout.isEmpty()) {
+            return
+        }
         stopTimer()
         currentExerciseIndex++
         showCurrentExercise()
@@ -153,7 +171,6 @@ class WorkoutRunningPresenter @Inject constructor(
 
     override fun onDestroy() {
         stopTimer()
-
         super.onDestroy()
     }
 }

@@ -28,8 +28,8 @@ class TrainingApp : Application(), Router {
     override fun onCreate() {
         super.onCreate()
         instance = this
-        FirebaseApp.initializeApp(this)
         TrainingRoomDatabase.initializeDb(this)
+        FirebaseApp.initializeApp(this)
         initDi()
         RouterHolder.router = this
     }
@@ -41,7 +41,7 @@ class TrainingApp : Application(), Router {
         MainComponent.init(coreComponent,exercisesProvider)
         SplashComponent.init(coreComponent)
         AuthComponent.init(coreComponent)
-        TrainingComponent.init(coreComponent)
+        //TrainingComponent.init(coreComponent)
     }
 
 

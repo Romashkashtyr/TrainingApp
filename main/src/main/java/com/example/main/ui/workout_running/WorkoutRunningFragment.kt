@@ -99,14 +99,11 @@ class WorkoutRunningFragment: BaseFragment(), WorkoutRunningView {
         total: Int
     ) {
 
-        binding.exerciseCounter.text =
-            "${position + 1} / $total"
+        binding.exerciseCounter.text = "${position + 1} / $total"
 
-        binding.exerciseName.text =
-            exercise.exerciseName
+        binding.exerciseName.text = exercise.exerciseName
 
-        binding.timer.text =
-            exercise.durationSeconds.toString()
+        binding.timer.text = exercise.durationSeconds.toString()
 
         Glide.with(this)
             .load(exercise.imageUrl)
