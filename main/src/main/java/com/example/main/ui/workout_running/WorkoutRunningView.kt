@@ -4,9 +4,10 @@ import com.example.core.base.BaseFragmentView
 import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType
 import com.example.main.data.entitieModules.WorkoutExercise
+import moxy.viewstate.strategy.AddToEndStrategy
 
 
-@StateStrategyType(value = AddToEndSingleStrategy::class)
+@StateStrategyType(value = AddToEndStrategy::class)
 interface WorkoutRunningView: BaseFragmentView {
 
     fun showExercise(

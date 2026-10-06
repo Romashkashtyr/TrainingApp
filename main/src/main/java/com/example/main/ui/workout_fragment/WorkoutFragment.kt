@@ -32,11 +32,7 @@ class WorkoutFragment : BaseFragment(), WorkoutView {
     lateinit var router: Router
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
-        MainComponent
-            .getMainInstance()
-            .inject(this)
-
+        MainComponent.getMainInstance().inject(this)
         super.onCreate(savedInstanceState)
     }
 
@@ -45,80 +41,49 @@ class WorkoutFragment : BaseFragment(), WorkoutView {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = FragmentWorkoutBinding.inflate(
             inflater,
             container,
             false
         )
-
         return binding.root
     }
 
-    override fun onViewCreated(
-        view: View,
-        savedInstanceState: Bundle?
-    ) {
-        super.onViewCreated(
-            view,
-            savedInstanceState
-        )
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setupViews()
     }
 
     private fun setupViews() {
-
         binding.easyRadioButton.isChecked = true
 
         binding.startWorkoutButton.setOnClickListener {
-
             val level = when {
-
-                binding.easyRadioButton.isChecked ->
-                    WorkoutLevel.EASY
-
-                binding.mediumRadioButton.isChecked ->
-                    WorkoutLevel.MEDIUM
-
-                binding.hardRadioButton.isChecked ->
-                    WorkoutLevel.HARD
-
-                else ->
-                    WorkoutLevel.EASY
+                binding.easyRadioButton.isChecked -> WorkoutLevel.EASY
+                binding.mediumRadioButton.isChecked -> WorkoutLevel.MEDIUM
+                binding.hardRadioButton.isChecked -> WorkoutLevel.HARD
+                else -> WorkoutLevel.EASY
             }
-
             openRunningWorkout(level)
         }
-
         binding.arrowBack.setOnClickListener {
-
-            requireActivity()
-                .onBackPressedDispatcher
-                .onBackPressed()
+            requireActivity().onBackPressedDispatcher.onBackPressed()
         }
     }
 
-    private fun openRunningWorkout(
-        level: WorkoutLevel
-    ) {
+    private fun openRunningWorkout(level: WorkoutLevel) {
         router.navigateToFragment(
-
             screen = Screen.WorkoutRunningFragmentRoute(
                 fromContext = requireActivity(),
                 containerId = R.id.mainFragmentContainer,
                 level = level.name,
                 type = WorkoutType.FULL_BODY.name
             ),
-
             fragmentManager = parentFragmentManager
         )
     }
 
-    override fun showError(
-        message: String
-    ) {
-
+    override fun showError(message: String) {
         Toast.makeText(
             requireContext(),
             message,
@@ -126,10 +91,7 @@ class WorkoutFragment : BaseFragment(), WorkoutView {
         ).show()
     }
 
-    override fun openWorkout(
-        level: WorkoutLevel,
-        type: WorkoutType
-    ) {
+    override fun openWorkout(level: WorkoutLevel, type: WorkoutType) {
         RouterHolder.router.navigateToFragment(
             screen = Screen.WorkoutRunningFragmentRoute(
                 fromContext = requireActivity(),
@@ -142,9 +104,7 @@ class WorkoutFragment : BaseFragment(), WorkoutView {
     }
 
     override fun onDestroyView() {
-
         _binding = null
-
         super.onDestroyView()
     }
 

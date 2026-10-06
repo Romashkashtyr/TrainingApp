@@ -25,15 +25,10 @@ class WorkoutRunningPresenter @Inject constructor(
 
     private var countDownTimer: CountDownTimer? = null
 
-    fun loadWorkout(
-        type: WorkoutType,
-        level: WorkoutLevel
-    ) {
-
+    fun loadWorkout(type: WorkoutType, level: WorkoutLevel) {
         launch {
 
             try {
-
                 val result = getWorkoutUseCase(
                     type = type,
                     level = level
@@ -104,46 +99,33 @@ class WorkoutRunningPresenter @Inject constructor(
         )
     }
 
-    private fun startTimer(
-        durationSeconds: Int
-    ) {
-
+    private fun startTimer(durationSeconds: Int) {
         stopTimer()
-
         viewState.updateTimer(
             durationSeconds
         )
-
         countDownTimer = object : CountDownTimer(
             durationSeconds * 1000L,
             1000L
         ) {
-
             override fun onTick(
                 millisUntilFinished: Long
             ) {
-
                 val seconds =
                     (millisUntilFinished / 1000L)
                         .toInt()
-
                 viewState.updateTimer(
                     seconds
                 )
             }
-
             override fun onFinish() {
-
                 currentExerciseIndex++
-
                 if (currentExerciseIndex >= workout.size) {
                     viewState.showWorkoutFinished()
                     return
                 }
-
                 showCurrentExercise()
             }
-
         }.start()
     }
 

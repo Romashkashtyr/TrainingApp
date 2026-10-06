@@ -55,4 +55,13 @@
     <!-- Workout Execution -->
     <string name="exercise_image">Картинка упражнения</string>
 
+    <!-- Drawer Menu -->
+    <string name="menu_home">Главная</string>
+    <string name="menu_trainings">Тренировки</string>
+    <string name="menu_favorites">Избранное</string>
+    <string name="menu_settings_title">Настройки</string>
+    <string name="menu_profile_settings">Настройки профиля</string>
+    <string name="navigation_drawer_open">Открыть меню</string>
+    <string name="navigation_drawer_close">Закрыть меню</string>
+
 </resources>

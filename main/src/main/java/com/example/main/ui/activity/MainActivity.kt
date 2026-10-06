@@ -34,6 +34,10 @@ import com.example.main.ui.OnFavoritesTrainingClick
 import com.example.main.ui.OnTrainingClick
 import com.example.main.ui.OnViewTrainingsClicked
 import com.example.main.ui.adapters.DashboardAdapterDelegates
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.view.GravityCompat
+import com.example.main.ui.settings.SettingsFragment
+import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -41,7 +45,8 @@ import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 
 class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
-    OnTrainingClick, OnFavoritesTrainingClick, OnViewTrainingsClicked, OnStepsClick, OnWorkoutClick {
+    OnTrainingClick, OnFavoritesTrainingClick, OnViewTrainingsClicked, OnStepsClick, OnWorkoutClick,
+    NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var sensorManager: SensorManager
     private var stepSensor: Sensor? = null
@@ -93,6 +98,7 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
         mainPresenter.observeSteps(getLocalDate())
 
         startStepCounterService()
+        setupNavigationDrawer()
 
         initSensor()
         checkRuntimePermission()
@@ -242,6 +248,59 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
             this,
             intent
         )
+    }
+
+    private fun setupNavigationDrawer() {
+        setSupportActionBar(binding.toolbar)
+
+        val toggle = ActionBarDrawerToggle(
+            this,
+            binding.drawerLayout,
+            binding.toolbar,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
+        )
+        binding.drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+
+        binding.navView.setNavigationItemSelectedListener(this)
+    }
+
+    override fun onNavigationItemSelected(item: android.view.MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.nav_dashboard -> {
+                supportFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            }
+            R.id.nav_trainings -> {
+                onTrainingClick()
+            }
+            R.id.nav_favorites -> {
+                onFavoriteTrainingClick()
+            }
+            R.id.nav_settings -> {
+                openSettings()
+            }
+        }
+        binding.drawerLayout.closeDrawer(GravityCompat.START)
+        return true
+    }
+
+    private fun openSettings() {
+        binding.dashboardRecyclerView.visibility = View.GONE
+        binding.mainFragmentContainer.visibility = View.VISIBLE
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.mainFragmentContainer, SettingsFragment.newInstance())
+            .addToBackStack(null)
+            .commit()
+    }
+
+    override fun onBackPressed() {
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
     }
 
     private fun refreshFragment() {

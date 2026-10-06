@@ -15,6 +15,8 @@ import com.example.main.ui.activity.MainPresenter
 import com.example.main.ui.steps_fragment.StepsFragmentPresenter
 import com.example.main.ui.water_fragment.WaterFragmentPresenter
 import com.example.main.ui.workout_history_fragment.WorkoutHistoryFragmentPresenter
+import com.example.main.ui.settings.SettingsPresenter
+import com.example.main.ui.workout_running.WorkoutRunningPresenter
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -48,7 +50,6 @@ interface MainModule {
             return TrainingRoomDatabase.getInstanceDb()
         }
     }
-
 }
 
 @Singleton
@@ -84,6 +85,15 @@ class MainPresenterFactory @Inject constructor(
     private val presenter: Provider<MainPresenter>
 ) {
     fun createMainPresenter(): MainPresenter {
+        return presenter.get()
+    }
+}
+
+@Singleton
+class SettingsPresenterFactory @Inject constructor(
+    private val presenter: Provider<SettingsPresenter>
+) {
+    fun createPresenter(): SettingsPresenter {
         return presenter.get()
     }
 }
