@@ -40,9 +40,26 @@ class SettingsFragment : BaseFragment(), SettingsView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        
+        binding.notificationsCheckbox.setOnCheckedChangeListener { _, isChecked ->
+            presenter.onNotificationChanged(isChecked)
+        }
+
+        binding.darkModeCheckbox.setOnCheckedChangeListener { _, isChecked ->
+            presenter.onDarkModeChanged(isChecked)
+        }
+
         binding.logoutButton.setOnClickListener {
             presenter.onLogoutClicked()
         }
+    }
+
+    override fun setNotificationsState(enabled: Boolean) {
+        binding.notificationsCheckbox.isChecked = enabled
+    }
+
+    override fun setDarkModeState(enabled: Boolean) {
+        binding.darkModeCheckbox.isChecked = enabled
     }
 
     override fun showLogoutConfirmation() {
