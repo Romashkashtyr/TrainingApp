@@ -13,6 +13,7 @@ import com.example.main.databinding.WaterFragmentBinding
 import com.example.main.di.MainComponent
 import com.example.main.di.modules.WaterFragmentFactory
 import com.example.main.ui.water_rc_view.WaterAdapter
+import dagger.internal.Provider
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 
@@ -23,10 +24,10 @@ class WaterFragment: BaseFragment(), WaterView {
     val binding get() = _binding!!
 
     @Inject
-    lateinit var factory: WaterFragmentFactory
+    lateinit var factory: Provider<WaterFragmentPresenter>
 
     private val presenter by moxyPresenter {
-        factory.createWaterFragmentPresenter()
+        factory.get()
     }
 
     private lateinit var adapter: WaterAdapter

@@ -4,14 +4,12 @@
     <color name="white">#FFFFFFFF</color>
     <color name="yellow">#FFEB3B</color>
 
-    <!-- Main Activity colors !-->
+    <!-- Фирменные цвета приложения -->
+    <color name="primary_color">#C1E879</color>
+    <color name="primary_dark">#A6D15A</color>
+    <color name="background_light">#F8FBEF</color>
 
-
-    <color name="purple_500">#6200EE</color>
-    <color name="purple_700">#3700B3</color>
     <color name="teal_200">#03DAC5</color>
     <color name="teal_700">#018786</color>
     <color name="splash_background_color">#FFFFFF</color>
-
-    <color name="primary_color">#C1E879</color>
 </resources>

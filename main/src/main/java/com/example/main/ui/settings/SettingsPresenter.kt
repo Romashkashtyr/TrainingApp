@@ -2,6 +2,7 @@ package com.example.main.ui.settings
 
 import com.example.core.base.BasePresenter
 import com.example.core.data.datastore.SettingsDataStore
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -21,10 +22,12 @@ class SettingsPresenter @Inject constructor(
     private fun observeSettings() {
         settingsDataStore.notificationsEnabled
             .onEach { viewState.setNotificationsState(it) }
+            .catch { viewState.showToast(it.message ?: "Выбор уведомлений упал") }
             .launchIn(this)
 
         settingsDataStore.darkModeEnabled
             .onEach { viewState.setDarkModeState(it) }
+            .catch { viewState.showToast(it.message ?: "Выбор темной темы упал") }
             .launchIn(this)
     }
 

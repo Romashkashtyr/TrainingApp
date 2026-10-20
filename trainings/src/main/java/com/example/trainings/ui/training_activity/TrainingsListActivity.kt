@@ -14,9 +14,9 @@ import com.example.core.navigation.Screen
 import com.example.trainings.data.response.FullExercise
 import com.example.trainings.databinding.ActivityTrainingsListBinding
 import com.example.trainings.di.TrainingComponent
-import com.example.trainings.di.modules.TrainingFactory
 import com.example.trainings.ui.fragment_detail_training.ExerciseDetailFragment
 import com.example.trainings.ui.rc_view_training.TrainingAdapter
+import dagger.internal.Provider
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 
@@ -26,9 +26,9 @@ class TrainingsListActivity : BaseActivity(), TrainingsView, ExerciseDetailFragm
 
 
     @Inject
-    lateinit var trainingFactory: TrainingFactory
+    lateinit var trainingFactory: Provider<TrainingsPresenter>
 
-    private val presenter by moxyPresenter { trainingFactory.createTrainingPresenter() }
+    private val presenter by moxyPresenter { trainingFactory.get() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         TrainingComponent.getTrainingInstance().inject(this)

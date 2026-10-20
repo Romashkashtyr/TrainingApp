@@ -12,7 +12,9 @@ import com.example.main.data.entitieModules.WorkoutHistory
 import com.example.main.databinding.WorkoutFragmentHistoryBinding
 import com.example.main.di.MainComponent
 import com.example.main.di.modules.WorkoutFragmentFactory
+import com.example.main.ui.workout_fragment.WorkoutPresenter
 import com.example.main.ui.workout_rc_view.WorkoutHistoryAdapter
+import dagger.internal.Provider
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 
@@ -23,10 +25,10 @@ class WorkoutHistoryFragment: BaseFragment(), WorkoutHistoryView {
         get() = _binding!!
 
     @Inject
-    lateinit var factory: WorkoutFragmentFactory
+    lateinit var factory: Provider<WorkoutPresenter>
 
     private val presenter by moxyPresenter {
-        factory.createPresenter()
+        factory.get()
     }
 
     private lateinit var adapter: WorkoutHistoryAdapter

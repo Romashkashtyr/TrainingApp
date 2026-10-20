@@ -97,3 +97,12 @@ class SettingsPresenterFactory @Inject constructor(
         return presenter.get()
     }
 }
+
+@Singleton
+class WorkoutRunningPresenterFactory @Inject constructor(
+    private val presenter: Provider<WorkoutRunningPresenter>
+) {
+    fun createPresenter(): WorkoutRunningPresenter {
+        return presenter.get()
+    }
+}

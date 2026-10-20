@@ -9,6 +9,7 @@ import com.example.core.base.BaseFragment
 import com.example.main.databinding.FragmentSettingsBinding
 import com.example.main.di.MainComponent
 import com.example.main.di.modules.SettingsPresenterFactory
+import dagger.internal.Provider
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 
@@ -18,10 +19,10 @@ class SettingsFragment : BaseFragment(), SettingsView {
     private val binding get() = _binding!!
 
     @Inject
-    lateinit var presenterFactory: SettingsPresenterFactory
+    lateinit var presenterFactory: Provider<SettingsPresenter>
 
     private val presenter by moxyPresenter {
-        presenterFactory.createPresenter()
+        presenterFactory.get()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,7 +64,7 @@ class SettingsFragment : BaseFragment(), SettingsView {
     }
 
     override fun showLogoutConfirmation() {
-        Toast.makeText(requireContext(), "Выход из аккаунта...", Toast.LENGTH_SHORT).show()
+        showToast("Выход из аккаунта")
     }
 
     override fun onDestroyView() {
