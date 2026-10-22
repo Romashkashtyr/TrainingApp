@@ -13,6 +13,8 @@ import com.example.main.data.entitieModules.WorkoutLevel
 import com.example.main.data.entitieModules.WorkoutType
 import com.example.main.databinding.FragmentWorkoutRunningBinding
 import com.example.main.di.MainComponent
+import dagger.internal.Provider
+import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 
 class WorkoutRunningFragment: BaseFragment(), WorkoutRunningView {
@@ -21,9 +23,11 @@ class WorkoutRunningFragment: BaseFragment(), WorkoutRunningView {
 
     private val binding: FragmentWorkoutRunningBinding
         get() = _binding!!
-
+    
     @Inject
-    lateinit var presenter: WorkoutRunningPresenter
+    lateinit var workoutRunningPresenterFactory: Provider<WorkoutRunningPresenter>
+
+    private val presenter by moxyPresenter { workoutRunningPresenterFactory.get() }
 
     private lateinit var level: WorkoutLevel
     private lateinit var type: WorkoutType
