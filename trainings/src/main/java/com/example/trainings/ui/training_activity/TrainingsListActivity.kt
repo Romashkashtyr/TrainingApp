@@ -16,9 +16,9 @@ import com.example.trainings.databinding.ActivityTrainingsListBinding
 import com.example.trainings.di.TrainingComponent
 import com.example.trainings.ui.fragment_detail_training.ExerciseDetailFragment
 import com.example.trainings.ui.rc_view_training.TrainingAdapter
-import dagger.internal.Provider
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
+import javax.inject.Provider
 
 class TrainingsListActivity : BaseActivity(), TrainingsView, ExerciseDetailFragment.DetailsListener {
     private lateinit var binding: ActivityTrainingsListBinding

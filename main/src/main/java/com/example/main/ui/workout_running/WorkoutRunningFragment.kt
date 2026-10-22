@@ -13,9 +13,10 @@ import com.example.main.data.entitieModules.WorkoutLevel
 import com.example.main.data.entitieModules.WorkoutType
 import com.example.main.databinding.FragmentWorkoutRunningBinding
 import com.example.main.di.MainComponent
-import dagger.internal.Provider
+
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
+import javax.inject.Provider
 
 class WorkoutRunningFragment: BaseFragment(), WorkoutRunningView {
 

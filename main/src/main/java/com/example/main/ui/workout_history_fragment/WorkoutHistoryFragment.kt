@@ -14,9 +14,10 @@ import com.example.main.di.MainComponent
 import com.example.main.di.modules.WorkoutFragmentFactory
 import com.example.main.ui.workout_fragment.WorkoutPresenter
 import com.example.main.ui.workout_rc_view.WorkoutHistoryAdapter
-import dagger.internal.Provider
+
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
+import javax.inject.Provider
 
 class WorkoutHistoryFragment: BaseFragment(), WorkoutHistoryView {
 

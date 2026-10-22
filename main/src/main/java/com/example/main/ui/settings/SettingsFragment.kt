@@ -9,9 +9,10 @@ import com.example.core.base.BaseFragment
 import com.example.main.databinding.FragmentSettingsBinding
 import com.example.main.di.MainComponent
 import com.example.main.di.modules.SettingsPresenterFactory
-import dagger.internal.Provider
+
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
+import javax.inject.Provider
 
 class SettingsFragment : BaseFragment(), SettingsView {
 
