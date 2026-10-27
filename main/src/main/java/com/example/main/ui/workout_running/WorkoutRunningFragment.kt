@@ -6,6 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.model.GlideUrl
+import com.bumptech.glide.load.model.LazyHeaders
+import com.example.core.BuildConfig
 import com.example.core.base.BaseFragment
 import com.example.core.navigation.Router
 import com.example.main.data.entitieModules.WorkoutExercise
@@ -33,13 +36,9 @@ class WorkoutRunningFragment: BaseFragment(), WorkoutRunningView {
     private lateinit var level: WorkoutLevel
     private lateinit var type: WorkoutType
 
-    override fun onCreate(
-        savedInstanceState: Bundle?
-    ) {
+    override fun onCreate(savedInstanceState: Bundle?) {
 
-        MainComponent
-            .getMainInstance()
-            .inject(this)
+        MainComponent.getMainInstance().inject(this)
 
         super.onCreate(savedInstanceState)
 
@@ -69,40 +68,22 @@ class WorkoutRunningFragment: BaseFragment(), WorkoutRunningView {
         return binding.root
     }
 
-    override fun onViewCreated(
-        view: View,
-        savedInstanceState: Bundle?
-    ) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        super.onViewCreated(
-            view,
-            savedInstanceState
-        )
+        super.onViewCreated(view, savedInstanceState)
 
        binding.arrowBack.setOnClickListener {
            presenter.stopWorkout()
-
-           requireActivity()
-               .onBackPressedDispatcher
-               .onBackPressed()
+           requireActivity().onBackPressedDispatcher.onBackPressed()
        }
 
-        binding.nextButton.setOnClickListener {
-            presenter.nextExercise()
-        }
+        binding.nextButton.setOnClickListener { presenter.nextExercise() }
 
-        presenter.loadWorkout(
-            type = type,
-            level = level
-        )
+        presenter.loadWorkout(type = type, level = level)
     }
 
 
-    override fun showExercise(
-        exercise: WorkoutExercise,
-        position: Int,
-        total: Int
-    ) {
+    override fun showExercise(exercise: WorkoutExercise, position: Int, total: Int) {
 
         binding.exerciseCounter.text = "${position + 1} / $total"
 
@@ -110,43 +91,38 @@ class WorkoutRunningFragment: BaseFragment(), WorkoutRunningView {
 
         binding.timer.text = exercise.durationSeconds.toString()
 
+        val glideUrl = GlideUrl(
+            exercise.imageUrl,
+            LazyHeaders.Builder()
+                .addHeader("x-api-key", BuildConfig.TRAINING_API_KEY)
+                .build()
+        )
+
         Glide.with(this)
-            .load(exercise.imageUrl)
+            .load(glideUrl)
             .into(binding.exerciseImage)
     }
 
-    override fun updateTimer(
-        seconds: Int
-    ) {
+    override fun updateTimer(seconds: Int) {
 
-        binding.timer.text =
-            seconds.toString()
+        binding.timer.text = seconds.toString()
     }
 
     override fun showWorkoutFinished() {
 
         binding.timer.text = "Готово!"
 
-        binding.nextButton.text =
-            "Завершить"
+        binding.nextButton.text = "Завершить"
 
         binding.nextButton.setOnClickListener {
-
             requireActivity()
                 .onBackPressedDispatcher
                 .onBackPressed()
         }
     }
 
-    override fun showError(
-        message: String
-    ) {
-
-        Toast.makeText(
-            requireContext(),
-            message,
-            Toast.LENGTH_LONG
-        ).show()
+    override fun showError(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
 
     override fun onDestroyView() {
@@ -166,24 +142,15 @@ class WorkoutRunningFragment: BaseFragment(), WorkoutRunningView {
         private const val ARG_TYPE =
             "workout_type"
 
-        fun newInstance(
-            level: WorkoutLevel,
-            type: WorkoutType
-        ): WorkoutRunningFragment {
+        fun newInstance(level: WorkoutLevel, type: WorkoutType): WorkoutRunningFragment {
 
             return WorkoutRunningFragment().apply {
 
                 arguments = Bundle().apply {
 
-                    putString(
-                        ARG_LEVEL,
-                        level.name
-                    )
+                    putString(ARG_LEVEL, level.name)
 
-                    putString(
-                        ARG_TYPE,
-                        type.name
-                    )
+                    putString(ARG_TYPE, type.name)
                 }
             }
         }
