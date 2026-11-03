@@ -52,6 +52,10 @@ class WaterFragment: BaseFragment(), WaterView {
         binding.arrowBack.setOnClickListener {
             parentFragmentManager.popBackStack()
         }
+
+        binding.addWaterFab.setOnClickListener {
+            presenter.addWater(250) // Adding 250ml as default
+        }
     }
 
     override fun showTodayWater(amount: Int) {
@@ -62,6 +66,10 @@ class WaterFragment: BaseFragment(), WaterView {
 
     override fun showWaterHistory(history: List<Water>) {
         adapter.submitList(history)
+    }
+
+    override fun showEmptyHistory(show: Boolean) {
+        binding.emptyHistoryText.visibility = if (show) View.VISIBLE else View.GONE
     }
 
     override fun showLoading() {

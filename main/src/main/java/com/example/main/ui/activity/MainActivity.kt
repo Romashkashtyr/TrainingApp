@@ -25,6 +25,7 @@ import com.example.main.ui.OnStepsClick
 import com.example.main.R
 import com.example.main.data.entitieModules.Water
 import com.example.main.databinding.ActivityMainBinding
+import com.example.main.databinding.NavHeaderMainBinding
 import com.example.main.di.MainComponent
 import com.example.main.di.modules.MainPresenterFactory
 import com.example.main.service.StepsCounterService
@@ -36,8 +37,10 @@ import com.example.main.ui.OnViewTrainingsClicked
 import com.example.main.ui.adapters.DashboardAdapterDelegates
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
+import com.bumptech.glide.Glide
 import com.example.main.ui.settings.SettingsFragment
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -264,6 +267,24 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
         toggle.syncState()
 
         binding.navView.setNavigationItemSelectedListener(this)
+        updateNavHeader()
+    }
+
+    private fun updateNavHeader() {
+        val headerView = binding.navView.getHeaderView(0)
+        val headerBinding = NavHeaderMainBinding.bind(headerView)
+
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        currentUser?.let {
+            headerBinding.userEmail.text = it.email
+            headerBinding.userName.text = it.displayName ?: "Спортсмен"
+            it.photoUrl?.let { uri ->
+                Glide.with(this)
+                    .load(uri)
+                    .circleCrop()
+                    .into(headerBinding.userAvatar)
+            }
+        }
     }
 
     override fun onNavigationItemSelected(item: android.view.MenuItem): Boolean {
@@ -271,18 +292,30 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
             R.id.nav_dashboard -> {
                 supportFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
             }
-            R.id.nav_trainings -> {
-                onTrainingClick()
-            }
-            R.id.nav_favorites -> {
-                onFavoriteTrainingClick()
-            }
-            R.id.nav_settings -> {
-                openSettings()
-            }
+            R.id.nav_trainings -> onTrainingClick()
+            R.id.nav_favorites -> onFavoriteTrainingClick()
+            R.id.nav_steps -> onStepsClick()
+            R.id.nav_water -> onWaterItemClick()
+            R.id.nav_history -> onWorkoutClick()
+            R.id.nav_settings -> openSettings()
+            R.id.nav_logout -> showLogoutDialog()
         }
         binding.drawerLayout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    private fun showLogoutDialog() {
+        androidx.appcompat.app.AlertDialog.Builder(this)
+            .setTitle("Выход")
+            .setMessage("Вы уверены, что хотите выйти из аккаунта?")
+            .setPositiveButton("Выйти") { _, _ -> logout() }
+            .setNegativeButton("Отмена", null)
+            .show()
+    }
+
+    private fun logout() {
+        FirebaseAuth.getInstance().signOut()
+        showToast("Выход выполнен")
     }
 
     private fun openSettings() {

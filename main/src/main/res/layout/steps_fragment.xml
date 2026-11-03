@@ -106,6 +106,19 @@
         tools:itemCount="5"
         tools:listitem="@layout/item_water_history"/>
 
+    <TextView
+        android:id="@+id/emptyHistoryText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="История шагов пуста"
+        android:textColor="@color/gray"
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/historyRecycler"
+        app:layout_constraintEnd_toEndOf="@id/historyRecycler"
+        app:layout_constraintStart_toStartOf="@id/historyRecycler"
+        app:layout_constraintTop_toTopOf="@id/historyRecycler"/>
+
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"

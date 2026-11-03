@@ -12,6 +12,8 @@ interface StepsView: BaseFragmentView {
 
     fun showStepsHistory(history: List<Steps>)
 
+    fun showEmptyHistory(show: Boolean)
+
     fun showLoading()
 
     fun stopLoading()

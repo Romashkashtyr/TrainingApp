@@ -50,6 +50,7 @@ class StepsFragmentPresenter @Inject constructor(
             getStepsHistoryUseCase().collect { history ->
                 onMainThread {
                     viewState.showStepsHistory(history)
+                    viewState.showEmptyHistory(history.isEmpty())
                 }
             }
         }

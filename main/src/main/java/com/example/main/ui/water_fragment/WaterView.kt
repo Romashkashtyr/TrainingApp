@@ -12,6 +12,8 @@ interface WaterView: BaseFragmentView {
 
     fun showWaterHistory(history: List<Water>)
 
+    fun showEmptyHistory(show: Boolean)
+
     fun showLoading()
 
     fun stopLoading()

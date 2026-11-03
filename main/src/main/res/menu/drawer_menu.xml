@@ -3,23 +3,45 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_dashboard"
-            android:icon="@drawable/drawable"
+            android:icon="@drawable/baseline_play_arrow_24"
             android:title="Главная" />
         <item
             android:id="@+id/nav_trainings"
             android:icon="@drawable/baseline_play_arrow_24"
-            android:title="Тренировки" />
+            android:title="Все тренировки" />
         <item
             android:id="@+id/nav_favorites"
             android:icon="@drawable/baseline_favorite_24"
             android:title="Избранное" />
     </group>
-    <item android:title="Настройки">
+
+    <item android:title="Моя активность">
+        <menu>
+            <item
+                android:id="@+id/nav_steps"
+                android:icon="@drawable/baseline_steps"
+                android:title="Счетчик шагов" />
+            <item
+                android:id="@+id/nav_water"
+                android:icon="@drawable/drawable"
+                android:title="Трекер воды" />
+            <item
+                android:id="@+id/nav_history"
+                android:icon="@drawable/baseline_play_arrow_24"
+                android:title="История занятий" />
+        </menu>
+    </item>
+
+    <item android:title="Аккаунт">
         <menu>
             <item
                 android:id="@+id/nav_settings"
                 android:icon="@drawable/ic_launcher_foreground"
-                android:title="Настройки профиля" />
+                android:title="Настройки" />
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/outline_arrow_back_24"
+                android:title="Выйти" />
         </menu>
     </item>
 </menu>

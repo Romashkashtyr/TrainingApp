@@ -66,6 +66,10 @@ class StepsFragment: BaseFragment(), StepsView {
         adapter.submitList(history)
     }
 
+    override fun showEmptyHistory(show: Boolean) {
+        binding.emptyHistoryText.visibility = if (show) View.VISIBLE else View.GONE
+    }
+
     override fun showLoading() {
         binding.progressBar.visibility = View.VISIBLE
     }
