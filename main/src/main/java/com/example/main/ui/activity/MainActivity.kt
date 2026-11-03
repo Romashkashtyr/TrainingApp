@@ -132,7 +132,8 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
 
 
     override fun onViewTrainingsClicked() {
-        TODO()
+        Log.d("MainActivity", "onViewTrainingsClicked")
+        // Implementation for viewing all trainings
     }
 
     override fun onFavoriteTrainingClick() {
@@ -186,7 +187,7 @@ class MainActivity : BaseActivity(), MainView, OnAddWaterClicked,
     }
 
     override fun showWaterHistory(history: List<Water>) {
-        TODO("Not yet implemented")
+        // Not used in MainActivity, but required by interface
     }
 
     override fun onStepsClick() {

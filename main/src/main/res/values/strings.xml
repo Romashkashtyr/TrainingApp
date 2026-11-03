@@ -64,4 +64,9 @@
     <string name="navigation_drawer_open">Открыть меню</string>
     <string name="navigation_drawer_close">Закрыть меню</string>
 
+    <string name="water_history_empty">История воды пуста</string>
+    <string name="steps_history_empty">История шагов пуста</string>
+    <string name="add_water">Добавить воду</string>
+    <string name="history_title">История</string>
+    <string name="today_title">Сегодня</string>
 </resources>

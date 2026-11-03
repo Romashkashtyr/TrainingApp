@@ -26,7 +26,7 @@ class WorkoutHistoryFragment: BaseFragment(), WorkoutHistoryView {
         get() = _binding!!
 
     @Inject
-    lateinit var factory: Provider<WorkoutPresenter>
+    lateinit var factory: Provider<WorkoutHistoryFragmentPresenter>
 
     private val presenter by moxyPresenter {
         factory.get()
